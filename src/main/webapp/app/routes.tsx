@@ -14,6 +14,7 @@ import PrivateRoute from 'app/shared/auth/private-route';
 import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
+import LicenceRoute from 'app/modules/licence';
 import Permit from 'app/modules/permit';
 
 const loading = <div>loading ...</div>;
@@ -28,6 +29,10 @@ const Admin = Loadable({
   loading: () => loading,
 });
 
+const Licence = Loadable({
+  loader: () => import(/* webpackChunkName: "administration" */ 'app/modules/licence'),
+  loading: () => loading,
+});
 const AppRoutes = () => {
   return (
     <div className="view-routes">
@@ -57,6 +62,14 @@ const AppRoutes = () => {
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
               <Admin />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="licence/*"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
+              <LicenceRoute />
             </PrivateRoute>
           }
         />

@@ -6,7 +6,7 @@ import { Navbar, Nav, NavbarToggler, Collapse, DropdownItem } from 'reactstrap';
 import LoadingBar from 'react-redux-loading-bar';
 
 import { Home, Brand } from './header-components';
-import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu } from '../menus';
+import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu, LicencesMenu } from '../menus';
 import { useAppDispatch } from 'app/config/store';
 import { setLocale } from 'app/shared/reducers/locale';
 import { languages, locales } from 'app/config/translation';
@@ -56,6 +56,7 @@ const Header = (props: IHeaderProps) => {
         <Collapse isOpen={menuOpen} navbar>
           <Nav id="header-tabs" className="ms-auto" navbar>
             <Home />
+            {props.isAuthenticated && <LicencesMenu />}
             <NavDropdown icon="book" name="Permite">
               <DropdownItem>
                 {' '}
