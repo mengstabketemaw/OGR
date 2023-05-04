@@ -1,5 +1,7 @@
 package com.dulcons.ogr.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,9 @@ public class CustomField {
     private String label;
     private Boolean required;
     private String placeHolder;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<CustomOption> options = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -54,5 +59,13 @@ public class CustomField {
 
     public void setPlaceHolder(String placeHolder) {
         this.placeHolder = placeHolder;
+    }
+
+    public List<CustomOption> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<CustomOption> options) {
+        this.options = options;
     }
 }

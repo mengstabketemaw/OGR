@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class Permit {
+public class CustomForm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
