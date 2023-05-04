@@ -2,13 +2,16 @@ import './header.scss';
 
 import React, { useState } from 'react';
 import { Translate, Storage } from 'react-jhipster';
-import { Navbar, Nav, NavbarToggler, Collapse } from 'reactstrap';
+import { Navbar, Nav, NavbarToggler, Collapse, DropdownItem } from 'reactstrap';
 import LoadingBar from 'react-redux-loading-bar';
 
 import { Home, Brand } from './header-components';
 import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu } from '../menus';
 import { useAppDispatch } from 'app/config/store';
 import { setLocale } from 'app/shared/reducers/locale';
+import { languages, locales } from 'app/config/translation';
+import { NavDropdown } from 'app/shared/layout/menus/menu-components';
+import { Link } from 'react-router-dom';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -53,6 +56,24 @@ const Header = (props: IHeaderProps) => {
         <Collapse isOpen={menuOpen} navbar>
           <Nav id="header-tabs" className="ms-auto" navbar>
             <Home />
+            <NavDropdown icon="book" name="Permite">
+              <DropdownItem>
+                {' '}
+                <Link to="/permit?name=drilling"> Drilling Permit Requirement </Link>{' '}
+              </DropdownItem>
+              <DropdownItem>
+                {' '}
+                <Link to="/permit?name=air"> Air Emission Permit </Link>{' '}
+              </DropdownItem>
+              <DropdownItem> Production Permit</DropdownItem>
+              <DropdownItem> Transportation Permit</DropdownItem>
+              <DropdownItem> Storage Permit</DropdownItem>
+              <DropdownItem> Waste Management Permit</DropdownItem>
+              <DropdownItem> Pipeline Permit</DropdownItem>
+              <DropdownItem> Flaring and Venting Permit</DropdownItem>
+              <DropdownItem> Water Use Permit</DropdownItem>
+              <DropdownItem> Emissions Permit</DropdownItem>
+            </NavDropdown>
             {props.isAuthenticated && <EntitiesMenu />}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
             <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />
