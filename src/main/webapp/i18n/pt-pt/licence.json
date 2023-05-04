@@ -1,0 +1,16 @@
+{
+  "licence": {
+    "title": "Licence",
+    "types": {
+      "exploration": "Exploration Licence",
+      "production": "Production Licence",
+      "pipeline": "Pipeline Licence",
+      "storage": "Storage License",
+      "transportation": "Transportation License",
+      "processing": "Processing License",
+      "distribution": "Distribution License",
+      "retail": "Retail License",
+      "waste": "Waste Management License"
+    }
+  }
+}
