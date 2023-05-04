@@ -3,13 +3,13 @@ package com.dulcons.ogr.domain;
 import javax.persistence.*;
 
 @Entity
-public class CustomForm {
+public class CustomField {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private FieldTypes fieldType;
 
     private String label;
