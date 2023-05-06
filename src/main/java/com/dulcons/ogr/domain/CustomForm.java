@@ -15,6 +15,7 @@ public class CustomForm {
     private String title;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "form_id")
     private List<CustomField> fields = new ArrayList<>();
 
     public Long getId() {

@@ -25,13 +25,13 @@ public class FormController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createPermits(@RequestBody CustomForm customForm) {
+    public void createForms(@RequestBody CustomForm customForm) {
         customFormRepository.save(customForm);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void updatePermits(@RequestBody CustomForm customForm, @PathVariable Long id) {
+    public void updateForms(@RequestBody CustomForm customForm, @PathVariable Long id) {
         customForm.setId(id);
         customFormRepository.save(customForm);
     }

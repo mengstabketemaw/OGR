@@ -16,7 +16,7 @@ public class CustomField {
 
     private String label;
     private Boolean required;
-    private String placeHolder;
+    private String placeholder;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CustomOption> options = new ArrayList<>();
@@ -53,12 +53,12 @@ public class CustomField {
         this.required = required;
     }
 
-    public String getPlaceHolder() {
-        return placeHolder;
+    public String getPlaceholder() {
+        return placeholder;
     }
 
-    public void setPlaceHolder(String placeHolder) {
-        this.placeHolder = placeHolder;
+    public void setPlaceholder(String placeHolder) {
+        this.placeholder = placeHolder;
     }
 
     public List<CustomOption> getOptions() {
