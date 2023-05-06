@@ -23,6 +23,11 @@ public class FormController {
         return customFormRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public CustomForm getform(@PathVariable Long id) {
+        return customFormRepository.findById(id).orElseThrow();
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createForms(@RequestBody CustomForm customForm) {

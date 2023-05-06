@@ -22,8 +22,18 @@ const FormCreater = () => {
     if(form.length > 0) setForm(form[0]);
   }, [form]);
   const handleFields = (fields) => {
+    if (fields.newId){
+      const editedFields = [...formForEdit.fields,fields]
+      setForm((prevState)=>({...prevState,fields:editedFields}));
+    }else{
+      const editform = {...formForEdit};
+      editform.fields = editform.fields.map(f=>{if(f.id==fields.id){return fields} return f})
+      setForm(editform);
+    }
+  }
+  const handleDelete= (id) =>{
     const editform = {...formForEdit};
-    editform.fields = editform.fields.map(f=>{if(f.id==fields.id){return fields} return f})
+    editform.fields = editform.fields.filter(f=> {return f.id !=id})
     setForm(editform);
   }
   const handleSelectForm = (e) => {
@@ -59,7 +69,7 @@ const FormCreater = () => {
                  ))}
                </ValidatedField >
 
-                <FieldCreater fields={formForEdit.fields} handleFields={handleFields}/>
+                <FieldCreater fields={formForEdit.fields} handleFields={handleFields} handleDelete={handleDelete}/>
                <Button tag={Link} to="/admin/user-management" replace color="info">
                  <FontAwesomeIcon icon="arrow-left" />
                  &nbsp;

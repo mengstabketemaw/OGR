@@ -5,10 +5,13 @@ import {Link} from "react-router-dom";
 import {useAppSelector} from "app/config/store";
 
 const FieldCreaterModal=(props)=>{
-  const { handleClose, field, handleFields } = props;
+  const { handleClose, field, handleFields, handleDelete } = props;
   const fieldTypes = useAppSelector(state => state.form.fieldTypes);
   const handleSubmit = value => {
-    handleFields(value);
+    let valueToSend = {...value}
+    valueToSend.fieldType = JSON.parse(valueToSend.fieldType)
+    handleFields(valueToSend);
+    handleClose();
   };
   return(
     <Modal isOpen={props.showModal} toggle={handleClose} backdrop="static" id="form-page" autoFocus={false}>
@@ -23,7 +26,7 @@ const FieldCreaterModal=(props)=>{
                 type="text"
                 name="label"
                 label="Label"//{translate('global.form.username.label')}
-                placeholder="add label"//{translate('global.form.username.placeholder')}
+                //placeholder="add label"//{translate('global.form.username.placeholder')}
                 required
 
               />
@@ -31,7 +34,7 @@ const FieldCreaterModal=(props)=>{
                 type="text"
                 name="placeholder"
                 label="Placeholder"//{translate('login.form.password')}
-                placeholder="add placeholder"
+                //placeholder="add placeholder"
                 required
               />
               <ValidatedField
@@ -42,11 +45,11 @@ const FieldCreaterModal=(props)=>{
                 value={true}
 
               />
-              <ValidatedField type="select" name="langKey" label="Field Type"//{translate('form.fields.title')}
+              <ValidatedField type="select" name="fieldType" label="Field Type"//{translate('form.fields.title')}
               >
                 {fieldTypes.map((f,i) => (
-                  <option value={f.id} key={f.id}>
-                    {f.names}
+                  <option value={JSON.stringify(f)} key={f.id}>
+                    {f.display}
                   </option>
                 ))}
               </ValidatedField >
@@ -55,6 +58,9 @@ const FieldCreaterModal=(props)=>{
             </Button>{' '}
             <Button color="primary" type="submit" data-cy="submit">
               Add
+            </Button>{' '}
+            <Button color="danger" onClick={()=>handleDelete(field.id)}>
+              Delete
             </Button>
           </ValidatedForm>
 

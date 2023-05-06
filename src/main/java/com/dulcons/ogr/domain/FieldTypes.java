@@ -12,7 +12,9 @@ public class FieldTypes {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String names;
+    private String name;
+
+    private String display;
 
     public Long getId() {
         return id;
@@ -22,11 +24,19 @@ public class FieldTypes {
         this.id = id;
     }
 
-    public String getNames() {
-        return names;
+    public String getName() {
+        return name;
     }
 
-    public void setNames(String names) {
-        this.names = names;
+    public void setName(String names) {
+        this.name = names;
+    }
+
+    public String getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(String displayName) {
+        this.display = displayName;
     }
 }

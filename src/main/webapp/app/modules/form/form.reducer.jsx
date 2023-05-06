@@ -30,6 +30,9 @@ export const updateForm = createAsyncThunk(
   },
   { serializeError: serializeAxiosError }
 );
+export const getForm = createAsyncThunk('fetch_form', async (id) => axios.get(`api/forms/${id}`), {
+  serializeError: serializeAxiosError,
+});
 
 export const FormSlice = createSlice({
   name: 'form',
@@ -45,12 +48,17 @@ export const FormSlice = createSlice({
         state.loading = false;
         state.fieldTypes = action.payload.data;
       })
+      .addCase(getForm.fulfilled, (state, action) => {
+      state.loading = false;
+      state.form = action.payload.data;
+      })
       .addMatcher(isFulfilled(updateForm), (state, action) => {
         state.updating = false;
         state.loading = false;
         state.updateSuccess = true;
         //state.user = action.payload.data;
       })
+
   },
 });
 

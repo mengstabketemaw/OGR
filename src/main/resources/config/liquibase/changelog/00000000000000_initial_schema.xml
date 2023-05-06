@@ -115,9 +115,10 @@
         </createTable>
     </changeSet>
     <changeSet id="2" author="mengstab">
-        <loadData tableName="field_types" separator=";" usePreparedStatements="true" file="config/liquibase/data/field_types.csv">
+        <loadData  tableName="field_types" separator=";" usePreparedStatements="true" file="config/liquibase/data/field_types.csv">
             <column name="id" type="numeric"/>
-            <column name="names" type="text"/>
+            <column name="name" type="text"/>
+            <column name="display" type="text"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>

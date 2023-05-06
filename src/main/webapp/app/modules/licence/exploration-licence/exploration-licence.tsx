@@ -1,13 +1,30 @@
-import React from 'react';
-import { Translate } from 'react-jhipster';
-import FormCreater from 'app/modules/form/form-creater';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'app/config/store';
+import { getForm } from 'app/modules/form/form.reducer';
+import DynamicFields from 'app/shared/common/dynamicFields';
+import { Button, Row, Col, FormText } from 'reactstrap';
 const ExplorationLicence = () => {
+  const pageKey = 1;
+  const dispatch = useAppDispatch();
+  const form = useAppSelector(state => state.form.form);
+
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(getForm(pageKey));
+  }, []);
+  const handleSubmit = () => {};
   return (
     <div>
-      <h2 id="logs-page-heading" data-cy="logsPageHeading">
-        <Translate contentKey="licence.title">Logs</Translate>
-      </h2>
-      Hey
+      <Row className="justify-content-center">
+        <Col md="8">
+          <h1>Create or edit Exploration Licence</h1>
+        </Col>
+      </Row>
+      <Row className="justify-content-center">
+        <Col md="8">
+          <DynamicFields fields={form.fields} handleSubmit={handleSubmit} />
+        </Col>
+      </Row>
     </div>
   );
 };

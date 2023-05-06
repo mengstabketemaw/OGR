@@ -5,18 +5,23 @@ import {Badge, Button, Table} from "reactstrap";
 import {Link} from "react-router-dom";
 import {APP_DATE_FORMAT} from "app/config/constants";
 import FieldCreaterModal from "app/modules/form/field-creater-modal";
+import {nanoid} from "nanoid";
 
 const FieldCreater = (param) =>{
   const [show,setShow] = useState(false);
-  const {fields,handleFields} = param;
-  const [selectedField,setField] = useState({
+  const {fields, handleFields, handleDelete} = param;
+  const initalField = {
     "id":0,
-    "label":"firstname",
+    "label":"",
     "required":true,
     "placeholder":"",
-    "options":[]
-  })
+    "fieldType":{},
+    "options":[],
+    "newId":nanoid()
+  }
+  const [selectedField,setField] = useState(initalField)
   const showModal = () => {
+    setField(initalField);
     setShow(true);
   }
   const closeModal= () => {
@@ -27,7 +32,7 @@ const FieldCreater = (param) =>{
   const editField = (id) =>{
     if (fields.length > 0) {
       setField(fields.filter(f => f.id == id)[0]);
-      showModal();
+      setShow(true);
     }
   }
   return (
@@ -66,7 +71,7 @@ const FieldCreater = (param) =>{
             </Button>):<Button color="success">
               FALSE
             </Button>}</td>
-            <td>{field.fieldType.names}</td>
+            <td>{field.fieldType.display}</td>
           </tr>
         )
       )}
@@ -84,6 +89,7 @@ const FieldCreater = (param) =>{
                          handleClose = {closeModal}
                          field = {selectedField}
                          handleFields = {handleFields}
+                         handleDelete={handleDelete}
       />
     </>
   )
