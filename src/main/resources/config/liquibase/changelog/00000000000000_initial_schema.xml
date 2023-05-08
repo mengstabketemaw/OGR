@@ -121,4 +121,12 @@
             <column name="display" type="text"/>
         </loadData>
     </changeSet>
+
+    <changeSet id="3" author="mengstab">
+        <loadData  tableName="custom_form" separator=";" usePreparedStatements="true" file="config/liquibase/data/custom_form.csv">
+            <column name="id" type="numeric"/>
+            <column name="type" type="text"/>
+            <column name="title" type="text"/>
+        </loadData>
+    </changeSet>
 </databaseChangeLog>
