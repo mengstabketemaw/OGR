@@ -42,7 +42,7 @@ const AppRoutes = () => {
   return (
     <div className="view-routes">
       <ErrorBoundaryRoutes>
-        <Route index element={<Home />} />
+        {/*<Route index element={<Home />} />*/}
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
         <Route path="permit" element={<Permit />} />

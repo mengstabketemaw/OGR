@@ -9,9 +9,7 @@ export const Logout = () => {
 
   useLayoutEffect(() => {
     dispatch(logout());
-    if (logoutUrl) {
-      window.location.href = logoutUrl;
-    }
+    window.location.href = '/';
   });
 
   return (
