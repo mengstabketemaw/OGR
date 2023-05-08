@@ -4,7 +4,7 @@ const { merge } = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
+//const ESLintPlugin = require('eslint-webpack-plugin');
 const { hashElement } = require('folder-hash');
 const MergeJsonWebpackPlugin = require('merge-jsons-webpack-plugin');
 const utils = require('./utils.js');
@@ -69,7 +69,7 @@ module.exports = async options => {
       module: {
         rules: [
           {
-            test: /\.tsx?$/,
+            test: /\.(tsx|jsx|ts|js)?$/,
             use: getTsLoaderRule(options.env),
             include: [utils.root('./src/main/webapp/app')],
             exclude: [utils.root('node_modules')],
@@ -100,13 +100,13 @@ module.exports = async options => {
           VERSION: JSON.stringify(environment.VERSION),
           SERVER_API_URL: JSON.stringify(environment.SERVER_API_URL),
         }),
-        new ESLintPlugin({
-          baseConfig: {
-            parserOptions: {
-              project: ['../tsconfig.json'],
-            },
-          },
-        }),
+        // new ESLintPlugin({
+        //   baseConfig: {
+        //     parserOptions: {
+        //       project: ['../tsconfig.json'],
+        //     },
+        //   },
+        // }),
         new ForkTsCheckerWebpackPlugin(),
         new CopyWebpackPlugin({
           patterns: [

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class Permit {
+public class CustomForm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,6 +15,7 @@ public class Permit {
     private String title;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "form_id")
     private List<CustomField> fields = new ArrayList<>();
 
     public Long getId() {

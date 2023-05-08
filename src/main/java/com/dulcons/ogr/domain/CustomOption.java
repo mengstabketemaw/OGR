@@ -6,15 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class FieldTypes {
+public class CustomOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    Long id;
 
     private String name;
-
-    private String display;
 
     public Long getId() {
         return id;
@@ -28,15 +26,7 @@ public class FieldTypes {
         return name;
     }
 
-    public void setName(String names) {
-        this.name = names;
-    }
-
-    public String getDisplay() {
-        return display;
-    }
-
-    public void setDisplay(String displayName) {
-        this.display = displayName;
+    public void setName(String name) {
+        this.name = name;
     }
 }

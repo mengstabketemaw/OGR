@@ -1,0 +1,12 @@
+{
+  "form": {
+    "edit": "Edit a form",
+    "fields": {
+      "title": "Title",
+      "label": "Label",
+      "placeholder": "Placeholder",
+      "required": "Required",
+      "type": "Type"
+    }
+  }
+}

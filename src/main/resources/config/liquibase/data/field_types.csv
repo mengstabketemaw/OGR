@@ -1,4 +1,7 @@
-id;names
-1;text
-2;button
-3;dropdown
+id;name;display
+1;text;Text
+2;button;Button
+3;select;Dropdown
+4;date;Date
+5;checkbox;Check-box
+6;datetime-local;Date and Time
