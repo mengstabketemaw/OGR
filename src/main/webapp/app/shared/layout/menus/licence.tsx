@@ -9,8 +9,8 @@ const licenceMenuItems = () => (
     <MenuItem icon="note" to="/licence/exploration">
       <Translate contentKey="licence.types.exploration" />
     </MenuItem>
-    <MenuItem icon="note" to="/admin/user-management">
-      <Translate contentKey="licence.types.production" />
+    <MenuItem icon="note" to="/licence/pipeline">
+      <Translate contentKey="licence.types.pipeline" />
     </MenuItem>
     <MenuItem icon="note" to="/admin/user-management">
       <Translate contentKey="licence.types.pipeline" />

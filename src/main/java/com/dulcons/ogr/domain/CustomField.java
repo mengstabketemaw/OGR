@@ -18,7 +18,7 @@ public class CustomField {
     private Boolean required;
     private String placeholder;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CustomOption> options = new ArrayList<>();
 
     public Long getId() {

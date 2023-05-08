@@ -1,18 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Alert, Button, Col, Form, Modal, ModalBody, ModalFooter, ModalHeader, Row} from "reactstrap";
 import {translate, Translate, ValidatedField, ValidatedForm} from "react-jhipster";
 import {Link} from "react-router-dom";
 import {useAppSelector} from "app/config/store";
 
 const FieldCreaterModal=(props)=>{
+  const [dropDown, setDropdown] = useState({show: false, value:""});
+
   const { handleClose, field, handleFields, handleDelete } = props;
   const fieldTypes = useAppSelector(state => state.form.fieldTypes);
   const handleSubmit = value => {
     let valueToSend = {...value}
     valueToSend.fieldType = JSON.parse(valueToSend.fieldType)
-    handleFields(valueToSend);
+    handleFields({...valueToSend, options: dropDown.value.split("\n").map((e,id)=>({id, name:e.trim()}))});
     handleClose();
   };
+
+  const handleFieldTypesClick = (e) => {
+    setDropdown((prev)=>({...prev, show: JSON.parse(e.target.value)?.name === "select"}));
+  }
+
+
   return(
     <Modal isOpen={props.showModal} toggle={handleClose} backdrop="static" id="form-page" autoFocus={false}>
 
@@ -45,7 +53,7 @@ const FieldCreaterModal=(props)=>{
                 value={true}
 
               />
-              <ValidatedField type="select" name="fieldType" label="Field Type"//{translate('form.fields.title')}
+              <ValidatedField type="select" name="fieldType" label="Field Type" onChange={handleFieldTypesClick}
               >
                 {fieldTypes.map((f,i) => (
                   <option value={JSON.stringify(f)} key={f.id}>
@@ -53,6 +61,11 @@ const FieldCreaterModal=(props)=>{
                   </option>
                 ))}
               </ValidatedField >
+            {dropDown.show &&
+              <ValidatedField type={"textarea"} draggable={true} value={dropDown.value} onChange={e=>setDropdown({show: true, value: e.target.value})}>
+
+              </ValidatedField>
+            }
             <Button color="secondary" onClick={handleClose} tabIndex={1}>
               <Translate contentKey="entity.action.cancel">Cancel</Translate>
             </Button>{' '}

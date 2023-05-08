@@ -22,6 +22,7 @@ const FormCreater = () => {
     if(form.length > 0) setForm(form[0]);
   }, [form]);
   const handleFields = (fields) => {
+    console.log(fields);
     if (fields.newId){
       const editedFields = [...formForEdit.fields,fields]
       setForm((prevState)=>({...prevState,fields:editedFields}));

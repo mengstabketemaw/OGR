@@ -89,7 +89,7 @@ const FieldCreater = (param) =>{
                          handleClose = {closeModal}
                          field = {selectedField}
                          handleFields = {handleFields}
-                         handleDelete={handleDelete}
+                         handleDelete={(value)=>{closeModal();handleDelete(value)}}
       />
     </>
   )

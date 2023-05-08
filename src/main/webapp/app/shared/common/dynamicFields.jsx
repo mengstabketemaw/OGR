@@ -6,10 +6,20 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const DynamicFields = props =>{
   const {fields, defaultValue, handleSubmit} = props;
-
+  console.log(fields)
   return(
     <ValidatedForm onSubmit={handleSubmit} defaultValues={defaultValue} >
-      {fields && fields.map( f => (
+      {fields && fields.map( f => f.fieldType.name === "select" ? (
+        <ValidatedField
+          type={f.fieldType.name}
+          name={f.label}
+          label={f.label}//{translate('global.form.username.label')}
+          //placeholder="add label"//{translate('global.form.username.placeholder')}
+          required={f.required}
+        >
+          {f.options.map((a,i)=>(<option key={i} value={a.name}>{a.name}</option>))  }
+        </ValidatedField>
+        ) :
         <ValidatedField
           type={f.fieldType.name}
           name={f.label}
@@ -17,7 +27,7 @@ const DynamicFields = props =>{
           //placeholder="add label"//{translate('global.form.username.placeholder')}
           required={f.required}
         />
-        ))
+      )
       }
       <Button tag={Link} to="/admin/user-management" replace color="info">
         <FontAwesomeIcon icon="arrow-left" />

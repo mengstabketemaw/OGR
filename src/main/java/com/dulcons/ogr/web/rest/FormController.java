@@ -3,6 +3,7 @@ package com.dulcons.ogr.web.rest;
 import com.dulcons.ogr.domain.CustomForm;
 import com.dulcons.ogr.repository.CustomFormRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,8 @@ public class FormController {
 
     @GetMapping("/{id}")
     public CustomForm getform(@PathVariable Long id) {
-        return customFormRepository.findById(id).orElseThrow();
+        Optional<CustomForm> data = customFormRepository.findById(id);
+        return data.orElse(null);
     }
 
     @PostMapping
