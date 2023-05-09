@@ -8,7 +8,8 @@
     <groupId>com.dulcons.ogr</groupId>
     <artifactId>ogr</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
+
     <name>OGR</name>
     <description>Description for OGR</description>
 
@@ -736,6 +737,7 @@
                 <!-- jhipster-needle-maven-add-plugin-management -->
             </plugins>
         </pluginManagement>
+        <finalName>ogr</finalName>
     </build>
     <profiles>
         <profile>
