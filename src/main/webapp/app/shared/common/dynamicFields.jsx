@@ -5,10 +5,14 @@ import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const DynamicFields = props =>{
-  const {fields, defaultValue, handleSubmit} = props;
-  console.log(fields)
+  const {fields, defaultValue, handleSubmit, formatValue} = props;
+  const handlevalue = (value) =>{
+    //console.log(value,fields)
+    formatValue(value,fields)
+    handleSubmit(formatValue(value,fields))
+  }
   return(
-    <ValidatedForm onSubmit={handleSubmit} defaultValues={defaultValue} >
+    <ValidatedForm onSubmit={handlevalue} defaultValues={defaultValue} >
       {fields && fields.map( f => f.fieldType.name === "select" ? (
         <ValidatedField
           type={f.fieldType.name}
@@ -19,7 +23,7 @@ const DynamicFields = props =>{
         >
           {f.options.map((a,i)=>(<option key={i} value={a.name}>{a.name}</option>))  }
         </ValidatedField>
-        ) :
+        ) :(
         <ValidatedField
           type={f.fieldType.name}
           name={f.label}
@@ -27,7 +31,7 @@ const DynamicFields = props =>{
           //placeholder="add label"//{translate('global.form.username.placeholder')}
           required={f.required}
         />
-      )
+        ))
       }
       <Button tag={Link} to="/admin/user-management" replace color="info">
         <FontAwesomeIcon icon="arrow-left" />

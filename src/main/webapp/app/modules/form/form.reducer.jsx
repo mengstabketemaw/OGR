@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {createAsyncThunk, createSlice, isFulfilled} from '@reduxjs/toolkit';
 import {serializeAxiosError} from 'app/shared/reducers/reducer.utils';
-import {createUser, updateUser} from "app/modules/administration/user-management/user-management.reducer";
 
 const initialState = {
   loading: false,

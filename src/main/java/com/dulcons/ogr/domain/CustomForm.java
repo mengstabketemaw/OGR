@@ -14,7 +14,7 @@ public class CustomForm {
     private String type;
     private String title;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "form_id")
     private List<CustomField> fields = new ArrayList<>();
 

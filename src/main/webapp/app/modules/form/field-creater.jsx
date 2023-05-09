@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {TextFormat, Translate} from "react-jhipster";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Badge, Button, Table} from "reactstrap";
-import {Link} from "react-router-dom";
-import {APP_DATE_FORMAT} from "app/config/constants";
 import FieldCreaterModal from "app/modules/form/field-creater-modal";
 import {nanoid} from "nanoid";
 
