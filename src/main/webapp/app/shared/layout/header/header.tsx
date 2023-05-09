@@ -50,33 +50,33 @@ const Header = (props: IHeaderProps) => {
     <div id="app-header">
       {renderDevRibbon()}
       <LoadingBar className="loading-bar" />
-      <Navbar data-cy="navbar" expand="md" fixed="top" className="navbar-horizontal navbar-dark bg-success mb-4">
+      <Navbar data-cy="navbar" expand="lg" fixed="top" className="navbar-horizontal navbar-dark bg-gradient-success mb-4 col-12">
         <NavbarToggler aria-label="Menu" onClick={toggleMenu} />
         <Brand />
         <Collapse isOpen={menuOpen} navbar>
           <Nav id="header-tabs" className="ms-auto" navbar>
             {props.isAuthenticated && <Home />}
             {props.isAuthenticated && <LicencesMenu />}
-            {props.isAuthenticated && (
-              <NavDropdown icon="book" name="Permit">
-                <DropdownItem>
-                  {' '}
-                  <Link to="/permit?name=drilling"> Drilling Permit Requirement </Link>{' '}
-                </DropdownItem>
-                <DropdownItem>
-                  {' '}
-                  <Link to="/permit?name=air"> Air Emission Permit </Link>{' '}
-                </DropdownItem>
-                <DropdownItem> Production Permit</DropdownItem>
-                <DropdownItem> Transportation Permit</DropdownItem>
-                <DropdownItem> Storage Permit</DropdownItem>
-                <DropdownItem> Waste Management Permit</DropdownItem>
-                <DropdownItem> Pipeline Permit</DropdownItem>
-                <DropdownItem> Flaring and Venting Permit</DropdownItem>
-                <DropdownItem> Water Use Permit</DropdownItem>
-                <DropdownItem> Emissions Permit</DropdownItem>
-              </NavDropdown>
-            )}
+
+            <NavDropdown icon="book" name="Permit">
+              <DropdownItem>
+                {' '}
+                <Link to="/permit?name=drilling"> Drilling Permit Requirement </Link>{' '}
+              </DropdownItem>
+              <DropdownItem>
+                {' '}
+                <Link to="/permit?name=air"> Air Emission Permit </Link>{' '}
+              </DropdownItem>
+              <DropdownItem> Production Permit</DropdownItem>
+              <DropdownItem> Transportation Permit</DropdownItem>
+              <DropdownItem> Storage Permit</DropdownItem>
+              <DropdownItem> Waste Management Permit</DropdownItem>
+              <DropdownItem> Pipeline Permit</DropdownItem>
+              <DropdownItem> Flaring and Venting Permit</DropdownItem>
+              <DropdownItem> Water Use Permit</DropdownItem>
+              <DropdownItem> Emissions Permit</DropdownItem>
+            </NavDropdown>
+
             {/* {props.isAuthenticated && <EntitiesMenu />} */}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
             <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />
