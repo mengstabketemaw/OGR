@@ -38,7 +38,7 @@ export const App = () => {
   const ribbonEnv = useAppSelector(state => state.applicationProfile.ribbonEnv);
   const isInProduction = useAppSelector(state => state.applicationProfile.inProduction);
   const isOpenAPIEnabled = useAppSelector(state => state.applicationProfile.isOpenAPIEnabled);
-  const isLandingPage = currentLocation === '/' && !isAuthenticated;
+  const isLandingPage = currentLocation == '/' && !isAuthenticated;
 
   const paddingTop = '60px';
   return (
@@ -49,7 +49,7 @@ export const App = () => {
         </ErrorBoundary>
       ) : (
         <div className="app-container" style={{ paddingTop }}>
-          <ToastContainer position={toast.POSITION.TOP_LEFT} className="toastify-container" toastClassName="toastify-toast" />
+          <ToastContainer position={toast.POSITION.TOP_RIGHT} className="toastify-container" toastClassName="toastify-toast" />
           <ErrorBoundary>
             <Header
               isAuthenticated={isAuthenticated}
@@ -61,7 +61,7 @@ export const App = () => {
             />
           </ErrorBoundary>
           <div className="container-fluid view-container mt-5" id="app-view-container">
-            <Card className="jh-card">
+            <Card className="jh-card pt-4 pb-8">
               <ErrorBoundary>
                 <AppRoutes />
               </ErrorBoundary>

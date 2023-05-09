@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Input} from "app/shared/common/forms";
+// import {Input} from "app/shared/common/forms";
 import FieldCreater from "./field-creater";
-import {Button, Col, FormText, Row} from "reactstrap";
+import {Button, Col, FormGroup, FormText, Input, Label, Row} from "reactstrap";
 import {isEmail, translate, Translate, ValidatedField, ValidatedForm} from "react-jhipster";
 import {languages, locales} from "app/config/translation";
 import {Link} from "react-router-dom";
@@ -59,6 +59,7 @@ const FormCreater = () => {
            {/*  <p>Loading...</p>*/}
            {/*) : (*/}
              <ValidatedForm onSubmit={handleSubmit} defaultValues={formForEdit}>
+
                <ValidatedField type="select" name="langKey" label={translate('form.fields.title')}
                onChange={handleSelectForm}
                >

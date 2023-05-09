@@ -32,7 +32,7 @@ const LoginModal = (props: ILoginModalProps) => {
     <Row className="justify-content-center">
       <Col md="4">
         <Form onSubmit={handleLoginSubmit}>
-          <ModalHeader id="login-title" data-cy="loginTitle" toggle={handleClose}>
+          <ModalHeader id="login-title" data-cy="loginTitle">
             <Translate contentKey="login.title">Sign in</Translate>
           </ModalHeader>
           <ModalBody>
@@ -97,9 +97,6 @@ const LoginModal = (props: ILoginModalProps) => {
             </Alert>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={handleClose} tabIndex={1}>
-              <Translate contentKey="entity.action.cancel">Cancel</Translate>
-            </Button>{' '}
             <Button color="primary" type="submit" data-cy="submit">
               <Translate contentKey="login.form.button">Sign in</Translate>
             </Button>

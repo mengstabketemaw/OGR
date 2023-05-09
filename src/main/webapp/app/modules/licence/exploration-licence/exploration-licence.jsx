@@ -25,14 +25,14 @@ const ExplorationLicence = () => {
     dispatch(createLicence(valueToSend));
   };
   return (
-    <div>
-      <Row className="justify-content-center">
-        <Col md="8">
-          <h1>Create or edit Exploration Licence</h1>
+    <div className="">
+      <Row className="justify-content-center ">
+        <Col md="4" >
+          <h1 className="">Create or edit Exploration Licence</h1>
         </Col>
       </Row>
       <Row className="justify-content-center">
-        <Col md="8">
+        <Col md="4">
           <DynamicFields fields={form.fields} handleSubmit={handleSubmit} formatValue={formatValue} />
         </Col>
       </Row>

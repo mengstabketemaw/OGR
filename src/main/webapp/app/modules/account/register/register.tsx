@@ -37,14 +37,14 @@ export const RegisterPage = () => {
   return (
     <div>
       <Row className="justify-content-center">
-        <Col md="8">
+        <Col md="4">
           <h1 id="register-title" data-cy="registerTitle">
             <Translate contentKey="register.title">Registration</Translate>
           </h1>
         </Col>
       </Row>
       <Row className="justify-content-center">
-        <Col md="8">
+        <Col md="4">
           <ValidatedForm id="register-form" onSubmit={handleValidSubmit}>
             <ValidatedField
               name="username"
