@@ -1,7 +1,9 @@
 package com.dulcons.ogr.web.rest;
 
 import com.dulcons.ogr.domain.Licence;
+import com.dulcons.ogr.domain.User;
 import com.dulcons.ogr.repository.LicenceRepository;
+import com.dulcons.ogr.service.UserService;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,8 +16,11 @@ public class LicenceController {
 
     private final LicenceRepository licenceRepository;
 
-    public LicenceController(LicenceRepository licenceRepository) {
+    private final UserService userService;
+
+    public LicenceController(LicenceRepository licenceRepository, UserService userService) {
         this.licenceRepository = licenceRepository;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -54,5 +59,11 @@ public class LicenceController {
     @DeleteMapping("/{id}")
     public void deleteLic(@PathVariable Long id) {
         licenceRepository.deleteById(id);
+    }
+
+    @GetMapping("/formByUser")
+    public Page<Licence> getDataByUserId(Pageable page) {
+        User user = userService.getUserWithAuthorities().orElseThrow();
+        return licenceRepository.findByUser_Id(user.getId(), page);
     }
 }
