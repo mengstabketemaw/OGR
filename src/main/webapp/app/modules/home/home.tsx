@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { Row, Col, Card, CardBody, Button, Progress, CardHeader, NavLink, NavItem, Container, Nav, Table } from 'reactstrap';
 
 import { useAppSelector } from 'app/config/store';
-import { Bar, Line } from 'react-chartjs-2';
 import classnames from 'classnames';
 import Header from '../../argon/components/Headers/Header.js';
 
