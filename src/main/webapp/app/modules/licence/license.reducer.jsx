@@ -15,6 +15,9 @@ const initialState = {
 export const getLicenceAll = createAsyncThunk('fetch_licences', async () => axios.get('api/licence'), {
   serializeError: serializeAxiosError,
 });
+export const getLicenceByForm = createAsyncThunk('fetch_licences_by_form', async (id) => axios.get(`api/licence/form/${id}`), {
+  serializeError: serializeAxiosError,
+});
 export const createLicence = createAsyncThunk(
   'create_licence',
   async (licence) => {
@@ -43,6 +46,12 @@ export const LicenceSlice = createSlice({
       .addCase(getLicenceAll.fulfilled, (state, action) => {
         state.loading = false;
         state.licenses = action.payload.data;
+        state.totalItems = parseInt(action.payload.headers['x-total-count'], 10);
+      })
+      .addCase(getLicenceByForm.fulfilled, (state, action) => {
+        state.loading = false;
+        state.licenses = action.payload.data;
+        state.totalItems = parseInt(action.payload.headers['x-total-count'], 10);
       })
       .addCase(getLicence.fulfilled, (state, action) => {
       state.loading = false;
