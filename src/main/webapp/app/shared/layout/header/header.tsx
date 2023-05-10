@@ -57,20 +57,26 @@ const Header = (props: IHeaderProps) => {
           <Nav id="header-tabs" className="ms-auto" navbar>
             {props.isAuthenticated && <Home />}
             {props.isAuthenticated && <LicencesMenu />}
-            {props.isAuthenticated && (
-              <NavDropdown icon="book" name="Permit">
-                <DropdownItem onClick={() => nav('/permit?name=Drilling&pageKey=4')}>Drilling Permit Requirement</DropdownItem>
-                <DropdownItem onClick={() => nav('/permit?name=Air Emission&pageKey=3')}>Air Emission Permit</DropdownItem>
-                <DropdownItem> Production Permit</DropdownItem>
-                <DropdownItem> Transportation Permit</DropdownItem>
-                <DropdownItem> Storage Permit</DropdownItem>
-                <DropdownItem> Waste Management Permit</DropdownItem>
-                <DropdownItem> Pipeline Permit</DropdownItem>
-                <DropdownItem> Flaring and Venting Permit</DropdownItem>
-                <DropdownItem> Water Use Permit</DropdownItem>
-                <DropdownItem> Emissions Permit</DropdownItem>
-              </NavDropdown>
-            )}
+
+            <NavDropdown icon="book" name="Permit">
+              <DropdownItem tag="a" href="/permit?name=drilling">
+                {' '}
+                Drilling Permit Requirement{' '}
+              </DropdownItem>
+              <DropdownItem tag="a" href="/permit?name=air">
+                {' '}
+                Air Emission Permit{' '}
+              </DropdownItem>
+              <DropdownItem> Production Permit</DropdownItem>
+              <DropdownItem> Transportation Permit</DropdownItem>
+              <DropdownItem> Storage Permit</DropdownItem>
+              <DropdownItem> Waste Management Permit</DropdownItem>
+              <DropdownItem> Pipeline Permit</DropdownItem>
+              <DropdownItem> Flaring and Venting Permit</DropdownItem>
+              <DropdownItem> Water Use Permit</DropdownItem>
+              <DropdownItem> Emissions Permit</DropdownItem>
+            </NavDropdown>
+
             {/* {props.isAuthenticated && <EntitiesMenu />} */}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
             <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />
