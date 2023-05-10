@@ -5,11 +5,11 @@ import { Translate } from 'react-jhipster';
 import { Col, Row } from 'reactstrap';
 
 const Footer = () => (
-  <div className="footer page-content">
+  <div className="footer  page-content fixed-bottom bg-gradient-success">
     <Row>
       <Col md="12">
         <p>
-          <Translate contentKey="footer">Your footer</Translate>
+          <Translate contentKey="footer">Oil and Gas Regulation and Licensing</Translate>
         </p>
       </Col>
     </Row>
