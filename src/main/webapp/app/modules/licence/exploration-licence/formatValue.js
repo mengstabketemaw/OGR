@@ -12,6 +12,7 @@ export const formatValue = (values, fields) => {
 
 const fieldFill = (val, field, fieldType, label) => {
   switch (field) {
+    case 'location':
     case 'text':
       return {
         fieldType: fieldType,

@@ -11,7 +11,7 @@ import { useAppDispatch } from 'app/config/store';
 import { setLocale } from 'app/shared/reducers/locale';
 import { languages, locales } from 'app/config/translation';
 import { NavDropdown } from 'app/shared/layout/menus/menu-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -24,7 +24,7 @@ export interface IHeaderProps {
 
 const Header = (props: IHeaderProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const nav = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleLocaleChange = event => {
@@ -57,26 +57,20 @@ const Header = (props: IHeaderProps) => {
           <Nav id="header-tabs" className="ms-auto" navbar>
             {props.isAuthenticated && <Home />}
             {props.isAuthenticated && <LicencesMenu />}
-
-            <NavDropdown icon="book" name="Permit">
-              <DropdownItem>
-                {' '}
-                <Link to="/permit?name=drilling"> Drilling Permit Requirement </Link>{' '}
-              </DropdownItem>
-              <DropdownItem>
-                {' '}
-                <Link to="/permit?name=air"> Air Emission Permit </Link>{' '}
-              </DropdownItem>
-              <DropdownItem> Production Permit</DropdownItem>
-              <DropdownItem> Transportation Permit</DropdownItem>
-              <DropdownItem> Storage Permit</DropdownItem>
-              <DropdownItem> Waste Management Permit</DropdownItem>
-              <DropdownItem> Pipeline Permit</DropdownItem>
-              <DropdownItem> Flaring and Venting Permit</DropdownItem>
-              <DropdownItem> Water Use Permit</DropdownItem>
-              <DropdownItem> Emissions Permit</DropdownItem>
-            </NavDropdown>
-
+            {props.isAuthenticated && (
+              <NavDropdown icon="book" name="Permit">
+                <DropdownItem onClick={() => nav('/permit?name=Drilling&pageKey=4')}>Drilling Permit Requirement</DropdownItem>
+                <DropdownItem onClick={() => nav('/permit?name=Air Emission&pageKey=3')}>Air Emission Permit</DropdownItem>
+                <DropdownItem> Production Permit</DropdownItem>
+                <DropdownItem> Transportation Permit</DropdownItem>
+                <DropdownItem> Storage Permit</DropdownItem>
+                <DropdownItem> Waste Management Permit</DropdownItem>
+                <DropdownItem> Pipeline Permit</DropdownItem>
+                <DropdownItem> Flaring and Venting Permit</DropdownItem>
+                <DropdownItem> Water Use Permit</DropdownItem>
+                <DropdownItem> Emissions Permit</DropdownItem>
+              </NavDropdown>
+            )}
             {/* {props.isAuthenticated && <EntitiesMenu />} */}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
             <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />

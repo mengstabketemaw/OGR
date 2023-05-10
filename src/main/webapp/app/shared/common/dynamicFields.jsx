@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {Translate, ValidatedField, ValidatedForm} from "react-jhipster";
-import {Button, Modal, ModalBody, ModalFooter} from "reactstrap";
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {MapContainer, Marker, Popup, TileLayer, useMap} from 'react-leaflet'
 import ChooseLocation from "app/modules/maps/MapUtils";
+import {isArray} from "lodash";
 // import 'leaflet/dist/leaflet.css'
 
 const DynamicFields = props =>{
@@ -15,6 +16,9 @@ const DynamicFields = props =>{
     formatValue(value,fields)
     handleSubmit(formatValue(value,fields))
   }
+
+  if(fields?.length === 0 || !isArray(fields))
+    return <p>There is No Form</p>
 
   return(<>
       <GeoLocationChooser showModal={locationModal.show} setValue={setLocationModal} handleClose={()=>setLocationModal({
@@ -35,14 +39,15 @@ const DynamicFields = props =>{
         </ValidatedField>
          :
         f.fieldType.name === "location" ?
-         <> <ValidatedField
+         <ValidatedField
             name={f.label}
             label={f.label}
+            autoComplete={"off"}
             value={locationModal.value}
+            placeholder={"Click here to add location"}
+            required={f.required}
             onClick={()=>setLocationModal({...locationModal, show: true})}
-          >
-          </ValidatedField>
-         </>
+          />
           :
         <ValidatedField
           type={f.fieldType.name}
@@ -71,17 +76,26 @@ const DynamicFields = props =>{
   )
 }
     const GeoLocationChooser = ({showModal, handleClose,setValue}) => {
-    const position = [51.505, -0.09]
 
     return (
-    <Modal fullscreen={"lg"} isOpen={showModal} toggle={handleClose} backdrop="static" id="form-page" autoFocus={false} style={{width:"500px", height:"500px"}}>
-    <ModalBody style={{ width: '800px', height: '600px', backgroundColor:"white" }}>
-    <ChooseLocation setLocation={(lat,lon)=>{
-    setValue(prev=>{
-    return {show:false, value: lat + "," + lon}
-  })
-  }}/>;
+    <Modal
+      isOpen={showModal}
+      toggle={handleClose}
+      backdrop="static"
+      autoFocus={false}
+      className={"geo-locator-modal col-lg-12"}
+    >
+      <ModalHeader>Geo-Locator</ModalHeader>
+      <ModalBody>
+        <ChooseLocation setLocation={(lat,lon)=>{
+        setValue(prev=>{
+          return {show:false, value: lat + "," + lon}
+          })
+        }}/>
     </ModalBody>
+      <ModalFooter>
+        <Button onClick={handleClose}>Close</Button>
+      </ModalFooter>
     </Modal>
     )
   }
