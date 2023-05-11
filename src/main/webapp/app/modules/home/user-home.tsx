@@ -16,8 +16,6 @@ const UserHome = () => {
       .catch(console.log);
   }, []);
 
-  console.log(applications);
-
   return (
     <>
       <Container className="mt--7 p-7" fluid>
