@@ -24,32 +24,36 @@ const ShowFieldValue = ({ data }) => {
       case 'datetime-local':
         return moment(field.dateAndTime).format('MMMM Do YYYY, h:mm:ss a');
       case 'checkbox':
-        return field.checkBoxId === 1;
+        return (field.checkBoxId === 1) + '';
       case 'file':
         return 'download';
     }
     return 'Data Type is not found';
   };
 
-  return data.map(field => {
-    return (
-      <>
-        <Row xs="2">
-          <Col>
-            <p style={{ textAlign: 'end' }}>{field.label}</p>
-          </Col>
-          <Col>
-            <p className="font-weight-bold">{getFieldValue(field)}</p>
-          </Col>
-        </Row>
-        <ShowLocationModal
-          show={locationModal.show}
-          value={locationModal.value}
-          handleClose={() => setLocationModal({ show: false, value: '' })}
-        ></ShowLocationModal>
-      </>
-    );
-  });
+  return (
+    <>
+      {data.map(field => {
+        return (
+          <>
+            <Row xs="2">
+              <Col>
+                <p style={{ textAlign: 'end' }}>{field.label}</p>
+              </Col>
+              <Col>
+                <p className="font-weight-bold">{getFieldValue(field)}</p>
+              </Col>
+            </Row>
+          </>
+        );
+      })}
+      <ShowLocationModal
+        show={locationModal.show}
+        value={locationModal.value}
+        handleClose={() => setLocationModal({ show: false, value: '' })}
+      ></ShowLocationModal>
+    </>
+  );
 };
 
 const ShowLocationModal = ({ show, value, handleClose }) => {

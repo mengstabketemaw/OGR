@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const formatValue = async (values, fields) => {
   let valueToSend = [];
   await Promise.all(
