@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Translate, ValidatedField, ValidatedForm} from "react-jhipster";
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
-import {Link} from "react-router-dom";
+import {Link,useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {MapContainer, Marker, Popup, TileLayer, useMap} from 'react-leaflet'
 import ChooseLocation from "app/modules/maps/MapUtils";
@@ -9,6 +9,7 @@ import {isArray} from "lodash";
 // import 'leaflet/dist/leaflet.css'
 
 const DynamicFields = props =>{
+  const nav = useNavigate();
   const [locationModal,setLocationModal] = useState({show: false, value:""});
   const {fields, defaultValue, handleSubmit,formatValue} = props;
 
@@ -59,7 +60,7 @@ const DynamicFields = props =>{
         />
       )
       }
-      <Button tag={Link} to="/admin/user-management" replace color="info">
+      <Button onClick={()=>{nav(-1)}} replace color="info">
         <FontAwesomeIcon icon="arrow-left" />
         &nbsp;
         <span className="d-none d-md-inline">

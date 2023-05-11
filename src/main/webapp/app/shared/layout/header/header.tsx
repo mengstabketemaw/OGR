@@ -55,7 +55,7 @@ const Header = (props: IHeaderProps) => {
         <Collapse isOpen={menuOpen} navbar>
           <Nav id="header-tabs" className="ms-auto" navbar>
             {props.isAuthenticated && <Home />}
-            {props.isAuthenticated && <LicencesMenu />}
+            <LicencesMenu />
 
             <NavDropdown icon="book" name="Permit">
               <DropdownItem tag="a" href="/permit?name=Drilling Permit &pageKey=4">
