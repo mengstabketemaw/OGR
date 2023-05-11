@@ -15,7 +15,7 @@ import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import Permit from 'app/modules/permit';
-
+import Licence from 'app/modules/licence';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -28,10 +28,10 @@ const Admin = Loadable({
   loading: () => loading,
 });
 
-const Licence = Loadable({
-  loader: () => import(/* webpackChunkName: "administration" */ 'app/modules/licence'),
-  loading: () => loading,
-});
+// const Licence = Loadable({
+//   loader: () => import(/* webpackChunkName: "administration" */ 'app/modules/licence'),
+//   loading: () => loading,
+// });
 
 const Form = Loadable({
   loader: () => import(/* webpackChunkName: "administration" */ 'app/modules/form'),
@@ -46,6 +46,7 @@ const AppRoutes = () => {
         <Route path="login" element={<Login />} />
         <Route path="logout" element={<Logout />} />
         <Route path="permit" element={<Permit />} />
+        <Route path="licence" element={<Licence />} />
         <Route path="account">
           <Route
             path="*"
@@ -70,14 +71,7 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-        <Route
-          path="licence/*"
-          element={
-            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
-              <Licence />
-            </PrivateRoute>
-          }
-        />
+
         <Route
           path="form/*"
           element={
