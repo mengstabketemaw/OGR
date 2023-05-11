@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Badge } from 'reactstrap';
+import { Button, Row, Badge, Col } from 'reactstrap';
 import { Translate, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -21,7 +21,7 @@ export const UserManagementDetail = () => {
   const user = useAppSelector(state => state.userManagement.user);
 
   return (
-    <div>
+    <Col sm="8" xs="12" className="mx-auto">
       <h2>
         <Translate contentKey="userManagement.detail.title">User</Translate> [<strong>{user.login}</strong>]
       </h2>
@@ -100,7 +100,7 @@ export const UserManagementDetail = () => {
           <Translate contentKey="entity.action.back">Back</Translate>
         </span>
       </Button>
-    </div>
+    </Col>
   );
 };
 

@@ -4,7 +4,7 @@ import { getForm } from 'app/modules/form/form.reducer';
 import {createLicence} from 'app/modules/licence/license.reducer';
 import DynamicFields from 'app/shared/common/dynamicFields';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import {formatValue} from "./formatValue";
+import {formatValue} from "../formatValue";
 
 const ExplorationLicence = () => {
   const pageKey = 1;

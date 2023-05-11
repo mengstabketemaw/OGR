@@ -1,8 +1,11 @@
 package com.dulcons.ogr.domain;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.Instant;
+import java.util.Base64;
 import javax.persistence.*;
+import org.hibernate.annotations.Type;
 
 @Entity
 public class LicenceFieldData {
@@ -20,6 +23,10 @@ public class LicenceFieldData {
     private Date date;
     private Instant dateAndTime;
     private Integer checkBoxId;
+
+    @Column(columnDefinition = "LONGBLOB", length = 2147483647)
+    @Type(type = "org.hibernate.type.BinaryType")
+    private byte[] file;
 
     public Long getId() {
         return id;
@@ -83,5 +90,22 @@ public class LicenceFieldData {
 
     public void setCheckBoxId(Integer checkBoxId) {
         this.checkBoxId = checkBoxId;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        if (file != null) {
+            try {
+                String base64Data = file.substring(file.indexOf(",") + 1);
+                this.file = Base64.getDecoder().decode(base64Data);
+            } catch (IllegalArgumentException e) {
+                this.file = null;
+            }
+        } else {
+            this.file = null;
+        }
     }
 }

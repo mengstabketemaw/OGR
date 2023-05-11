@@ -5,7 +5,7 @@ import { getForm } from 'app/modules/form/form.reducer';
 import { createLicence } from 'app/modules/licence/license.reducer';
 import { Col, Row } from 'reactstrap';
 import DynamicFields from 'app/shared/common/dynamicFields';
-import { formatValue } from 'app/modules/licence/exploration-licence/formatValue';
+import { formatValue } from 'app/modules/licence/formatValue';
 
 const ApplyPermit = () => {
   const [params] = useSearchParams();
