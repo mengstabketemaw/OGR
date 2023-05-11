@@ -18,7 +18,7 @@ export const getLicenceAll = createAsyncThunk('fetch_licences', async () => axio
 export const getLicenceByForm = createAsyncThunk('fetch_licences_by_form', async (id) => axios.get(`api/licence/form/${id}`), {
   serializeError: serializeAxiosError,
 });
-export const createLicence = createAsyncThunk(
+export const  createLicence =  createAsyncThunk(
   'create_licence',
   async (licence) => {
     return await axios.post('/api/licence', licence);

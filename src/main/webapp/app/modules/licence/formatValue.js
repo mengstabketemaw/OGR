@@ -1,18 +1,18 @@
-import moment from 'moment';
-
-export const formatValue = (values, fields) => {
+export const formatValue = async (values, fields) => {
   let valueToSend = [];
-  Object.keys(values).map(key => {
-    const fieldType = fields.filter(f => f.label === key)[0].fieldType;
-    const label = key;
-    const value = values[key];
-
-    valueToSend.push(fieldFill(value, fieldType.name, fieldType, label));
-  });
+  await Promise.all(
+    Object.keys(values).map(async key => {
+      const fieldType = fields.filter(f => f.label === key)[0].fieldType;
+      const label = key;
+      const value = values[key];
+      const fieldValue = await fieldFill(value, fieldType.name, fieldType, label);
+      valueToSend.push(fieldValue);
+    })
+  );
   return valueToSend;
 };
 
-const fieldFill = (val, field, fieldType, label) => {
+const fieldFill = async (val, field, fieldType, label) => {
   switch (field) {
     case 'location':
     case 'text':
@@ -24,6 +24,7 @@ const fieldFill = (val, field, fieldType, label) => {
         date: null,
         dateAndTime: null,
         checkBoxId: null,
+        file: null,
       };
     case 'select':
       return {
@@ -34,6 +35,7 @@ const fieldFill = (val, field, fieldType, label) => {
         date: null,
         dateAndTime: null,
         checkBoxId: null,
+        file: null,
       };
     case 'date':
       return {
@@ -44,6 +46,7 @@ const fieldFill = (val, field, fieldType, label) => {
         date: val,
         dateAndTime: null,
         checkBoxId: null,
+        file: null,
       };
     case 'checkbox':
       return {
@@ -54,6 +57,7 @@ const fieldFill = (val, field, fieldType, label) => {
         date: null,
         dateAndTime: null,
         checkBoxId: Number(val),
+        file: null,
       };
     case 'datetime-local':
       return {
@@ -64,6 +68,29 @@ const fieldFill = (val, field, fieldType, label) => {
         date: null,
         dateAndTime: moment(val).format(),
         checkBoxId: null,
+        file: null,
+      };
+    case 'file':
+      const base64 = await convertFileToBase64(val[0]);
+
+      return {
+        fieldType: fieldType,
+        label: label,
+        text: null,
+        dropDown: null,
+        date: null,
+        dateAndTime: null,
+        checkBoxId: null,
+        file: base64,
       };
   }
 };
+
+async function convertFileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onerror = reject;
+    reader.onload = () => resolve(reader.result);
+  });
+}

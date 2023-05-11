@@ -4,6 +4,7 @@ import com.dulcons.ogr.domain.Licence;
 import com.dulcons.ogr.domain.User;
 import com.dulcons.ogr.repository.LicenceRepository;
 import com.dulcons.ogr.service.UserService;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

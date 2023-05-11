@@ -11,11 +11,12 @@ import {isArray} from "lodash";
 const DynamicFields = props =>{
   const [locationModal,setLocationModal] = useState({show: false, value:""});
   const {fields, defaultValue, handleSubmit,formatValue} = props;
-  const handlevalue = (value) =>{
-    //console.log(value,fields)
-    formatValue(value,fields)
-    handleSubmit(formatValue(value,fields))
+
+  const handlevalue = async (value) => {
+    const formattedValue = await formatValue(value, fields);
+    handleSubmit(formattedValue);
   }
+
 
   if(fields?.length === 0 || !isArray(fields))
     return <p>There is No Form</p>
