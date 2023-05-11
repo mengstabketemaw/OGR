@@ -1,17 +1,16 @@
 import React from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Button } from 'reactstrap';
+const Licence = () => {
+  const [params] = useSearchParams();
+  const nav = useNavigate();
 
-import { Route } from 'react-router-dom';
-import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
-import ExplorationLicence from './exploration-licence/exploration-licence';
-import PipelineLicence from 'app/modules/licence/pipeline-licence/pipeline-licence';
+  return (
+    <>
+      <h1>{params.get('name')}</h1>
+      <Button onClick={() => nav('/apply-licence?name=' + params.get('name') + '&pageKey=' + params.get('pageKey'))}>Apply</Button>
+    </>
+  );
+};
 
-const LicenceRoute = () => (
-  <div>
-    <ErrorBoundaryRoutes>
-      <Route path="exploration" element={<ExplorationLicence />} />
-      <Route path="pipeline" element={<PipelineLicence />} />
-    </ErrorBoundaryRoutes>
-  </div>
-);
-
-export default LicenceRoute;
+export default Licence;

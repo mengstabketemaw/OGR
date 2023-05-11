@@ -6,13 +6,10 @@ import MenuItem from 'app/shared/layout/menus/menu-item';
 
 const licenceMenuItems = () => (
   <>
-    <MenuItem icon="note" to="/licence/exploration">
+    <MenuItem icon="note" to="/licence?name=Exploration Licence &pageKey=1">
       <Translate contentKey="licence.types.exploration" />
     </MenuItem>
-    <MenuItem icon="note" to="/licence/pipeline">
-      <Translate contentKey="licence.types.pipeline" />
-    </MenuItem>
-    <MenuItem icon="note" to="/admin/user-management">
+    <MenuItem icon="note" to="/licence?name=Pipeline Licence &pageKey=2">
       <Translate contentKey="licence.types.pipeline" />
     </MenuItem>
     <MenuItem icon="note" to="/admin/user-management">
