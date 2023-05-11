@@ -4,7 +4,8 @@ import moment from 'moment';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 import MapTiles from 'app/modules/maps/MapTiles';
 import DoctorsIcon, { point } from 'app/modules/maps/icons';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudDownload, faDownload } from '@fortawesome/free-solid-svg-icons';
 const ShowFieldValue = ({ data }) => {
   const [locationModal, setLocationModal] = useState({ show: false, value: '' });
   const getFieldValue = field => {
@@ -26,7 +27,27 @@ const ShowFieldValue = ({ data }) => {
       case 'checkbox':
         return (field.checkBoxId === 1) + '';
       case 'file':
-        return 'download';
+        const fileName = field.encodingFileType?.split('~')[0];
+        const encodedType = field.encodingFileType?.split('~')[1];
+
+        return (
+          <>
+            {fileName && encodedType ? (
+              <>
+                <a
+                  className="cursor-pointer hover-blue underline-hover d-flex flex-row align-items-center"
+                  download={fileName}
+                  href={`${encodedType},${field.file}`}
+                >
+                  <p className="mr-2">{fileName}</p>
+                  <FontAwesomeIcon icon={faDownload} color="#2DCEC8" size="2x" />
+                </a>
+              </>
+            ) : (
+              <p className="cursor-pointer">No File</p>
+            )}
+          </>
+        );
     }
     return 'Data Type is not found';
   };

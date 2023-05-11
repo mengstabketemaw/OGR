@@ -27,6 +27,7 @@ const fieldFill = async (val, field, fieldType, label) => {
         dateAndTime: null,
         checkBoxId: null,
         file: null,
+        encodingFileType: null,
       };
     case 'select':
       return {
@@ -38,6 +39,7 @@ const fieldFill = async (val, field, fieldType, label) => {
         dateAndTime: null,
         checkBoxId: null,
         file: null,
+        encodingFileType: null,
       };
     case 'date':
       return {
@@ -49,6 +51,7 @@ const fieldFill = async (val, field, fieldType, label) => {
         dateAndTime: null,
         checkBoxId: null,
         file: null,
+        encodingFileType: null,
       };
     case 'checkbox':
       return {
@@ -60,6 +63,7 @@ const fieldFill = async (val, field, fieldType, label) => {
         dateAndTime: null,
         checkBoxId: Number(val),
         file: null,
+        encodingFileType: null,
       };
     case 'datetime-local':
       return {
@@ -71,6 +75,7 @@ const fieldFill = async (val, field, fieldType, label) => {
         dateAndTime: moment(val).format(),
         checkBoxId: null,
         file: null,
+        encodingFileType: null,
       };
     case 'file':
       const base64 = await convertFileToBase64(val[0]);
@@ -84,6 +89,7 @@ const fieldFill = async (val, field, fieldType, label) => {
         dateAndTime: null,
         checkBoxId: null,
         file: base64,
+        encodingFileType: val[0].name + '~' + base64.split(',')[0],
       };
   }
 };

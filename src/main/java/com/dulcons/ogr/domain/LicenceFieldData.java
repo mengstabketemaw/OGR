@@ -1,6 +1,5 @@
 package com.dulcons.ogr.domain;
 
-import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.Base64;
@@ -26,7 +25,10 @@ public class LicenceFieldData {
 
     @Column(columnDefinition = "LONGBLOB", length = 2147483647)
     @Type(type = "org.hibernate.type.BinaryType")
+    @Lob
     private byte[] file;
+
+    private String encodingFileType;
 
     public Long getId() {
         return id;
@@ -92,8 +94,17 @@ public class LicenceFieldData {
         this.checkBoxId = checkBoxId;
     }
 
-    public byte[] getFile() {
-        return file;
+    public String getFile() {
+        if (file != null) {
+            try {
+                String base64String = Base64.getEncoder().encodeToString(file);
+                return base64String;
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 
     public void setFile(String file) {
@@ -106,6 +117,18 @@ public class LicenceFieldData {
             }
         } else {
             this.file = null;
+        }
+    }
+
+    public String getEncodingFileType() {
+        return encodingFileType;
+    }
+
+    public void setEncodingFileType(String encodingFileType) {
+        if (encodingFileType != null) {
+            this.encodingFileType = encodingFileType;
+        } else {
+            this.encodingFileType = null;
         }
     }
 }
