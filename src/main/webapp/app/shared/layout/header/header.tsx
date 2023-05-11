@@ -59,13 +59,11 @@ const Header = (props: IHeaderProps) => {
             {props.isAuthenticated && <LicencesMenu />}
 
             <NavDropdown icon="book" name="Permit">
-              <DropdownItem tag="a" href="/permit?name=drilling">
-                {' '}
-                Drilling Permit Requirement{' '}
+              <DropdownItem tag="a" href="/permit?name=Drilling Permit &pageKey=4">
+                Drilling Permit Requirement
               </DropdownItem>
-              <DropdownItem tag="a" href="/permit?name=air">
-                {' '}
-                Air Emission Permit{' '}
+              <DropdownItem tag="a" href="/permit?name=Air Emission Permit &pageKey=3">
+                Air Emission Permit
               </DropdownItem>
               <DropdownItem> Production Permit</DropdownItem>
               <DropdownItem> Transportation Permit</DropdownItem>
