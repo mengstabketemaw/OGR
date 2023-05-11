@@ -20,6 +20,12 @@ public class Licence {
     @ManyToOne
     private User user;
 
+    private Instant submittedDate = Instant.now();
+
+    private String stage = "undefined";
+
+    private String status = "undefined";
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LicenceFieldData> data = new ArrayList<>();
 
@@ -53,5 +59,29 @@ public class Licence {
 
     public void setData(List<LicenceFieldData> fieldData) {
         this.data = fieldData;
+    }
+
+    public Instant getSubmittedDate() {
+        return submittedDate;
+    }
+
+    public void setSubmittedDate(Instant submittedDate) {
+        this.submittedDate = submittedDate;
+    }
+
+    public String getStage() {
+        return stage;
+    }
+
+    public void setStage(String stage) {
+        this.stage = stage;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

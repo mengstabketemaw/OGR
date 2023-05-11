@@ -33,7 +33,6 @@ const licenceMenuItems = () => (
     <MenuItem icon="note" to="/admin/user-management">
       <Translate contentKey="licence.types.waste" />
     </MenuItem>
-    {/* jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here */}
   </>
 );
 

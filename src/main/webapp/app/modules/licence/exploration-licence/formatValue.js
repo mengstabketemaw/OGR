@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const formatValue = (values, fields) => {
   let valueToSend = [];
   Object.keys(values).map(key => {
@@ -51,7 +53,7 @@ const fieldFill = (val, field, fieldType, label) => {
         dropDown: null,
         date: null,
         dateAndTime: null,
-        checkBoxId: val,
+        checkBoxId: Number(val),
       };
     case 'datetime-local':
       return {
@@ -60,7 +62,7 @@ const fieldFill = (val, field, fieldType, label) => {
         text: null,
         dropDown: null,
         date: null,
-        dateAndTime: val,
+        dateAndTime: moment(val).format(),
         checkBoxId: null,
       };
   }

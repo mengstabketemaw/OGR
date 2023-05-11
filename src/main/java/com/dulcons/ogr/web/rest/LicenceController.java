@@ -61,7 +61,7 @@ public class LicenceController {
         licenceRepository.deleteById(id);
     }
 
-    @GetMapping("/formByUser")
+    @GetMapping("/formByUser") //Find all application the use applied to
     public Page<Licence> getDataByUserId(Pageable page) {
         User user = userService.getUserWithAuthorities().orElseThrow();
         return licenceRepository.findByUser_Id(user.getId(), page);

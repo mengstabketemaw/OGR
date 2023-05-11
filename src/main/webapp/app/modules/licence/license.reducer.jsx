@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice, isFulfilled} from '@reduxjs/toolkit';
 import {serializeAxiosError} from 'app/shared/reducers/reducer.utils';
 
 const initialState = {
-  loading: false,
+  loading: true,
   errorMessage: null,
   licenses:[],
   license:{},
