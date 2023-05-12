@@ -40,8 +40,8 @@ public class LicenceController {
     }
 
     @GetMapping("/form/{id}")
-    public List<Licence> getbyForm(@PathVariable Long id) {
-        return licenceRepository.findDistinctByForm_Id(id);
+    public Page<Licence> getbyForm(@PathVariable Long id, Pageable page) {
+        return licenceRepository.findDistinctByForm_Id(id, page);
     }
 
     @PostMapping

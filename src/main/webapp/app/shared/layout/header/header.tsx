@@ -55,13 +55,38 @@ const Header = (props: IHeaderProps) => {
         <Collapse isOpen={menuOpen} navbar>
           <Nav id="header-tabs" className="ms-auto" navbar>
             {props.isAuthenticated && <Home />}
-            <LicencesMenu />
+            <NavDropdown icon="book" name="licence">
+              <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Exploration Licence&pageKey=1'}>
+                <Translate contentKey="licence.types.exploration" />
+              </DropdownItem>
+              <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=PipeLine Licence&pageKey=2'}>
+                <Translate contentKey="licence.types.pipeline" />
+              </DropdownItem>
+              <DropdownItem>
+                <Translate contentKey="licence.types.storage" />
+              </DropdownItem>
+              <DropdownItem>
+                <Translate contentKey="licence.types.transportation" />
+              </DropdownItem>
+              <DropdownItem>
+                <Translate contentKey="licence.types.processing" />
+              </DropdownItem>
+              <DropdownItem>
+                <Translate contentKey="licence.types.distribution" />
+              </DropdownItem>
+              <DropdownItem>
+                <Translate contentKey="licence.types.retail" />
+              </DropdownItem>
+              <DropdownItem>
+                <Translate contentKey="licence.types.waste" />
+              </DropdownItem>
+            </NavDropdown>
 
             <NavDropdown icon="book" name="Permit">
-              <DropdownItem tag="a" href="/permit?name=Drilling Permit &pageKey=4">
+              <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Drilling Permit &pageKey=4'}>
                 Drilling Permit Requirement
               </DropdownItem>
-              <DropdownItem tag="a" href="/permit?name=Air Emission Permit &pageKey=3">
+              <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Air Emission Permit &pageKey=3'}>
                 Air Emission Permit
               </DropdownItem>
               <DropdownItem> Production Permit</DropdownItem>
