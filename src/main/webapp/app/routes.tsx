@@ -16,6 +16,7 @@ import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import Permit from 'app/modules/permit';
 import Licence from 'app/modules/licence';
+import FormData from 'app/modules/administration/FormData';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -80,6 +81,15 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route
+          path="formData/*"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
+              <FormData />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="*"
           element={

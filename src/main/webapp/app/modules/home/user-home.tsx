@@ -84,7 +84,7 @@ const UserHome = () => {
   );
 };
 
-const DetailModal = ({ id, show, handleClose }) => {
+export const DetailModal = ({ id, show, handleClose }) => {
   const [data, setDate] = useState({ loading: true, data: { data: [] } });
 
   useEffect(() => {
