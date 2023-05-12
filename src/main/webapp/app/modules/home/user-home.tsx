@@ -66,7 +66,7 @@ const UserHome = () => {
                         <th>{data.stage}</th>
                         <th>{data.status}</th>
                         <th>
-                          <Button color="primary" href="#pablo" onClick={e => setDetailModal({ show: true, id: data.id })} size="sm">
+                          <Button color="primary" href="#details" onClick={e => setDetailModal({ show: true, id: data.id })} size="sm">
                             View
                           </Button>
                         </th>
@@ -99,7 +99,7 @@ const DetailModal = ({ id, show, handleClose }) => {
     <Modal isOpen={show} onClosed={handleClose}>
       <ModalHeader>Detail</ModalHeader>
       <ModalBody>
-        <Container className="p--5 justify-content-center">
+        <Container className="p--5 d-flex flex-column justify-content-center">
           {data.loading ? (
             <Spinner className="align-self-center" color="primary" style={{ height: '3rem', width: '3rem' }} type="grow">
               Loading...
