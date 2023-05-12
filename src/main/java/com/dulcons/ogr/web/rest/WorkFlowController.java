@@ -1,9 +1,11 @@
 package com.dulcons.ogr.web.rest;
 
+import com.dulcons.ogr.domain.State;
 import com.dulcons.ogr.domain.WorkFlow;
 import com.dulcons.ogr.exception.ResourceNotFoundException;
 import com.dulcons.ogr.repository.WorkFlowRepository;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +27,18 @@ public class WorkFlowController {
     @GetMapping("/{id}")
     public WorkFlow getById(@PathVariable Long id) {
         return workFlowRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Work Flow Could not be found"));
+    }
+
+    @GetMapping("/form/{id}")
+    public WorkFlow getByFormId(@PathVariable Long id) {
+        return Objects
+            .requireNonNull(workFlowRepository.findByCustomForms_Id(id))
+            .orElseThrow(() -> new ResourceNotFoundException("No WorkFlow For this form"));
+    }
+
+    @GetMapping("/state")
+    public Iterable<State> getAllState() {
+        return workFlowRepository.findAllState();
     }
 
     @PostMapping
