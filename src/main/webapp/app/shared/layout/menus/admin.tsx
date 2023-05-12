@@ -13,6 +13,9 @@ const adminMenuItems = () => (
     <MenuItem icon="tasks" to="/form/create">
       Form
     </MenuItem>
+    <MenuItem icon="tasks" to="/workflow">
+      <Translate contentKey="global.menu.admin.workflow">Workflow</Translate>
+    </MenuItem>
     {/* jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here */}
   </>
 );

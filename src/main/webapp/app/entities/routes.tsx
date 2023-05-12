@@ -6,7 +6,7 @@ import PrivateRoute from 'app/shared/auth/private-route';
 import { AUTHORITIES } from 'app/config/constants';
 import ApplyPermit from 'app/modules/permit/ApplyPermit';
 import ApplyLicence from 'app/modules/licence/ApplyLicence';
-
+import Workflow from 'app/modules/administration/workflow/workflow';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -26,6 +26,14 @@ export default () => {
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
               <ApplyLicence />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="workflow"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
+              <Workflow />
             </PrivateRoute>
           }
         />

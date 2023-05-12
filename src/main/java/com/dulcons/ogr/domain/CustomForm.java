@@ -18,6 +18,18 @@ public class CustomForm {
     @JoinColumn(name = "form_id")
     private List<CustomField> fields = new ArrayList<>();
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "work_flow_id", nullable = true)
+    private WorkFlow workFlow;
+
+    public WorkFlow getWorkFlow() {
+        return workFlow;
+    }
+
+    public void setWorkFlow(WorkFlow workFlow) {
+        this.workFlow = workFlow;
+    }
+
     public Long getId() {
         return id;
     }
