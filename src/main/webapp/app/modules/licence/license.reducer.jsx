@@ -7,7 +7,7 @@ const initialState = {
   errorMessage: null,
   licenses:[],
   license:{},
-  workflow: {},
+  workflow: [],
   states:[],
   totalItems: 0,
 };
@@ -38,7 +38,10 @@ export const updateLicence = createAsyncThunk(
 export const getLicence = createAsyncThunk('fetch_licence', async (id) => axios.get(`api/licence/${id}`), {
   serializeError: serializeAxiosError,
 });
-
+// export const getAllWorkflows = createAsyncThunk('fetch_workflows',
+//   async () => axios.get(`api/workflow/`), {
+//     serializeError: serializeAxiosError,
+//   });
 export const getWorkflowByForm = createAsyncThunk('fetch_workflowByForm',
   async (id) => axios.get(`api/workflow/form/${id}`), {
   serializeError: serializeAxiosError,
@@ -63,7 +66,7 @@ export const updateWorkflow = createAsyncThunk(
 );
 export const LicenceSlice = createSlice({
   name: 'licence',
-  initialState: initialState ,
+  initialState ,
   reducers: {},
   extraReducers(builder) {
     builder

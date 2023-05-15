@@ -15,12 +15,21 @@ public class WorkFlow {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "work_flow_id")
     private Set<WorkFlowSequence> workFlowSequences = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "workFlow", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CustomForm> customForms = new LinkedHashSet<>();
+    @OneToOne
+    @JoinColumn(name = "custom_form_id")
+    private CustomForm customForm;
+
+    public CustomForm getCustomForm() {
+        return customForm;
+    }
+
+    public void setCustomForm(CustomForm customForm) {
+        this.customForm = customForm;
+    }
 
     public String getName() {
         return name;
@@ -44,13 +53,5 @@ public class WorkFlow {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Set<CustomForm> getCustomForms() {
-        return customForms;
-    }
-
-    public void setCustomForms(Set<CustomForm> customForms) {
-        this.customForms = customForms;
     }
 }

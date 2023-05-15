@@ -10,11 +10,11 @@ public class WorkFlowSequence {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "state_id")
     private State state;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "to_state_id")
     private State toState;
 

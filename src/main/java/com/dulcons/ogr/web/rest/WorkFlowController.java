@@ -2,10 +2,13 @@ package com.dulcons.ogr.web.rest;
 
 import com.dulcons.ogr.domain.State;
 import com.dulcons.ogr.domain.WorkFlow;
+import com.dulcons.ogr.domain.mapper.WorkFlowDto;
+import com.dulcons.ogr.domain.mapper.WorkFlowMapper;
 import com.dulcons.ogr.exception.ResourceNotFoundException;
 import com.dulcons.ogr.repository.WorkFlowRepository;
 import java.util.List;
 import java.util.Objects;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +18,11 @@ public class WorkFlowController {
 
     private final WorkFlowRepository workFlowRepository;
 
-    public WorkFlowController(WorkFlowRepository workFlowRepository) {
+    private final WorkFlowMapper workFlowMapper;
+
+    public WorkFlowController(WorkFlowRepository workFlowRepository, WorkFlowMapper workFlowMapper) {
         this.workFlowRepository = workFlowRepository;
+        this.workFlowMapper = workFlowMapper;
     }
 
     @GetMapping
@@ -31,9 +37,7 @@ public class WorkFlowController {
 
     @GetMapping("/form/{id}")
     public WorkFlow getByFormId(@PathVariable Long id) {
-        return Objects
-            .requireNonNull(workFlowRepository.findByCustomForms_Id(id))
-            .orElseThrow(() -> new ResourceNotFoundException("No WorkFlow For this form"));
+        return workFlowRepository.findByCustomForm_Id(id).orElseGet(() -> new WorkFlow());
     }
 
     @GetMapping("/state")
@@ -44,6 +48,7 @@ public class WorkFlowController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public WorkFlow save(@RequestBody WorkFlow workFlow) {
+        workFlowRepository.deleteByCustomForm(workFlow.getCustomForm());
         return workFlowRepository.save(workFlow);
     }
 

@@ -129,4 +129,10 @@
             <column name="title" type="text"/>
         </loadData>
     </changeSet>
+    <changeSet id="4" author="betselot">
+        <loadData  tableName="state" separator=";" usePreparedStatements="true" file="config/liquibase/data/state.csv">
+            <column name="id" type="numeric"/>
+            <column name="name" type="text"/>
+        </loadData>
+    </changeSet>
 </databaseChangeLog>
