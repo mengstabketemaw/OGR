@@ -6,6 +6,7 @@ import CustomPagination from 'app/shared/common/CustomPagination';
 import { isArray } from 'lodash';
 import moment from 'moment';
 import ShowFieldValue from 'app/shared/common/showFieldValue';
+import { Translate } from 'react-jhipster';
 
 const PAGE_SIZE = 5;
 export const AdminDashboardTable = ({ type }) => {
@@ -44,7 +45,9 @@ export const AdminDashboardTable = ({ type }) => {
           <CardHeader className="border-0">
             <Row className="align-items-center">
               <div className="col">
-                <h3 className="mb-0">{type === 'permit' ? 'Permits' : 'Licences'}</h3>
+                <h3 className="mb-0">
+                  {type === 'permit' ? <Translate contentKey="permit.title" /> : <Translate contentKey="licence.title" />}
+                </h3>
               </div>
             </Row>
           </CardHeader>

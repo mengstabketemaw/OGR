@@ -17,6 +17,7 @@ import { AUTHORITIES } from 'app/config/constants';
 import Permit from 'app/modules/permit';
 import Licence from 'app/modules/licence';
 import FormData from 'app/modules/administration/FormData';
+import ComplianceMonitoring from 'app/modules/compliance/complianceMonitoring';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -48,6 +49,7 @@ const AppRoutes = () => {
         <Route path="logout" element={<Logout />} />
         <Route path="permit" element={<Permit />} />
         <Route path="licence" element={<Licence />} />
+        <Route path="compliance" element={<ComplianceMonitoring />} />
         <Route path="account">
           <Route
             path="*"

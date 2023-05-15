@@ -2,7 +2,7 @@ import './header.scss';
 
 import React, { useState } from 'react';
 import { Translate, Storage } from 'react-jhipster';
-import { Navbar, Nav, NavbarToggler, Collapse, DropdownItem } from 'reactstrap';
+import { Navbar, Nav, NavbarToggler, Collapse, DropdownItem, NavItem, NavLink } from 'reactstrap';
 import LoadingBar from 'react-redux-loading-bar';
 
 import { Home, Brand } from './header-components';
@@ -12,6 +12,8 @@ import { setLocale } from 'app/shared/reducers/locale';
 import { languages, locales } from 'app/config/translation';
 import { NavDropdown } from 'app/shared/layout/menus/menu-components';
 import { Link, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -44,6 +46,10 @@ const Header = (props: IHeaderProps) => {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  const gotoCompliance = () => {
+    window.location.href = '/compliance';
+  };
+
   /* jhipster-needle-add-element-to-menu - JHipster will add new menu items here */
 
   return (
@@ -55,7 +61,7 @@ const Header = (props: IHeaderProps) => {
         <Collapse isOpen={menuOpen} navbar>
           <Nav id="header-tabs" className="ms-auto" navbar>
             {props.isAuthenticated && <Home />}
-            <NavDropdown icon="book" name="Licence">
+            <NavDropdown icon="book" name={<Translate contentKey="licence.title" />}>
               <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Exploration Licence&pageKey=1'}>
                 <Translate contentKey="licence.types.exploration" />
               </DropdownItem>
@@ -82,7 +88,7 @@ const Header = (props: IHeaderProps) => {
               </DropdownItem>
             </NavDropdown>
 
-            <NavDropdown icon="book" name="Permit">
+            <NavDropdown icon="book" name={<Translate contentKey="permit.title" />}>
               <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Drilling Permit &pageKey=4'}>
                 Drilling Permit Requirement
               </DropdownItem>
@@ -98,6 +104,16 @@ const Header = (props: IHeaderProps) => {
               <DropdownItem> Water Use Permit</DropdownItem>
               <DropdownItem> Emissions Permit</DropdownItem>
             </NavDropdown>
+            {props.isAuthenticated && props.isAdmin && (
+              <NavItem>
+                <NavLink onClick={gotoCompliance} className="d-flex align-items-center">
+                  <FontAwesomeIcon icon={faInfoCircle} className={'mr-1'} />
+                  <span>
+                    <Translate contentKey="global.menu.compliance" />
+                  </span>
+                </NavLink>
+              </NavItem>
+            )}
 
             {/* {props.isAuthenticated && <EntitiesMenu />} */}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
