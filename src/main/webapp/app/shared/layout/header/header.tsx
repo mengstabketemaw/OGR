@@ -49,13 +49,13 @@ const Header = (props: IHeaderProps) => {
   return (
     <div id="app-header">
       <LoadingBar className="loading-bar" />
-      <Navbar data-cy="navbar" expand="lg" fixed="top" className="navbar-horizontal navbar-dark bg-gradient-success mb-4 col-12">
+      <Navbar data-cy="navbar" expand="md" fixed="top" className="navbar-horizontal pt-2 pb-2 navbar-dark bg-gradient-success  col-12">
         <NavbarToggler aria-label="Menu" onClick={toggleMenu} />
         <Brand />
         <Collapse isOpen={menuOpen} navbar>
           <Nav id="header-tabs" className="ms-auto" navbar>
             {props.isAuthenticated && <Home />}
-            <NavDropdown icon="book" name="licence">
+            <NavDropdown icon="book" name="Licence">
               <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Exploration Licence&pageKey=1'}>
                 <Translate contentKey="licence.types.exploration" />
               </DropdownItem>

@@ -17,10 +17,22 @@
 */
 
 // reactstrap components
-import React from 'react';
-import { Card, CardBody, CardTitle, Container, Row, Col } from 'reactstrap';
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, CardTitle, Container, Row, Col, Spinner } from 'reactstrap';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarPlus, faDownload, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 
 const Header = () => {
+  const [stats, setStats] = useState({ loading: true, data: {} });
+
+  useEffect(() => {
+    axios
+      .get('/api/stats')
+      .then(({ data }) => setStats({ loading: false, data }))
+      .catch(console.log);
+  }, []);
+
   return (
     <>
       <div className="header bg-gradient-success pb-8 pt-5 pt-md-8">
@@ -34,21 +46,36 @@ const Header = () => {
                     <Row>
                       <div className="col">
                         <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
-                          Traffic
+                          Total Submissions
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">350,897</span>
+
+                        {stats.loading ? (
+                          <Spinner
+                            className="align-self-center"
+                            color="primary"
+                            style={{
+                              height: '3rem',
+                              width: '3rem',
+                            }}
+                            type="grow"
+                          >
+                            Loading...
+                          </Spinner>
+                        ) : (
+                          <span className="h2 font-weight-bold mb-0">{stats.data.totalSubmissionsCount}</span>
+                        )}
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <i className="fas fa-chart-bar" />
+                        <div className="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                          <FontAwesomeIcon icon={'database'} />
                         </div>
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-arrow-up" /> 3.48%
+                      <span className="text-success font-weight-bold mr-2">
+                        <i className="fa fa-plus" /> {stats.data?.thisMonthSubmissions}
                       </span>{' '}
-                      <span className="text-nowrap">Since last month</span>
+                      <span className="text-nowrap">Submitted this month</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -59,21 +86,35 @@ const Header = () => {
                     <Row>
                       <div className="col">
                         <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
-                          New users
+                          Registered Accounts
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">2,356</span>
+                        {stats.loading ? (
+                          <Spinner
+                            className="align-self-center"
+                            color="primary"
+                            style={{
+                              height: '3rem',
+                              width: '3rem',
+                            }}
+                            type="grow"
+                          >
+                            Loading...
+                          </Spinner>
+                        ) : (
+                          <span className="h2 font-weight-bold mb-0">{stats.data?.totalUserCount}</span>
+                        )}
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
-                          <i className="fas fa-chart-pie" />
+                        <div className="icon icon-shape bg-gradient-danger text-white rounded-circle shadow">
+                          <FontAwesomeIcon icon={'user-plus'} />
                         </div>
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-danger mr-2">
-                        <i className="fas fa-arrow-down" /> 3.48%
+                      <span className="text-danger  font-weight-bold  mr-2">
+                        <i className="fas fa-arrow-down" /> {stats.data?.totalUserToday}
                       </span>{' '}
-                      <span className="text-nowrap">Since last week</span>
+                      <span className="text-nowrap">Registered today</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -84,21 +125,36 @@ const Header = () => {
                     <Row>
                       <div className="col">
                         <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
-                          Sales
+                          Requests Submitted Today
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">924</span>
+                        {stats.loading ? (
+                          <Spinner
+                            className="align-self-center"
+                            color="primary"
+                            style={{
+                              height: '3rem',
+                              width: '3rem',
+                            }}
+                            type="grow"
+                          >
+                            Loading...
+                          </Spinner>
+                        ) : (
+                          <span className="h2 font-weight-bold mb-0">{stats.data?.todaySubmissions}</span>
+                        )}
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                          <i className="fas fa-users" />
+                        <div className="icon icon-shape bg-gradient-cyan text-white rounded-circle shadow">
+                          <FontAwesomeIcon icon={faCalendarPlus} />
                         </div>
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-warning mr-2">
-                        <i className="fas fa-arrow-down" /> 1.10%
+                      <span className="text-info font-weight-bold mr-2">
+                        <i className="fas fa-arrow-down" />
+                        {stats.data?.yesterdaysSubmissions}
                       </span>{' '}
-                      <span className="text-nowrap">Since yesterday</span>
+                      <span className="text-nowrap">Submitted yesterday</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -109,21 +165,36 @@ const Header = () => {
                     <Row>
                       <div className="col">
                         <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
-                          Performance
+                          Total Inspections
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">49,65%</span>
+
+                        {stats.loading ? (
+                          <Spinner
+                            className="align-self-center"
+                            color="primary"
+                            style={{
+                              height: '3rem',
+                              width: '3rem',
+                            }}
+                            type="grow"
+                          >
+                            Loading...
+                          </Spinner>
+                        ) : (
+                          <span className="h2 font-weight-bold mb-0">{stats.data.totalSubmissionsCount}</span>
+                        )}
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-info text-white rounded-circle shadow">
-                          <i className="fas fa-percent" />
+                        <div className="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                          <FontAwesomeIcon icon={faUserSecret} />
                         </div>
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fas fa-arrow-up" /> 12%
+                      <span className="text-success font-weight-bold mr-2">
+                        <i className="fa fa-plus" /> {stats.data?.thisMonthSubmissions}
                       </span>{' '}
-                      <span className="text-nowrap">Since last month</span>
+                      <span className="text-nowrap">Inspections this month</span>
                     </p>
                   </CardBody>
                 </Card>

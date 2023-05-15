@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,6 +15,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    @Query("select count(u) from User u where u.createdDate >= ?1")
+    long countByCreatedDateGreaterThanEqual(Instant createdDate);
+
+    @Query("select count(u) from User u")
+    long countFirstBy();
+
     Optional<User> findOneByActivationKey(String activationKey);
     List<User> findAllByActivatedIsFalseAndActivationKeyIsNotNullAndCreatedDateBefore(Instant dateTime);
     Optional<User> findOneByResetKey(String resetKey);

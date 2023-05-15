@@ -6,21 +6,18 @@ import { NavLink as Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const refreshPage = () => {
-  window.location.href = '/';
+  window.location.href = '/home';
 };
 
 export const BrandIcon = props => (
   <div {...props} className="brand-icon">
-    <img src="content/images/logo-jhipster.png" alt="Logo" />
+    <img src="content/images/img_1.png" className="img-fluid text-xl" style={{ borderRadius: '12px' }} alt="Logo" />
   </div>
 );
 
 export const Brand = () => (
   <NavbarBrand onClick={refreshPage} className="brand-logo">
     <BrandIcon />
-    <span className="brand-title">
-      <Translate contentKey="global.title">OGR</Translate>
-    </span>
     <span className="navbar-version">{VERSION}</span>
   </NavbarBrand>
 );

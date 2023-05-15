@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Card, CardHeader, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner, Table } from 'reactstrap';
 import CustomPagination from 'app/shared/common/CustomPagination';
 import { isArray } from 'lodash';

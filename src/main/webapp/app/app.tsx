@@ -60,7 +60,7 @@ export const App = () => {
               isOpenAPIEnabled={isOpenAPIEnabled}
             />
           </ErrorBoundary>
-          <div className="container-fluid view-container mt-5" id="app-view-container">
+          <div className="container-fluid view-container mt-4" id="app-view-container">
             <Card className="jh-card pt-4 pb-8">
               <ErrorBoundary>
                 <AppRoutes />
