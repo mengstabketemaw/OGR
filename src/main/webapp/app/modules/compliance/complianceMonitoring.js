@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Button, Card, CardHeader, Col, Row, Spinner, Table } from 'reactstrap';
+import { Button, Card, CardHeader, Col, Input, Row, Spinner, Table } from 'reactstrap';
 import { isArray } from 'lodash';
 import moment from 'moment/moment';
 import CustomPagination from 'app/shared/common/CustomPagination';
@@ -14,6 +14,7 @@ const ComplianceMonitoring = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [inspections, setInspections] = useState({ loading: true, data: { content: [] } });
+  const [searchTerm, setSearchTerm] = useState('');
 
   const fetchData = page => {
     // Construct the URL with the page query parameter
@@ -47,12 +48,21 @@ const ComplianceMonitoring = () => {
             <CardHeader className="border-0">
               <Row className="align-items-center">
                 <div className="col">
-                  <h1 className="mb-0">Compliance Monitoring </h1>
+                  <h1 className="mb-0">Compliance Monitoring</h1>
                   <h5> View and track compliance with regulations for oil and gas refineries.</h5>
                 </div>
               </Row>
             </CardHeader>
-
+            <div className="d-flex align-items-center justify-content-between">
+              <Input
+                type="text"
+                placeholder="Search by company"
+                className={'col-md-4 ml-4 mr-4 mb-2'}
+                // value={searchTerm}
+                // onChange={handleSearchChange}
+              />
+              <Button className={'mr-4 mb-2 bg-gradient-green'}>Add Inspection</Button>
+            </div>
             {inspections.loading ? (
               <Spinner
                 className="align-self-center"
@@ -66,7 +76,21 @@ const ComplianceMonitoring = () => {
                 Loading...
               </Spinner>
             ) : !isArray(inspections.data.content) || inspections.data?.content.length === 0 ? (
-              <p>There is no Data</p>
+              <>
+                <Table className="align-items-center table-flush" responsive>
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">Record Id Date</th>
+                      <th scope="col">Company Name</th>
+                      <th scope="col">Licence Type</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Last Inspection Date</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                </Table>
+                <p className="align-self-center">There is no Data</p>
+              </>
             ) : (
               <>
                 <Table className="align-items-center table-flush" responsive>
@@ -85,8 +109,9 @@ const ComplianceMonitoring = () => {
                     {inspections.data?.content.map(data => (
                       <tr key={data.id}>
                         <th>{data.id}</th>
+                        <th>{data.company.login}</th>
+                        <th>{data.customForm.title}</th>
                         <th>{moment(data.submittedDate).format('MMMM Do YYYY, h:mm:ss a')}</th>
-                        <th>{data.user.firstName}</th>
                         <th>{data.form.title}</th>
                         <th>{data.stage}</th>
                         <th>{data.status}</th>
