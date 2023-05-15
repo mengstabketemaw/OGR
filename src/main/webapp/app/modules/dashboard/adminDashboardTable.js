@@ -86,7 +86,7 @@ export const AdminDashboardTable = ({ type }) => {
                       <th>{data.stage}</th>
                       <th>{data.status}</th>
                       <th>
-                        <Button color="primary" href="#details" onClick={e => setDetailModal({ show: true, id: data.id })} size="sm">
+                        <Button color="primary" onClick={e => setDetailModal({ show: true, id: data.id })} size="sm">
                           View
                         </Button>
                       </th>
