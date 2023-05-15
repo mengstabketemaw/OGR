@@ -11,11 +11,11 @@ import 'reactflow/dist/style.css';
 import {Translate, translate, ValidatedField} from "react-jhipster";
 import {useAppDispatch,useAppSelector} from "app/config/store";
 import { Button, Card, CardHeader, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner, Table } from 'reactstrap';
-
+import { toast } from 'react-toastify';
 import {getWorkflowByForm,createWorkflow,updateWorkflow,getState} from "app/modules/licence/license.reducer";
 import {getFieldType, getFormType} from "app/modules/form/form.reducer";
-import {formatReactFlow, formatWorkFlowSequences, formatEdge} from "app/modules/administration/workflow/formatReactFlow";
-import ReactWorkFlow from "app/modules/administration/workflow/reactFlow";
+import {formatReactFlow, formatWorkFlowSequences, formatEdge} from "app/modules/administration/workflow/format-react-flow";
+import ReactWorkFlow from "app/modules/administration/workflow/react-flow";
 import {useSelector} from "react-redux";
 
 
@@ -43,7 +43,7 @@ const Workflow = () => {
 
   useEffect(() => {
     if(formForEdit.id != undefined){
-    dispatch(getWorkflowByForm(formForEdit.id))
+      dispatch(getWorkflowByForm(formForEdit.id))
     }
   }, [formForEdit]);
   const handleSelectForm = (e) => {
@@ -55,15 +55,15 @@ const Workflow = () => {
     valueToSend.workFlowSequences = formatWorkFlowSequences(value,states)
     valueToSend.name = valueToSend.name ? valueToSend.name : formForEdit.title + ' Licence'
     valueToSend.id=0
-    dispatch(createWorkflow(valueToSend));
-
+    dispatch(createWorkflow(valueToSend)).then(
+      toast.success("Workflow Saved")
+    );
   }
 
   return (
     <Row className="d-flex justify-content-center">
       <Col md="8">
         <Card className="shadow">
-
           <Panel position="top-left">
             <ValidatedField type="select" name="langKey"
                             onChange={handleSelectForm}
@@ -76,7 +76,9 @@ const Workflow = () => {
             </ValidatedField >
           </Panel>
           {formatedNode.length>0 && fromatedEdge &&
-          <ReactWorkFlow formatedNode={formatedNode} initialEdges={fromatedEdge} handleSubmit={handleSubmit}
+          <ReactWorkFlow formatedNode={formatedNode}
+                         initialEdges={fromatedEdge}
+                         handleSubmit={handleSubmit}
                          /> }
         </Card>
       </Col>

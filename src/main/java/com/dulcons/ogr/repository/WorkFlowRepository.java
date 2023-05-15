@@ -20,6 +20,6 @@ public interface WorkFlowRepository extends CrudRepository<WorkFlow, Long> {
     @Nullable
     Optional<WorkFlow> findByCustomForm_Id(Long id);
 
-    @Query("select s from State s")
+    @Query("select s from State s order by 1")
     Iterable<State> findAllState();
 }
