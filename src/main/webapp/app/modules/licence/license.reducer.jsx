@@ -7,6 +7,8 @@ const initialState = {
   errorMessage: null,
   licenses:[],
   license:{},
+  workflow: [],
+  states:[],
   totalItems: 0,
 };
 
@@ -36,10 +38,35 @@ export const updateLicence = createAsyncThunk(
 export const getLicence = createAsyncThunk('fetch_licence', async (id) => axios.get(`api/licence/${id}`), {
   serializeError: serializeAxiosError,
 });
-
+// export const getAllWorkflows = createAsyncThunk('fetch_workflows',
+//   async () => axios.get(`api/workflow/`), {
+//     serializeError: serializeAxiosError,
+//   });
+export const getWorkflowByForm = createAsyncThunk('fetch_workflowByForm',
+  async (id) => axios.get(`api/workflow/form/${id}`), {
+  serializeError: serializeAxiosError,
+});
+export const getState = createAsyncThunk('fetch_state',
+  async () => axios.get(`api/workflow/state`), {
+    serializeError: serializeAxiosError,
+  });
+export const  createWorkflow =  createAsyncThunk(
+  'create_workflow',
+  async (workflow) => {
+    return await axios.post('/api/workflow', workflow);
+  },
+  { serializeError: serializeAxiosError }
+);
+export const updateWorkflow = createAsyncThunk(
+  'update_workflow',
+  async (workflow, id) => {
+    return await axios.post(`/api/workflow/${id}`, workflow);
+  },
+  { serializeError: serializeAxiosError }
+);
 export const LicenceSlice = createSlice({
   name: 'licence',
-  initialState: initialState ,
+  initialState ,
   reducers: {},
   extraReducers(builder) {
     builder
@@ -57,7 +84,15 @@ export const LicenceSlice = createSlice({
       state.loading = false;
       state.license = action.payload.data;
       })
-      .addMatcher(isFulfilled(createLicence), (state, action) => {
+      .addCase(getWorkflowByForm.fulfilled, (state, action) => {
+        state.loading = false;
+        state.workflow = action.payload.data;
+      })
+      .addCase(getState.fulfilled, (state, action) => {
+        state.loading = false;
+        state.states = action.payload.data;
+      })
+      .addMatcher(isFulfilled(createLicence,updateLicence,updateWorkflow,createWorkflow), (state, action) => {
         state.updating = false;
         state.loading = false;
         state.updateSuccess = true;

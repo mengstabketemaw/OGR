@@ -35,24 +35,24 @@ const FieldCreater = (param) =>{
   }
   return (
     <>
-    <Table responsive striped>
-      <thead>
+    <Table className="align-items-center table-flush" responsive>
+      <thead className="thead-light">
       <tr>
 
-        <th className="hand" onClick={}>
+        <th  scope="col" >
           <Translate contentKey="form.fields.label"></Translate>
           <FontAwesomeIcon icon="sort" />
         </th>
-        <th className="hand" onClick={}>
+        <th  scope="col">
           <Translate contentKey="form.fields.placeholder"></Translate>
           <FontAwesomeIcon icon="sort" />
         </th>
 
-        <th className="hand" onClick={}>
+        <th  scope="col">
           <Translate contentKey="form.fields.required"></Translate>
           <FontAwesomeIcon icon="sort" />
         </th>
-        <th>
+        <th scope="col">
           <Translate contentKey="form.fields.type"></Translate>
         </th>
 

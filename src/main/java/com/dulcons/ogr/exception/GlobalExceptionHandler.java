@@ -1,15 +1,13 @@
 package com.dulcons.ogr.exception;
 
-import com.dulcian.auto_dealer.tenant.entity.ExceptionResponse;
+import com.dulcons.ogr.domain.ExceptionResponse;
 import java.sql.SQLSyntaxErrorException;
 import java.time.LocalDateTime;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -39,7 +37,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ExceptionResponse> customException(CustomException ex) {
-        log.error("CustomException Exception Occurred", ex);
+        // log.error("CustomException Exception Occurred", ex);
         ExceptionResponse response = new ExceptionResponse();
         response.setErrorCode("BAD_REQUEST");
         response.setErrorMessage(ex.getMessage());
@@ -51,7 +49,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ExceptionResponse> unauthorizedException(UnauthorizedException ex) {
-        log.error("UnauthorizedException Exception Occurred", ex);
+        // log.error("UnauthorizedException Exception Occurred", ex);
         ExceptionResponse response = new ExceptionResponse();
         response.setErrorCode("UNAUTHORIZED");
         response.setErrorMessage(ex.getMessage());
@@ -63,7 +61,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SQLSyntaxErrorException.class)
     public ResponseEntity<ExceptionResponse> sQLSyntaxErrorException(SQLSyntaxErrorException ex) {
-        log.error("UnauthorizedException Exception Occurred", ex);
+        // log.error("UnauthorizedException Exception Occurred", ex);
         ExceptionResponse response = new ExceptionResponse();
         response.setErrorCode("UNAUTHORIZED");
         response.setErrorMessage(ex.getMessage());

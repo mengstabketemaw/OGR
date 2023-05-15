@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 // import {Input} from "app/shared/common/forms";
 import FieldCreater from "./field-creater";
-import {Button, Col, FormGroup, FormText, Input, Label, Row} from "reactstrap";
+import { Button, Card, CardHeader, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner, Table } from 'reactstrap';
 import {isEmail, translate, Translate, ValidatedField, ValidatedForm} from "react-jhipster";
 import {languages, locales} from "app/config/translation";
 import {Link} from "react-router-dom";
@@ -45,34 +45,35 @@ const FormCreater = () => {
   }
 
    return (
-     <div>
-       <Row className="justify-content-center">
-         <Col md="8">
-           <h1>
-             <Translate contentKey="form.edit"> Edit a form</Translate>
-           </h1>
-         </Col>
-       </Row>
-       <Row className="justify-content-center">
-         <Col md="8">
+     <Row className="d-flex justify-content-center">
+       <Col md="8">
+         <Card className="shadow">
+           <CardHeader className="border-0">
+             <Row className="align-items-center">
+               <div className="col">
+                 <h3 className="mb-0"><Translate contentKey="form.edit"> Edit a form</Translate></h3>
+               </div>
+             </Row>
+           </CardHeader>
+
            {/*{loading ? (*/}
            {/*  <p>Loading...</p>*/}
            {/*) : (*/}
              <ValidatedForm onSubmit={handleSubmit} defaultValues={formForEdit}>
-
+               <Col md="8">
                <ValidatedField type="select" name="langKey" label={translate('form.fields.title')}
                onChange={handleSelectForm}
-               >
-
-                 {form.map((f,i) => (
+               >{form.map((f,i) => (
                    <option value={f.id} key={f.id}>
                      {f.title}
                    </option>
                  ))}
                </ValidatedField >
-
+               </Col>
+               <Col md="11">
                 <FieldCreater fields={formForEdit.fields} handleFields={handleFields} handleDelete={handleDelete}/>
-               <Button tag={Link} to="/admin/user-management" replace color="info">
+               </Col>
+                 <Button tag={Link} to="/admin/user-management" replace color="info">
                  <FontAwesomeIcon icon="arrow-left" />
                  &nbsp;
                  <span className="d-none d-md-inline">
@@ -86,10 +87,9 @@ const FormCreater = () => {
                  <Translate contentKey="entity.action.save">Save</Translate>
                </Button>
              </ValidatedForm>
-
+          </Card>
          </Col>
        </Row>
-     </div>
    )
 };
 export default FormCreater;
