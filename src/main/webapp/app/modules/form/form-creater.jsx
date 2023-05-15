@@ -73,19 +73,21 @@ const FormCreater = () => {
                <Col md="11">
                 <FieldCreater fields={formForEdit.fields} handleFields={handleFields} handleDelete={handleDelete}/>
                </Col>
-                 <Button tag={Link} to="/admin/user-management" replace color="info">
-                 <FontAwesomeIcon icon="arrow-left" />
+               <div className="pb-4 pl-4">
+                   <Button tag={Link} to="/admin/user-management" replace color="info">
+                   <FontAwesomeIcon icon="arrow-left" />
+                   &nbsp;
+                   <span className="d-none d-md-inline">
+                    <Translate contentKey="entity.action.back">Back</Translate>
+                  </span>
+                 </Button>
                  &nbsp;
-                 <span className="d-none d-md-inline">
-                  <Translate contentKey="entity.action.back">Back</Translate>
-                </span>
-               </Button>
-               &nbsp;
-               <Button color="primary" type="submit" >
-                 <FontAwesomeIcon icon="save" />
-                 &nbsp;
-                 <Translate contentKey="entity.action.save">Save</Translate>
-               </Button>
+                 <Button color="primary" type="submit" >
+                   <FontAwesomeIcon icon="save" />
+                   &nbsp;
+                   <Translate contentKey="entity.action.save">Save</Translate>
+                 </Button>
+               </div>
              </ValidatedForm>
           </Card>
          </Col>

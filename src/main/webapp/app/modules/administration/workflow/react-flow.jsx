@@ -11,13 +11,13 @@ const ReactWorkFlow = (param) =>{
   const [nodes, setNodes, onNodesChange] = useNodesState(formatedNode);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-  const onSave = useCallback(() => {
+  const onSave = ()=>{
     if (rfInstance) {
       const flow = rfInstance.toObject();
       handleSubmit(flow.edges || [])
         //localStorage.setItem(flowKey, JSON.stringify(flow));
     }
-  }, [rfInstance]);
+  }
   useEffect(()=>{
     setEdges(initialEdges || []);
   },[initialEdges])

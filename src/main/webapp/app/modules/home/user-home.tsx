@@ -4,6 +4,7 @@ import axios from 'axios';
 import { isArray } from 'lodash';
 import moment from 'moment';
 import ShowFieldValue from 'app/shared/common/showFieldValue';
+import { useNavigate } from 'react-router-dom';
 
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
@@ -86,7 +87,7 @@ const UserHome = () => {
 
 export const DetailModal = ({ id, show, handleClose }) => {
   const [data, setDate] = useState({ loading: true, data: { data: [] } });
-
+  const nav = useNavigate();
   useEffect(() => {
     if (id === -1) return;
     axios
@@ -112,6 +113,13 @@ export const DetailModal = ({ id, show, handleClose }) => {
         </Container>
       </ModalBody>
       <ModalFooter>
+        <Button
+          onClick={() => {
+            nav('/sequence');
+          }}
+        >
+          More Action
+        </Button>
         <Button onClick={handleClose}>Close</Button>
       </ModalFooter>
     </Modal>

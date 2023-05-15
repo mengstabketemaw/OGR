@@ -17,6 +17,7 @@ public class WorkFlow {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "work_flow_id")
+    @OrderBy("sequence Asc")
     private Set<WorkFlowSequence> workFlowSequences = new LinkedHashSet<>();
 
     @OneToOne
