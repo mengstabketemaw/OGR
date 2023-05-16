@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import {useSelector} from "react-redux";
 import PageSwitcher from "app/modules/administration/workflow/pageSwitcher/pageSwitcher";
+import {useAppSelector} from "app/config/store";
 
 export const PageContext = React.createContext();
-const PageSequence = ({ children }) => {
+const PageSequence = ({ id, children }) => {
   const [currentPage, setCurrentPage] = useState(0);
-  const sequenceFromDatabase = useSelector((state) => state.pageSequence); // Access the sequence state from Redux
+  const sequenceFromDatabase = useAppSelector(state => state.licence.currentSequence);// Access the sequence state from Redux
   const pages = React.Children.toArray(children);
 
   // Update pages based on the sequence from the database

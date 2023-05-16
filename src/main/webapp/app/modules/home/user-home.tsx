@@ -5,10 +5,12 @@ import { isArray } from 'lodash';
 import moment from 'moment';
 import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { useNavigate } from 'react-router-dom';
+import { getWorkflowByForm } from 'app/modules/licence/license.reducer';
+import { useAppDispatch } from 'app/config/store';
 
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
-  const [detailModal, setDetailModal] = useState({ show: false, id: -1 });
+  const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
 
   useEffect(() => {
     axios
@@ -67,7 +69,12 @@ const UserHome = () => {
                         <th>{data.stage}</th>
                         <th>{data.status}</th>
                         <th>
-                          <Button color="primary" href="#details" onClick={e => setDetailModal({ show: true, id: data.id })} size="sm">
+                          <Button
+                            color="primary"
+                            href="#details"
+                            onClick={e => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
+                            size="sm"
+                          >
                             View
                           </Button>
                         </th>
@@ -80,14 +87,20 @@ const UserHome = () => {
           </Col>
         </Row>
       </Container>
-      <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
+      <DetailModal
+        id={detailModal.id}
+        formId={detailModal.formId}
+        show={detailModal.show}
+        handleClose={() => setDetailModal({ ...detailModal, show: false })}
+      />
     </>
   );
 };
 
-export const DetailModal = ({ id, show, handleClose }) => {
+export const DetailModal = ({ id, formId, show, handleClose }) => {
   const [data, setDate] = useState({ loading: true, data: { data: [] } });
   const nav = useNavigate();
+
   useEffect(() => {
     if (id === -1) return;
     axios
@@ -115,7 +128,7 @@ export const DetailModal = ({ id, show, handleClose }) => {
       <ModalFooter>
         <Button
           onClick={() => {
-            nav('/sequence');
+            nav(`/sequence/${formId}/${id}`);
           }}
         >
           More Action
