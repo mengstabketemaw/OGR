@@ -1,16 +1,16 @@
 {
   "licence": {
-    "title": "Licence",
+    "title": "Licença",
     "types": {
       "exploration": "Exploration Licence",
-      "production": "Production Licence",
-      "pipeline": "Pipeline Licence",
-      "storage": "Storage License",
-      "transportation": "Transportation License",
-      "processing": "Processing License",
-      "distribution": "Distribution License",
-      "retail": "Retail License",
-      "waste": "Waste Management License"
+      "production": "Licença de Exploração",
+      "pipeline": "Licença de Oleoduto",
+      "storage": "Licença de armazenamento",
+      "transportation": "Licença de transporte",
+      "processing": "Licença de processamento",
+      "distribution": "Licença de Distribuição",
+      "retail": "Licença de Varejo",
+      "waste": "Licença de Gestão de Resíduos"
     }
   }
 }
