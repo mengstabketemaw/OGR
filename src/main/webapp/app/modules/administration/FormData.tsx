@@ -11,6 +11,7 @@ import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { DetailModal } from 'app/modules/home/user-home';
 
 const FormData = () => {
+  const [updateModal, setUpdateModal] = useState({ show: false, data: {} });
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [licences, setLicences] = useState({ loading: true, data: { content: [] } });
@@ -30,6 +31,8 @@ const FormData = () => {
       })
       .catch(console.log);
   };
+
+  const handleShowUpdateModal = id => {};
 
   const handlePageChange = pageNumber => {
     setCurrentPage(pageNumber - 1);
@@ -106,6 +109,10 @@ const FormData = () => {
                       <th>
                         <Button color="primary" onClick={e => setDetailModal({ show: true, id: data.id })} size="sm">
                           View
+                        </Button>
+
+                        <Button color="secondary" onClick={e => handleShowUpdateModal(data.id)} size="sm">
+                          Update
                         </Button>
                       </th>
                     </tr>
