@@ -14,6 +14,7 @@ const FieldCreater = (param) =>{
     "required":true,
     "placeholder":"",
     "fieldType":{},
+    "state":{},
     "options":[],
     "newId":nanoid()
   }

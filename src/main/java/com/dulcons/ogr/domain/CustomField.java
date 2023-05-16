@@ -18,8 +18,18 @@ public class CustomField {
     private Boolean required;
     private String placeholder;
 
+    private Long stateId;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CustomOption> options = new ArrayList<>();
+
+    public Long getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(Long stateId) {
+        this.stateId = stateId;
+    }
 
     public Long getId() {
         return id;

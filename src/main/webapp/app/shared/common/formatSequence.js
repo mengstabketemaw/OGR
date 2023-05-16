@@ -1,5 +1,5 @@
 export const formatSequence = arr => {
-  const result = [0];
+  const result = [];
   for (let i = 0; i < arr.length; i++) {
     result.push(arr[i].state.id);
     if (i === arr.length - 1) {
