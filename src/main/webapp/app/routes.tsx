@@ -19,6 +19,7 @@ import Licence from 'app/modules/licence';
 import FormData from 'app/modules/administration/FormData';
 import TempLanding from 'app/modules/administration/workflow/tempLanding';
 import ComplianceMonitoring from 'app/modules/compliance/complianceMonitoring';
+import { ComplianceDetail } from 'app/modules/compliance/complianceDetail';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -93,7 +94,14 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-
+        <Route
+          path="complianceHistory/*"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
+              <ComplianceDetail />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="*"
           element={

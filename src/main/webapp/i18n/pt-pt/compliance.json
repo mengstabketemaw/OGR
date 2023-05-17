@@ -1,0 +1,30 @@
+{
+  "compliance": {
+    "addInspection": "Adicionar Inspeção",
+    "complianceInfo": "Visualize e acompanhe a conformidade com os regulamentos para refinarias de petróleo e gás.",
+    "complianceDetail": "Detalhes de Conformidade",
+    "complianceHistory": "Histórico de Conformidade",
+    "close": "Fechar",
+    "submit": "Enviar",
+    "view": "Visualizar",
+    "inspector": "Inspetor",
+    "scheduleInspection": "Agendar Inspeção",
+    "table": {
+      "recordId": "ID do registro",
+      "companyName": "Nome da empresa",
+      "licenceType": "Tipo de licença",
+      "status": "Status",
+      "lastInspection": "Data da última inspeção",
+      "actions": "Ações"
+    },
+    "companyName": "Nome da empresa",
+    "form": {
+      "selectLicence": "Selecione um tipo de licença",
+      "selectUser": "Selecione o usuário",
+      "created": "Inspeção criada.",
+      "scheduleCreated": "Agenda criada",
+      "errorOccured": "Um erro ocorreu! Tente novamente.",
+      "inspectionDate": "Data de inspecção"
+    }
+  }
+}

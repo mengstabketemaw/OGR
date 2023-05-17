@@ -7,8 +7,9 @@ import { isArray } from 'lodash';
 import moment from 'moment';
 import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { Translate } from 'react-jhipster';
+import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = ITEMS_PER_PAGE;
 export const AdminDashboardTable = ({ type }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);

@@ -9,6 +9,7 @@ import com.dulcons.ogr.repository.UserRepository;
 import com.dulcons.ogr.web.rest.vm.ComplianceBody;
 import com.dulcons.ogr.web.rest.vm.ComplianceHistoryBody;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -44,6 +45,16 @@ public class ComplianceController {
         complianceRepository.save(compliance);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateCompliance(@PathVariable Long id, @RequestBody ComplianceBody complianceBody) {
+        Compliance compliance = new Compliance();
+        compliance.setId(id);
+        compliance.setCompany(userRepository.findById(complianceBody.getUserId()).orElseThrow());
+        compliance.setCustomForm(customFormRepository.findById(complianceBody.getFormId()).orElseThrow());
+        complianceRepository.save(compliance);
+    }
+
     @GetMapping
     public Page<Compliance> findAll(Pageable page) {
         return complianceRepository.findAll(page);
@@ -72,6 +83,9 @@ public class ComplianceController {
         complianceHistory.setCompliance(complianceRepository.findById(complianceHistoryBody.getComplianceId()).orElseThrow());
         complianceHistory.setInspector(userRepository.findById(complianceHistoryBody.getInspectorId()).orElseThrow());
         complianceHistoryRepository.save(complianceHistory);
+        // Update the status on the main Compliance
+        Long complianceId = complianceHistoryBody.getComplianceId();
+        complianceRepository.updateStatusById(complianceHistoryBody.getStatus(), complianceId);
     }
 
     @PutMapping("/complianceHistory/{id}")

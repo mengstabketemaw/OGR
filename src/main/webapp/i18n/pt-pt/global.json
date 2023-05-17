@@ -87,7 +87,8 @@
     "ribbon": {
       "dev": "Desenvolvimento"
     },
-    "item-count": "Mostrando {{first}} - {{second}} de {{total}} resultados."
+    "item-count": "Mostrando {{first}} - {{second}} de {{total}} resultados.",
+    "noData": "Não há dados"
   },
   "entity": {
     "action": {
