@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import ReactFlow,{addEdge, Panel, useEdgesState, useNodesState, useReactFlow} from "reactflow";
 import {Button} from "reactstrap";
+import {ValidateEdges} from "app/modules/administration/workflow/validateEdges";
 
 const ReactWorkFlow = (param) =>{
   const getNodeId = () => `randomnode_${+new Date()}`;
@@ -14,7 +15,8 @@ const ReactWorkFlow = (param) =>{
   const onSave = ()=>{
     if (rfInstance) {
       const flow = rfInstance.toObject();
-      handleSubmit(flow.edges || [])
+      const edgeToSend = ValidateEdges(flow.edges);
+      handleSubmit(edgeToSend || [])
         //localStorage.setItem(flowKey, JSON.stringify(flow));
     }
   }

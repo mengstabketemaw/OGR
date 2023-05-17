@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {createAsyncThunk, createSlice, isFulfilled} from '@reduxjs/toolkit';
 import {serializeAxiosError} from 'app/shared/reducers/reducer.utils';
+import {formatSequence} from "app/shared/common/formatSequence";
 
 const initialState = {
   loading: true,
@@ -8,6 +9,7 @@ const initialState = {
   licenses:[],
   license:{},
   workflow: [],
+  currentSequence:[],
   states:[],
   totalItems: 0,
 };
@@ -87,6 +89,7 @@ export const LicenceSlice = createSlice({
       .addCase(getWorkflowByForm.fulfilled, (state, action) => {
         state.loading = false;
         state.workflow = action.payload.data;
+        state.currentSequence = formatSequence(action.payload.data?.workFlowSequences)
       })
       .addCase(getState.fulfilled, (state, action) => {
         state.loading = false;

@@ -16,7 +16,9 @@ const initialState = {
 export const getFormType = createAsyncThunk('fetch_forms', async () => axios.get('api/forms'), {
   serializeError: serializeAxiosError,
 });
-
+export const getFormTypeByState = createAsyncThunk('fetch_forms_by_state', async (id) => axios.get(`api/forms/state/${id}`), {
+  serializeError: serializeAxiosError,
+});
 export const getFieldType = createAsyncThunk('fetch_field_types'
   , async () => axios.get('/api/custome-field/names'), {
   serializeError: serializeAxiosError,
@@ -40,6 +42,10 @@ export const FormSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getFormType.fulfilled, (state, action) => {
+        state.loading = false;
+        state.formTypes = action.payload.data;
+      })
+      .addCase(getFormTypeByState.fulfilled, (state, action) => {
         state.loading = false;
         state.formTypes = action.payload.data;
       })

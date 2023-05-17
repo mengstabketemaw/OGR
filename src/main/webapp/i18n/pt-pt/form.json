@@ -1,12 +1,14 @@
 {
   "form": {
+    "title": "Title",
     "edit": "Edit a form",
     "fields": {
-      "title": "title",
-      "label": "label",
-      "placeholder": "palceholder",
-      "required": "required",
-      "type": "type"
-    }
+      "title": "Title",
+      "label": "Label",
+      "placeholder": "Placeholder",
+      "required": "Required",
+      "type": "Type"
+    },
+    "state": "State"
   }
 }

@@ -14,7 +14,7 @@ const FormData = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [licences, setLicences] = useState({ loading: true, data: { content: [] } });
-  const [detailModal, setDetailModal] = useState({ show: false, id: -1 });
+  const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
   const [param] = useSearchParams();
   const nav = useNavigate();
 
@@ -107,7 +107,7 @@ const FormData = () => {
                       <th>{data.stage}</th>
                       <th>{data.status}</th>
                       <th>
-                        <Button color="primary" onClick={e => setDetailModal({ show: true, id: data.id })} size="sm">
+                        <Button color="primary" onClick={e => setDetailModal({ show: true, id: data.id, formId: data.form.id })} size="sm">
                           View
                         </Button>
 
@@ -125,7 +125,12 @@ const FormData = () => {
           )}
         </Card>
       </Col>
-      <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
+      <DetailModal
+        id={detailModal.id}
+        formId={detailModal.formId}
+        show={detailModal.show}
+        handleClose={() => setDetailModal({ ...detailModal, show: false })}
+      />
     </Row>
   );
 };
