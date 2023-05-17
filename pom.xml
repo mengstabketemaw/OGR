@@ -1351,6 +1351,23 @@
                 </pluginManagement>
             </build>
         </profile>
+        <profile>
+            <id>dev-h2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+            <properties>
+                <!-- default Spring profiles -->
+                <spring.profiles.active>dev${profile.tls}${profile.no-liquibase}</spring.profiles.active>
+            </properties>
+        </profile>
         <!-- jhipster-needle-maven-add-profile -->
     </profiles>
 </project>

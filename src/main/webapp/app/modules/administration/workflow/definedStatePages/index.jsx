@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import {InitialReview} from "app/modules/administration/workflow/definedStatePages/initial-review";
 import {DecisionMaking} from "app/modules/administration/workflow/definedStatePages/decision-making";
-import {Denied} from "app/modules/administration/workflow/definedStatePages/denied";
-import {Issued} from "app/modules/administration/workflow/definedStatePages/issued";
+import {IssuedOrDenied} from "app/modules/administration/workflow/definedStatePages/issued-or-denied";
 import {SpecializedReview} from "app/modules/administration/workflow/definedStatePages/specialized-review";
 import {TechnicalReview} from "app/modules/administration/workflow/definedStatePages/technical-review";
 import PageSequence from "app/modules/administration/workflow/pageSwitcher/pageSequence";
+import FormEdit from "app/modules/administration/workflow/definedStatePages/formEdit";
 
-const dynamicWorkFlow = () => {
+const DynamicWorkFlow = (id) => {
   return(
-    <PageSequence>
+    // Sequence Matter here toDo make it to not matter
+    <PageSequence id={id}>
+      <FormEdit/>
       <InitialReview/>
-      <DecisionMaking/>
-      <Denied/>
-      <Issued/>
-      <SpecializedReview/>
       <TechnicalReview/>
+      <SpecializedReview/>
+      <DecisionMaking/>
+      <IssuedOrDenied/>
     </PageSequence>
   )
 };
 
-export default dynamicWorkFlow;
+export default DynamicWorkFlow;

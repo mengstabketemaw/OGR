@@ -94,7 +94,7 @@ const fieldFill = async (val, field, fieldType, label) => {
   }
 };
 
-async function convertFileToBase64(file) {
+export async function convertFileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);

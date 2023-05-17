@@ -1,5 +1,6 @@
 {
   "form": {
+    "title": "Form",
     "edit": "Edit a form",
     "fields": {
       "title": "Title",
@@ -7,6 +8,7 @@
       "placeholder": "Placeholder",
       "required": "Required",
       "type": "Type"
-    }
+    },
+    "state": "State"
   }
 }

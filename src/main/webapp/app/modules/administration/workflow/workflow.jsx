@@ -50,6 +50,7 @@ const Workflow = () => {
     setEditForm(form.filter(f=> f.id == e.target.value)[0]);
   }
   const handleSubmit =  (value) =>{
+    if(value.length > 0){
     const valueToSend = {...wf};
     valueToSend.customForm = {...formForEdit}
     valueToSend.workFlowSequences = formatWorkFlowSequences(value,states)
@@ -58,6 +59,9 @@ const Workflow = () => {
     dispatch(createWorkflow(valueToSend)).then(
       toast.success("Workflow Saved")
     );
+    }else{
+      toast.error("Invalid Format")
+    }
   }
 
   return (

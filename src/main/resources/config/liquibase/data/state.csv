@@ -1,6 +1,7 @@
 id;name
+0;Form
 1;Initial Review
 2;Technical Review
 3;Specialized Review
 4;Decision Making
-5;Denied or issued
+5;IssuedOrDenied or issued

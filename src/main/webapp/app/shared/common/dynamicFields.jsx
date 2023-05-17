@@ -77,9 +77,9 @@ const DynamicFields = props =>{
     </>
   )
 }
-    const GeoLocationChooser = ({showModal, handleClose,setValue}) => {
+const GeoLocationChooser = ({showModal, handleClose,setValue}) => {
 
-    return (
+  return (
     <Modal
       isOpen={showModal}
       toggle={handleClose}
@@ -99,6 +99,6 @@ const DynamicFields = props =>{
         <Button onClick={handleClose}>Close</Button>
       </ModalFooter>
     </Modal>
-    )
-  }
+  )
+}
 export default DynamicFields;

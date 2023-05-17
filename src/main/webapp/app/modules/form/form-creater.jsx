@@ -8,15 +8,18 @@ import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useAppDispatch, useAppSelector} from "app/config/store";
 import {getFormType, getFieldType, updateForm} from "app/modules/form/form.reducer";
+import {getState} from "app/modules/licence/license.reducer";
 
 const FormCreater = () => {
   const dispatch = useAppDispatch();
   const form = useAppSelector(state => state.form.formTypes);
   const [formForEdit,setForm] = useState([]);
-
+  const states = useAppSelector(state => state.licence.states)
+  const [currentState,setCurrentState] = useState(0);
   useEffect(() => {
     dispatch(getFormType());
     dispatch(getFieldType());
+    dispatch(getState());
   }, []);
   useEffect(() => {
     if(form.length > 0) setForm(form[0]);
@@ -39,6 +42,9 @@ const FormCreater = () => {
   }
   const handleSelectForm = (e) => {
     setForm(form.filter(f=> f.id == e.target.value)[0]);
+  }
+  const handleSelectState = (e) => {
+    setCurrentState(e.target.value);
   }
   const handleSubmit = (values)=>{
     dispatch(updateForm(values))
@@ -69,6 +75,21 @@ const FormCreater = () => {
                    </option>
                  ))}
                </ValidatedField >
+               </Col>
+               <Col md="8">
+                 <ValidatedField type="select" name="langKey" label={translate('form.state')}
+                                 onChange={handleSelectState}
+                 > <>
+                   <option value="0" key="0">
+                     <Translate contentKey="form.title">Back</Translate>
+                 </option>
+                   {states.map((f,i) => (
+                   <option value={f.id} key={f.id}>
+                     {f.name}
+                   </option>
+                 ))}
+                 </>
+                 </ValidatedField >
                </Col>
                <Col md="11">
                 <FieldCreater fields={formForEdit.fields} handleFields={handleFields} handleDelete={handleDelete}/>

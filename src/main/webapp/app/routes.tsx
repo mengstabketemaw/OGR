@@ -17,9 +17,10 @@ import { AUTHORITIES } from 'app/config/constants';
 import Permit from 'app/modules/permit';
 import Licence from 'app/modules/licence';
 import FormData from 'app/modules/administration/FormData';
-import TempLanding from 'app/modules/administration/workflow/tempLanding';
+import SequenceLanding from 'app/modules/administration/workflow/sequenceLanding';
 import ComplianceMonitoring from 'app/modules/compliance/complianceMonitoring';
 import { ComplianceDetail } from 'app/modules/compliance/complianceDetail';
+import FormDataUpdate from 'app/shared/form/form-data-update';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -102,6 +103,16 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="dataUpdate/:id"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
+              <FormDataUpdate />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="*"
           element={

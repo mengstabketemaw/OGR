@@ -2,6 +2,7 @@ package com.dulcons.ogr.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 @Entity
@@ -18,8 +19,18 @@ public class CustomField {
     private Boolean required;
     private String placeholder;
 
+    private Long stateId;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CustomOption> options = new ArrayList<>();
+
+    public Long getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(Long stateId) {
+        this.stateId = stateId;
+    }
 
     public Long getId() {
         return id;
@@ -67,5 +78,18 @@ public class CustomField {
 
     public void setOptions(List<CustomOption> options) {
         this.options = options;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CustomField that = (CustomField) o;
+        return id.equals(that.id) && label.equals(that.label) && required.equals(that.required) && placeholder.equals(that.placeholder);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, label, required, placeholder);
     }
 }
