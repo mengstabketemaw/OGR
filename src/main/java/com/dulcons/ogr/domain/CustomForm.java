@@ -1,7 +1,9 @@
 package com.dulcons.ogr.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +18,7 @@ public class CustomForm {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "form_id")
-    private List<CustomField> fields = new ArrayList<>();
+    private Set<CustomField> fields = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -42,11 +44,11 @@ public class CustomForm {
         this.title = title;
     }
 
-    public List<CustomField> getFields() {
+    public Set<CustomField> getFields() {
         return fields;
     }
 
-    public void setFields(List<CustomField> fields) {
+    public void setFields(Set<CustomField> fields) {
         this.fields = fields;
     }
 }

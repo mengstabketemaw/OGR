@@ -15,7 +15,7 @@ public class Compliance {
     @OneToOne
     CustomForm customForm;
 
-    String status = "Non-Compliant";
+    String status = "Not Inspected";
 
     public Long getId() {
         return id;

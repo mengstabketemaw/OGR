@@ -1,16 +1,42 @@
 import React, {useEffect, useState} from "react"
 import {useNavigate, useParams} from "react-router-dom";
-import {isArray} from "lodash";
-import {Translate, ValidatedField, ValidatedForm} from "react-jhipster";
-import {Button, Container, Modal, ModalBody, ModalFooter, ModalHeader, Spinner} from "reactstrap";
+import {Translate, ValidatedBlobField, ValidatedField, ValidatedForm} from "react-jhipster";
+import {
+  Button,
+  Card,
+  CardHeader,
+  Col,
+  Container,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Row,
+  Spinner
+} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ChooseLocation from "app/modules/maps/MapUtils";
 import axios from "axios";
-import ShowFieldValue from "app/shared/common/showFieldValue";
-import moment from "moment/moment";
 import {convertFileToBase64} from "app/shared/common/formatValue";
-import {faDownload} from "@fortawesome/free-solid-svg-icons";
+import moment from "moment";
 
+function getFieldValueName(type){
+  switch (type) {
+    case 'location':
+    case 'text':
+      return "text"
+    case 'select':
+      return "dropDown"
+    case 'date':
+      return "date"
+    case 'checkbox':
+      return "checkBoxId"
+    case 'datetime-local':
+      return "dateAndTime"
+    case 'file':
+      return "file"
+  }
+}
 const FormDataUpdate = () => {
   const { id } = useParams();
   const [data, setDate] = useState({ loading: true, data: {} });
@@ -30,16 +56,16 @@ const FormDataUpdate = () => {
             </Spinner>
           ) : (
             <>
-              <UpdateDynamicFields data={data.data} />
+              <UpdateDynamicFields data={data.data}/>
             </>
           )}
         </Container>
   );
 }
 
-async function getValue(fieldData) {
+function getValue(fieldData) {
 
-  switch (fieldData.fieldType.name) {
+  switch (fieldData?.fieldType.name) {
     case 'location':
     case 'text':
       return fieldData.text
@@ -50,82 +76,177 @@ async function getValue(fieldData) {
     case 'checkbox':
       return Number(fieldData.checkBoxId)
     case 'datetime-local':
-      return fieldData.dateAndTime
+      return moment(fieldData.dateAndTime).format("YYYY-MM-DDTHH:MM")
     case 'file':
-      const fileName = fieldData.encodingFileType?.split('~')[0];
-      const encodedType = fieldData.encodingFileType?.split('~')[1];
-
-      return (
-        <>
-          {fileName && encodedType ? (
-            <>
-              <a
-                className="cursor-pointer hover-blue underline-hover d-flex flex-row align-items-center"
-                download={fileName}
-                href={`${encodedType},${field.file}`}
-              >
-                <p className="mr-2">{fileName}</p>
-                <FontAwesomeIcon icon={faDownload} color="#2DCEC8" size="2x" />
-              </a>
-            </>
-          ) : (
-            <p className="cursor-pointer">No File</p>
-          )}
-        </>
-      );
+      return fieldData.file
   }
   return undefined;
 }
 
 const UpdateDynamicFields = ({data}) =>{
+  const [fieldData, setFieldData] = useState(data.data)
   const nav = useNavigate();
-  const [locationModal,setLocationModal] = useState({show: false, value:""});
+  const [locationModal,setLocationModal] = useState({show: false, label:undefined});
 
-  const defaultValue = () => {
-    return data.data.map(fieldData=>{
-      let key = fieldData.label;
-      let value = getValue(fieldData);
+  const getFieldDataTemplate = (name) => {
+    let field = data.form.fields.find(formFields => formFields.label === name)
+    return {
+      id:null,
+      fieldType: field.fieldType,
+      label: name,
+      text: undefined,
+      dropDown: undefined,
+      date: undefined,
+      dateAndTime: undefined,
+      checkBoxId: undefined,
+      file: undefined,
+      encodingFileType: undefined,
+    }
+  }
+  const getFieldValue = (name) => {
+    let fData = fieldData.find(fData => fData.label === name);
+
+    if(fData === undefined){ //This means a new field is added.
+      setFieldData(prev => [...prev, getFieldDataTemplate(name)])
+    }
+    return getValue(fData);
+  }
+
+  const handleSubmit = () => {
+    axios.put("/api/licence/" + data.id, {
+      ...data,
+      data: fieldData
+    }).then(()=> {
+      nav(-1);
     })
+    console.log(fieldData)
   }
-  const handleSubmit = () => {}
-  const formatValue = () => {}
 
-
-  const handleValue = async (value) => {
-    const formattedValue = await formatValue(value, fields);
-    handleSubmit(formattedValue);
+  const getOnChangeHandler = name => {
+    let fData = fieldData.find(fData => fData.label === name);
+    return event => {
+      setFieldData(prev => {
+        let newFieldData = prev.map(prevFieldData=> {
+          if(prevFieldData.id === fData.id)
+            return {...prevFieldData, [getFieldValueName(prevFieldData.fieldType.name)] : fData.fieldType.name === "datetime-local" ? moment(event.target.value).format() : event.target.value};
+          return {...prevFieldData};
+        })
+        return newFieldData;
+      })
+    }
   }
+  const getOnChangeHandlerForCheckbox = name => {
+    let fData = fieldData.find(fData => fData.label === name);
+    return event => {
+      setFieldData(prev => {
+        let newFieldData = prev.map(prevFieldData=> {
+          if(prevFieldData.id === fData.id)
+            return {...prevFieldData, [getFieldValueName(prevFieldData.fieldType.name)] : event.target.checked ? 1 : 0};
+          return {...prevFieldData};
+        })
+        return newFieldData;
+      })
+    }
+  }
+  const getOnChangeHandlerForFile = name => {
+    let fData = fieldData.find(fData => fData.label === name);
+    return async event => {
+      const file = await convertFileToBase64(event.target.files[0]);
+      let encodingFileType =  event.target.files[0].name + '~' + file.split(',')[0];
+
+      setFieldData(prev => {
+        return prev.map(prevFieldData => {
+          if (prevFieldData.id === fData.id)
+            return {...prevFieldData, file, encodingFileType};
+          return {...prevFieldData};
+        });
+      })
+    }
+  }
+
+  const setLocationValue = (value) => {
+    //If Label is undefined don't do anything.
+    if(!locationModal.label)
+      return;
+    let setLocationValue = getOnChangeHandler(locationModal.label);
+    setLocationValue({target:{value}});
+    setLocationModal({show: false, label: undefined})
+  }
+
+  const getFileName = name => {
+    let fData = fieldData.find(fData => fData.label === name);
+    return fData.encodingFileType?.split('~')[0];
+  }
+
 
   return(<>
-      <ValidatedForm onSubmit={handleValue} defaultValues={defaultValue}>
-        {data.form.fields.map(field => field.fieldType.name === "select" ?
-          <ValidatedField
-            type={field.fieldType.name}
-            name={field.label}
-            label={field.label}//{translate('global.form.username.label')}
-            //placeholder="add label"//{translate('global.form.username.placeholder')}
-            required={field.required}
-          >
-            {field.options.map((a, i) => (<option key={i} value={a.name}>{a.name}</option>))}
-          </ValidatedField>
-          :
-          field.fieldType.name === "location" ?
-            <ValidatedField
-              name={field.label}
-              label={field.label}
-              autoComplete={"off"}
-              value={locationModal.value}
-              placeholder={"Click here to add location"}
-              required={field.required}
-              onClick={() => setLocationModal({...locationModal, show: true})}
-            />
-            :
-            <ValidatedField
+    <Row className="d-flex justify-content-center">
+      <Col md="8">
+        <Card className="shadow p-4">
+          <CardHeader className="border-0">
+            <Row className="align-items-center">
+              <div className="col">
+                <h3 className="mb-0">Edit Data</h3>
+              </div>
+            </Row>
+          </CardHeader>
+    <ValidatedForm>
+        {
+          data.form.fields.map(
+            field => field.fieldType.name === "select" ?
+              <ValidatedField
+                key={field.id}
+                type={field.fieldType.name}
+                value={getFieldValue(field.label)}
+                label={field.label}
+                required={field.required}
+                onChange={getOnChangeHandler(field.label)}
+              >
+                {field.options.map((a, i) => (<option key={i} value={a.name} >{a.name}</option>))}
+              </ValidatedField>
+
+            :field.fieldType.name === "location" ?
+                <ValidatedField
+                  key={field.id}
+                  label={field.label}
+                  autoComplete={"off"}
+                  value={getFieldValue(field.label)}
+                  placeholder={"Click here to add location"}
+                  required={field.required}
+                  onClick={() => setLocationModal({label: field.label, show: true})}
+                />
+
+            :field.fieldType.name === "file" ?
+                  <>
+                    <ValidatedBlobField
+                      key={field.id}
+                      type={field.fieldType.name}
+                      label={field.label}
+                      required={false}
+                      onChange={getOnChangeHandlerForFile(field.label)}
+                    />
+                      <span style={{fontSize:"0.6em", color:"grey", marginLeft:"50px"}}>File chosen: {getFileName(field.label)}</span><br/>
+                  </>
+
+            :field.fieldType.name === "checkbox" ?
+              <ValidatedField
+                key={field.id}
+                type={field.fieldType.name}
+                name={field.label}
+                checked={getFieldValue(field.label) === 1}
+                label={field.label}
+                required={field.required}
+                onChange={getOnChangeHandlerForCheckbox(field.label)}
+              />
+
+            :<ValidatedField
+              key={field.id}
               type={field.fieldType.name}
               name={field.label}
-              label={field.label}//{translate('global.form.username.label')}
-              //placeholder="add label"//{translate('global.form.username.placeholder')}
+              value={getFieldValue(field.label)}
+              label={field.label}
               required={field.required}
+              onChange={getOnChangeHandler(field.label)}
             />
         )
         }
@@ -139,17 +260,20 @@ const UpdateDynamicFields = ({data}) =>{
                 </span>
         </Button>
         &nbsp;
-        <Button color="primary" type="submit">
+        <Button color="primary" onClick={handleSubmit}>
           <FontAwesomeIcon icon="save"/>
           &nbsp;
           <Translate contentKey="entity.action.save">Save</Translate>
         </Button>
-      </ValidatedForm>
-      <GeoLocationChooser showModal={locationModal.show} setValue={setLocationModal} handleClose={()=>setLocationModal({
+    </ValidatedForm>
+      <GeoLocationChooser showModal={locationModal.show} setValue={setLocationValue} handleClose={()=>setLocationModal({
           ...locationModal,
           show: false,
         })
       }/>
+        </Card>
+      </Col>
+    </Row>
     </>
   )
 }
@@ -166,9 +290,7 @@ const GeoLocationChooser = ({showModal, handleClose,setValue}) => {
       <ModalHeader>Geo-Locator</ModalHeader>
       <ModalBody>
         <ChooseLocation setLocation={(lat,lon)=>{
-          setValue(prev=>{
-            return {show:false, value: lat + "," + lon}
-          })
+          setValue(lat + "," + lon)
         }}/>
       </ModalBody>
       <ModalFooter>

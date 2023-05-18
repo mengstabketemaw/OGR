@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import loading = toast.loading;
@@ -11,12 +11,12 @@ import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { DetailModal } from 'app/modules/home/user-home';
 
 const FormData = () => {
-  const [updateModal, setUpdateModal] = useState({ show: false, data: {} });
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [licences, setLicences] = useState({ loading: true, data: { content: [] } });
   const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
   const [param] = useSearchParams();
+  const nav = useNavigate();
 
   const fetchData = page => {
     // Construct the URL with the page query parameter
@@ -111,7 +111,7 @@ const FormData = () => {
                           View
                         </Button>
 
-                        <Button color="secondary" onClick={e => handleShowUpdateModal(data.id)} size="sm">
+                        <Button color="secondary" onClick={e => nav('/dataUpdate/' + data.id)} size="sm">
                           Update
                         </Button>
                       </th>

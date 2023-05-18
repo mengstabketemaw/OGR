@@ -1,0 +1,30 @@
+{
+  "compliance": {
+    "addInspection": "Add Inspection",
+    "complianceInfo": "View and track compliance with regulations for oil and gas refineries.",
+    "complianceDetail": "Compliance Detail",
+    "complianceHistory": "Compliance History",
+    "close": "Close",
+    "submit": "Submit",
+    "view": "View",
+    "inspector": "Inspector",
+    "scheduleInspection": "Schedule Inspection",
+    "table": {
+      "recordId": "Record Id",
+      "companyName": "Company Name",
+      "licenceType": "Licence Type",
+      "status": "Status",
+      "lastInspection": "Last Inspection Date",
+      "actions": "Actions"
+    },
+    "companyName": "Company Name",
+    "form": {
+      "selectLicence": "Select a Licence Type",
+      "selectUser": "Select User",
+      "created": "Inspection Created",
+      "scheduleCreated": "Schedule Created",
+      "errorOccured": "An error occured! Try again.",
+      "inspectionDate": "Inspection Date"
+    }
+  }
+}

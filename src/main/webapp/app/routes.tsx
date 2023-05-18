@@ -19,6 +19,7 @@ import Licence from 'app/modules/licence';
 import FormData from 'app/modules/administration/FormData';
 import SequenceLanding from 'app/modules/administration/workflow/sequenceLanding';
 import ComplianceMonitoring from 'app/modules/compliance/complianceMonitoring';
+import { ComplianceDetail } from 'app/modules/compliance/complianceDetail';
 import FormDataUpdate from 'app/shared/form/form-data-update';
 const loading = <div>loading ...</div>;
 
@@ -51,7 +52,7 @@ const AppRoutes = () => {
         <Route path="logout" element={<Logout />} />
         <Route path="permit" element={<Permit />} />
         <Route path="licence" element={<Licence />} />
-        <Route path="sequence/:formId/:id" element={<SequenceLanding />} />
+        <Route path="sequence" element={<TempLanding />} />
         <Route path="compliance" element={<ComplianceMonitoring />} />
         <Route path="account">
           <Route
@@ -91,6 +92,14 @@ const AppRoutes = () => {
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
               <FormData />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="complianceHistory/*"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
+              <ComplianceDetail />
             </PrivateRoute>
           }
         />
