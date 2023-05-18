@@ -7,14 +7,15 @@ import {languages, locales} from "app/config/translation";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useAppDispatch, useAppSelector} from "app/config/store";
-import {getFormType, getFieldType, updateForm} from "app/modules/form/form.reducer";
+import {getFormType, getFieldType, updateForm, getFormTypeByState} from "app/modules/form/form.reducer";
 import {getState} from "app/modules/licence/license.reducer";
+import {toast} from "react-toastify";
 
 const FormCreater = () => {
   const dispatch = useAppDispatch();
   const form = useAppSelector(state => state.form.formTypes);
-  const [formForEdit,setForm] = useState([]);
-  const states = useAppSelector(state => state.licence.states)
+  const [formForEdit,setForm] = useState(null);
+  const states = useAppSelector(state => state.licence.states);
   const [currentState,setCurrentState] = useState(0);
   useEffect(() => {
     dispatch(getFormType());
@@ -22,7 +23,12 @@ const FormCreater = () => {
     dispatch(getState());
   }, []);
   useEffect(() => {
-    if(form.length > 0) setForm(form[0]);
+    if(form.length > 0) {
+      const ed = {...form[0]}
+      ed.fields = ed.fields.filter((f)=>{return f.state.id === parseInt(currentState)})
+      setForm(ed)
+
+    }
   }, [form]);
   const handleFields = (fields) => {
     console.log(fields);
@@ -35,19 +41,34 @@ const FormCreater = () => {
       setForm(editform);
     }
   }
+
   const handleDelete= (id) =>{
     const editform = {...formForEdit};
     editform.fields = editform.fields.filter(f=> {return f.id !=id})
     setForm(editform);
   }
   const handleSelectForm = (e) => {
-    setForm(form.filter(f=> f.id == e.target.value)[0]);
+    const ed = {...form.filter(f=> f.id == e.target.value)[0]}
+    ed.fields = ed.fields.filter((f)=>{return f.state.id === parseInt(currentState)})
+    setForm(ed);
   }
   const handleSelectState = (e) => {
+    if(formForEdit){
+    const ed = {...form.filter(f=> f.id == formForEdit?.id)[0]}
+    ed.fields = ed.fields.filter((f)=>{return f.state.id === parseInt(e.target.value)})
+    setForm(ed);
     setCurrentState(e.target.value);
+    }
   }
   const handleSubmit = (values)=>{
-    dispatch(updateForm(values))
+    const forms = {...form.filter(f=> f.id == values.id)[0]}
+    const otherStateFields = {...forms.fields.filter(f=>{return f.state.id !== parseInt(currentState)})}
+    const valueToSend = {...values}
+    valueToSend.fields = [...valueToSend.fields,...Object.values(otherStateFields)];
+    dispatch(updateForm(valueToSend)).then(()=>{
+      dispatch(getFormType())
+      toast.success("Form Saved")}
+    );
   }
 
    return (
@@ -65,7 +86,7 @@ const FormCreater = () => {
            {/*{loading ? (*/}
            {/*  <p>Loading...</p>*/}
            {/*) : (*/}
-             <ValidatedForm onSubmit={handleSubmit} defaultValues={formForEdit}>
+             <ValidatedForm onSubmit={()=>{}} defaultValues={formForEdit}>
                <Col md="8">
                <ValidatedField type="select" name="langKey" label={translate('form.fields.title')}
                onChange={handleSelectForm}
@@ -80,9 +101,7 @@ const FormCreater = () => {
                  <ValidatedField type="select" name="langKey" label={translate('form.state')}
                                  onChange={handleSelectState}
                  > <>
-                   <option value="0" key="0">
-                     <Translate contentKey="form.title">Back</Translate>
-                 </option>
+
                    {states.map((f,i) => (
                    <option value={f.id} key={f.id}>
                      {f.name}
@@ -92,7 +111,10 @@ const FormCreater = () => {
                  </ValidatedField >
                </Col>
                <Col md="11">
-                <FieldCreater fields={formForEdit.fields} handleFields={handleFields} handleDelete={handleDelete}/>
+                 {formForEdit &&
+                <FieldCreater formForEdit={formForEdit} fields = {formForEdit.fields}
+                              state={states?.filter((s)=>{return s.id === parseInt(currentState)})[0]}
+                              handleFields={handleFields} handleDelete={handleDelete}/>}
                </Col>
                <div className="pb-4 pl-4">
                    <Button tag={Link} to="/admin/user-management" replace color="info">
@@ -103,7 +125,7 @@ const FormCreater = () => {
                   </span>
                  </Button>
                  &nbsp;
-                 <Button color="primary" type="submit" >
+                 <Button color="primary" onClick={()=>handleSubmit(formForEdit)} >
                    <FontAwesomeIcon icon="save" />
                    &nbsp;
                    <Translate contentKey="entity.action.save">Save</Translate>

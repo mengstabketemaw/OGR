@@ -18,17 +18,19 @@ public class CustomField {
     private Boolean required;
     private String placeholder;
 
-    private Long stateId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "state_id", nullable = false)
+    private State state;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CustomOption> options = new ArrayList<>();
 
-    public Long getStateId() {
-        return stateId;
+    public State getState() {
+        return state;
     }
 
-    public void setStateId(Long stateId) {
-        this.stateId = stateId;
+    public void setState(State state) {
+        this.state = state;
     }
 
     public Long getId() {

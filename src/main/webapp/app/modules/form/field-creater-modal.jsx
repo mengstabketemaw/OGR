@@ -9,7 +9,7 @@ const FieldCreaterModal=(props)=>{
 
   const { handleClose, field, handleFields, handleDelete } = props;
   const fieldTypes = useAppSelector(state => state.form.fieldTypes);
-  const handleSubmit = value => {
+  const handleSubmitField = value => {
     let valueToSend = {...value}
     valueToSend.fieldType = JSON.parse(valueToSend.fieldType)
     handleFields({...valueToSend, options: dropDown.value.split("\n").map((e,id)=>({id, name:e.trim()}))});
@@ -29,7 +29,7 @@ const FieldCreaterModal=(props)=>{
         </ModalHeader>
 
         <ModalBody>
-          <ValidatedForm onSubmit={handleSubmit} defaultValues={field} >
+          <ValidatedForm onSubmit={handleSubmitField} defaultValues={field} >
           <ValidatedField
                 type="text"
                 name="label"
@@ -69,7 +69,7 @@ const FieldCreaterModal=(props)=>{
             <Button color="secondary" onClick={handleClose} tabIndex={1}>
               <Translate contentKey="entity.action.cancel">Cancel</Translate>
             </Button>{' '}
-            <Button color="primary" type="submit" data-cy="submit">
+            <Button color="primary" type="submit" >
               Add
             </Button>{' '}
             <Button color="danger" onClick={()=>handleDelete(field.id)}>
