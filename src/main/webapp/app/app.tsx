@@ -38,7 +38,7 @@ export const App = () => {
   const ribbonEnv = useAppSelector(state => state.applicationProfile.ribbonEnv);
   const isInProduction = useAppSelector(state => state.applicationProfile.inProduction);
   const isOpenAPIEnabled = useAppSelector(state => state.applicationProfile.isOpenAPIEnabled);
-  const isLandingPage = currentLocation == '/' && !isAuthenticated;
+  const isLandingPage = currentLocation == '/';
 
   const paddingTop = '60px';
   return (

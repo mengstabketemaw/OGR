@@ -21,6 +21,7 @@ import SequenceLanding from 'app/modules/administration/workflow/sequenceLanding
 import ComplianceMonitoring from 'app/modules/compliance/complianceMonitoring';
 import { ComplianceDetail } from 'app/modules/compliance/complianceDetail';
 import FormDataUpdate from 'app/shared/form/form-data-update';
+import { InspectionReport } from 'app/modules/compliance/inspectionReport';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -52,8 +53,7 @@ const AppRoutes = () => {
         <Route path="logout" element={<Logout />} />
         <Route path="permit" element={<Permit />} />
         <Route path="licence" element={<Licence />} />
-        <Route path="sequence" element={<TempLanding />} />
-        <Route path="compliance" element={<ComplianceMonitoring />} />
+        <Route path="sequence" element={<SequenceLanding />} />
         <Route path="account">
           <Route
             path="*"
@@ -100,6 +100,23 @@ const AppRoutes = () => {
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
               <ComplianceDetail />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="compliance"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
+              <ComplianceMonitoring />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="inspectionReport/*"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
+              <InspectionReport />
             </PrivateRoute>
           }
         />

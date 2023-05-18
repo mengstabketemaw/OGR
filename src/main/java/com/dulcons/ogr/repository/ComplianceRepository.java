@@ -11,4 +11,7 @@ public interface ComplianceRepository extends JpaRepository<Compliance, Long> {
     @Modifying
     @Query("update Compliance c set c.status = ?1 where c.id = ?2")
     int updateStatusById(String status, Long id);
+
+    @Override
+    void deleteById(Long aLong);
 }
