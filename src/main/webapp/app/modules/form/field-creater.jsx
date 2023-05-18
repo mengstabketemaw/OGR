@@ -1,20 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {TextFormat, Translate} from "react-jhipster";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Badge, Button, Table} from "reactstrap";
 import FieldCreaterModal from "app/modules/form/field-creater-modal";
 import {nanoid} from "nanoid";
+import {getFieldType, getFormType, getFormTypeByState} from "app/modules/form/form.reducer";
+import {getState} from "app/modules/licence/license.reducer";
+import {useAppDispatch, useAppSelector} from "app/config/store";
 
 const FieldCreater = (param) =>{
   const [show,setShow] = useState(false);
-  const {fields, handleFields, handleDelete} = param;
+  const dispatch = useAppDispatch();
+  const {formForEdit, state, fields, handleFields, handleDelete} = param;
+  //const fields = useAppSelector(state => state.form.fieldsForEdit);
   const initalField = {
     "id":0,
     "label":"",
     "required":true,
     "placeholder":"",
     "fieldType":{},
-    "state":{},
+    "state": {...state},
     "options":[],
     "newId":nanoid()
   }
@@ -26,7 +31,13 @@ const FieldCreater = (param) =>{
   const closeModal= () => {
     setShow(false);
   }
-
+  // useEffect(() => {
+  //   const params = {
+  //     id: formForEdit?.id,
+  //     state_id: state,
+  //   };
+  //   dispatch(getFormTypeByState(params))
+  // }, [state,formForEdit]);
 
   const editField = (id) =>{
     if (fields.length > 0) {
@@ -61,7 +72,7 @@ const FieldCreater = (param) =>{
       </tr>
       </thead>
       <tbody>
-      {fields?.map( (field) =>(
+      {fields.length >0 && fields?.map( (field) =>(
           <tr id={field.id} key={field.id} onClick={()=>editField(field.id)}>
             <td>{field.label}</td>
             <td>{field.placeholder}</td>

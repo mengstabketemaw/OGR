@@ -8,6 +8,7 @@ const initialState = {
   formTypes: [] ,
   form: {},
   fieldTypes:[],
+  fieldsForEdit:{},
   totalItems: 0,
 };
 
@@ -16,7 +17,7 @@ const initialState = {
 export const getFormType = createAsyncThunk('fetch_forms', async () => axios.get('api/forms'), {
   serializeError: serializeAxiosError,
 });
-export const getFormTypeByState = createAsyncThunk('fetch_forms_by_state', async (id) => axios.get(`api/forms/state/${id}`), {
+export const getFormTypeByState = createAsyncThunk('fetch_forms_by_state', async ({id,state_id}, thunkAPI) => axios.get(`api/forms/state/${id}/${state_id}`), {
   serializeError: serializeAxiosError,
 });
 export const getFieldType = createAsyncThunk('fetch_field_types'
@@ -35,6 +36,7 @@ export const getForm = createAsyncThunk('fetch_form', async (id) => axios.get(`a
   serializeError: serializeAxiosError,
 });
 
+
 export const FormSlice = createSlice({
   name: 'form',
   initialState: initialState ,
@@ -47,7 +49,7 @@ export const FormSlice = createSlice({
       })
       .addCase(getFormTypeByState.fulfilled, (state, action) => {
         state.loading = false;
-        state.formTypes = action.payload.data;
+        state.fieldsForEdit = action.payload.data;
       })
       .addCase(getFieldType.fulfilled, (state, action) => {
         state.loading = false;
