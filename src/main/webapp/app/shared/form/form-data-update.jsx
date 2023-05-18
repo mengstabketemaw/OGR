@@ -56,7 +56,7 @@ const FormDataUpdate = () => {
             </Spinner>
           ) : (
             <>
-              <UpdateDynamicFields data={data.data} />
+              <UpdateDynamicFields data={data.data}/>
             </>
           )}
         </Container>
@@ -65,7 +65,7 @@ const FormDataUpdate = () => {
 
 function getValue(fieldData) {
 
-  switch (fieldData.fieldType.name) {
+  switch (fieldData?.fieldType.name) {
     case 'location':
     case 'text':
       return fieldData.text
@@ -86,10 +86,29 @@ function getValue(fieldData) {
 const UpdateDynamicFields = ({data}) =>{
   const [fieldData, setFieldData] = useState(data.data)
   const nav = useNavigate();
-  const [locationModal,setLocationModal] = useState({show: false, value:""});
+  const [locationModal,setLocationModal] = useState({show: false, label:undefined});
 
+  const getFieldDataTemplate = (name) => {
+    let field = data.form.fields.find(formFields => formFields.label === name)
+    return {
+      id:null,
+      fieldType: field.fieldType,
+      label: name,
+      text: undefined,
+      dropDown: undefined,
+      date: undefined,
+      dateAndTime: undefined,
+      checkBoxId: undefined,
+      file: undefined,
+      encodingFileType: undefined,
+    }
+  }
   const getFieldValue = (name) => {
     let fData = fieldData.find(fData => fData.label === name);
+
+    if(fData === undefined){ //This means a new field is added.
+      setFieldData(prev => [...prev, getFieldDataTemplate(name)])
+    }
     return getValue(fData);
   }
 
@@ -145,6 +164,15 @@ const UpdateDynamicFields = ({data}) =>{
     }
   }
 
+  const setLocationValue = (value) => {
+    //If Label is undefined don't do anything.
+    if(!locationModal.label)
+      return;
+    let setLocationValue = getOnChangeHandler(locationModal.label);
+    setLocationValue({target:{value}});
+    setLocationModal({show: false, label: undefined})
+  }
+
   const getFileName = name => {
     let fData = fieldData.find(fData => fData.label === name);
     return fData.encodingFileType?.split('~')[0];
@@ -185,7 +213,7 @@ const UpdateDynamicFields = ({data}) =>{
                   value={getFieldValue(field.label)}
                   placeholder={"Click here to add location"}
                   required={field.required}
-                  onClick={() => setLocationModal({...locationModal, show: true})}
+                  onClick={() => setLocationModal({label: field.label, show: true})}
                 />
 
             :field.fieldType.name === "file" ?
@@ -210,6 +238,7 @@ const UpdateDynamicFields = ({data}) =>{
                 required={field.required}
                 onChange={getOnChangeHandlerForCheckbox(field.label)}
               />
+
             :<ValidatedField
               key={field.id}
               type={field.fieldType.name}
@@ -237,7 +266,7 @@ const UpdateDynamicFields = ({data}) =>{
           <Translate contentKey="entity.action.save">Save</Translate>
         </Button>
     </ValidatedForm>
-      <GeoLocationChooser showModal={locationModal.show} setValue={setLocationModal} handleClose={()=>setLocationModal({
+      <GeoLocationChooser showModal={locationModal.show} setValue={setLocationValue} handleClose={()=>setLocationModal({
           ...locationModal,
           show: false,
         })
@@ -261,9 +290,7 @@ const GeoLocationChooser = ({showModal, handleClose,setValue}) => {
       <ModalHeader>Geo-Locator</ModalHeader>
       <ModalBody>
         <ChooseLocation setLocation={(lat,lon)=>{
-          setValue(prev=>{
-            return {show:false, value: lat + "," + lon}
-          })
+          setValue(lat + "," + lon)
         }}/>
       </ModalBody>
       <ModalFooter>
