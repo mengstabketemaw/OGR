@@ -52,7 +52,7 @@ const AppRoutes = () => {
         <Route path="logout" element={<Logout />} />
         <Route path="permit" element={<Permit />} />
         <Route path="licence" element={<Licence />} />
-        <Route path="sequence" element={<TempLanding />} />
+        <Route path="sequence" element={<SequenceLanding />} />
         <Route path="compliance" element={<ComplianceMonitoring />} />
         <Route path="account">
           <Route
