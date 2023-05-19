@@ -4,7 +4,7 @@ import PageSwitcher from "app/modules/administration/workflow/pageSwitcher/pageS
 import {useAppSelector} from "app/config/store";
 
 export const PageContext = React.createContext();
-const PageSequence = ({ id, children }) => {
+const PageSequence = ({ id,formId, children }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const sequenceFromDatabase = useAppSelector(state => state.licence.currentSequence);// Access the sequence state from Redux
   const pages = React.Children.toArray(children);
@@ -17,7 +17,7 @@ const PageSequence = ({ id, children }) => {
   };
 
   return (
-    <PageContext.Provider value={{ pages: pagesFromDatabase, currentPage, switchPage }}>
+    <PageContext.Provider value={{ pages: pagesFromDatabase, currentPage, switchPage, id ,formId }}>
       <PageSwitcher />
     </PageContext.Provider>
   );

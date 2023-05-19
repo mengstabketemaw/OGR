@@ -14,6 +14,7 @@ import settings from 'app/modules/account/settings/settings.reducer';
 import passwordReset from 'app/modules/account/password-reset/password-reset.reducer';
 import form from 'app/modules/form/form.reducer';
 import licence from 'app/modules/licence/license.reducer';
+import workflow from 'app/modules/administration/workflow/workflow.reducer';
 import entitiesReducers from 'app/entities/reducers';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
@@ -30,6 +31,7 @@ const rootReducer: ReducersMapObject = {
   settings,
   form,
   licence,
+  workflow,
   loadingBar,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   ...entitiesReducers,
