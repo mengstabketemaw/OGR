@@ -9,7 +9,6 @@ const PageSequence = ({ id,formId, children }) => {
   const sequenceFromDatabase = useAppSelector(state => state.licence.currentSequence);// Access the sequence state from Redux
   const pages = React.Children.toArray(children);
 
-  // Update pages based on the sequence from the database
   const pagesFromDatabase = sequenceFromDatabase.map((pageIndex) => pages[pageIndex]);
 
   const switchPage = (pageNumber) => {
