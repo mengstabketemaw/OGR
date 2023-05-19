@@ -1,21 +1,35 @@
 {
   "compliance": {
     "addInspection": "Adicionar Inspeção",
+    "updateInspection": "Atualizar inspeção",
     "complianceInfo": "Visualize e acompanhe a conformidade com os regulamentos para refinarias de petróleo e gás.",
     "complianceDetail": "Detalhes de Conformidade",
     "complianceHistory": "Histórico de Conformidade",
+    "inspectionDeleteWarning": "Você está prestes a excluir um histórico de inspeção.",
+    "readThis": "Você deveria ler isso!",
+    "attentionRequired": "Sua atenção é necessária",
     "close": "Fechar",
     "submit": "Enviar",
     "view": "Visualizar",
+    "viewReport": "Exibir relatório",
     "inspector": "Inspetor",
+    "update": "Atualizar",
+    "delete": "Excluir",
+    "noClose": "Sem, Fechar",
+    "yesDelete": "Sim, Excluir",
     "scheduleInspection": "Agendar Inspeção",
+    "inspectionReport": "Relatório de inspeção",
+    "report": "Relatório",
+    "inspect": "Inspecionar",
     "table": {
       "recordId": "ID do registro",
       "companyName": "Nome da empresa",
       "licenceType": "Tipo de licença",
       "status": "Status",
       "lastInspection": "Data da última inspeção",
-      "actions": "Ações"
+      "actions": "Ações",
+      "date": "Data",
+      "findings": "Descobertas"
     },
     "companyName": "Nome da empresa",
     "form": {
@@ -23,8 +37,15 @@
       "selectUser": "Selecione o usuário",
       "created": "Inspeção criada.",
       "scheduleCreated": "Agenda criada",
+      "updated": "Inspeção atualizada",
+      "deleted": "Inspeção excluída",
+      "containsData": "Não é possível excluir a inspeção porque ela contém dados.",
+      "scheduleUpdated": "Cronograma atualizado",
       "errorOccured": "Um erro ocorreu! Tente novamente.",
-      "inspectionDate": "Data de inspecção"
+      "inspectionDate": "Data de inspecção",
+      "selectInspector": "Selecionar Inspetor",
+      "selectStatus": "Selecione o estado",
+      "inspectionSaved": "Inspeção salva"
     }
   }
 }

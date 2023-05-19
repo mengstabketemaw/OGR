@@ -15,6 +15,7 @@ import {faArrowLeft} from "@fortawesome/free-solid-svg-icons/faArrowLeft";
 export function ComplianceDetail() {
   const [param] = useSearchParams();
   const [compliance, setCompliance] = useState({ loading: true, data: {} });
+
   const fetchData = () => {
     // Construct the URL with the page query parameter
     const url = `/api/compliance/${param.get('compliance')}`;
@@ -31,6 +32,8 @@ export function ComplianceDetail() {
     // Fetch the initial data when the component mounts
     fetchData();
   }, []);
+
+
   return (
     <>
       {compliance.loading ? (
@@ -55,28 +58,34 @@ export function ComplianceDetail() {
                 <h1><Translate contentKey={"compliance.complianceDetail"}/></h1>
               </div>
 
-              <div className="d-flex flex-column col-6 form-group">
+              <div className="d-flex flex-column col-6 mt-3 form-group">
                 <div className="company d-flex flex-row justify-content-between">
                   <h3 className={""}><Translate contentKey={"compliance.companyName"}/> </h3>
-                  <p>{compliance.data.company.login}</p>
+                  <p className={"col-6"} >{compliance.data.company.login}</p>
                 </div>
               <div className="licence d-flex flex-row justify-content-between">
                 <h3 className={""}><Translate contentKey={"compliance.table.licenceType"}/> </h3>
-                <p>{compliance.data.customForm.title}</p>
+                <p className={"col-6"}>{compliance.data.customForm.title}</p>
               </div>
                 <div className="status d-flex flex-row justify-content-between">
                   <h3 className={""}>  <Translate contentKey={"compliance.table.status"}/>  </h3>
                   {
                     `${compliance.data.status}` == 'Non-Compliant'
                       ?
-                      <p className={"text-danger"}>{compliance.data.status}</p>
+                      <p className={"text-danger col-6"}>{compliance.data.status}</p>
                       :
-                      <p className={"text-success"}>{compliance.data.status}</p>
+                      `${compliance.data.status}` == 'Not Inspected'
+                        ?
+                      <p className={"col-6"}>{compliance.data.status}</p>
+                        :
+                        <p className={"text-success col-6"}>{compliance.data.status}</p>
+
+
                   }
 
                 </div>
               </div>
-              <ComplianceHistory/>
+              <ComplianceHistory  complianceId={`${param.get('compliance')}`} />
             </Col>
         )
       }

@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 import { ScheduleInspection } from 'app/modules/compliance/scheduleInspection';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 
 const PAGE_SIZE = ITEMS_PER_PAGE;
 const ComplianceMonitoring = () => {
@@ -28,7 +29,9 @@ const ComplianceMonitoring = () => {
   const users = useAppSelector(state => state.userManagement.users);
   const [filteredData, setFilteredData] = useState([]);
   const [scheduleParams, setScheduleParams] = useState({});
-
+  const [updateCompliance, setUpdateCompliance] = useState({});
+  const [refreshTable, setRefreshTable] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const fetchData = page => {
     // Construct the URL with the page query parameter
     const url = `/api/compliance?page=${page}&size=${PAGE_SIZE}&sort=id,desc`;
@@ -60,7 +63,7 @@ const ComplianceMonitoring = () => {
         sort: '',
       })
     );
-  }, []);
+  }, [, refreshTable]);
 
   useEffect(() => {
     const results = inspections.data.content.filter(
@@ -101,12 +104,10 @@ const ComplianceMonitoring = () => {
               <Row className="align-items-center">
                 <div className="col">
                   <h1 className="mb-0">
-                    <Translate contentKey={'global.menu.compliance'}>Compliance Monitoring </Translate>
+                    <Translate contentKey={'global.menu.compliance'}> </Translate>
                   </h1>
                   <h5>
-                    <Translate contentKey={'compliance.complianceInfo'}>
-                      View and track compliance with regulations for oil and gas refineries.{' '}
-                    </Translate>
+                    <Translate contentKey={'compliance.complianceInfo'}> </Translate>
                   </h5>
                 </div>
               </Row>
@@ -123,9 +124,10 @@ const ComplianceMonitoring = () => {
                 className={'mr-4 mb-2 bg-gradient-green text-white'}
                 onClick={() => {
                   setShowModal(true);
+                  setUpdateCompliance({});
                 }}
               >
-                <Translate contentKey={'compliance.addInspection'}>Add Inspection </Translate>
+                <Translate contentKey={'compliance.addInspection'}></Translate>
               </Button>
             </div>
             {inspections.loading ? (
@@ -187,6 +189,9 @@ const ComplianceMonitoring = () => {
                       <th scope="col">
                         <Translate contentKey={'compliance.table.actions'} />
                       </th>
+                      <th scope="col">
+                        <Translate contentKey={'compliance.scheduleInspection'} />
+                      </th>
                     </tr>
                   </thead>
 
@@ -196,7 +201,15 @@ const ComplianceMonitoring = () => {
                         <th>{data.id}</th>
                         <th>{data.company.login}</th>
                         <th>{data.customForm.title}</th>
-                        <th>{data.status}</th>
+                        <th>
+                          {`${data.status}` == 'Non-Compliant' ? (
+                            <p className={'text-danger text-sm'}>{data.status}</p>
+                          ) : `${data.status}` == 'Not Inspected' ? (
+                            <p className={'text-sm'}>{data.status}</p>
+                          ) : (
+                            <p className={'text-success text-sm'}>{data.status}</p>
+                          )}
+                        </th>
 
                         <th>
                           <Button
@@ -209,7 +222,29 @@ const ComplianceMonitoring = () => {
                             <Translate contentKey={'compliance.view'} />
                           </Button>
                           <Button
-                            color="warning"
+                            color="light"
+                            onClick={() => {
+                              setShowModal(true);
+                              setUpdateCompliance({ complianceId: data.id, userId: data.company.id, formId: data.customForm.id });
+                            }}
+                            size="sm"
+                          >
+                            <Translate contentKey={'compliance.update'} />
+                          </Button>
+                          <Button
+                            color="danger"
+                            onClick={() => {
+                              setShowDeleteModal(true);
+                              setUpdateCompliance({ complianceId: data.id, userId: data.company.id, formId: data.customForm.id });
+                            }}
+                            size="sm"
+                          >
+                            <Translate contentKey={'compliance.delete'} />
+                          </Button>
+                        </th>
+                        <th>
+                          <Button
+                            color="info"
                             onClick={() => {
                               setScheduleModal(true);
                               setScheduleParams({
@@ -237,33 +272,65 @@ const ComplianceMonitoring = () => {
         </Col>
       </div>
 
-      <AddNewInspection show={showModal} handleClose={() => setShowModal(false)} form={form} users={users}></AddNewInspection>
+      <AddNewInspection
+        show={showModal}
+        refreshTable={() => setRefreshTable(!refreshTable)}
+        handleClose={() => setShowModal(false)}
+        form={form}
+        users={users}
+        updateCompliance={updateCompliance}
+      ></AddNewInspection>
       <ScheduleInspection
         show={showScheduleModal}
         handleClose={() => setScheduleModal(false)}
         form={form}
         users={users}
         scheduleParams={scheduleParams}
+        refreshTable={() => setRefreshTable(!refreshTable)}
       ></ScheduleInspection>
+      <DeleteCompliance
+        show={showDeleteModal}
+        refreshTable={() => setRefreshTable(!refreshTable)}
+        handleClose={() => setShowDeleteModal(false)}
+        updateCompliance={updateCompliance}
+      ></DeleteCompliance>
     </>
   );
 };
 
 export default ComplianceMonitoring;
 
-const AddNewInspection = ({ show, handleClose, form, users }) => {
+const AddNewInspection = ({ show, refreshTable, handleClose, form, users, updateCompliance }) => {
   const [opened, setOpened] = useState(true);
   const nav = useNavigate();
+  const formId = updateCompliance?.formId;
+  const userId = updateCompliance?.userId;
+  const complianceId = updateCompliance?.complianceId;
+
   const handleSubmit = async values => {
     try {
-      const res = await axios({
-        method: 'post',
-        url: '/api/compliance',
-        data: { userId: values.userId, formId: values.formId },
-      });
-      if (res.status == 201) {
-        handleClose();
-        toast.success(<Translate contentKey={'compliance.form.created'} />);
+      if (complianceId) {
+        const update = await axios({
+          method: 'put',
+          url: `/api/compliance/${complianceId}`,
+          data: { userId: values.userId, formId: values.formId },
+        });
+        if (update.status == 200) {
+          handleClose();
+          toast.success(<Translate contentKey={'compliance.form.updated'} />);
+          refreshTable();
+        }
+      } else {
+        const res = await axios({
+          method: 'post',
+          url: '/api/compliance',
+          data: { userId: values.userId, formId: values.formId },
+        });
+        if (res.status == 201) {
+          handleClose();
+          toast.success(<Translate contentKey={'compliance.form.created'} />);
+          refreshTable();
+        }
       }
     } catch (err) {
       toast.error(<Translate contentKey={'compliance.form.errorOccured'} />);
@@ -274,12 +341,18 @@ const AddNewInspection = ({ show, handleClose, form, users }) => {
     <Modal size={''} isOpen={opened && show}>
       <ModalHeader>
         <h2>
-          <Translate contentKey={'compliance.addInspection'} />
+          {complianceId ? <Translate contentKey={'compliance.updateInspection'} /> : <Translate contentKey={'compliance.addInspection'} />}
         </h2>
       </ModalHeader>
       <ModalBody>
         <ValidatedForm onSubmit={values => handleSubmit(values)}>
-          <ValidatedField type="select" name="formId" required={true} label={translate('compliance.form.selectLicence')}>
+          <ValidatedField
+            type="select"
+            name="formId"
+            required={true}
+            defaultValue={formId}
+            label={translate('compliance.form.selectLicence')}
+          >
             <option value="" key="">
               <Translate contentKey={'compliance.form.selectLicence'} />
             </option>
@@ -289,7 +362,7 @@ const AddNewInspection = ({ show, handleClose, form, users }) => {
               </option>
             ))}
           </ValidatedField>
-          <ValidatedField type="select" name="userId" required={true} label={translate('compliance.companyName')}>
+          <ValidatedField type="select" name="userId" required={true} defaultValue={userId} label={translate('compliance.companyName')}>
             <option value="" key="">
               <Translate contentKey={'compliance.form.selectUser'} />
             </option>
@@ -298,6 +371,7 @@ const AddNewInspection = ({ show, handleClose, form, users }) => {
                 f.authorities.every(auth => auth === 'ROLE_USER') && (
                   <option value={f.id} key={f.id}>
                     {f.login}
+                    {userId}
                   </option>
                 )
             )}
@@ -305,7 +379,7 @@ const AddNewInspection = ({ show, handleClose, form, users }) => {
           <Button color="primary" type="submit">
             <FontAwesomeIcon icon="save" />
             &nbsp;
-            <Translate contentKey="entity.action.save">Save</Translate>
+            <Translate contentKey="entity.action.save"></Translate>
           </Button>
         </ValidatedForm>
       </ModalBody>
@@ -314,6 +388,69 @@ const AddNewInspection = ({ show, handleClose, form, users }) => {
           <Translate contentKey={'compliance.close'} />
         </Button>
       </ModalFooter>
+    </Modal>
+  );
+};
+
+const DeleteCompliance = ({ show, refreshTable, handleClose, updateCompliance }) => {
+  const complianceId = updateCompliance?.complianceId;
+
+  const handleSubmit = async () => {
+    try {
+      if (complianceId) {
+        const update = await axios({
+          method: 'delete',
+          url: `/api/compliance/${complianceId}`,
+        });
+        if (update.status == 204) {
+          handleClose();
+          toast.success(<Translate contentKey={'compliance.form.deleted'} />);
+          refreshTable();
+        }
+      }
+    } catch (err) {
+      handleClose();
+      toast.error(<Translate contentKey={'compliance.form.containsData'} />);
+      refreshTable();
+    }
+  };
+
+  return (
+    <Modal
+      className="modal-dialog-centered modal-danger"
+      contentClassName="bg-gradient-danger"
+      isOpen={show}
+      toggle={() => this.toggleModal('notificationModal')}
+      size={'sm'}
+    >
+      <div className="modal-header">
+        <h6 className="modal-title" id="modal-title-notification">
+          <Translate contentKey={'compliance.attentionRequired'} />
+        </h6>
+        <button aria-label="Close" className="close" data-dismiss="modal" type="button" onClick={handleClose}>
+          <span aria-hidden={true}>×</span>
+        </button>
+      </div>
+      <div className="modal-body">
+        <div className="py-3 text-center">
+          <i className="ni ni-bell-55 ni-3x" />
+          <FontAwesomeIcon icon={faTrash} />
+          <h4 className="heading mt-4">
+            <Translate contentKey={'compliance.readThis'} />
+          </h4>
+          <p>
+            <Translate contentKey={'compliance.inspectionDeleteWarning'} />
+          </p>
+        </div>
+      </div>
+      <div className="modal-footer">
+        <Button className="btn-white" color="default" type="button" onClick={handleClose}>
+          <Translate contentKey={'compliance.noClose'} />
+        </Button>
+        <Button className="text-white ml-auto" color="link" data-dismiss="modal" type="button" onClick={handleSubmit}>
+          <Translate contentKey={'compliance.yesDelete'} />
+        </Button>
+      </div>
     </Modal>
   );
 };

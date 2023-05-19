@@ -31,6 +31,11 @@
   font-weight: normal;
   font-style: normal;
 }
+.border-top-bottom > div {
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px; /* increase the margin-bottom value to increase spacing */
+}
 
 :root {
   --blue: #5e72e4;

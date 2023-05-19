@@ -5,7 +5,8 @@ import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React, {useState} from "react";
 
-export const ScheduleInspection = ({show, handleClose, form, users,scheduleParams}) => {
+export const ScheduleInspection = ({show,refreshTable, handleClose, users,scheduleParams}) => {
+
   const handleSubmit = async (values) => {
     try {
       const res = await axios({
@@ -15,7 +16,7 @@ export const ScheduleInspection = ({show, handleClose, form, users,scheduleParam
           date: values.inspectionDate
           ,inspectorId: values.inspectorId
           ,complianceId: scheduleParams.complianceId
-          ,finding: ""
+          ,finding: "Not Inspected"
           ,status:"Not Inspected"
           ,report:""
         }
@@ -24,6 +25,7 @@ export const ScheduleInspection = ({show, handleClose, form, users,scheduleParam
       if (res.status == 201) {
         handleClose();
         toast.success(<Translate contentKey={'compliance.form.scheduleCreated'}/>);
+        refreshTable();
       }
     } catch (err) {
       toast.error(<Translate contentKey={'compliance.form.errorOccured'}/>);
@@ -44,7 +46,7 @@ export const ScheduleInspection = ({show, handleClose, form, users,scheduleParam
           <ValidatedField type="select" name="inspectorId" required={true} label={translate('compliance.inspector')}
           >
             <option value="" key="">
-              <Translate contentKey={"compliance.form.selectUser"}/>
+              <Translate contentKey={"compliance.form.selectInspector"}/>
             </option>
             {users.map((f, i) => (
               f.authorities.includes('ROLE_ADMIN') && (

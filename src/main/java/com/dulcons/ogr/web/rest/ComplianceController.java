@@ -11,6 +11,7 @@ import com.dulcons.ogr.web.rest.vm.ComplianceHistoryBody;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -46,13 +47,19 @@ public class ComplianceController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public void updateCompliance(@PathVariable Long id, @RequestBody ComplianceBody complianceBody) {
         Compliance compliance = new Compliance();
         compliance.setId(id);
         compliance.setCompany(userRepository.findById(complianceBody.getUserId()).orElseThrow());
         compliance.setCustomForm(customFormRepository.findById(complianceBody.getFormId()).orElseThrow());
         complianceRepository.save(compliance);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCompliance(@PathVariable Long id) {
+        complianceRepository.deleteById(id);
     }
 
     @GetMapping
@@ -66,8 +73,8 @@ public class ComplianceController {
     }
 
     @GetMapping("/complianceHistory")
-    public List<ComplianceHistory> findComplianceHistory(@RequestParam Long complianceId) {
-        return complianceHistoryRepository.findDistinctByCompliance_Id(complianceId);
+    public Page<ComplianceHistory> findComplianceHistory(@RequestParam Long complianceId, Pageable pageable) {
+        return complianceHistoryRepository.findDistinctByCompliance_Id(complianceId, pageable);
     }
 
     @GetMapping("/complianceHistory/{id}")
@@ -82,10 +89,19 @@ public class ComplianceController {
         complianceHistory.setDate(complianceHistoryBody.getDate());
         complianceHistory.setCompliance(complianceRepository.findById(complianceHistoryBody.getComplianceId()).orElseThrow());
         complianceHistory.setInspector(userRepository.findById(complianceHistoryBody.getInspectorId()).orElseThrow());
+        complianceHistory.setFinding(complianceHistoryBody.getFinding());
+        complianceHistory.setStatus(complianceHistoryBody.getStatus());
+        complianceHistory.setReport(complianceHistoryBody.getReport());
         complianceHistoryRepository.save(complianceHistory);
         // Update the status on the main Compliance
         Long complianceId = complianceHistoryBody.getComplianceId();
         complianceRepository.updateStatusById(complianceHistoryBody.getStatus(), complianceId);
+    }
+
+    @DeleteMapping("/complianceHistory/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteComplianceHistory(@PathVariable Long id) {
+        complianceHistoryRepository.deleteById(id);
     }
 
     @PutMapping("/complianceHistory/{id}")
@@ -96,6 +112,13 @@ public class ComplianceController {
         complianceHistory.setDate(complianceHistoryBody.getDate());
         complianceHistory.setCompliance(complianceRepository.findById(complianceHistoryBody.getComplianceId()).orElseThrow());
         complianceHistory.setInspector(userRepository.findById(complianceHistoryBody.getInspectorId()).orElseThrow());
+        complianceHistory.setFinding(complianceHistoryBody.getFinding());
+        complianceHistory.setStatus(complianceHistoryBody.getStatus());
+        complianceHistory.setReport(complianceHistoryBody.getReport());
         complianceHistoryRepository.save(complianceHistory);
+
+        // Update the status on the main Compliance
+        Long complianceId = complianceHistoryBody.getComplianceId();
+        complianceRepository.updateStatusById(complianceHistoryBody.getStatus(), complianceId);
     }
 }
