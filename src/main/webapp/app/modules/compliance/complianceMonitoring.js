@@ -333,7 +333,8 @@ const AddNewInspection = ({ show, refreshTable, handleClose, form, users, update
         }
       }
     } catch (err) {
-      toast.error(<Translate contentKey={'compliance.form.errorOccured'} />);
+      console.log(err);
+      toast.error(<Translate contentKey={'compliance.form.inspectionExists'} />);
     }
   };
 

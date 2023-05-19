@@ -16,7 +16,7 @@ import {ScheduleInspection} from "app/modules/compliance/scheduleInspection";
 import {MakeInspection} from "app/modules/compliance/makeInspection";
 
 const PAGE_SIZE = ITEMS_PER_PAGE;
-const ComplianceHistory = ({complianceId,refreshDetail}) => {
+const ComplianceHistory = ({complianceId,compliance}) => {
   const [params] = useSearchParams();
   const dispatch = useAppDispatch();
   const nav = useNavigate();
@@ -81,11 +81,11 @@ const ComplianceHistory = ({complianceId,refreshDetail}) => {
 
                             setScheduleModal(true);
                             setScheduleParams({
-                              complianceId: inspectionHistory.data?.content[0]?.compliance.id,
-                              companyId:  inspectionHistory.data?.content[0]?.compliance.company.id,
-                              companyName:  inspectionHistory.data?.content[0]?.compliance.company.login,
-                              licenceId:  inspectionHistory.data?.content[0]?.compliance.customForm.id,
-                              licenceName:  inspectionHistory.data?.content[0]?.compliance.customForm.title,
+                              complianceId: complianceId,
+                              companyId:  compliance.data.company.id,
+                              companyName:  compliance.data.company.login,
+                              licenceId:  compliance.data.customForm.id,
+                              licenceName:  compliance.data.customForm.title,
                             });
                           }}><Translate contentKey={"compliance.scheduleInspection"}></Translate>
                   </Button>
@@ -144,7 +144,18 @@ const ComplianceHistory = ({complianceId,refreshDetail}) => {
                           data.finding:
                           "---"
                       }</th>
-                      <th>{data.status}</th>
+                      <th>
+                      {
+                        `${data.status}` == 'Non-Compliant'
+                          ?
+                          <p className={"text-danger col-6"}>{data.status}</p>
+                          :
+                          `${data.status}` == 'Not Inspected'
+                            ?
+                            <p className={"col-6"}>{data.status}</p>
+                            :
+                            <p className={"text-success col-6"}>{data.status}</p>
+                      } </th>
                       <th>
                         <Button color="primary" tag={"a"} href={`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`}
                                  size="sm">
@@ -245,13 +256,11 @@ const DeleteInspection = ({ show,refreshTable, handleClose,updateInspection }) =
           handleClose();
           toast.success(<Translate contentKey={'compliance.form.deleted'} />);
           refreshTable();
-          refreshDetail();
         }
       }
     } catch (err) {
       handleClose();
       toast.error(<Translate contentKey={'compliance.form.containsData'} />);
-
       refreshTable();
     }
   };

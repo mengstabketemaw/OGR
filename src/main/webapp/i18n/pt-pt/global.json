@@ -5,6 +5,7 @@
     "menu": {
       "home": "Início",
       "compliance": "Monitoramento de Conformidade",
+      "inspection": "Relatório de inspection",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",

@@ -22,6 +22,7 @@ import ComplianceMonitoring from 'app/modules/compliance/complianceMonitoring';
 import { ComplianceDetail } from 'app/modules/compliance/complianceDetail';
 import FormDataUpdate from 'app/shared/form/form-data-update';
 import { InspectionReport } from 'app/modules/compliance/inspectionReport';
+import { ComplianceUser } from 'app/modules/complianceUser/complianceUser';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -108,6 +109,15 @@ const AppRoutes = () => {
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
               <ComplianceMonitoring />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="complianceUser/*"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
+              <ComplianceUser />
             </PrivateRoute>
           }
         />

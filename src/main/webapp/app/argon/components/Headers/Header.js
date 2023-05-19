@@ -181,7 +181,7 @@ const Header = () => {
                             Loading...
                           </Spinner>
                         ) : (
-                          <span className="h2 font-weight-bold mb-0">{stats.data.totalSubmissionsCount}</span>
+                          <span className="h2 font-weight-bold mb-0">{stats.data.totalInspections}</span>
                         )}
                       </div>
                       <Col className="col-auto">
@@ -192,9 +192,9 @@ const Header = () => {
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-success font-weight-bold mr-2">
-                        <i className="fa fa-plus" /> {stats.data?.thisMonthSubmissions}
+                        <i className="fa fa-plus" /> {stats.data?.inspectionThisMonth}
                       </span>{' '}
-                      <span className="text-nowrap">Inspections this month</span>
+                      <span className="text-nowrap">Scheduled Inspections this month</span>
                     </p>
                   </CardBody>
                 </Card>

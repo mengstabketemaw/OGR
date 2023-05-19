@@ -2,10 +2,12 @@ package com.dulcons.ogr.web.rest;
 
 import com.dulcons.ogr.domain.Compliance;
 import com.dulcons.ogr.domain.ComplianceHistory;
+import com.dulcons.ogr.domain.User;
 import com.dulcons.ogr.repository.ComplianceHistoryRepository;
 import com.dulcons.ogr.repository.ComplianceRepository;
 import com.dulcons.ogr.repository.CustomFormRepository;
 import com.dulcons.ogr.repository.UserRepository;
+import com.dulcons.ogr.service.UserService;
 import com.dulcons.ogr.web.rest.vm.ComplianceBody;
 import com.dulcons.ogr.web.rest.vm.ComplianceHistoryBody;
 import java.util.List;
@@ -24,17 +26,20 @@ public class ComplianceController {
     private final ComplianceHistoryRepository complianceHistoryRepository;
     private final CustomFormRepository customFormRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     public ComplianceController(
         ComplianceRepository complianceRepository,
         ComplianceHistoryRepository complianceHistoryRepository,
         CustomFormRepository customFormRepository,
-        UserRepository userRepository
+        UserRepository userRepository,
+        UserService userService
     ) {
         this.complianceRepository = complianceRepository;
         this.complianceHistoryRepository = complianceHistoryRepository;
         this.customFormRepository = customFormRepository;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @PostMapping
@@ -120,5 +125,11 @@ public class ComplianceController {
         // Update the status on the main Compliance
         Long complianceId = complianceHistoryBody.getComplianceId();
         complianceRepository.updateStatusById(complianceHistoryBody.getStatus(), complianceId);
+    }
+
+    @GetMapping("/user/{id}")
+    public Compliance findOneByUserId(@PathVariable Long id) {
+        User user = userService.getUserWithAuthorities().orElseThrow();
+        return complianceRepository.findByCompany_IdAndCustomForm_Id(user.getId(), id);
     }
 }

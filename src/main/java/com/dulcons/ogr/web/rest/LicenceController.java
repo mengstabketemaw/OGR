@@ -1,7 +1,9 @@
 package com.dulcons.ogr.web.rest;
 
+import com.dulcons.ogr.domain.Compliance;
 import com.dulcons.ogr.domain.Licence;
 import com.dulcons.ogr.domain.User;
+import com.dulcons.ogr.repository.ComplianceRepository;
 import com.dulcons.ogr.repository.LicenceRepository;
 import com.dulcons.ogr.service.UserService;
 import java.util.HashMap;
@@ -18,10 +20,12 @@ public class LicenceController {
     private final LicenceRepository licenceRepository;
 
     private final UserService userService;
+    private final ComplianceRepository complianceRepository;
 
-    public LicenceController(LicenceRepository licenceRepository, UserService userService) {
+    public LicenceController(LicenceRepository licenceRepository, UserService userService, ComplianceRepository complianceRepository) {
         this.licenceRepository = licenceRepository;
         this.userService = userService;
+        this.complianceRepository = complianceRepository;
     }
 
     @GetMapping
@@ -66,5 +70,13 @@ public class LicenceController {
     public Page<Licence> getDataByUserId(Pageable page) {
         User user = userService.getUserWithAuthorities().orElseThrow();
         return licenceRepository.findByUser_Id(user.getId(), page);
+    }
+
+    @GetMapping("/user")
+    public Iterable<Licence> getAllByUser() {
+        User user = userService.getUserWithAuthorities().orElseThrow();
+        List<Long> licenceId = complianceRepository.findLicenceIdByCompany_Id(user.getId());
+        Iterable<Licence> licences = licenceRepository.findByUser_IdAndForm_IdIn(user.getId(), licenceId);
+        return licences;
     }
 }
