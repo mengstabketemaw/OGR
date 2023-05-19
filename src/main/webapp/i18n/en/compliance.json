@@ -21,6 +21,8 @@
     "inspectionReport": "View Inspection Report",
     "report": "Report",
     "inspect": "Inspect",
+    "inspectionHistory": "Inspection History",
+    "inspections": "Inspections",
     "table": {
       "recordId": "Record Id",
       "companyName": "Company Name",
@@ -45,7 +47,8 @@
       "inspectionDate": "Inspection Date",
       "selectInspector": "Select Inspector",
       "selectStatus": "Select Status",
-      "inspectionSaved": "Inspection Saved"
+      "inspectionSaved": "Inspection Saved",
+      "inspectionExists": "Inspection Exists"
     }
   }
 }

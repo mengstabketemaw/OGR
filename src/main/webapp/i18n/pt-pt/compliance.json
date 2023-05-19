@@ -21,6 +21,8 @@
     "inspectionReport": "Relatório de inspeção",
     "report": "Relatório",
     "inspect": "Inspecionar",
+    "inspectionHistory": "Histórico de Inspeção",
+    "inspections": "Inspeções",
     "table": {
       "recordId": "ID do registro",
       "companyName": "Nome da empresa",
@@ -45,7 +47,8 @@
       "inspectionDate": "Data de inspecção",
       "selectInspector": "Selecionar Inspetor",
       "selectStatus": "Selecione o estado",
-      "inspectionSaved": "Inspeção salva"
+      "inspectionSaved": "Inspeção salva",
+      "inspectionExists": "Existe Inspeção"
     }
   }
 }

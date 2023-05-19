@@ -3,6 +3,7 @@ package com.dulcons.ogr.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "company_id", "customForm_id" }) })
 public class Compliance {
 
     @Id
@@ -10,9 +11,11 @@ public class Compliance {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
     User company;
 
     @OneToOne
+    @JoinColumn(name = "customForm_id", referencedColumnName = "id")
     CustomForm customForm;
 
     String status = "Not Inspected";

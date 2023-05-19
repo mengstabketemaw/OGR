@@ -85,7 +85,7 @@ export function ComplianceDetail() {
 
                 </div>
               </div>
-              <ComplianceHistory  complianceId={`${param.get('compliance')}`} />
+              <ComplianceHistory  compliance={compliance} complianceId={`${param.get('compliance')}`} />
             </Col>
         )
       }

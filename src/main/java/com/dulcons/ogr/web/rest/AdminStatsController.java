@@ -1,5 +1,7 @@
 package com.dulcons.ogr.web.rest;
 
+import com.dulcons.ogr.repository.ComplianceHistoryRepository;
+import com.dulcons.ogr.repository.ComplianceRepository;
 import com.dulcons.ogr.repository.LicenceRepository;
 import com.dulcons.ogr.repository.UserRepository;
 import java.time.Instant;
@@ -16,10 +18,19 @@ public class AdminStatsController {
 
     private final LicenceRepository licenceRepository;
     private final UserRepository userRepository;
+    private final ComplianceRepository complianceRepository;
+    private final ComplianceHistoryRepository complianceHistoryRepository;
 
-    public AdminStatsController(LicenceRepository licenceRepository, UserRepository userRepository) {
+    public AdminStatsController(
+        LicenceRepository licenceRepository,
+        UserRepository userRepository,
+        ComplianceRepository complianceRepository,
+        ComplianceHistoryRepository complianceHistoryRepository
+    ) {
         this.licenceRepository = licenceRepository;
         this.userRepository = userRepository;
+        this.complianceRepository = complianceRepository;
+        this.complianceHistoryRepository = complianceHistoryRepository;
     }
 
     //Admin Statistics
@@ -35,7 +46,8 @@ public class AdminStatsController {
         long todaySubmissions = licenceRepository.countBySubmittedDateGreaterThanEqual(today);
         long yesterdaysSubmissions = licenceRepository.countBySubmittedDateBetween(yesterday, today);
         long thisMonthSubmissions = licenceRepository.countBySubmittedDateGreaterThanEqual(thisMonth);
-
+        long totalInspections = complianceHistoryRepository.countFirstBy();
+        long inspectionThisMonth = complianceHistoryRepository.countByDateGreaterThanEqual(LocalDate.now().withDayOfMonth(1));
         HashMap<String, Long> returnValue = new HashMap<>();
 
         returnValue.put("totalSubmissionsCount", totalSubmissionsCount);
@@ -44,6 +56,8 @@ public class AdminStatsController {
         returnValue.put("totalUserToday", totalUserToday);
         returnValue.put("todaySubmissions", todaySubmissions);
         returnValue.put("yesterdaysSubmissions", yesterdaysSubmissions);
+        returnValue.put("totalInspections", totalInspections);
+        returnValue.put("inspectionThisMonth", inspectionThisMonth);
 
         return returnValue;
     }

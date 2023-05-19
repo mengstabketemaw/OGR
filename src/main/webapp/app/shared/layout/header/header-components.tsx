@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Translate } from 'react-jhipster';
 
-import { NavItem, NavLink, NavbarBrand } from 'reactstrap';
-import { NavLink as Link } from 'react-router-dom';
+import { DropdownItem, NavbarBrand, NavItem, NavLink, Spinner } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from 'app/config/store';
+import { NavDropdown } from 'app/shared/layout/menus/menu-components';
+import axios from 'axios';
 
 const refreshPage = () => {
   window.location.href = '/home';
@@ -45,3 +46,51 @@ export const Home = () => (
     </NavLink>
   </NavItem>
 );
+
+export const ComplianceMonitoringUser = () => {
+  const [licence, setLicence] = useState({ loading: true, data: [] });
+
+  const fetchData = () => {
+    // Construct the URL with the page query parameter
+    const url = `/api/licence/user`;
+    axios
+      .get(url)
+      .then(({ data }) => {
+        // Update the state with the new data and total pages
+        setLicence({ loading: false, data });
+      })
+      .catch(console.log);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <NavDropdown icon="book" name={<Translate contentKey="compliance.inspectionHistory" />}>
+      {licence.loading ? (
+        <div className={'d-flex justify-content-center'}>
+          <Spinner
+            className="align-self-center"
+            color="primary"
+            style={{
+              height: '3rem',
+              width: '3rem',
+            }}
+            type="grow"
+          >
+            Loading...
+          </Spinner>
+        </div>
+      ) : (
+        <>
+          {licence?.data?.map(data => (
+            <DropdownItem tag={'a'} href={`/complianceUser?licence=${data.form.id}&title=${data.form.title}`}>
+              {data.form.title}
+            </DropdownItem>
+          ))}
+        </>
+      )}
+    </NavDropdown>
+  );
+};

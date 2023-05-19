@@ -5,7 +5,7 @@ import { Translate, Storage } from 'react-jhipster';
 import { Navbar, Nav, NavbarToggler, Collapse, DropdownItem, NavItem, NavLink } from 'reactstrap';
 import LoadingBar from 'react-redux-loading-bar';
 
-import { Home, Brand } from './header-components';
+import { Home, Brand, ComplianceMonitoringUser } from './header-components';
 import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu, LicencesMenu } from '../menus';
 import { useAppDispatch } from 'app/config/store';
 import { setLocale } from 'app/shared/reducers/locale';
@@ -50,6 +50,9 @@ const Header = (props: IHeaderProps) => {
     window.location.href = '/compliance';
   };
 
+  const gotoComplianceUser = () => {
+    window.location.href = '/complianceUser';
+  };
   /* jhipster-needle-add-element-to-menu - JHipster will add new menu items here */
 
   return (
@@ -114,6 +117,7 @@ const Header = (props: IHeaderProps) => {
                 </NavLink>
               </NavItem>
             )}
+            {props.isAuthenticated && <ComplianceMonitoringUser />}
 
             {/* {props.isAuthenticated && <EntitiesMenu />} */}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
