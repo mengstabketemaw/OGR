@@ -7,17 +7,18 @@ import {TechnicalReview} from "app/modules/administration/workflow/definedStateP
 import PageSequence from "app/modules/administration/workflow/pageSwitcher/pageSequence";
 import FormEdit from "app/modules/administration/workflow/definedStatePages/formEdit";
 
-const DynamicWorkFlow = (id) => {
+const DynamicWorkFlow = (props) => {
+  const {id, formId} = props;
   return(
     // Sequence Matter here toDo make it to not matter
-    <PageSequence id={id}>
-      <FormEdit/>
-      <InitialReview/>
-      <TechnicalReview/>
-      <SpecializedReview/>
-      <DecisionMaking/>
-      <IssuedOrDenied/>
-    </PageSequence>
+    <PageSequence id={id} formId={formId}>
+      <FormEdit key={0}/>
+      <InitialReview key={1}/>
+      <TechnicalReview key={2}/>
+      <SpecializedReview key={3}/>
+      <DecisionMaking key={4}/>
+      <IssuedOrDenied key={5}/>
+    </PageSequence >
   )
 };
 

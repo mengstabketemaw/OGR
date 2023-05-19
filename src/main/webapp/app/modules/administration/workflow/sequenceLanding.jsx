@@ -12,7 +12,7 @@ import {getWorkflowByForm} from "app/modules/licence/license.reducer";
      dispatch(getWorkflowByForm(formId))
    }, [formId]);
    return (
-    <DynamicWorkFlow id={id} />
+    <DynamicWorkFlow id={id} formId={formId} />
    )
 }
 export default SequenceLanding;

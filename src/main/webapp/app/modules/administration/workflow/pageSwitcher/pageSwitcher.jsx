@@ -37,8 +37,8 @@ const PageSwitcher = () => {
             </Row>
             {/* Render the current page */}
             {pages[currentPage]}
-
-            <div className="pb-4 pl-4">
+            &nbsp;
+            <div  className="d-flex justify-content-between pb-4 pl-4 pt-20">
               <Button onClick={handlePreviousPage} disabled={currentPage === 0} >
 
                 <span className="d-none d-md-inline">
