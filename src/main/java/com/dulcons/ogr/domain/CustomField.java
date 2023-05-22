@@ -26,6 +26,17 @@ public class CustomField {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<CustomOption> options = new ArrayList<>();
 
+    @Column(name = "order_num")
+    private Integer orderNum;
+
+    public Integer getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(Integer orderNum) {
+        this.orderNum = orderNum;
+    }
+
     public State getState() {
         return state;
     }
