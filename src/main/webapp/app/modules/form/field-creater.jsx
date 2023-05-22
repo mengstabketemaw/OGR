@@ -20,6 +20,7 @@ const FieldCreater = (param) =>{
     "placeholder":"",
     "fieldType":{},
     "state": {...state},
+    "orderNum":null,
     "options":[],
     "newId":nanoid()
   }

@@ -17,6 +17,7 @@ public class CustomForm {
     private String title;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OrderBy("orderNum asc")
     @JoinColumn(name = "form_id")
     private Set<CustomField> fields = new HashSet<>();
 

@@ -43,7 +43,13 @@ const FieldCreaterModal=(props)=>{
                 name="placeholder"
                 label="Placeholder"//{translate('login.form.password')}
                 //placeholder="add placeholder"
-                required
+
+              />
+              <ValidatedField
+                name="orderNum"
+                type="number"
+                label="Order"//{translate('login.form.rememberme')}
+
               />
               <ValidatedField
                 name="required"
@@ -53,6 +59,7 @@ const FieldCreaterModal=(props)=>{
                 value={true}
 
               />
+
               <ValidatedField type="select" name="fieldType" label="Field Type" onChange={handleFieldTypesClick}
               >
                 {fieldTypes.map((f,i) => (
