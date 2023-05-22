@@ -192,7 +192,8 @@ const UpdateDynamicFields = ({data}) =>{
           </CardHeader>
     <ValidatedForm>
         {
-          data.form.fields.map(
+          data.form.fields.filter(field => field.state.id === 0)
+            .map(
             field => field.fieldType.name === "select" ?
               <ValidatedField
                 key={field.id}
