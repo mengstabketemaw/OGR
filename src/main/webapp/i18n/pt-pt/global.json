@@ -2,6 +2,7 @@
   "global": {
     "title": "OGR",
     "browsehappy": "Está a usar um navegador <strong>desatualizado</strong>. Por favor <a href=\"http://browsehappy.com/?locale=pt_PT\">atualize o seu navegador</a> para ter uma experiência melhor.",
+    "applications": "Formulários",
     "menu": {
       "home": "Início",
       "compliance": "Monitoramento de Conformidade",
@@ -147,5 +148,26 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "© 2023 Sistema de Informação Regulamentar de Petróleo e Gás"
+  "footer": "© 2023 Sistema de Informação Regulamentar de Petróleo e Gás",
+  "table": {
+    "submittedDate": "Data de envio",
+    "user": "Do utilizador",
+    "type": "Tipo",
+    "stage": "Estágio",
+    "status": "Status",
+    "actions": "Ações",
+    "noData": "Não há dados",
+    "close": "Fechar",
+    "detail": "Detalhes"
+  },
+  "stats": {
+    "totalSubmissions": "Total de Envios",
+    "submittedThisMonth": "Enviado este mês",
+    "registeredAccounts": "Contas cadastradas",
+    "registeredToday": "Registrado hoje",
+    "requestToday": "PEDIDOS ENVIADOS HOJE",
+    "requestYesterday": "Enviado ontem",
+    "totalInspections": "INSPEÇÕES TOTAIS",
+    "inspThisMonth": "Inspeções agendadas para este mês"
+  }
 }

@@ -117,7 +117,7 @@ const Header = (props: IHeaderProps) => {
                 </NavLink>
               </NavItem>
             )}
-            {props.isAuthenticated && <ComplianceMonitoringUser />}
+            {props.isAuthenticated && !props.isAdmin && <ComplianceMonitoringUser />}
 
             {/* {props.isAuthenticated && <EntitiesMenu />} */}
             {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}

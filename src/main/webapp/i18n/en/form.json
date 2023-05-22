@@ -9,6 +9,15 @@
       "required": "Required",
       "type": "Type"
     },
-    "state": "State"
+    "add": "Add",
+    "back": "Back",
+    "save": "Save",
+    "state": "State",
+    "delete": "Delete"
+  },
+  "formModal": {
+    "fieldCreater": "Field Creater",
+    "order": "Order",
+    "fieldType": "Field Type"
   }
 }

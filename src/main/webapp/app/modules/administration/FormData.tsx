@@ -9,6 +9,7 @@ import moment from 'moment/moment';
 import CustomPagination from 'app/shared/common/CustomPagination';
 import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { DetailModal } from 'app/modules/home/user-home';
+import { Translate } from 'react-jhipster';
 
 const FormData = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -73,28 +74,54 @@ const FormData = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Submitted Date</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Stage</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">
+                      <Translate contentKey={'table.submittedDate'} />{' '}
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.user'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.type'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.stage'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.status'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.actions'} />
+                    </th>
                   </tr>
                 </thead>
               </Table>
-              <p className="align-self-center">There is no Data</p>
+              <p className="align-self-center">
+                <Translate contentKey={'table.noData'} />
+              </p>
             </>
           ) : (
             <>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Submitted Date</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Stage</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">
+                      <Translate contentKey={'table.submittedDate'} />{' '}
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.user'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.type'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.stage'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.status'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.actions'} />
+                    </th>
                   </tr>
                 </thead>
 

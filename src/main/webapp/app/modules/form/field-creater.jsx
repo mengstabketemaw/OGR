@@ -90,10 +90,10 @@ const FieldCreater = (param) =>{
 
     </Table>
       <div className="d-flex justify-content-end">
-        <Button color="primary" onClick={showModal} >
+        <Button color="primary mt-3" onClick={showModal} >
           <FontAwesomeIcon icon="add" />
           &nbsp;
-          Add
+          <Translate contentKey={'form.add'} />
         </Button>
       </div>
       <FieldCreaterModal showModal = {show}

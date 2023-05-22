@@ -78,7 +78,7 @@ const FormCreater = () => {
            <CardHeader className="border-0">
              <Row className="align-items-center">
                <div className="col">
-                 <h3 className="mb-0"><Translate contentKey="form.edit"> Edit a form</Translate></h3>
+                 <h3 className="mb-0"><Translate contentKey="form.edit"/></h3>
                </div>
              </Row>
            </CardHeader>

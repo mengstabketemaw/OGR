@@ -1,14 +1,23 @@
 {
   "form": {
     "title": "Title",
-    "edit": "Edit a form",
+    "edit": "Editar um formulário",
     "fields": {
-      "title": "Title",
-      "label": "Label",
+      "title": "Título",
+      "label": "Rótulo",
       "placeholder": "Placeholder",
-      "required": "Required",
-      "type": "Type"
+      "required": "Obrigatória",
+      "type": "Tipo"
     },
-    "state": "State"
+    "add": "Adicionar",
+    "back": "Back",
+    "save": "Save",
+    "state": "State",
+    "delete": "Excluir"
+  },
+  "formModal": {
+    "fieldCreater": "Criador de campo",
+    "order": "Ordem",
+    "fieldType": "Tipo de campo"
   }
 }

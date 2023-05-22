@@ -25,7 +25,7 @@ const FieldCreaterModal=(props)=>{
     <Modal isOpen={props.showModal} toggle={handleClose} backdrop="static" id="form-page" autoFocus={false}>
 
         <ModalHeader id="field-title" data-cy="fieldTitle" toggle={handleClose}>
-          Field Creater
+          <Translate contentKey={'formModal.fieldCreater'}/>
         </ModalHeader>
 
         <ModalBody>
@@ -33,7 +33,7 @@ const FieldCreaterModal=(props)=>{
           <ValidatedField
                 type="text"
                 name="label"
-                label="Label"//{translate('global.form.username.label')}
+                label={translate('form.fields.label')}
                 //placeholder="add label"//{translate('global.form.username.placeholder')}
                 required
 
@@ -41,26 +41,26 @@ const FieldCreaterModal=(props)=>{
               <ValidatedField
                 type="text"
                 name="placeholder"
-                label="Placeholder"//{translate('login.form.password')}
+                label={translate('form.fields.placeholder')}
                 //placeholder="add placeholder"
 
               />
               <ValidatedField
                 name="orderNum"
                 type="number"
-                label="Order"//{translate('login.form.rememberme')}
+                label={translate('formModal.order')}
 
               />
               <ValidatedField
                 name="required"
                 type="checkbox"
                 check
-                label="Required"//{translate('login.form.rememberme')}
+                label={translate('form.fields.required')}
                 value={true}
 
               />
 
-              <ValidatedField type="select" name="fieldType" label="Field Type" onChange={handleFieldTypesClick}
+              <ValidatedField type="select" name="fieldType" label={translate('formModal.fieldType')} onChange={handleFieldTypesClick}
               >
                 {fieldTypes.map((f,i) => (
                   <option value={JSON.stringify(f)} key={f.id}>
@@ -77,10 +77,10 @@ const FieldCreaterModal=(props)=>{
               <Translate contentKey="entity.action.cancel">Cancel</Translate>
             </Button>{' '}
             <Button color="primary" type="submit" >
-              Add
+              <Translate contentKey={'form.add'}/>
             </Button>{' '}
             <Button color="danger" onClick={()=>handleDelete(field.id)}>
-              Delete
+              <Translate contentKey={'form.delete'}/>
             </Button>
           </ValidatedForm>
 
