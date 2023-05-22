@@ -22,9 +22,10 @@ public class Licence {
 
     private Instant submittedDate = Instant.now();
 
-    private String stage = "undefined";
-
     private String status = "undefined";
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private State stage = new State(0L, "Form");
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LicenceFieldData> data = new ArrayList<>();
@@ -69,11 +70,11 @@ public class Licence {
         this.submittedDate = submittedDate;
     }
 
-    public String getStage() {
+    public State getStage() {
         return stage;
     }
 
-    public void setStage(String stage) {
+    public void setStage(State stage) {
         this.stage = stage;
     }
 

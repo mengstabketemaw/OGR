@@ -13,6 +13,13 @@ public class State {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    public State() {}
+
+    public State(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

@@ -7,27 +7,27 @@ import drill from './markers/drill.png';
 
 const point = new L.Icon({
   iconUrl: png,
-  iconSize: new L.Point(60, 70),
+  iconSize: new L.Point(30, 35),
 });
 
 const pipelineIcon = new L.Icon({
   iconUrl: pipeline,
-  iconSize: new L.Point(60, 70),
+  iconSize: new L.Point(30, 35),
 });
 
 const explorationIcon = new L.Icon({
   iconUrl: exploration,
-  iconSize: new L.Point(60, 70),
+  iconSize: new L.Point(30, 35),
 });
 
 const drillIcon = new L.Icon({
   iconUrl: air,
-  iconSize: new L.Point(60, 70),
+  iconSize: new L.Point(30, 35),
 });
 
 const airIcon = new L.Icon({
   iconUrl: drill,
-  iconSize: new L.Point(60, 70),
+  iconSize: new L.Point(30, 35),
 });
 function DoctorsIcon(username) {
   return new L.Icon({

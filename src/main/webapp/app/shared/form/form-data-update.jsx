@@ -175,6 +175,10 @@ const UpdateDynamicFields = ({data}) =>{
 
   const getFileName = name => {
     let fData = fieldData.find(fData => fData.label === name);
+    if(fData === undefined) {
+      setFieldData(prev => [...prev, getFieldDataTemplate(name)])
+      return "No file chosen";
+    }
     return fData.encodingFileType?.split('~')[0];
   }
 
@@ -183,7 +187,7 @@ const UpdateDynamicFields = ({data}) =>{
     <Row className="d-flex justify-content-center">
       <Col md="8">
         <Card className="shadow p-4">
-          <CardHeader className="border-0">
+          <CardHeader className="border-0 pl-0">
             <Row className="align-items-center">
               <div className="col">
                 <h3 className="mb-0">Edit Data</h3>
@@ -192,7 +196,8 @@ const UpdateDynamicFields = ({data}) =>{
           </CardHeader>
     <ValidatedForm>
         {
-          data.form.fields.map(
+          data.form.fields.filter(field => field.state?.id === 0)
+            .map(
             field => field.fieldType.name === "select" ?
               <ValidatedField
                 key={field.id}

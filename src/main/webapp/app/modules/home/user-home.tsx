@@ -109,7 +109,7 @@ const UserHome = () => {
                         <th>{moment(data.submittedDate).format('MMMM Do YYYY, h:mm:ss a')}</th>
                         <th>{data.form.title}</th>
                         <th>{data.form.type}</th>
-                        <th>{data.stage}</th>
+                        <th>{data.stage?.name || 'Form'}</th>
                         <th>{data.status}</th>
                         <th>
                           <Button
@@ -140,7 +140,7 @@ const UserHome = () => {
 };
 
 export const DetailModal = ({ id, formId, show, handleClose }) => {
-  const [data, setDate] = useState({ loading: true, data: { data: [] } });
+  const [data, setDate] = useState({ loading: true, data: { form: { fields: [] }, data: [] } });
   const nav = useNavigate();
 
   useEffect(() => {
@@ -150,6 +150,15 @@ export const DetailModal = ({ id, formId, show, handleClose }) => {
       .then(({ data }) => setDate({ loading: false, data }))
       .catch(console.log);
   }, [id]);
+
+  const getDataBasedOnState = () => {
+    if (data.data.data.length) {
+      return data.data.data.filter(fieldData =>
+        data.data?.form.fields.some(field => field.label === fieldData.label && field.state?.id === 0)
+      );
+    }
+    return [];
+  };
 
   return (
     <Modal isOpen={show} onClosed={handleClose}>
@@ -162,7 +171,7 @@ export const DetailModal = ({ id, formId, show, handleClose }) => {
             </Spinner>
           ) : (
             <>
-              <ShowFieldValue data={data.data?.data} />
+              <ShowFieldValue data={getDataBasedOnState()} />
             </>
           )}
         </Container>
