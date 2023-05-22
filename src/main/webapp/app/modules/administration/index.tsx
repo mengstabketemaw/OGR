@@ -8,6 +8,7 @@ import Health from './health/health';
 import Metrics from './metrics/metrics';
 import Configuration from './configuration/configuration';
 import Docs from './docs/docs';
+import GeoLocationLocator from 'app/modules/maps/GeoLocationLocator';
 
 const AdministrationRoutes = () => (
   <div>
@@ -18,6 +19,7 @@ const AdministrationRoutes = () => (
       <Route path="configuration" element={<Configuration />} />
       <Route path="logs" element={<Logs />} />
       <Route path="docs" element={<Docs />} />
+      <Route path="location" element={<GeoLocationLocator />} />
     </ErrorBoundaryRoutes>
   </div>
 );

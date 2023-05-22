@@ -23,6 +23,7 @@
       "admin": {
         "main": "Administration",
         "userManagement": "User management",
+        "locationReport": "Location Report",
         "tracker": "User tracker",
         "metrics": "Metrics",
         "health": "Health",

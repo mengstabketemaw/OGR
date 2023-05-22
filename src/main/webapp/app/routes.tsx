@@ -54,6 +54,8 @@ const AppRoutes = () => {
         <Route path="logout" element={<Logout />} />
         <Route path="permit" element={<Permit />} />
         <Route path="licence" element={<Licence />} />
+        {/*        <Route path="sequence" element={<TempLanding />} />*/}
+        <Route path="compliance" element={<ComplianceMonitoring />} />
         <Route path="sequence/:formId/:id" element={<SequenceLanding />} />
         <Route path="account">
           <Route

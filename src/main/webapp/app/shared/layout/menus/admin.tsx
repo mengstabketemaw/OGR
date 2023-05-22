@@ -4,11 +4,17 @@ import { DropdownItem } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavDropdown } from './menu-components';
 import { Translate, translate } from 'react-jhipster';
+import { IconName, IconPrefix } from '@fortawesome/fontawesome-common-types';
+import { faLocation, faMap } from '@fortawesome/free-solid-svg-icons';
 
 const adminMenuItems = () => (
   <>
     <MenuItem icon="users" to="/admin/user-management">
       <Translate contentKey="global.menu.admin.userManagement">User management</Translate>
+    </MenuItem>
+    <MenuItem icon={['fas', 'map-location']} to="/admin/location">
+      <FontAwesomeIcon icon={faMap} />
+      <Translate contentKey="global.menu.admin.locationReport">Location Report</Translate>
     </MenuItem>
     <MenuItem icon="tasks" to="/form/create">
       Form

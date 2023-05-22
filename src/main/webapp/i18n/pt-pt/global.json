@@ -23,6 +23,7 @@
       "admin": {
         "main": "Administração",
         "userManagement": "Gestão de utilizadores",
+        "locationReport": "vAtividade Lcasrtry",
         "tracker": "Atividade dos utilizadores",
         "metrics": "Métricas",
         "health": "Estado do Sistema",

@@ -5,8 +5,10 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -29,6 +31,10 @@ public interface LicenceRepository extends PagingAndSortingRepository<Licence, L
     Page<Licence> findDistinctByForm_Type(String type, Pageable pageable);
 
     Page<Licence> findDistinctByForm_Id(Long id, Pageable pageable);
+
+    @EntityGraph(attributePaths = { "user", "form.fields", "data.fieldType" })
+    @Query("select l from Licence l left join fetch l.data left join fetch l.form")
+    Stream<Licence> findAllForLocation();
 
     @Query("select l from Licence l where l.user.id = ?1")
     Page<Licence> findByUser_Id(Long id, Pageable pageable);

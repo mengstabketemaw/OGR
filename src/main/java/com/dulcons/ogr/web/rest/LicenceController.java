@@ -2,15 +2,18 @@ package com.dulcons.ogr.web.rest;
 
 import com.dulcons.ogr.domain.Compliance;
 import com.dulcons.ogr.domain.Licence;
+import com.dulcons.ogr.domain.LicenceFieldData;
 import com.dulcons.ogr.domain.User;
 import com.dulcons.ogr.repository.ComplianceRepository;
 import com.dulcons.ogr.repository.LicenceRepository;
 import com.dulcons.ogr.service.UserService;
-import java.util.HashMap;
+import com.dulcons.ogr.web.rest.vm.LocationFormDto;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -70,6 +73,36 @@ public class LicenceController {
     public Page<Licence> getDataByUserId(Pageable page) {
         User user = userService.getUserWithAuthorities().orElseThrow();
         return licenceRepository.findByUser_Id(user.getId(), page);
+    }
+
+    @GetMapping("/location")
+    @Transactional
+    public List<LocationFormDto> getAllLicenceWithLocation() {
+        return licenceRepository
+            .findAllForLocation()
+            .filter(licence ->
+                licence.getForm().getFields().stream().anyMatch(customField -> customField.getFieldType().getName().equals("location"))
+            )
+            .map(licence -> {
+                LocationFormDto locationFormDto = new LocationFormDto();
+                locationFormDto.setId(licence.getId());
+                locationFormDto.setTitle(licence.getForm().getTitle());
+                locationFormDto.setType(licence.getForm().getType());
+                locationFormDto.setUserId(licence.getUser().getId());
+                locationFormDto.setLogin(licence.getUser().getLogin());
+                locationFormDto.setFullName(licence.getUser().getFirstName() + " " + licence.getUser().getLastName());
+                locationFormDto.setLocation(
+                    licence
+                        .getData()
+                        .stream()
+                        .filter(licenceFieldData -> licenceFieldData.getFieldType().getName().equals("location"))
+                        .findFirst()
+                        .orElse(new LicenceFieldData())
+                        .getText()
+                );
+                return locationFormDto;
+            })
+            .collect(Collectors.toList());
     }
 
     @GetMapping("/user")

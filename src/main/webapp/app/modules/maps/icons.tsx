@@ -1,11 +1,34 @@
 import L from 'leaflet';
 import png from './po.png';
+import pipeline from './markers/pipeline.png';
+import exploration from './markers/exploration.png';
+import air from './markers/air.png';
+import drill from './markers/drill.png';
 
 const point = new L.Icon({
   iconUrl: png,
   iconSize: new L.Point(60, 70),
 });
 
+const pipelineIcon = new L.Icon({
+  iconUrl: pipeline,
+  iconSize: new L.Point(60, 70),
+});
+
+const explorationIcon = new L.Icon({
+  iconUrl: exploration,
+  iconSize: new L.Point(60, 70),
+});
+
+const drillIcon = new L.Icon({
+  iconUrl: air,
+  iconSize: new L.Point(60, 70),
+});
+
+const airIcon = new L.Icon({
+  iconUrl: drill,
+  iconSize: new L.Point(60, 70),
+});
 function DoctorsIcon(username) {
   return new L.Icon({
     iconUrl: `${'Config.USER_URL'}/avatar/${username}`,
@@ -17,4 +40,4 @@ function DoctorsIcon(username) {
 
 export default DoctorsIcon;
 
-export { point };
+export { point, pipelineIcon, explorationIcon, airIcon, drillIcon };
