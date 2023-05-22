@@ -101,7 +101,7 @@ export const AdminDashboardTable = ({ type }) => {
                       <th>{moment(data.submittedDate).format('MMMM Do YYYY, h:mm:ss a')}</th>
                       <th>{data.user.firstName}</th>
                       <th>{data.form.title}</th>
-                      <th>{data.stage}</th>
+                      <th>{data.stage?.name || 'Form'}</th>
                       <th>{data.status}</th>
                       <th>
                         <Button color="primary" onClick={e => setDetailModal({ show: true, id: data.id })} size="sm">

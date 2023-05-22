@@ -19,7 +19,7 @@ public class CustomField {
     private Boolean required;
     private String placeholder;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "state_id", nullable = false)
     private State state;
 
