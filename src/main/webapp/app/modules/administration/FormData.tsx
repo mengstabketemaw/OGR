@@ -104,14 +104,19 @@ const FormData = () => {
                       <th>{moment(data.submittedDate).format('MMMM Do YYYY, h:mm:ss a')}</th>
                       <th>{data.user.firstName}</th>
                       <th>{data.form.title}</th>
-                      <th>{data.stage}</th>
+                      <th>{data.stage?.name || 'Form'}</th>
                       <th>{data.status}</th>
                       <th>
                         <Button color="primary" onClick={e => setDetailModal({ show: true, id: data.id, formId: data.form.id })} size="sm">
                           View
                         </Button>
 
-                        <Button color="secondary" onClick={e => nav('/dataUpdate/' + data.id)} size="sm">
+                        <Button
+                          color="secondary"
+                          onClick={e => nav('/dataUpdate/' + data.id)}
+                          disabled={!(data.stage?.id === 0 || data.stage === null)}
+                          size="sm"
+                        >
                           Update
                         </Button>
                       </th>

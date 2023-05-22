@@ -66,7 +66,7 @@ const UserHome = () => {
                         <th>{moment(data.submittedDate).format('MMMM Do YYYY, h:mm:ss a')}</th>
                         <th>{data.form.title}</th>
                         <th>{data.form.type}</th>
-                        <th>{data.stage}</th>
+                        <th>{data.stage?.name || 'Form'}</th>
                         <th>{data.status}</th>
                         <th>
                           <Button

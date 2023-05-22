@@ -29,7 +29,8 @@ const DynamicFields = props =>{
       })
       }/>
     <ValidatedForm onSubmit={handlevalue} defaultValues={defaultValue} >
-      {fields && fields.map( f => f.fieldType.name === "select" ?
+      {fields && fields.filter(field => field.state?.id === 0)
+        .map( f => f.fieldType.name === "select" ?
         <ValidatedField
           type={f.fieldType.name}
           name={f.label}
