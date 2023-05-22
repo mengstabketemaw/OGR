@@ -66,7 +66,7 @@ const FormCreater = () => {
     const valueToSend = {...values}
     valueToSend.fields = [...valueToSend.fields,...Object.values(otherStateFields)];
     dispatch(updateForm(valueToSend)).then(()=>{
-      dispatch(getFormType())
+      //dispatch(getFormType())
       toast.success("Form Saved")}
     );
   }
