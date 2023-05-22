@@ -11,10 +11,10 @@ import {isArray} from "lodash";
 const DynamicFields = props =>{
   const nav = useNavigate();
   const [locationModal,setLocationModal] = useState({show: false, value:""});
-  const {fields, defaultValue, handleSubmit,formatValue} = props;
+  const {fields, defaultValue, handleSubmit,formatValue,currentFields= null,licence_id = null} = props;
 
   const handlevalue = async (value) => {
-    const formattedValue = await formatValue(value, fields);
+    const formattedValue = await formatValue(value, fields,currentFields,licence_id);
     handleSubmit(formattedValue);
   }
 

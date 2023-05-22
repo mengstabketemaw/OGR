@@ -1,25 +1,33 @@
 import moment from 'moment';
 
-export const formatValue = async (values, fields, c, f) => {
+export const formatValue = async (values, fields, currentFields, licence_id) => {
+  let dataId = null;
   let valueToSend = [];
   await Promise.all(
     Object.keys(values).map(async key => {
-      const fieldType = fields.filter(f => f.label === key)[0].fieldType;
+      const field = fields.filter(f => f.label === key)[0];
+      if (currentFields != null && currentFields.length > 0) {
+        dataId = currentFields.filter(d => d.label === key)[0].id;
+      }
+      const fieldType = field.fieldType;
+      const custom_field_id = field.id;
       const label = key;
       const value = values[key];
-      const fieldValue = await fieldFill(value, fieldType.name, fieldType, label);
+      const fieldValue = await fieldFill(value, fieldType.name, custom_field_id, label, dataId, licence_id);
       valueToSend.push(fieldValue);
     })
   );
   return valueToSend;
 };
 
-const fieldFill = async (val, field, fieldType, label) => {
+const fieldFill = async (val, field, custom_field_id, label, dataId, licence_id) => {
   switch (field) {
     case 'location':
     case 'text':
       return {
-        fieldType: fieldType,
+        id: dataId,
+        customFieldId: custom_field_id,
+        licenceId: licence_id,
         label: label,
         text: val,
         dropDown: null,
@@ -31,7 +39,9 @@ const fieldFill = async (val, field, fieldType, label) => {
       };
     case 'select':
       return {
-        fieldType: fieldType,
+        id: dataId,
+        customFieldId: custom_field_id,
+        licenceId: licence_id,
         label: label,
         text: null,
         dropDown: val,
@@ -43,7 +53,9 @@ const fieldFill = async (val, field, fieldType, label) => {
       };
     case 'date':
       return {
-        fieldType: fieldType,
+        id: dataId,
+        customFieldId: custom_field_id,
+        licenceId: licence_id,
         label: label,
         text: null,
         dropDown: null,
@@ -55,7 +67,9 @@ const fieldFill = async (val, field, fieldType, label) => {
       };
     case 'checkbox':
       return {
-        fieldType: fieldType,
+        id: dataId,
+        customFieldId: custom_field_id,
+        licenceId: licence_id,
         label: label,
         text: null,
         dropDown: null,
@@ -67,7 +81,9 @@ const fieldFill = async (val, field, fieldType, label) => {
       };
     case 'datetime-local':
       return {
-        fieldType: fieldType,
+        id: dataId,
+        customFieldId: custom_field_id,
+        licenceId: licence_id,
         label: label,
         text: null,
         dropDown: null,
@@ -81,7 +97,9 @@ const fieldFill = async (val, field, fieldType, label) => {
       const base64 = await convertFileToBase64(val[0]);
 
       return {
-        fieldType: fieldType,
+        id: dataId,
+        customFieldId: custom_field_id,
+        licenceId: licence_id,
         label: label,
         text: null,
         dropDown: null,
@@ -92,6 +110,32 @@ const fieldFill = async (val, field, fieldType, label) => {
         encodingFileType: val[0].name + '~' + base64.split(',')[0],
       };
   }
+};
+
+export const getFieldValue = list => {
+  var val = {};
+  if (list && list.length > 0) {
+    for (var item of list) {
+      val[item.label] = getValue(item);
+    }
+  }
+  return val;
+};
+
+const getValue = value => {
+  return value.text
+    ? value.text
+    : value.dropdown
+    ? value.dropdown
+    : value.date
+    ? value.date
+    : value.dateAndTime
+    ? value.dateAndTime
+    : value.checkBoxId
+    ? value.checkBoxId
+    : value.file
+    ? value.file
+    : value.encodingFileType;
 };
 
 export async function convertFileToBase64(file) {
