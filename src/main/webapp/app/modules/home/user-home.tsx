@@ -7,6 +7,7 @@ import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { useNavigate } from 'react-router-dom';
 import { getWorkflowByForm } from 'app/modules/licence/license.reducer';
 import { useAppDispatch } from 'app/config/store';
+import { Translate } from 'react-jhipster';
 
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
@@ -28,7 +29,9 @@ const UserHome = () => {
               <CardHeader className="border-0">
                 <Row className="align-items-center">
                   <div className="col">
-                    <h3 className="mb-0">Applications</h3>
+                    <h3 className="mb-0">
+                      <Translate contentKey={'global.applications'} />
+                    </h3>
                   </div>
                 </Row>
               </CardHeader>
@@ -46,17 +49,57 @@ const UserHome = () => {
                   Loading...
                 </Spinner>
               ) : !isArray(applications.data.content) || applications.data?.content.length === 0 ? (
-                <p>There is no Data</p>
+                <>
+                  <Table className="align-items-center table-flush" responsive>
+                    <thead className="thead-light">
+                      <tr>
+                        <th scope="col">
+                          <Translate contentKey={'table.submittedDate'} />{' '}
+                        </th>
+                        <th scope="col">
+                          <Translate contentKey={'table.user'} />
+                        </th>
+                        <th scope="col">
+                          <Translate contentKey={'table.type'} />
+                        </th>
+                        <th scope="col">
+                          <Translate contentKey={'table.stage'} />
+                        </th>
+                        <th scope="col">
+                          <Translate contentKey={'table.status'} />
+                        </th>
+                        <th scope="col">
+                          <Translate contentKey={'table.actions'} />
+                        </th>
+                      </tr>
+                    </thead>
+                  </Table>
+                  <p className="align-self-center">
+                    <Translate contentKey={'table.noData'} />
+                  </p>
+                </>
               ) : (
                 <Table className="align-items-center table-flush" responsive>
                   <thead className="thead-light">
                     <tr>
-                      <th scope="col">Submitted Date</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Type</th>
-                      <th scope="col">Stage</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Actions</th>
+                      <th scope="col">
+                        <Translate contentKey={'table.submittedDate'} />{' '}
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.user'} />
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.type'} />
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.stage'} />
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.status'} />
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.actions'} />
+                      </th>
                     </tr>
                   </thead>
 
@@ -74,7 +117,7 @@ const UserHome = () => {
                             onClick={e => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
                             size="sm"
                           >
-                            View
+                            <Translate contentKey={'entity.action.view'} />
                           </Button>
                         </th>
                       </tr>

@@ -70,28 +70,54 @@ export const AdminDashboardTable = ({ type }) => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Submitted Date</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Stage</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">
+                      <Translate contentKey={'table.submittedDate'} />{' '}
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.user'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.type'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.stage'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.status'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.actions'} />
+                    </th>
                   </tr>
                 </thead>
               </Table>
-              <p className="align-self-center">There is no Data</p>
+              <p className="align-self-center">
+                <Translate contentKey={'table.noData'} />
+              </p>
             </>
           ) : (
             <>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Submitted Date</th>
-                    <th scope="col">User</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Stage</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">
+                      <Translate contentKey={'table.submittedDate'} />{' '}
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.user'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.type'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.stage'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.status'} />
+                    </th>
+                    <th scope="col">
+                      <Translate contentKey={'table.actions'} />
+                    </th>
                   </tr>
                 </thead>
 
@@ -105,7 +131,7 @@ export const AdminDashboardTable = ({ type }) => {
                       <th>{data.status}</th>
                       <th>
                         <Button color="primary" onClick={e => setDetailModal({ show: true, id: data.id })} size="sm">
-                          View
+                          <Translate contentKey={'entity.action.view'} />
                         </Button>
                       </th>
                     </tr>
@@ -136,7 +162,9 @@ const DetailModal = ({ id, show, handleClose }) => {
 
   return (
     <Modal isOpen={show} onClosed={handleClose}>
-      <ModalHeader>Detail</ModalHeader>
+      <ModalHeader>
+        <Translate contentKey={'table.detail'} />{' '}
+      </ModalHeader>
       <ModalBody>
         <Container className="p--5 d-flex flex-column justify-content-center">
           {data.loading ? (
@@ -151,7 +179,9 @@ const DetailModal = ({ id, show, handleClose }) => {
         </Container>
       </ModalBody>
       <ModalFooter>
-        <Button onClick={handleClose}>Close</Button>
+        <Button onClick={handleClose}>
+          <Translate contentKey={'table.close'} />{' '}
+        </Button>
       </ModalFooter>
     </Modal>
   );

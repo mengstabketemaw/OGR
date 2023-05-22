@@ -22,6 +22,7 @@ import { Card, CardBody, CardTitle, Container, Row, Col, Spinner } from 'reactst
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarPlus, faDownload, faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import { Translate } from 'react-jhipster';
 
 const Header = () => {
   const [stats, setStats] = useState({ loading: true, data: {} });
@@ -46,7 +47,7 @@ const Header = () => {
                     <Row>
                       <div className="col">
                         <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
-                          Total Submissions
+                          <Translate contentKey={'stats.totalSubmissions'} />
                         </CardTitle>
 
                         {stats.loading ? (
@@ -75,7 +76,9 @@ const Header = () => {
                       <span className="text-success font-weight-bold mr-2">
                         <i className="fa fa-plus" /> {stats.data?.thisMonthSubmissions}
                       </span>{' '}
-                      <span className="text-nowrap">Submitted this month</span>
+                      <span className="text-nowrap">
+                        <Translate contentKey={'stats.submittedThisMonth'} />
+                      </span>
                     </p>
                   </CardBody>
                 </Card>
@@ -86,7 +89,7 @@ const Header = () => {
                     <Row>
                       <div className="col">
                         <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
-                          Registered Accounts
+                          <Translate contentKey={'stats.registeredAccounts'} />
                         </CardTitle>
                         {stats.loading ? (
                           <Spinner
@@ -114,7 +117,9 @@ const Header = () => {
                       <span className="text-danger  font-weight-bold  mr-2">
                         <i className="fas fa-arrow-down" /> {stats.data?.totalUserToday}
                       </span>{' '}
-                      <span className="text-nowrap">Registered today</span>
+                      <span className="text-nowrap">
+                        <Translate contentKey={'stats.registeredToday'} />
+                      </span>
                     </p>
                   </CardBody>
                 </Card>
@@ -125,7 +130,7 @@ const Header = () => {
                     <Row>
                       <div className="col">
                         <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
-                          Requests Submitted Today
+                          <Translate contentKey={'stats.requestToday'} />
                         </CardTitle>
                         {stats.loading ? (
                           <Spinner
@@ -154,7 +159,9 @@ const Header = () => {
                         <i className="fas fa-arrow-down" />
                         {stats.data?.yesterdaysSubmissions}
                       </span>{' '}
-                      <span className="text-nowrap">Submitted yesterday</span>
+                      <span className="text-nowrap">
+                        <Translate contentKey={'stats.requestYesterday'} />
+                      </span>
                     </p>
                   </CardBody>
                 </Card>
@@ -165,7 +172,7 @@ const Header = () => {
                     <Row>
                       <div className="col">
                         <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
-                          Total Inspections
+                          <Translate contentKey={'stats.totalInspections'} />
                         </CardTitle>
 
                         {stats.loading ? (
@@ -194,7 +201,9 @@ const Header = () => {
                       <span className="text-success font-weight-bold mr-2">
                         <i className="fa fa-plus" /> {stats.data?.inspectionThisMonth}
                       </span>{' '}
-                      <span className="text-nowrap">Scheduled Inspections this month</span>
+                      <span className="text-nowrap">
+                        <Translate contentKey={'stats.inspThisMonth'} />
+                      </span>
                     </p>
                   </CardBody>
                 </Card>

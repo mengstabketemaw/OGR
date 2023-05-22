@@ -48,6 +48,7 @@
       "email.label": "Email",
       "email.placeholder": "Your email"
     },
+    "applications": "Applications",
     "messages": {
       "info": {
         "authenticated": {
@@ -148,5 +149,26 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "© 2023 Oil and Gas Regulatory Information System"
+  "footer": "© 2023 Oil and Gas Regulatory Information System",
+  "table": {
+    "submittedDate": "Submitted Date",
+    "user": "User",
+    "type": "Type",
+    "stage": "Stage",
+    "status": "Status",
+    "actions": "Actions",
+    "noData": "There is no Data",
+    "close": "Close",
+    "detail": "Details"
+  },
+  "stats": {
+    "totalSubmissions": "Total Submissions",
+    "submittedThisMonth": "Submitted this month",
+    "registeredAccounts": "Registered Accounts",
+    "registeredToday": "Registered Today",
+    "requestToday": "REQUESTS SUBMITTED TODAY",
+    "requestYesterday": "Submitted yesterday",
+    "totalInspections": "TOTAL INSPECTIONS",
+    "inspThisMonth": "Scheduled Inspections this month"
+  }
 }
