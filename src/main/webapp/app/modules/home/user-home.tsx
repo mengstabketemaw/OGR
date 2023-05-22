@@ -71,7 +71,6 @@ const UserHome = () => {
                         <th>
                           <Button
                             color="primary"
-                            href="#details"
                             onClick={e => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
                             size="sm"
                           >
