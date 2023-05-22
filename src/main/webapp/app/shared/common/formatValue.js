@@ -16,6 +16,7 @@ export const formatValue = async (values, fields) => {
 
 const fieldFill = async (val, field, fieldType, label) => {
   switch (field) {
+    case 'textarea':
     case 'location':
     case 'text':
       return {
