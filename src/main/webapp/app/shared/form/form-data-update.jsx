@@ -175,6 +175,10 @@ const UpdateDynamicFields = ({data}) =>{
 
   const getFileName = name => {
     let fData = fieldData.find(fData => fData.label === name);
+    if(fData === undefined) {
+      setFieldData(prev => [...prev, getFieldDataTemplate(name)])
+      return "No file chosen";
+    }
     return fData.encodingFileType?.split('~')[0];
   }
 

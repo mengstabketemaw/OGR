@@ -5,3 +5,6 @@ id;name;display
 4;date;Date
 5;checkbox;Check-box
 6;datetime-local;Date and Time
+7;file;File
+8;location;Location
+9;textarea;Text Area
