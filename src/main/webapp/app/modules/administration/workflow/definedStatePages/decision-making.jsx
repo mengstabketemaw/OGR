@@ -40,7 +40,7 @@ export const DecisionMaking = (params) => {
     <>
       <Col  md="8" className={"container"} >
         <div className="d-flex ">
-          <h1> Initial Review</h1>
+          <h1> Decision Making</h1>
         </div>
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}

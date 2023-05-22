@@ -40,7 +40,7 @@ export const TechnicalReview = (params) => {
     <>
       <Col  md="8" className={"container"} >
         <div className="d-flex ">
-          <h1> Initial Review</h1>
+          <h1> Technical Review</h1>
         </div>
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}
