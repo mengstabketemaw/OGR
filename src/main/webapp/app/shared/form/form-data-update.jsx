@@ -83,7 +83,7 @@ function getValue(fieldData) {
   return undefined;
 }
 
-const UpdateDynamicFields = ({data}) =>{
+export const UpdateDynamicFields = ({data}) =>{
   const [fieldData, setFieldData] = useState(data.data)
   const nav = useNavigate();
   const [locationModal,setLocationModal] = useState({show: false, label:undefined});
@@ -184,16 +184,7 @@ const UpdateDynamicFields = ({data}) =>{
 
 
   return(<>
-    <Row className="d-flex justify-content-center">
-      <Col md="8">
-        <Card className="shadow p-4">
-          <CardHeader className="border-0 pl-0">
-            <Row className="align-items-center">
-              <div className="col">
-                <h3 className="mb-0">Edit Data</h3>
-              </div>
-            </Row>
-          </CardHeader>
+
     <ValidatedForm>
         {
           data.form.fields.filter(field => field.state?.id === 0)
@@ -276,9 +267,7 @@ const UpdateDynamicFields = ({data}) =>{
           show: false,
         })
       }/>
-        </Card>
-      </Col>
-    </Row>
+
     </>
   )
 }
