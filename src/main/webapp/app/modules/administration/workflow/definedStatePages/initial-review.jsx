@@ -2,7 +2,6 @@ import React, {useContext, useEffect} from "react";
 import {
   getFieldsByState,
   getFieldsDataByLicence,
-  c,
   createInitialReview
 } from "app/modules/administration/workflow/workflow.reducer";
 import {Link, useParams} from "react-router-dom";
@@ -11,6 +10,7 @@ import {useAppDispatch, useAppSelector} from "app/config/store";
 import DynamicFields from "app/shared/common/dynamicFields";
 import {formatValue,getFieldValue} from "app/shared/common/formatValueWithCustomField";
 import {Button, Col, Spinner} from "reactstrap";
+import {toast} from "react-toastify";
 
 export const InitialReview = (params) => {
   const stateKey = 1;
@@ -31,7 +31,9 @@ export const InitialReview = (params) => {
   }, []);
   const handleSumbit = (values) =>{
     console.log(values)
-    dispatch(createInitialReview(values))
+    dispatch(createInitialReview(values)).then(
+      toast.success("Initial Review Saved")
+    )
   }
   return (
 

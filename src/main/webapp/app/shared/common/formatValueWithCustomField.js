@@ -7,7 +7,7 @@ export const formatValue = async (values, fields, currentFields, licence_id) => 
     Object.keys(values).map(async key => {
       const field = fields.filter(f => f.label === key)[0];
       if (currentFields != null && currentFields.length > 0) {
-        dataId = currentFields.filter(d => d.label === key)[0].id;
+        dataId = currentFields.filter(d => d.label === key)[0]?.id || null;
       }
       const fieldType = field.fieldType;
       const custom_field_id = field.id;

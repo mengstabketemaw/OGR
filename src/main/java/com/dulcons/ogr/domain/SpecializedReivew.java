@@ -1,25 +1,55 @@
 package com.dulcons.ogr.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.time.Instant;
+import javax.persistence.*;
+import org.hibernate.annotations.Type;
 
-/**
- * DTO for {@link InitialReview}
- */
-public class InitialReviewDto implements Serializable {
+@Entity
+public class SpecializedReivew {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private Long id;
+
     private String label;
     private String text;
     private String dropDown;
     private Date date;
     private Instant dateAndTime;
     private Integer checkBoxId;
+
+    @Column(columnDefinition = "LONGBLOB", length = 2147483647)
+    @Type(type = "org.hibernate.type.BinaryType")
+    @Lob
     private byte[] file;
+
     private String encodingFileType;
-    private Long customFieldId;
-    private Long licenceId;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "custom_field_id", nullable = false)
+    private CustomField customField;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "licence_id", nullable = false)
+    private Licence licence;
+
+    public Licence getLicence() {
+        return licence;
+    }
+
+    public void setLicence(Licence licence) {
+        this.licence = licence;
+    }
+
+    public CustomField getCustomField() {
+        return customField;
+    }
+
+    public void setCustomField(CustomField customField) {
+        this.customField = customField;
+    }
 
     public Long getId() {
         return id;
@@ -91,21 +121,5 @@ public class InitialReviewDto implements Serializable {
 
     public void setEncodingFileType(String encodingFileType) {
         this.encodingFileType = encodingFileType;
-    }
-
-    public Long getCustomFieldId() {
-        return customFieldId;
-    }
-
-    public void setCustomFieldId(Long customFieldId) {
-        this.customFieldId = customFieldId;
-    }
-
-    public Long getLicenceId() {
-        return licenceId;
-    }
-
-    public void setLicenceId(Long licenceId) {
-        this.licenceId = licenceId;
     }
 }

@@ -1,7 +1,7 @@
 package com.dulcons.ogr.web.rest;
 
 import com.dulcons.ogr.domain.InitialReview;
-import com.dulcons.ogr.domain.InitialReviewDto;
+import com.dulcons.ogr.domain.mapper.InitialReviewDto;
 import com.dulcons.ogr.domain.mapper.InitialReviewMapper;
 import com.dulcons.ogr.repository.InitialReviewRepository;
 import java.util.List;
