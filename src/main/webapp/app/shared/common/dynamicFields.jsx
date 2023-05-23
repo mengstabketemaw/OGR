@@ -85,7 +85,6 @@ const GeoLocationChooser = ({showModal, handleClose,setValue}) => {
       toggle={handleClose}
       backdrop="static"
       autoFocus={false}
-      className={"geo-locator-modal col-lg-12"}
     >
       <ModalHeader><Translate contentKey="map.geoLocator">Save</Translate></ModalHeader>
       <ModalBody>

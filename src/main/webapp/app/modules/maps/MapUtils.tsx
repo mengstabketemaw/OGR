@@ -60,44 +60,28 @@ const ChooseLocation = ({ setLocation }) => {
   // @ts-ignore
   // @ts-ignore
   return (
-    <>
-      <div
-        style={{
-          height: 'fit-content',
-          padding: '30px',
-          width: '700px',
-          border: '2px solid black',
-          flexGrow: 1,
-        }}
-      >
-        <Label variant="h6" color="InfoText">
-          <Translate contentKey={'map.chooseLocation'} />
-        </Label>
-        <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
-          <div
-            style={{
-              height: '300px',
-              width: '500px',
-              margin: '10px',
-              border: '2px solid black',
-            }}
-          >
-            <MapContainer style={{ height: '100%' }} center={[9.0079232, 38.7678208]} zoom={15} scrollWheelZoom={true}>
-              <MapTiles />
-              <UserMarkerExp ref={child} />
-            </MapContainer>
-          </div>
-          <div>
-            <Button onClick={handleReset}>
-              <Translate contentKey={'entity.action.rest'} />
-            </Button>
-            <Button onClick={handleSave} color="primary">
-              <Translate contentKey={'entity.action.save'} />
-            </Button>
-          </div>
-        </div>
+    <div
+      style={{
+        height: '500px',
+      }}
+    >
+      <Label variant="h6" color="InfoText">
+        <Translate contentKey={'map.chooseLocation'} />
+      </Label>
+
+      <MapContainer style={{ height: '100%' }} center={[9.0079232, 38.7678208]} zoom={15} scrollWheelZoom={true}>
+        <MapTiles />
+        <UserMarkerExp ref={child} />
+      </MapContainer>
+      <div>
+        <Button onClick={handleReset}>
+          <Translate contentKey={'entity.action.rest'} />
+        </Button>
+        <Button onClick={handleSave} color="primary">
+          <Translate contentKey={'entity.action.save'} />
+        </Button>
       </div>
-    </>
+    </div>
   );
 };
 
