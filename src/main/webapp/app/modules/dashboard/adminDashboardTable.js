@@ -8,6 +8,7 @@ import moment from 'moment';
 import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { Translate } from 'react-jhipster';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
+import { DetailModal } from 'app/modules/home/user-home';
 
 const PAGE_SIZE = ITEMS_PER_PAGE;
 export const AdminDashboardTable = ({ type }) => {
@@ -146,44 +147,6 @@ export const AdminDashboardTable = ({ type }) => {
       </Col>
       <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
     </>
-  );
-};
-
-const DetailModal = ({ id, show, handleClose }) => {
-  const [data, setDate] = useState({ loading: true, data: { data: [] } });
-
-  useEffect(() => {
-    if (id === -1) return;
-    axios
-      .get('/api/licence/' + id)
-      .then(({ data }) => setDate({ loading: false, data }))
-      .catch(console.log);
-  }, [id]);
-
-  return (
-    <Modal isOpen={show} onClosed={handleClose}>
-      <ModalHeader>
-        <Translate contentKey={'table.detail'} />{' '}
-      </ModalHeader>
-      <ModalBody>
-        <Container className="p--5 d-flex flex-column justify-content-center">
-          {data.loading ? (
-            <Spinner className="align-self-center" color="primary" style={{ height: '3rem', width: '3rem' }} type="grow">
-              Loading...
-            </Spinner>
-          ) : (
-            <>
-              <ShowFieldValue data={data.data?.data} />
-            </>
-          )}
-        </Container>
-      </ModalBody>
-      <ModalFooter>
-        <Button onClick={handleClose}>
-          <Translate contentKey={'table.close'} />{' '}
-        </Button>
-      </ModalFooter>
-    </Modal>
   );
 };
 
