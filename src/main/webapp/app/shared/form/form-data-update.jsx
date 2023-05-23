@@ -19,6 +19,7 @@ import ChooseLocation from "app/modules/maps/MapUtils";
 import axios from "axios";
 import {convertFileToBase64} from "app/shared/common/formatValue";
 import moment from "moment";
+import {toast} from "react-toastify";
 
 function getFieldValueName(type){
   switch (type) {
@@ -119,9 +120,12 @@ export const UpdateDynamicFields = ({data}) =>{
       ...data,
       data: fieldData
     }).then(()=> {
+      toast.success(<Translate contentKey={'toaster.success'}/>);
       nav(-1);
+    }).catch(e=>{
+      toast.error(<Translate contentKey={'toaster.error'}/>);
     })
-    console.log(fieldData)
+    // console.log(fieldData)
   }
 
   const getOnChangeHandler = name => {

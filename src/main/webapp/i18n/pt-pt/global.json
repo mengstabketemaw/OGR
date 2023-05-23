@@ -176,5 +176,10 @@
     "report": "Localização de Licenças e Permissões",
     "chooseLocation": "Escolha sua localização arrastando o marcador",
     "addLocation": "Clique aqui para adicionar localização"
+  },
+  "toaster": {
+    "success": "Operação com sucesso",
+    "update": "Dados atualizados com sucesso",
+    "error": "há erro"
   }
 }

@@ -177,5 +177,10 @@
     "report": "Licenses and Permits Location",
     "chooseLocation": "Choose Your Location By Dragging the Marker",
     "addLocation": "Click here to add location"
+  },
+  "toaster": {
+    "success": "Operation Successfully",
+    "update": "Data is updated Successfully",
+    "error": "There is something wrong"
   }
 }

@@ -127,7 +127,7 @@ const UserHome = () => {
                             disabled={!(data.stage?.id === 0 || data.stage === null)}
                             size="sm"
                           >
-                            Update
+                            <Translate contentKey={'entity.action.edit'} />
                           </Button>
                         </th>
                       </tr>
