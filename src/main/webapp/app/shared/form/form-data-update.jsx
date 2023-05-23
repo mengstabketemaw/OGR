@@ -22,6 +22,7 @@ import moment from "moment";
 
 function getFieldValueName(type){
   switch (type) {
+    case "textarea":
     case 'location':
     case 'text':
       return "text"
@@ -67,6 +68,7 @@ function getValue(fieldData) {
 
   switch (fieldData?.fieldType.name) {
     case 'location':
+    case 'textarea':
     case 'text':
       return fieldData.text
     case 'select':
@@ -127,7 +129,7 @@ export const UpdateDynamicFields = ({data}) =>{
     return event => {
       setFieldData(prev => {
         let newFieldData = prev.map(prevFieldData=> {
-          if(prevFieldData.id === fData.id)
+          if(prevFieldData.label === fData.label)
             return {...prevFieldData, [getFieldValueName(prevFieldData.fieldType.name)] : fData.fieldType.name === "datetime-local" ? moment(event.target.value).format() : event.target.value};
           return {...prevFieldData};
         })
@@ -140,7 +142,7 @@ export const UpdateDynamicFields = ({data}) =>{
     return event => {
       setFieldData(prev => {
         let newFieldData = prev.map(prevFieldData=> {
-          if(prevFieldData.id === fData.id)
+          if(prevFieldData.label === fData.label)
             return {...prevFieldData, [getFieldValueName(prevFieldData.fieldType.name)] : event.target.checked ? 1 : 0};
           return {...prevFieldData};
         })
@@ -156,7 +158,7 @@ export const UpdateDynamicFields = ({data}) =>{
 
       setFieldData(prev => {
         return prev.map(prevFieldData => {
-          if (prevFieldData.id === fData.id)
+          if (prevFieldData.label === fData.label)
             return {...prevFieldData, file, encodingFileType};
           return {...prevFieldData};
         });
