@@ -104,7 +104,8 @@
       "open": "Abrir",
       "save": "Guardar",
       "view": "Visualizar",
-      "show": "Show {{otherEntity}}"
+      "show": "Show {{otherEntity}}",
+      "rest": "descansar"
     },
     "detail": {
       "field": "Campo",
@@ -169,5 +170,11 @@
     "requestYesterday": "Enviado ontem",
     "totalInspections": "INSPEÇÕES TOTAIS",
     "inspThisMonth": "Inspeções agendadas para este mês"
+  },
+  "map": {
+    "geoLocator": "geolocalizador",
+    "report": "Localização de Licenças e Permissões",
+    "chooseLocation": "Escolha sua localização arrastando o marcador",
+    "addLocation": "Clique aqui para adicionar localização"
   }
 }

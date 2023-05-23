@@ -12,6 +12,7 @@ import { Translate } from 'react-jhipster';
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
   const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
+  const nav = useNavigate();
 
   useEffect(() => {
     axios
@@ -22,9 +23,9 @@ const UserHome = () => {
 
   return (
     <>
-      <Container className="mt--7 p-7" fluid>
+      <Container className="mt--7 pt-7" fluid>
         <Row className="mt-5">
-          <Col className="mb-5 mb-xl-0" xl="8">
+          <Col className="mb-5 mb-xl-12" xl="12">
             <Card className="shadow">
               <CardHeader className="border-0">
                 <Row className="align-items-center">
@@ -118,6 +119,15 @@ const UserHome = () => {
                             size="sm"
                           >
                             <Translate contentKey={'entity.action.view'} />
+                          </Button>
+
+                          <Button
+                            color="secondary"
+                            onClick={e => nav('/dataUpdate/' + data.id)}
+                            disabled={!(data.stage?.id === 0 || data.stage === null)}
+                            size="sm"
+                          >
+                            Update
                           </Button>
                         </th>
                       </tr>
