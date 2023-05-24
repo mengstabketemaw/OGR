@@ -27,7 +27,7 @@ export const Login = () => {
 
   const { from } = (location.state as any) || { from: { pathname: '/home', search: location.search } };
   if (isAuthenticated) {
-    return <Navigate to={from} replace />;
+    return <Navigate to={'/home'} replace />;
   }
   return <LoginModal showModal={showModal} handleLogin={handleLogin} handleClose={handleClose} loginError={loginError} />;
 };

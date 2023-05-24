@@ -45,6 +45,8 @@ const Form = Loadable({
   loading: () => loading,
 });
 
+const deviceWidth = window.innerWidth;
+
 const AppRoutes = () => {
   return (
     <div className="view-routes">
