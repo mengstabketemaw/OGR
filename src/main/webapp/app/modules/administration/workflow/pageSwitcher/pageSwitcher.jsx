@@ -41,13 +41,13 @@ const PageSwitcher = () => {
                   </span>
               </Button>
               &nbsp;
-              {/* {pages.map((page, index) => ( */}
-              {/* <Button  key={index} onClick={() => handleSwitchPage(index)}> */}
+              {pages.map((page, index) => (
+              <Button  key={index} onClick={() => handleSwitchPage(index)}>
 
-              {/*     {page.type.name} */}
-              {/* </Button> */}
-              {/* ))} */}
-              {/* &nbsp; */}
+                  {page.type.name}
+              </Button>
+              ))}
+              &nbsp;
               <Button onClick={handleNextPage} disabled={currentPage === pages.length - 1}>
 
                 Next Page
