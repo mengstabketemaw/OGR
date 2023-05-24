@@ -73,12 +73,12 @@ const Header = (props: IHeaderProps) => {
   return (
     <div id="app-header">
       <LoadingBar className="loading-bar" />
-      <div className="navbar" ref={navbarRef}>
+      <div className="navbar">
         <Navbar data-cy="navbar" expand="md" fixed="top" className="navbar-horizontal pt-2 pb-2 navbar-dark bg-gradient-success  col-12">
           <NavbarToggler aria-label="Menu" onClick={toggleMenu} />
 
           <Brand />
-          <Collapse className={'mt-6 mt-sm-0'} isOpen={menuOpen} navbar delay={{ show: 2, hide: 1 }}>
+          <Collapse className={menuOpen ? 'show mt-6 mt-md-0' : 'mt-6 mt-md-0'} navbar>
             <Nav id="header-tabs" className="ms-auto" navbar>
               {props.isAuthenticated && <Home />}
               <NavDropdown icon="book" name={<Translate contentKey="licence.title" />}>
