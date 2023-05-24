@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Translate, ValidatedField, ValidatedForm} from "react-jhipster";
+import {translate, Translate, ValidatedField, ValidatedForm} from "react-jhipster";
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {Link,useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -46,7 +46,7 @@ const DynamicFields = props =>{
             label={f.label}
             autoComplete={"off"}
             value={locationModal.value}
-            placeholder={"Click here to add location"}
+            placeholder={translate('map.addLocation')}
             required={f.required}
             onClick={()=>setLocationModal({...locationModal, show: true})}
           />
@@ -85,9 +85,8 @@ const GeoLocationChooser = ({showModal, handleClose,setValue}) => {
       toggle={handleClose}
       backdrop="static"
       autoFocus={false}
-      className={"geo-locator-modal col-lg-12"}
     >
-      <ModalHeader>Geo-Locator</ModalHeader>
+      <ModalHeader><Translate contentKey="map.geoLocator">Save</Translate></ModalHeader>
       <ModalBody>
         <ChooseLocation setLocation={(lat,lon)=>{
         setValue(prev=>{
@@ -96,7 +95,7 @@ const GeoLocationChooser = ({showModal, handleClose,setValue}) => {
         }}/>
     </ModalBody>
       <ModalFooter>
-        <Button onClick={handleClose}>Close</Button>
+        <Button onClick={handleClose}><Translate contentKey="entity.action.cancel">Cancel</Translate></Button>
       </ModalFooter>
     </Modal>
   )

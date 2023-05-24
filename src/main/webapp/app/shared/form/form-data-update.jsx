@@ -19,9 +19,11 @@ import ChooseLocation from "app/modules/maps/MapUtils";
 import axios from "axios";
 import {convertFileToBase64} from "app/shared/common/formatValue";
 import moment from "moment";
+import {toast} from "react-toastify";
 
 function getFieldValueName(type){
   switch (type) {
+    case "textarea":
     case 'location':
     case 'text':
       return "text"
@@ -67,6 +69,7 @@ function getValue(fieldData) {
 
   switch (fieldData?.fieldType.name) {
     case 'location':
+    case 'textarea':
     case 'text':
       return fieldData.text
     case 'select':
@@ -83,7 +86,7 @@ function getValue(fieldData) {
   return undefined;
 }
 
-const UpdateDynamicFields = ({data}) =>{
+export const UpdateDynamicFields = ({data}) =>{
   const [fieldData, setFieldData] = useState(data.data)
   const nav = useNavigate();
   const [locationModal,setLocationModal] = useState({show: false, label:undefined});
@@ -117,9 +120,12 @@ const UpdateDynamicFields = ({data}) =>{
       ...data,
       data: fieldData
     }).then(()=> {
+      toast.success(<Translate contentKey={'toaster.success'}/>);
       nav(-1);
+    }).catch(e=>{
+      toast.error(<Translate contentKey={'toaster.error'}/>);
     })
-    console.log(fieldData)
+    // console.log(fieldData)
   }
 
   const getOnChangeHandler = name => {
@@ -127,7 +133,7 @@ const UpdateDynamicFields = ({data}) =>{
     return event => {
       setFieldData(prev => {
         let newFieldData = prev.map(prevFieldData=> {
-          if(prevFieldData.id === fData.id)
+          if(prevFieldData.label === fData.label)
             return {...prevFieldData, [getFieldValueName(prevFieldData.fieldType.name)] : fData.fieldType.name === "datetime-local" ? moment(event.target.value).format() : event.target.value};
           return {...prevFieldData};
         })
@@ -140,7 +146,7 @@ const UpdateDynamicFields = ({data}) =>{
     return event => {
       setFieldData(prev => {
         let newFieldData = prev.map(prevFieldData=> {
-          if(prevFieldData.id === fData.id)
+          if(prevFieldData.label === fData.label)
             return {...prevFieldData, [getFieldValueName(prevFieldData.fieldType.name)] : event.target.checked ? 1 : 0};
           return {...prevFieldData};
         })
@@ -156,7 +162,7 @@ const UpdateDynamicFields = ({data}) =>{
 
       setFieldData(prev => {
         return prev.map(prevFieldData => {
-          if (prevFieldData.id === fData.id)
+          if (prevFieldData.label === fData.label)
             return {...prevFieldData, file, encodingFileType};
           return {...prevFieldData};
         });
@@ -184,16 +190,7 @@ const UpdateDynamicFields = ({data}) =>{
 
 
   return(<>
-    <Row className="d-flex justify-content-center">
-      <Col md="8">
-        <Card className="shadow p-4">
-          <CardHeader className="border-0 pl-0">
-            <Row className="align-items-center">
-              <div className="col">
-                <h3 className="mb-0">Edit Data</h3>
-              </div>
-            </Row>
-          </CardHeader>
+
     <ValidatedForm>
         {
           data.form.fields.filter(field => field.state?.id === 0)
@@ -276,9 +273,7 @@ const UpdateDynamicFields = ({data}) =>{
           show: false,
         })
       }/>
-        </Card>
-      </Col>
-    </Row>
+
     </>
   )
 }

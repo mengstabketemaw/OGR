@@ -7,7 +7,7 @@ import drill from './markers/drill.png';
 
 const point = new L.Icon({
   iconUrl: png,
-  iconSize: new L.Point(30, 35),
+  iconSize: new L.Point(50, 65),
 });
 
 const pipelineIcon = new L.Icon({

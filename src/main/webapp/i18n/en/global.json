@@ -104,7 +104,8 @@
       "open": "Open",
       "save": "Save",
       "view": "View",
-      "show": "Show {{otherEntity}}"
+      "show": "Show {{otherEntity}}",
+      "rest": "Reset"
     },
     "detail": {
       "field": "Field",
@@ -170,5 +171,16 @@
     "requestYesterday": "Submitted yesterday",
     "totalInspections": "TOTAL INSPECTIONS",
     "inspThisMonth": "Scheduled Inspections this month"
+  },
+  "map": {
+    "geoLocator": "Geolocator",
+    "report": "Licenses and Permits Location",
+    "chooseLocation": "Choose Your Location By Dragging the Marker",
+    "addLocation": "Click here to add location"
+  },
+  "toaster": {
+    "success": "Operation Successfully",
+    "update": "Data is updated Successfully",
+    "error": "There is something wrong"
   }
 }

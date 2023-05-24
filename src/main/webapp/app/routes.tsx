@@ -20,7 +20,7 @@ import FormData from 'app/modules/administration/FormData';
 import SequenceLanding from 'app/modules/administration/workflow/sequenceLanding';
 import ComplianceMonitoring from 'app/modules/compliance/complianceMonitoring';
 import { ComplianceDetail } from 'app/modules/compliance/complianceDetail';
-import FormDataUpdate from 'app/shared/form/form-data-update';
+import FormUpdateLandingPage from 'app/shared/form/form-update-landing-page';
 import { InspectionReport } from 'app/modules/compliance/inspectionReport';
 import { ComplianceUser } from 'app/modules/complianceUser/complianceUser';
 const loading = <div>loading ...</div>;
@@ -137,7 +137,7 @@ const AppRoutes = () => {
           path="dataUpdate/:id"
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
-              <FormDataUpdate />
+              <FormUpdateLandingPage />
             </PrivateRoute>
           }
         />

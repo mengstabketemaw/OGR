@@ -5,6 +5,7 @@ import { Card, CardTitle, Container, Spinner } from 'reactstrap';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 import MapTiles from 'app/modules/maps/MapTiles';
 import { airIcon, drillIcon, explorationIcon, pipelineIcon, point } from 'app/modules/maps/icons';
+import { Translate } from 'react-jhipster';
 const GeoLocationLocator = () => {
   const [data, setData] = useState({ loading: true, data: [] });
   const [me, setMe] = useState([9.0079232, 38.7678208]);
@@ -64,7 +65,9 @@ const GeoLocationLocator = () => {
           </div>*/}
           <div className="col-12 col-md-12">
             <div className="border p-3">
-              <h3>Map</h3>
+              <h3>
+                <Translate contentKey={'map.report'} />
+              </h3>
               <div>
                 <MapContainer style={{ height: '75vh' }} center={me} zoom={13}>
                   <MapTiles />

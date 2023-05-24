@@ -17,6 +17,7 @@ const ShowFieldValue = ({ data }) => {
           </a>
         );
       case 'text':
+      case 'textarea':
         return field.text;
       case 'select':
         return field.dropDown;

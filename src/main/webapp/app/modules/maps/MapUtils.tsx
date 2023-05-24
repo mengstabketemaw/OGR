@@ -6,6 +6,7 @@ import { point } from './icons';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import React from 'react';
 import { Button, Label, Tooltip } from 'reactstrap';
+import { Translate } from 'react-jhipster';
 
 const UserMarkerExp = forwardRef((props, ref) => {
   const [position, setPosition] = useState({ lat: 9.0079232, lng: 38.7678208 });
@@ -59,43 +60,28 @@ const ChooseLocation = ({ setLocation }) => {
   // @ts-ignore
   // @ts-ignore
   return (
-    <>
-      <div
-        style={{
-          height: 'fit-content',
-          padding: '30px',
-          width: '700px',
-          border: '2px solid black',
-          flexGrow: 1,
-        }}
-      >
-        <p>Choose Your Location</p>
-        <Label variant="h6" color="InfoText">
-          Drag the marker to Your Home Location
-        </Label>
-        <div style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'column' }}>
-          <div
-            style={{
-              height: '300px',
-              width: '500px',
-              margin: '10px',
-              border: '2px solid black',
-            }}
-          >
-            <MapContainer style={{ height: '100%' }} center={[8, 38]} zoom={20} scrollWheelZoom={true}>
-              <MapTiles />
-              <UserMarkerExp ref={child} />
-            </MapContainer>
-          </div>
-          <div>
-            <Button onClick={handleReset}>RESET</Button>
-            <Button onClick={handleSave} variant="contained">
-              SAVE
-            </Button>
-          </div>
-        </div>
+    <div
+      style={{
+        height: '500px',
+      }}
+    >
+      <Label variant="h6" color="InfoText">
+        <Translate contentKey={'map.chooseLocation'} />
+      </Label>
+
+      <MapContainer style={{ height: '100%' }} center={[9.0079232, 38.7678208]} zoom={15} scrollWheelZoom={true}>
+        <MapTiles />
+        <UserMarkerExp ref={child} />
+      </MapContainer>
+      <div>
+        <Button onClick={handleReset}>
+          <Translate contentKey={'entity.action.rest'} />
+        </Button>
+        <Button onClick={handleSave} color="primary">
+          <Translate contentKey={'entity.action.save'} />
+        </Button>
       </div>
-    </>
+    </div>
   );
 };
 
