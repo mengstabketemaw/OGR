@@ -18,6 +18,7 @@ import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
 import Landing from 'app/modules/landing/landing';
+import Login from 'app/modules/login/login';
 
 const baseHref = document.querySelector('base').getAttribute('href').replace(/\/$/, '');
 
@@ -30,7 +31,7 @@ export const App = () => {
   }, []);
 
   const currentLocation = window.location.pathname;
-  console.log(currentLocation); // logs the current URL
+  const deviceWidth = window.innerWidth;
 
   const currentLocale = useAppSelector(state => state.locale.currentLocale);
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
@@ -43,7 +44,7 @@ export const App = () => {
   const paddingTop = '60px';
   return (
     <BrowserRouter basename={baseHref}>
-      {isLandingPage ? (
+      {isLandingPage && deviceWidth > 768 ? (
         <ErrorBoundary>
           <Landing />
         </ErrorBoundary>

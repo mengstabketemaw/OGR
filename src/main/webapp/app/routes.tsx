@@ -45,12 +45,14 @@ const Form = Loadable({
   loading: () => loading,
 });
 
+const deviceWidth = window.innerWidth;
+
 const AppRoutes = () => {
   return (
     <div className="view-routes">
       <ErrorBoundaryRoutes>
         <Route path="home" element={<Home />} />
-        <Route path="login" element={<Login />} />
+        <Route path={deviceWidth < 768 ? '/login' : '/'} element={<Login />} />
         <Route path="logout" element={<Logout />} />
         <Route path="permit" element={<Permit />} />
         <Route path="licence" element={<Licence />} />
