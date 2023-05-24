@@ -78,7 +78,7 @@ const Header = (props: IHeaderProps) => {
           <NavbarToggler aria-label="Menu" onClick={toggleMenu} />
 
           <Brand />
-          <Collapse className={menuOpen ? 'mt-6' : ''} isOpen={menuOpen} navbar delay={{ show: 2, hide: 1 }}>
+          <Collapse className={'mt-6 mt-sm-0'} isOpen={menuOpen} navbar delay={{ show: 2, hide: 1 }}>
             <Nav id="header-tabs" className="ms-auto" navbar>
               {props.isAuthenticated && <Home />}
               <NavDropdown icon="book" name={<Translate contentKey="licence.title" />}>
