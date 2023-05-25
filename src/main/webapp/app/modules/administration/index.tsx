@@ -9,6 +9,7 @@ import Metrics from './metrics/metrics';
 import Configuration from './configuration/configuration';
 import Docs from './docs/docs';
 import GeoLocationLocator from 'app/modules/maps/GeoLocationLocator';
+import Payment from 'app/modules/administration/Payment';
 
 const AdministrationRoutes = () => (
   <div>
@@ -20,6 +21,7 @@ const AdministrationRoutes = () => (
       <Route path="logs" element={<Logs />} />
       <Route path="docs" element={<Docs />} />
       <Route path="location" element={<GeoLocationLocator />} />
+      <Route path="payment" element={<Payment />} />
     </ErrorBoundaryRoutes>
   </div>
 );

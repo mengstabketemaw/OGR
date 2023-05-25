@@ -159,7 +159,9 @@
     "actions": "Ações",
     "noData": "Não há dados",
     "close": "Fechar",
-    "detail": "Detalhes"
+    "detail": "Detalhes",
+    "name": "Nome",
+    "amount": "Amount"
   },
   "stats": {
     "totalSubmissions": "Total de Envios",
@@ -170,6 +172,9 @@
     "requestYesterday": "Enviado ontem",
     "totalInspections": "INSPEÇÕES TOTAIS",
     "inspThisMonth": "Inspeções agendadas para este mês"
+  },
+  "payment": {
+    "conf": "Gestão de Pagamentos"
   },
   "map": {
     "geoLocator": "geolocalizador",

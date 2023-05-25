@@ -7,6 +7,7 @@ import { AUTHORITIES } from 'app/config/constants';
 import ApplyPermit from 'app/modules/permit/ApplyPermit';
 import ApplyLicence from 'app/modules/licence/ApplyLicence';
 import Workflow from 'app/modules/administration/workflow/workflow';
+import CheckoutForm from 'app/modules/checkout/checkout';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -18,6 +19,14 @@ export default () => {
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
               <ApplyPermit />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="checkout"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
+              <CheckoutForm />
             </PrivateRoute>
           }
         />

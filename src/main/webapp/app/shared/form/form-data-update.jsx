@@ -218,20 +218,25 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
                   onClick={() => setLocationModal({label: field.label, show: true})}
                 />
 
+            :field.fieldType.name === "info" ?
+                  <i>{field.label}</i>
+
             :field.fieldType.name === "file" ?
                   <>
                     <ValidatedBlobField
+                      className="mb-0"
                       key={field.id}
                       type={field.fieldType.name}
                       label={field.label}
                       required={false}
                       onChange={getOnChangeHandlerForFile(field.label)}
                     />
-                      <span style={{fontSize:"0.6em", color:"grey", marginLeft:"50px"}}>File chosen: {getFileName(field.label)}</span><br/>
+                      <p className="mb3" style={{fontSize:"0.6em", color:"grey", marginLeft:"50px"}}>File chosen: {getFileName(field.label)}</p>
                   </>
 
             :field.fieldType.name === "checkbox" ?
               <ValidatedField
+                className="mb-0 d-flex flex-column custom-checkbox"
                 key={field.id}
                 type={field.fieldType.name}
                 name={field.label}

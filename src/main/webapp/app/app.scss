@@ -4,6 +4,8 @@
 //@import '~bootstrap/scss/bootstrap';
 @import 'argon/assets/scss/argon-dashboard-react';
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'custom_css/css/bootstrap.min.css';
+@import 'custom_css/leaflet.css';
 //@import '~bootswatch/dist/minty/bootswatch';
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 /*!
@@ -2182,7 +2184,7 @@ textarea.form-control {
 .form-check-input {
   position: absolute;
   margin-top: 0.3rem;
-  margin-left: -1.25rem;
+  margin-left: 0.25rem;
 }
 .form-check-input[disabled] ~ .form-check-label,
 .form-check-input:disabled ~ .form-check-label {
@@ -8099,7 +8101,7 @@ button.bg-darker:focus {
 
 .mb-3,
 .my-3 {
-  margin-bottom: 1rem !important;
+  margin-bottom: 1rem;
 }
 
 .ml-3,
@@ -21452,4 +21454,8 @@ button:focus,
   width: 800px !important;
   height: 800px !important;
 }
+.custom-checkbox label {
+  margin-left: 28px;
+}
+
 /*# sourceMappingURL=argon-dashboard-react.css.map */

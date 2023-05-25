@@ -160,7 +160,9 @@
     "actions": "Actions",
     "noData": "There is no Data",
     "close": "Close",
-    "detail": "Details"
+    "detail": "Details",
+    "name": "Name",
+    "amount": "Amount"
   },
   "stats": {
     "totalSubmissions": "Total Submissions",
@@ -171,6 +173,9 @@
     "requestYesterday": "Submitted yesterday",
     "totalInspections": "TOTAL INSPECTIONS",
     "inspThisMonth": "Scheduled Inspections this month"
+  },
+  "payment": {
+    "conf": "Payment Management"
   },
   "map": {
     "geoLocator": "Geolocator",

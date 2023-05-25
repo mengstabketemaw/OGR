@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.NegativeOrZero;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 public class CustomForm {
@@ -15,6 +17,7 @@ public class CustomForm {
 
     private String type;
     private String title;
+    private Long money;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @OrderBy("orderNum asc")
@@ -51,5 +54,13 @@ public class CustomForm {
 
     public void setFields(Set<CustomField> fields) {
         this.fields = fields;
+    }
+
+    public Long getMoney() {
+        return money;
+    }
+
+    public void setMoney(Long money) {
+        this.money = money;
     }
 }

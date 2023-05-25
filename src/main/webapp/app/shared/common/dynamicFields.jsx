@@ -47,19 +47,9 @@ const DynamicFields = props =>{
         >
           {f.options.map((a,i)=>(<option key={i} value={a.name}>{a.name}</option>))  }
         </ValidatedField>
-        :f.fieldType.name === "file" ?
-          <>
-            <ValidatedBlobField
-              key={f.id}
-              type={f.fieldType.name}
-              label={f.label}
-              required={f.required}
 
-            />
-            <span style={{fontSize:"0.6em", color:"grey", marginLeft:"50px"}}>Download</span><br/>
-          </>
          :f.fieldType.name === "location" ?
-         <ValidatedField
+          <ValidatedField
             name={f.label}
             label={f.label}
             autoComplete={"off"}
@@ -68,14 +58,26 @@ const DynamicFields = props =>{
             required={f.required}
             onClick={()=>setLocationModal({...locationModal, show: true})}
           />
-          :
-        <ValidatedField
-          type={f.fieldType.name}
-          name={f.label}
-          label={f.label}//{translate('global.form.username.label')}
-          //placeholder="add label"//{translate('global.form.username.placeholder')}
-          required={f.required}
-        />
+
+          :f.fieldType.name === "info" ?
+            <i>{f.label}</i>
+
+          :f.fieldType.name === "checkbox" ?
+            <ValidatedField
+              className="mb-0 d-flex flex-column custom-checkbox"
+              type={f.fieldType.name}
+              name={f.label}
+              label={f.label}
+              required={f.required}
+            />
+
+          :<ValidatedField
+              type={f.fieldType.name}
+              name={f.label}
+              label={f.label}
+              required={f.required}
+            />
+
       )
       }
       {backButtonShow && <><Button onClick={()=>{nav(-1)}} replace color="info">
