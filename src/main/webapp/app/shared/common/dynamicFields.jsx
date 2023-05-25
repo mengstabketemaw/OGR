@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {translate, Translate, ValidatedField, ValidatedForm} from "react-jhipster";
+import {translate, Translate, ValidatedBlobField, ValidatedField, ValidatedForm} from "react-jhipster";
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import {Link,useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -11,7 +11,15 @@ import {isArray} from "lodash";
 const DynamicFields = props =>{
   const nav = useNavigate();
   const [locationModal,setLocationModal] = useState({show: false, value:""});
-  const {fields, defaultValue, handleSubmit,formatValue,currentFields= null,licence_id = null} = props;
+  const {fields,
+          defaultValue,
+          handleSubmit,
+          formatValue,
+          currentFields= null,
+          licence_id = null,
+          backButtonShow= true,
+          saveButtonShow = true,
+          } = props;
 
   const handlevalue = async (value) => {
     const formattedValue = await formatValue(value, fields,currentFields,licence_id);
@@ -72,19 +80,21 @@ const DynamicFields = props =>{
 
       )
       }
-      <Button onClick={()=>{nav(-1)}} replace color="info">
+      {backButtonShow && <><Button onClick={()=>{nav(-1)}} replace color="info">
         <FontAwesomeIcon icon="arrow-left" />
         &nbsp;
         <span className="d-none d-md-inline">
                   <Translate contentKey="entity.action.back">Back</Translate>
                 </span>
       </Button>
-      &nbsp;
-      <Button color="primary" type="submit" >
+        &nbsp;</>
+      }
+
+      {saveButtonShow && <Button color="primary" type="submit" >
         <FontAwesomeIcon icon="save" />
         &nbsp;
         <Translate contentKey="entity.action.save">Save</Translate>
-      </Button>
+      </Button>}
     </ValidatedForm>
     </>
   )

@@ -1,0 +1,12 @@
+{
+  "workflow": {
+    "initialreview": "Initial Review",
+    "technicalreview": "Technical Review",
+    "specializedreview": "Speicialized Review",
+    "previous": "Previous",
+    "next": "Next",
+    "formedit": "Form Edit",
+    "addnode": "Add Node",
+    "moreaction": "More Action"
+  }
+}

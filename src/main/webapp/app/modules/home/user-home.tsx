@@ -192,9 +192,11 @@ export const DetailModal = ({ id, formId, show, handleClose }) => {
             nav(`/sequence/${formId}/${id}`);
           }}
         >
-          More Action
+          <Translate contentKey={'workflow.moreaction'} />
         </Button>
-        <Button onClick={handleClose}>Close</Button>
+        <Button onClick={handleClose}>
+          <Translate contentKey={'table.close'} />
+        </Button>
       </ModalFooter>
     </Modal>
   );

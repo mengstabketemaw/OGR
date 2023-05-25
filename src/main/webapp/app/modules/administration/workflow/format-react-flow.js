@@ -1,11 +1,12 @@
+import { MarkerType } from 'reactflow';
 export const formatReactFlow = value => {
   const returnValue = [];
   if (value && value.length > 0) {
-    let y = 0;
-    let x = 350;
+    let y = 75;
+    let x = 125;
     for (const ele of value) {
       y = y + 75;
-      x = x + 30;
+      x = x + 75;
       returnValue.push({
         id: '' + ele.id + '',
         data: {
@@ -44,6 +45,12 @@ export const formatEdge = values => {
         id: '' + y + '',
         source: '' + ele.state.id + '',
         target: '' + ele.toState.id + '',
+        markerEnd: {
+          type: MarkerType.ArrowClosed,
+          width: 20,
+          height: 20,
+          color: '#FF0072',
+        },
       });
     }
   }

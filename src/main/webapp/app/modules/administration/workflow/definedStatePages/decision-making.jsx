@@ -45,6 +45,7 @@ export const DecisionMaking = (params) => {
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}
                        licence_id ={parseInt(id)}
+                       backButtonShow = {false}
                        currentFields = {fields_data}/>
       </Col>
     </>

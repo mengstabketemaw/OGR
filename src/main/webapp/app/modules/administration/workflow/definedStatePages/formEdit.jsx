@@ -11,7 +11,7 @@ import {formatValue} from "app/shared/common/formatValueWithCustomField";
        <div className="d-flex ">
          <h1> Edit Form</h1>
        </div>
-       <FormDataUpdate/>
+       <FormDataUpdate seq={true}/>
      </Col>
    </>
   )

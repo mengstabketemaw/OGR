@@ -19,7 +19,7 @@ const adminMenuItems = () => (
 
     <MenuItem icon="dagger" to="/form/create">
       <FontAwesomeIcon icon={faPager} />
-      Form
+      <Translate contentKey="form.title">Workflow</Translate>
     </MenuItem>
     <MenuItem icon="dagger" to="/workflow">
       <FontAwesomeIcon icon={faCalendarTimes} />

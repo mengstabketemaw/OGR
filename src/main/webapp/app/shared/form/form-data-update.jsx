@@ -39,10 +39,10 @@ function getFieldValueName(type){
       return "file"
   }
 }
-const FormDataUpdate = () => {
+const FormDataUpdate = (param) => {
   const { id } = useParams();
   const [data, setDate] = useState({ loading: true, data: {} });
-
+  const {seq} = param;
   useEffect(() => {
     axios
       .get('/api/licence/' + id)
@@ -51,14 +51,14 @@ const FormDataUpdate = () => {
   }, [id]);
 
   return (
-        <Container className="p--5 d-flex flex-column justify-content-center">
+        <Container className="p--5 pl-0 d-flex flex-column justify-content-center">
           {data.loading ? (
             <Spinner className="align-self-center" color="primary" style={{ height: '3rem', width: '3rem' }} type="grow">
               Loading...
             </Spinner>
           ) : (
             <>
-              <UpdateDynamicFields data={data.data}/>
+              <UpdateDynamicFields data={data.data} seq={seq}/>
             </>
           )}
         </Container>
@@ -86,7 +86,7 @@ function getValue(fieldData) {
   return undefined;
 }
 
-export const UpdateDynamicFields = ({data}) =>{
+export const UpdateDynamicFields = ({data,seq = false}) =>{
   const [fieldData, setFieldData] = useState(data.data)
   const nav = useNavigate();
   const [locationModal,setLocationModal] = useState({show: false, label:undefined, fieldType:undefined});
@@ -258,7 +258,7 @@ export const UpdateDynamicFields = ({data}) =>{
             />
         )
         }
-        <Button onClick={() => {
+      {!seq && <><Button onClick={() => {
           nav(-1)
         }} replace color="info">
           <FontAwesomeIcon icon="arrow-left"/>
@@ -267,7 +267,7 @@ export const UpdateDynamicFields = ({data}) =>{
                   <Translate contentKey="entity.action.back">Back</Translate>
                 </span>
         </Button>
-        &nbsp;
+        &nbsp;</>}
         <Button color="primary" onClick={handleSubmit}>
           <FontAwesomeIcon icon="save"/>
           &nbsp;
