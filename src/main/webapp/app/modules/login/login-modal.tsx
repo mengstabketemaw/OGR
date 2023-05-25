@@ -30,7 +30,7 @@ const LoginModal = (props: ILoginModalProps) => {
 
   return (
     <Row className="justify-content-center">
-      <Col md="6">
+      <Col md="4">
         <Form onSubmit={handleLoginSubmit}>
           <ModalHeader id="login-title" data-cy="loginTitle">
             <Translate contentKey="login.title">Sign in</Translate>
@@ -82,16 +82,16 @@ const LoginModal = (props: ILoginModalProps) => {
               </Col>
             </Row>
             <div className="mt-1">&nbsp;</div>
-            <Alert color="info">
-              <Link className={'text-yellow'} to="/account/reset/request" data-cy="forgetYourPasswordSelector">
+            <Alert color="success">
+              <Link className={'text-orange'} to="/account/reset/request" data-cy="forgetYourPasswordSelector">
                 <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
               </Link>
             </Alert>
-            <Alert color="info">
+            <Alert color="success">
               <span>
                 <Translate contentKey="global.messages.info.register.noaccount">You don&apos;t have an account yet?</Translate>
               </span>{' '}
-              <Link className={'text-yellow'} to="/account/register">
+              <Link className={'text-orange'} to="/account/register">
                 <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
               </Link>
             </Alert>
