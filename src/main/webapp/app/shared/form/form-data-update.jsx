@@ -89,7 +89,7 @@ function getValue(fieldData) {
 export const UpdateDynamicFields = ({data}) =>{
   const [fieldData, setFieldData] = useState(data.data)
   const nav = useNavigate();
-  const [locationModal,setLocationModal] = useState({show: false, label:undefined});
+  const [locationModal,setLocationModal] = useState({show: false, label:undefined, fieldType:undefined});
 
   const getFieldDataTemplate = (name) => {
     let field = data.form.fields.find(formFields => formFields.label === name)
@@ -128,33 +128,34 @@ export const UpdateDynamicFields = ({data}) =>{
     // console.log(fieldData)
   }
 
-  const getOnChangeHandler = name => {
-    let fData = fieldData.find(fData => fData.label === name);
+  const getOnChangeHandler = (name, fieldType) => {
+    let fData = {...fieldData.find(fData => fData.label === name), fieldType};
     return event => {
       setFieldData(prev => {
         let newFieldData = prev.map(prevFieldData=> {
           if(prevFieldData.label === fData.label)
-            return {...prevFieldData, [getFieldValueName(prevFieldData.fieldType.name)] : fData.fieldType.name === "datetime-local" ? moment(event.target.value).format() : event.target.value};
+            return {...prevFieldData, fieldType,  [getFieldValueName(prevFieldData.fieldType.name)] : fData.fieldType.name === "datetime-local" ? moment(event.target.value).format() : event.target.value};
           return {...prevFieldData};
         })
         return newFieldData;
       })
     }
   }
-  const getOnChangeHandlerForCheckbox = name => {
-    let fData = fieldData.find(fData => fData.label === name);
+  const getOnChangeHandlerForCheckbox = (name, fieldType) => {
+    let fData = {...fieldData.find(fData => fData.label === name), fieldType};
+
     return event => {
       setFieldData(prev => {
         let newFieldData = prev.map(prevFieldData=> {
           if(prevFieldData.label === fData.label)
-            return {...prevFieldData, [getFieldValueName(prevFieldData.fieldType.name)] : event.target.checked ? 1 : 0};
+            return {...prevFieldData, fieldType, [getFieldValueName(prevFieldData.fieldType.name)] : event.target.checked ? 1 : 0};
           return {...prevFieldData};
         })
         return newFieldData;
       })
     }
   }
-  const getOnChangeHandlerForFile = name => {
+  const getOnChangeHandlerForFile = (name, fieldType) => {
     let fData = fieldData.find(fData => fData.label === name);
     return async event => {
       const file = await convertFileToBase64(event.target.files[0]);
@@ -163,7 +164,7 @@ export const UpdateDynamicFields = ({data}) =>{
       setFieldData(prev => {
         return prev.map(prevFieldData => {
           if (prevFieldData.label === fData.label)
-            return {...prevFieldData, file, encodingFileType};
+            return {...prevFieldData,fieldType, file, encodingFileType};
           return {...prevFieldData};
         });
       })
@@ -174,7 +175,7 @@ export const UpdateDynamicFields = ({data}) =>{
     //If Label is undefined don't do anything.
     if(!locationModal.label)
       return;
-    let setLocationValue = getOnChangeHandler(locationModal.label);
+    let setLocationValue = getOnChangeHandler(locationModal.label, locationModal.fieldType);
     setLocationValue({target:{value}});
     setLocationModal({show: false, label: undefined})
   }
@@ -202,7 +203,7 @@ export const UpdateDynamicFields = ({data}) =>{
                 value={getFieldValue(field.label)}
                 label={field.label}
                 required={field.required}
-                onChange={getOnChangeHandler(field.label)}
+                onChange={getOnChangeHandler(field.label, field.fieldType)}
               >
                 {field.options.map((a, i) => (<option key={i} value={a.name} >{a.name}</option>))}
               </ValidatedField>
@@ -215,7 +216,7 @@ export const UpdateDynamicFields = ({data}) =>{
                   value={getFieldValue(field.label)}
                   placeholder={"Click here to add location"}
                   required={field.required}
-                  onClick={() => setLocationModal({label: field.label, show: true})}
+                  onClick={() => setLocationModal({label: field.label, show: true, fieldType: field.fieldType})}
                 />
 
             :field.fieldType.name === "info" ?
@@ -229,7 +230,7 @@ export const UpdateDynamicFields = ({data}) =>{
                       type={field.fieldType.name}
                       label={field.label}
                       required={false}
-                      onChange={getOnChangeHandlerForFile(field.label)}
+                      onChange={getOnChangeHandlerForFile(field.label, field.fieldType)}
                     />
                       <p className="mb3" style={{fontSize:"0.6em", color:"grey", marginLeft:"50px"}}>File chosen: {getFileName(field.label)}</p>
                   </>
@@ -243,7 +244,7 @@ export const UpdateDynamicFields = ({data}) =>{
                 checked={getFieldValue(field.label) === 1}
                 label={field.label}
                 required={field.required}
-                onChange={getOnChangeHandlerForCheckbox(field.label)}
+                onChange={getOnChangeHandlerForCheckbox(field.label, field.fieldType)}
               />
 
             :<ValidatedField
@@ -253,7 +254,7 @@ export const UpdateDynamicFields = ({data}) =>{
               value={getFieldValue(field.label)}
               label={field.label}
               required={field.required}
-              onChange={getOnChangeHandler(field.label)}
+              onChange={getOnChangeHandler(field.label, field.fieldType)}
             />
         )
         }
