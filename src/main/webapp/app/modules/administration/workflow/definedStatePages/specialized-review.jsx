@@ -45,7 +45,9 @@ export const SpecializedReview = (params) => {
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}
                        licence_id ={parseInt(id)}
-                       currentFields = {fields_data}/>
+                       currentFields = {fields_data}
+                       backButtonShow = {false}
+        />
       </Col>
     </>
 

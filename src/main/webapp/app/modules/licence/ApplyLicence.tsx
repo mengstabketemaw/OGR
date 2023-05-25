@@ -36,7 +36,13 @@ const ApplyLicence = () => {
       </Row>
       <Row className="justify-content-center">
         <Col md="6">
-          <DynamicFields fields={form.fields} handleSubmit={handleSubmit} formatValue={formatValue} />
+          <DynamicFields
+            fields={form.fields?.filter(f => {
+              return f.state.id === 0;
+            })}
+            handleSubmit={handleSubmit}
+            formatValue={formatValue}
+          />
         </Col>
       </Row>
     </div>

@@ -42,7 +42,7 @@ const PageSwitcher = () => {
               </Button>
               &nbsp;
               {pages.map((page, index) => (
-              <Button  key={index} onClick={() => handleSwitchPage(index)}>
+              <Button  key={index} onClick={() => handleSwitchPage(index)} className={currentPage === index ? "bg-green text-black btn btn-secondary":"bg-gray text-white btn btn-secondary"}>
 
                   {page.type.name}
               </Button>
@@ -53,7 +53,6 @@ const PageSwitcher = () => {
                 Next Page
               </Button>
             </div>
-
 
           </CardHeader>
         </Card>

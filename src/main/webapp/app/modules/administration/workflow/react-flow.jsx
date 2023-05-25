@@ -1,9 +1,16 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import ReactFlow,{addEdge, Panel, useEdgesState, useNodesState, useReactFlow} from "reactflow";
+import ReactFlow, {addEdge, MarkerType, Panel, useEdgesState, useNodesState, useReactFlow} from "reactflow";
 import {Button} from "reactstrap";
 import {ValidateEdges} from "app/modules/administration/workflow/validateEdges";
-
+import 'reactflow/dist/style.css';
+import {Translate} from "react-jhipster";
 const ReactWorkFlow = (param) =>{
+  const markEnd = {markerEnd: {
+      type: MarkerType.ArrowClosed,
+      width: 20,
+      height: 20,
+      color: '#FF0072',
+    }}
   const getNodeId = () => `randomnode_${+new Date()}`;
   const flowKey = 'work-flow';
   const {formatedNode, initialEdges, handleSubmit} = param;
@@ -11,8 +18,9 @@ const ReactWorkFlow = (param) =>{
   const { setViewport } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState(formatedNode);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+  const onConnect = useCallback((params) => setEdges((eds) => addEdge({...params,...markEnd}, eds)), [setEdges]);
   const onSave = ()=>{
+
     if (rfInstance) {
       const flow = rfInstance.toObject();
       const edgeToSend = ValidateEdges(flow.edges);
@@ -20,6 +28,7 @@ const ReactWorkFlow = (param) =>{
         //localStorage.setItem(flowKey, JSON.stringify(flow));
     }
   }
+  const connectionLineStyle = { stroke: '#fdf' };
   useEffect(()=>{
     setEdges(initialEdges || []);
   },[initialEdges])
@@ -58,16 +67,17 @@ const ReactWorkFlow = (param) =>{
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         onInit={setRfInstance}
+        connectionLineStyle={connectionLineStyle}
+        fitView
+        snapToGrid={true}
       >
-        <Panel position="top-right">
-          <Button color="secondary" onClick={onRestore} tabIndex={1}>
-            restore
-          </Button>{' '}
+        <Panel position="bottom-left">
+
           <Button color="primary" type="submit" onClick={onSave}>
-            save
+            <Translate contentKey="entity.action.save">Save</Translate>
           </Button>{' '}
-          <Button color="danger" onClick={onAdd} disabled={true}>
-            add node
+          <Button color="danger" onClick={onAdd} >
+            <Translate contentKey={'workflow.addnode'} />
           </Button>
         </Panel>
       </ReactFlow>
