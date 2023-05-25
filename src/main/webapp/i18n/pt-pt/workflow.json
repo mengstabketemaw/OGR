@@ -1,0 +1,12 @@
+{
+  "workflow": {
+    "initialreview": "Revisão inicial",
+    "technicalreview": "Revisao Tecnica",
+    "specializedreview": "Revisão Especializada",
+    "previous": "Anterior",
+    "next": "Próxima",
+    "formedit": "Editar formulário",
+    "addnode": "Adicionar nó",
+    "moreaction": "Mais ação"
+  }
+}
