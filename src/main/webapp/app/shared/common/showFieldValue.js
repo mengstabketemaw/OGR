@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Col, Modal, ModalFooter, ModalHeader, Row } from 'reactstrap';
+import { Button, Col, FormText, Modal, ModalFooter, ModalHeader, Row } from 'reactstrap';
 import moment from 'moment';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 import MapTiles from 'app/modules/maps/MapTiles';
@@ -26,7 +26,7 @@ const ShowFieldValue = ({ data }) => {
       case 'datetime-local':
         return moment(field.dateAndTime).format('MMMM Do YYYY, h:mm:ss a');
       case 'checkbox':
-        return (field.checkBoxId === 1) + '';
+        return field.checkBoxId === 1;
       case 'file':
         const fileName = field.encodingFileType?.split('~')[0];
         const encodedType = field.encodingFileType?.split('~')[1];
@@ -40,8 +40,9 @@ const ShowFieldValue = ({ data }) => {
                   download={fileName}
                   href={`${encodedType},${field.file}`}
                 >
-                  <p className="mr-2">{fileName}</p>
-                  <FontAwesomeIcon icon={faDownload} color="#2DCEC8" size="2x" />
+                  <span className="pt-1 text-black pb-1">
+                    {fileName} <FontAwesomeIcon icon={faDownload} color="#2DCEC8" size="1x" />
+                  </span>
                 </a>
               </>
             ) : (
@@ -58,12 +59,22 @@ const ShowFieldValue = ({ data }) => {
       {data.map(field => {
         return (
           <>
-            <Row xs="2">
+            <Row xs="12">
               <Col>
-                <p style={{ textAlign: 'end' }}>{field.label}</p>
-              </Col>
-              <Col>
-                <p className="font-weight-bold">{getFieldValue(field)}</p>
+                {field.fieldType.name === 'checkbox' ? (
+                  <>
+                    <input type="checkbox" checked={getFieldValue(field)} /> <span>{field.label}</span>
+                  </>
+                ) : field.fieldType.name === 'info' ? (
+                  <>
+                    <FormText className="pt-3">{field.label}</FormText>
+                  </>
+                ) : (
+                  <>
+                    <FormText className="pt-3">{field.label}</FormText>
+                    <span className="pt-1 text-black pb-1">{getFieldValue(field)}</span>
+                  </>
+                )}
               </Col>
             </Row>
           </>
