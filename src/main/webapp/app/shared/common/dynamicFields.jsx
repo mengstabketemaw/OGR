@@ -39,9 +39,9 @@ const DynamicFields = props =>{
         >
           {f.options.map((a,i)=>(<option key={i} value={a.name}>{a.name}</option>))  }
         </ValidatedField>
-         :
-        f.fieldType.name === "location" ?
-         <ValidatedField
+
+         :f.fieldType.name === "location" ?
+          <ValidatedField
             name={f.label}
             label={f.label}
             autoComplete={"off"}
@@ -50,14 +50,26 @@ const DynamicFields = props =>{
             required={f.required}
             onClick={()=>setLocationModal({...locationModal, show: true})}
           />
-          :
-        <ValidatedField
-          type={f.fieldType.name}
-          name={f.label}
-          label={f.label}//{translate('global.form.username.label')}
-          //placeholder="add label"//{translate('global.form.username.placeholder')}
-          required={f.required}
-        />
+
+          :f.fieldType.name === "info" ?
+            <i>{f.label}</i>
+
+          :f.fieldType.name === "checkbox" ?
+            <ValidatedField
+              className="mb-0 d-flex flex-column custom-checkbox"
+              type={f.fieldType.name}
+              name={f.label}
+              label={f.label}
+              required={f.required}
+            />
+
+          :<ValidatedField
+              type={f.fieldType.name}
+              name={f.label}
+              label={f.label}
+              required={f.required}
+            />
+
       )
       }
       <Button onClick={()=>{nav(-1)}} replace color="info">

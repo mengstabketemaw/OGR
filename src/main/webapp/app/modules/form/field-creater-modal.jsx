@@ -68,11 +68,9 @@ const FieldCreaterModal=(props)=>{
                   </option>
                 ))}
               </ValidatedField >
-            {dropDown.show &&
-              <ValidatedField type={"textarea"} draggable={true} value={dropDown.value} onChange={e=>setDropdown({show: true, value: e.target.value})}>
+              <ValidatedField type={"textarea"} hidden={!dropDown.show} draggable={true} value={dropDown.value} onChange={e=>setDropdown({show: true, value: e.target.value})}>
 
               </ValidatedField>
-            }
             <Button color="secondary" onClick={handleClose} tabIndex={1}>
               <Translate contentKey="entity.action.cancel">Cancel</Translate>
             </Button>{' '}
