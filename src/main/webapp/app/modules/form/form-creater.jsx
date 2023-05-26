@@ -14,6 +14,7 @@ import {toast} from "react-toastify";
 const FormCreater = () => {
   const dispatch = useAppDispatch();
   const form = useAppSelector(state => state.form.formTypes);
+  const [allForm,setAllForm] = useState(null)
   const [formForEdit,setForm] = useState(null);
   const states = useAppSelector(state => state.licence.states);
   const [currentState,setCurrentState] = useState(0);
@@ -27,7 +28,7 @@ const FormCreater = () => {
       const ed = {...form[0]}
       ed.fields = ed.fields.filter((f)=>{return f.state.id === parseInt(currentState)})
       setForm(ed)
-
+      setAllForm(form);
     }
   }, [form]);
   const handleFields = (fields) => {
@@ -35,10 +36,15 @@ const FormCreater = () => {
     if (fields.newId){
       const editedFields = [...formForEdit.fields,fields]
       setForm((prevState)=>({...prevState,fields:editedFields}));
+      const allFields = [...allForm.filter((f)=>{return f.id === formForEdit.id})[0]?.fields,fields]
+      const newForm = {...formForEdit,fields:allFields}
+      const allf = [...allForm.map(f=>{if(f.id===newForm.id){ return newForm}  return f})]
+      setAllForm(allf);
     }else{
       const editform = {...formForEdit};
       editform.fields = editform.fields.map(f=>{if(f.id==fields.id){return fields} return f})
       setForm(editform);
+
     }
   }
 
@@ -48,25 +54,27 @@ const FormCreater = () => {
     setForm(editform);
   }
   const handleSelectForm = (e) => {
-    const ed = {...form.filter(f=> f.id == e.target.value)[0]}
+    const ed = {...allForm.filter(f=> f.id == e.target.value)[0]}
     ed.fields = ed.fields.filter((f)=>{return f.state.id === parseInt(currentState)})
     setForm(ed);
   }
   const handleSelectState = (e) => {
     if(formForEdit){
-    const ed = {...form.filter(f=> f.id == formForEdit?.id)[0]}
+    const ed = {...allForm.filter(f=> f.id == formForEdit?.id)[0]}
     ed.fields = ed.fields.filter((f)=>{return f.state.id === parseInt(e.target.value)})
     setForm(ed);
     setCurrentState(e.target.value);
     }
   }
   const handleSubmit = (values)=>{
-    const forms = {...form.filter(f=> f.id == values.id)[0]}
+    const forms = {...allForm.filter(f=> f.id == values.id)[0]}
     const otherStateFields = {...forms.fields.filter(f=>{return f.state.id !== parseInt(currentState)})}
     const valueToSend = {...values}
     valueToSend.fields = [...valueToSend.fields,...Object.values(otherStateFields)];
     dispatch(updateForm(valueToSend)).then(()=>{
       //dispatch(getFormType())
+      const allf = [...allForm.map(f=>{if(f.id===valueToSend.id){ return valueToSend}  return f})]
+      setAllForm(allf);
       toast.success("Form Saved")}
     );
   }
@@ -92,7 +100,8 @@ const FormCreater = () => {
                onChange={handleSelectForm}
                >{form.map((f,i) => (
                    <option value={f.id} key={f.id}>
-                     {f.title}
+
+                     <Translate contentKey={"licence."+f.title}></Translate>
                    </option>
                  ))}
                </ValidatedField >
@@ -104,7 +113,7 @@ const FormCreater = () => {
 
                    {states.map((f,i) => (
                    <option value={f.id} key={f.id}>
-                     {f.name}
+                     <Translate contentKey={"state."+f.name}></Translate>
                    </option>
                  ))}
                  </>

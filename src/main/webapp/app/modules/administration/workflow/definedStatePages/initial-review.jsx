@@ -11,7 +11,7 @@ import DynamicFields from "app/shared/common/dynamicFields";
 import {formatValue,getFieldValue} from "app/shared/common/formatValueWithCustomField";
 import {Button, Col, Spinner} from "reactstrap";
 import {toast} from "react-toastify";
-
+import {Translate} from "react-jhipster";
 export const InitialReview = (params) => {
   const stateKey = 1;
   const dispatch = useAppDispatch();
@@ -40,7 +40,7 @@ export const InitialReview = (params) => {
     <>
       <Col  md="8" className={"container"} >
         <div className="d-flex ">
-          <h1> Initial Review</h1>
+          <h1>  <Translate contentKey="workflow.initialreview"></Translate></h1>
         </div>
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}

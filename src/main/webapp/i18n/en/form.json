@@ -19,5 +19,31 @@
     "fieldCreater": "Field Creater",
     "order": "Order",
     "fieldType": "Field Type"
+  },
+
+  "licence": {
+    "Exploration licence": "Exploration Licence",
+    "Pipeline Licence": "Pipeline Licence",
+    "Air Permit": "Air Permit",
+    "Drilling Permit": "Drilling Permit"
+  },
+  "state": {
+    "Form": "Form",
+    "Initial Review": "Initial Review",
+    "Technical Review": "Technical Review",
+    "Specialized Review": "Speicialized Review",
+    "Decision Making": "Decision Making"
+  },
+  "fieldstype": {
+    "Text": "Text",
+    "Button": "Button",
+    "Dropdown": "Dropdown",
+    "Date": "Date",
+    "Check-box": "Check-Box",
+    "Date and Time": "Date And Time",
+    "File": "File",
+    "Location": "Location",
+    "Text Area": "Text Area",
+    "Information": "Information"
   }
 }

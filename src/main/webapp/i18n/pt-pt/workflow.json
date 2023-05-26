@@ -7,6 +7,12 @@
     "next": "Próxima",
     "formedit": "Editar formulário",
     "addnode": "Adicionar nó",
-    "moreaction": "Mais ação"
+    "moreaction": "Mais ação",
+    "FormEdit": "Editar formulário",
+    "InitialReview": "Revisão inicial",
+    "TechnicalReview": "Revisao Tecnica",
+    "SpecializedReview": "Revisão Especializada",
+    "DecisionMaking": "Tomando uma decisão",
+    "decisionmaking": "Tomando uma decisão"
   }
 }

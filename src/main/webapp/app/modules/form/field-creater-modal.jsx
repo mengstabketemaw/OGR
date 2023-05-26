@@ -64,7 +64,7 @@ const FieldCreaterModal=(props)=>{
               >
                 {fieldTypes.map((f,i) => (
                   <option value={JSON.stringify(f)} key={f.id}>
-                    {f.display}
+                    <Translate contentKey={"fieldstype."+f.display}></Translate>
                   </option>
                 ))}
               </ValidatedField >

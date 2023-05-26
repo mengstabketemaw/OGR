@@ -37,20 +37,20 @@ const PageSwitcher = () => {
               <Button onClick={handlePreviousPage} disabled={currentPage === 0} >
 
                 <span className="d-none d-md-inline">
-                    Previous Page
+                    <Translate contentKey="workflow.previous"></Translate>
                   </span>
               </Button>
               &nbsp;
               {pages.map((page, index) => (
               <Button  key={index} onClick={() => handleSwitchPage(index)} className={currentPage === index ? "bg-green text-black btn btn-secondary":"bg-gray text-white btn btn-secondary"}>
 
-                  {page.type.name}
+                  <Translate contentKey={"workflow."+page.type.name}></Translate>
               </Button>
               ))}
               &nbsp;
               <Button onClick={handleNextPage} disabled={currentPage === pages.length - 1}>
 
-                Next Page
+                <Translate contentKey="workflow.next"></Translate>
               </Button>
             </div>
 

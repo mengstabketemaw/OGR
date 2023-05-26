@@ -11,6 +11,7 @@ import DynamicFields from "app/shared/common/dynamicFields";
 import {formatValue,getFieldValue} from "app/shared/common/formatValueWithCustomField";
 import {Button, Col, Spinner} from "reactstrap";
 import {toast} from "react-toastify";
+import {Translate} from "react-jhipster";
 
 export const SpecializedReview = (params) => {
   const stateKey = 3;
@@ -40,7 +41,7 @@ export const SpecializedReview = (params) => {
     <>
       <Col  md="8" className={"container"} >
         <div className="d-flex ">
-          <h1> Specialized Review</h1>
+          <h1> <Translate contentKey="workflow.specializedreview"></Translate></h1>
         </div>
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}

@@ -1,6 +1,6 @@
 {
   "form": {
-    "title": "Title",
+    "title": "Forma",
     "edit": "Editar um formulário",
     "fields": {
       "title": "Título",
@@ -19,5 +19,30 @@
     "fieldCreater": "Criador de campo",
     "order": "Ordem",
     "fieldType": "Tipo de campo"
+  },
+  "licence": {
+    "Exploration licence": "licença de exploração",
+    "Pipeline Licence": "Licença de Oleoduto",
+    "Air Permit": "Permissão Aérea",
+    "Drilling Permit": "Permissão de Perfuração"
+  },
+  "state": {
+    "Form": "Editar formulário",
+    "Initial Review": "Revisão inicial",
+    "Technical Review": "Revisao Tecnica",
+    "Specialized Review": "Revisão Especializada",
+    "Decision Making": "Tomando uma decisão"
+  },
+  "fieldstype": {
+    "Text": "Texto",
+    "Button": "Botão",
+    "Dropdown": "Suspensa",
+    "Date": "Data",
+    "Check-box": "caixa de seleção",
+    "Date and Time": "Data e hora",
+    "File": "Arquivo",
+    "Location": "Localização",
+    "Text Area": "Área de texto",
+    "Information": "Informação"
   }
 }

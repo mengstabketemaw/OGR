@@ -7,6 +7,12 @@
     "next": "Next",
     "formedit": "Form Edit",
     "addnode": "Add Node",
-    "moreaction": "More Action"
+    "moreaction": "More Action",
+    "FormEdit": "Form Edit",
+    "InitialReview": "Initial Review",
+    "TechnicalReview": "Technical Review",
+    "SpecializedReview": "Speicialized Review",
+    "DecisionMaking": "Decision Making",
+    "decisionmaking": "Decision Making"
   }
 }

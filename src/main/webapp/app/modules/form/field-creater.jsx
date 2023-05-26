@@ -73,7 +73,7 @@ const FieldCreater = (param) =>{
       </tr>
       </thead>
       <tbody>
-      {fields.length >0 && fields?.map( (field) =>(
+      {fields?.map( (field) =>(
           <tr id={field.id} key={field.id} onClick={()=>editField(field.id)}>
             <td>{field.label}</td>
             <td>{field.placeholder}</td>
