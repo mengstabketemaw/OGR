@@ -12,12 +12,11 @@ const DynamicWorkFlow = (props) => {
   return(
     // Sequence Matter here toDo make it to not matter
     <PageSequence id={id} formId={formId}>
-      <FormEdit key={0}/>
-      <InitialReview key={1}/>
-      <TechnicalReview key={2}/>
-      <SpecializedReview key={3}/>
-      <DecisionMaking key={4}/>
-      <IssuedOrDenied key={5}/>
+      <FormEdit />
+      <InitialReview />
+      <TechnicalReview />
+      <SpecializedReview />
+      <DecisionMaking />
     </PageSequence >
   )
 };
