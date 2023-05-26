@@ -11,9 +11,9 @@ const PageSequence = ({ id,formId, children }) => {
   const [currentPage, setCurrentPage] = useState( 0);
   const pagesFromDatabase = sequenceFromDatabase.map((pageIndex) => pages[pageIndex]);
 
-  useEffect(() => {
-    setCurrentPage(sequenceFromDatabase[currentState.id])
-  }, [currentState]);
+  // useEffect(() => {
+  //   setCurrentPage(pagesFromDatabase.length > currentState.id ? 0 : sequenceFromDatabase[currentState.id] | 0)
+  // }, [currentState]);
 
   const switchPage = (pageNumber) => {
     setCurrentPage(pageNumber);

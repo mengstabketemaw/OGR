@@ -16,7 +16,6 @@ const PageSwitcher = () => {
   const { pages, currentPage, switchPage, id , formId } = useContext(PageContext);
   const sequenceFromDatabase = useAppSelector(state => state.licence.currentSequence);
   const [showModal,setShowModal] = useState(false)
-  const currentState = useAppSelector(state => state.workflow.currentState);
   const handleSwitchPage = (pageNumber) => {
 
     if (pageNumber >= 0 && pageNumber < pages.length) {
