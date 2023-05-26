@@ -72,6 +72,17 @@ export const createDecisionMaking = createAsyncThunk(
   { serializeError: serializeAxiosError }
 );
 
+export const updateStatusAndState = createAsyncThunk(
+  'update_status_state',
+  async (p, thunkAPI) => {
+    const url = `/api/licence/updateLicenceStage/${p.id}?stateId=${p.data.stateId}&status=${p.data.status}`;
+    return await axios.put(url);
+  },
+  { serializeError: serializeAxiosError }
+);
+export const getStateOfLicence  = createAsyncThunk('fetch_licence', async (id) => axios.get(`api/licence/${id}`), {
+  serializeError: serializeAxiosError,
+});
 
 export const WorkflowSlice = createSlice({
   name: 'workflow',
@@ -99,6 +110,10 @@ export const WorkflowSlice = createSlice({
       .addCase(getFieldsDataByLicenceDM.fulfilled, (state, action) => {
         state.loading = false;
         state.currentFieldData = action.payload.data;
+      })
+      .addCase(getStateOfLicence.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentState = action.payload.data.stage;
       })
       .addMatcher(isFulfilled(createInitialReview,createTechnicalReview,createSpecializedReview,createDecisionMaking), (state, action) => {
         state.updating = false;

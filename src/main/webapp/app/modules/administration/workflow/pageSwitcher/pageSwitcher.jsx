@@ -1,14 +1,20 @@
-import React, {useContext} from "react";
+import React, {useContext,useState} from "react";
 import {PageContext} from './pageSequence'
 import { Button, Card, CardHeader, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner, Table} from "reactstrap";
 import {Translate} from "react-jhipster";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-const PageSwitcher = () => {
-  const { pages, currentPage, switchPage } = useContext(PageContext);
+import {useAppSelector, useAppDispatch} from "app/config/store";
+import {IssuedOrDenied} from "app/modules/administration/workflow/definedStatePages/issued-or-denied";
+import {updateStatusAndState} from "app/modules/administration/workflow/workflow.reducer";
 
+const PageSwitcher = () => {
+  const dispatch = useAppDispatch();
+  const { pages, currentPage, switchPage, id , formId } = useContext(PageContext);
+  const sequenceFromDatabase = useAppSelector(state => state.licence.currentSequence);
+  const [showModal,setShowModal] = useState(false)
   const handleSwitchPage = (pageNumber) => {
-    // Check if the pageNumber is within the range of available pages
+
     if (pageNumber >= 0 && pageNumber < pages.length) {
       switchPage(pageNumber);
     }
@@ -18,9 +24,28 @@ const PageSwitcher = () => {
   };
   const handleNextPage = () => {
     handleSwitchPage(currentPage + 1);
+    const param = {
+      id : id,
+      data : {
+        stateId : sequenceFromDatabase[currentPage],
+        status:'Inprogress'
+      }
+    }
+    dispatch(updateStatusAndState(param))
+    console.log(id)
+    console.log(formId)
+    console.log(sequenceFromDatabase[currentPage])
+    console.log(switchPage)
   };
+  const handleProceed = () =>{
+    setShowModal(true)
+  }
+  const handleClose = () =>{
+    setShowModal(false)
+  }
 
   return (
+    <>
     <Row className="d-flex justify-content-center">
       <Col md="8">
         <Card className="shadow">
@@ -42,23 +67,29 @@ const PageSwitcher = () => {
               </Button>
               &nbsp;
               {pages.map((page, index) => (
-              <Button  key={index} onClick={() => handleSwitchPage(index)} className={currentPage === index ? "bg-green text-black btn btn-secondary":"bg-gray text-white btn btn-secondary"}>
+              <Button  key={index} onClick={() => handleSwitchPage(index)} className={currentPage === index ? "bg-cornsilk text-black btn btn-secondary":"bg-gray text-white btn btn-secondary"}>
 
                   <Translate contentKey={"workflow."+page.type.name}></Translate>
               </Button>
               ))}
               &nbsp;
-              <Button onClick={handleNextPage} disabled={currentPage === pages.length - 1}>
+              <Button onClick={handleNextPage} hidden={currentPage === pages.length - 1} disabled={currentPage === pages.length - 1}>
 
                 <Translate contentKey="workflow.next"></Translate>
               </Button>
+              <Button className={'mr-4 mb-2 bg-gradient-green text-white'} onClick={handleProceed} hidden={currentPage !== pages.length - 1} >
+
+                <Translate contentKey="workflow.proceed"></Translate>
+              </Button>
+
             </div>
 
           </CardHeader>
         </Card>
       </Col>
     </Row>
-
+      <IssuedOrDenied showModal={showModal} handleClose={handleClose}/>
+    </>
 
   );
 };

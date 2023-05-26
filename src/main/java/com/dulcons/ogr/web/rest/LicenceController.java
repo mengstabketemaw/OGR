@@ -1,11 +1,9 @@
 package com.dulcons.ogr.web.rest;
 
-import com.dulcons.ogr.domain.Compliance;
-import com.dulcons.ogr.domain.Licence;
-import com.dulcons.ogr.domain.LicenceFieldData;
-import com.dulcons.ogr.domain.User;
+import com.dulcons.ogr.domain.*;
 import com.dulcons.ogr.repository.ComplianceRepository;
 import com.dulcons.ogr.repository.LicenceRepository;
+import com.dulcons.ogr.repository.StateRepository;
 import com.dulcons.ogr.service.UserService;
 import com.dulcons.ogr.web.rest.vm.LocationFormDto;
 import java.util.List;
@@ -25,10 +23,18 @@ public class LicenceController {
     private final UserService userService;
     private final ComplianceRepository complianceRepository;
 
-    public LicenceController(LicenceRepository licenceRepository, UserService userService, ComplianceRepository complianceRepository) {
+    private final StateRepository stateRepository;
+
+    public LicenceController(
+        LicenceRepository licenceRepository,
+        UserService userService,
+        ComplianceRepository complianceRepository,
+        StateRepository stateRepository
+    ) {
         this.licenceRepository = licenceRepository;
         this.userService = userService;
         this.complianceRepository = complianceRepository;
+        this.stateRepository = stateRepository;
     }
 
     @GetMapping
@@ -111,5 +117,15 @@ public class LicenceController {
         List<Long> licenceId = complianceRepository.findLicenceIdByCompany_Id(user.getId());
         Iterable<Licence> licences = licenceRepository.findByUser_IdAndForm_IdIn(user.getId(), licenceId);
         return licences;
+    }
+
+    @PutMapping("/updateLicenceStage/{id}")
+    public void updateLiSAS(
+        @PathVariable Long id,
+        @RequestParam(value = "stateId") Long stateId,
+        @RequestParam(value = "status") String status
+    ) {
+        State state = stateRepository.findById(stateId).orElse(stateRepository.findById(stateId).orElseThrow());
+        licenceRepository.updateStatusAndStageById(status, state, id);
     }
 }

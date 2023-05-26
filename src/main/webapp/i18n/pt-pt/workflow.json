@@ -13,6 +13,11 @@
     "TechnicalReview": "Revisao Tecnica",
     "SpecializedReview": "Revisão Especializada",
     "DecisionMaking": "Tomando uma decisão",
-    "decisionmaking": "Tomando uma decisão"
+    "decisionmaking": "Tomando uma decisão",
+    "proceed": "Continuar",
+    "deny": "Negar",
+    "authorize": "Autorizar",
+    "infoPermit": "Deseja Autorizar ou Negar esta Solicitação?",
+    "issueordeny": "Emitir/Negar"
   }
 }
