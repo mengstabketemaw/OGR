@@ -22,7 +22,7 @@ public class Licence {
 
     private Instant submittedDate = Instant.now();
 
-    private String status = "undefined";
+    private String status = "Inprogress";
 
     @ManyToOne(fetch = FetchType.EAGER)
     private State stage = new State(0L, "Form");

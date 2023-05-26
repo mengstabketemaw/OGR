@@ -27,13 +27,19 @@ const Workflow = () => {
   const states = useAppSelector(state => state.licence.states);
   const [formForEdit,setEditForm] = useState({});
   const wf = useSelector(state => state.licence.workflow);
-  const [workflowForEdit,setWorkflowForEdit] = useState(null);
-  const formatedNode = formatReactFlow(states);
+  const sequence = useSelector(state => state.licence.currentSequence);
+  const [formatedNode,setformatedNode] = useState(null);
+  //const formatedNode = formatReactFlow(states,sequence);
   const fromatedEdge = formatEdge(wf?.workFlowSequences)//[{ id: '1', source: '4', target: '1' }]//formatEdge(workflowForEdit?.workFlowSequences) || []
   useEffect(()=>{
     dispatch(getState());
     dispatch(getFormType());
   },[])
+
+  useEffect(() => {
+    setformatedNode(formatReactFlow(states,sequence))
+  }, [sequence]);
+
 
   useEffect(() => {
     if(form.length > 0) {
@@ -79,7 +85,7 @@ const Workflow = () => {
 
             </ValidatedField >
           </Panel>
-          {formatedNode.length>0 && fromatedEdge &&
+          {formatedNode && formatedNode.length>0 && fromatedEdge &&
           <ReactWorkFlow formatedNode={formatedNode}
                          initialEdges={fromatedEdge}
                          handleSubmit={handleSubmit}

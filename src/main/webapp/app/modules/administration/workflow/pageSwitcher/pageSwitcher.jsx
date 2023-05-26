@@ -8,6 +8,7 @@ import {useAppSelector, useAppDispatch} from "app/config/store";
 import {IssuedOrDenied} from "app/modules/administration/workflow/definedStatePages/issued-or-denied";
 import {updateStatusAndState} from "app/modules/administration/workflow/workflow.reducer";
 import {useNavigate} from "react-router-dom";
+import './pageS.css'
 
 const PageSwitcher = () => {
   const dispatch = useAppDispatch();
@@ -62,6 +63,7 @@ const PageSwitcher = () => {
 
   return (
     <>
+
     <Row className="d-flex justify-content-center">
       <Col md="8">
         <Card className="shadow">
@@ -74,13 +76,26 @@ const PageSwitcher = () => {
                   </span>
               </Button>
               &nbsp;
-              {pages.map((page, index) => (
-                <Button  key={index}  disabled={sequenceFromDatabase[currentState.id] < index}
-                         onClick={() => handleSwitchPage(index)} className={currentPage === index ? "bg-blue text-white btn btn-secondary btn-sm":"bg-white text-blue btn btn-secondary btn-sm"}>
+              <div className="box">
+                <div className="steps">
+                  <ul className="nav">
+                    {pages.map((page, index) => {
+                      return <li  key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
+                                  onClick={() => handleSwitchPage(index)}
+                                  >
+                        <div>Step {index + 1}<br /><span > {page.type.name}</span></div>
+                      </li>
+                    })}
+                  </ul>
+                </div>
+              </div>
+              {/* {pages.map((page, index) => ( */}
+              {/*   <Button  key={index}  disabled={sequenceFromDatabase[currentState.id] < index} */}
+              {/*            onClick={() => handleSwitchPage(index)} className={currentPage === index ? "bg-blue text-white btn btn-secondary btn-sm":"bg-white text-blue btn btn-secondary btn-sm"}> */}
 
-                  <Translate contentKey={"workflow."+page.type.name}></Translate>
-                </Button>
-              ))}
+              {/*     <Translate contentKey={"workflow."+page.type.name}></Translate> */}
+              {/*   </Button> */}
+              {/* ))} */}
 
               <Button onClick={handleNextPage} hidden={currentPage === pages.length - 1} disabled={currentPage === pages.length - 1}>
 
