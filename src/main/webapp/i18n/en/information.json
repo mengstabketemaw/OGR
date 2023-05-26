@@ -1,0 +1,31 @@
+{
+  "information": {
+    "titles": {
+      "process": "Application Process",
+      "requirements": "Requirements",
+      "regulations": "Relevant Regulations and Guidelines",
+      "faq": "Frequently Asked Questions?"
+    },
+    "more": "...more",
+    "pageKey": {
+      "1": {
+        "title": "An Exploration Licence grants permission to explore and evaluate the potential presence of oil and gas resources in a specific area.\t  It is a crucial step in the process of identifying and harnessing valuable energy resources.",
+        "titleShort": "An Exploration Licence grants permission",
+        "process": "To apply for a License, applicants must go through a detailed application process. It involves submitting a comprehensive exploration plan that outlines the proposed methods, timeline, and budget for the exploration activities.The plan should demonstrate a thorough understanding of the area of interest and highlight the potential benefits of the exploration activities. <br><br> In addition to the exploration plan, applicants must provide evidence of their technical and financial capabilities to undertake the proposed exploration activities. This may include details about the experience and expertise of the team, available equipment and resources, and financial statements or investment plans to support the exploration efforts.",
+        "processShort": "To apply for a License, applicants",
+        "requirements": " The requirements for obtaining an Exploration Permit include:  <br> <br>            <ul>   <li>Submission of a detailed exploration plan: This plan should provide a clear roadmap of the proposed exploration activities, including the methodology, equipment, and expected outcomes.</li>            <br><br>          <li>Evidence of technical and financial capabilities: Applicants need to demonstrate their technical expertise, experience, and financial stability to carry out the exploration activities effectively.</li>      <br><br>                <li>Environmental impact assessment: As part of the application process, an environmental impact assessment is usually required to evaluate and mitigate any potential negative effects on the environment.</li>         <br><br>             <li>Payment of application and permit fees: There are usually fees associated with the application and permit issuance, which need to be paid as per the regulations and guidelines.</li>                    </ul>",
+        "requirementsShort": "The requirements for obtaining an",
+        "regulations": "   <p>\n                      The exploration activities are subject to specific regulations and guidelines imposed by relevant authorities. These regulations aim to ensure the responsible and sustainable exploration of oil and gas resources while considering environmental protection and safety measures. It is important for applicants to be aware of and comply with these regulations throughout the exploration process.\n                    </p>\n  <br>   <br>               <p>\n                      Additionally, applicants may need to engage with stakeholders, local communities, and other interested parties to address any concerns and obtain necessary permissions or approvals as part of the exploration permit process.\n                    </p>\n   <br><br>                 <p>\n                      By adhering to the regulations, guidelines, and best practices, exploration permit holders can conduct their activities in a manner that maximizes the chances of successful resource identification while minimizing environmental impacts and ensuring the safety of personnel and surrounding communities.\n                    </p>",
+        "regulationsShort": "The exploration activities are sub",
+        "faq": {
+          "question1": "What is the purpose of an Exploration Licence?",
+          "answer1": "An Exploration License is designed to grant permission for the evaluation and assessment of potential\n                oil and gas resources in\n                a specific area. It allows companies or individuals to conduct exploration activities to determine the\n                presence, quality, and\n                extent of these resources before proceeding with further development and production.",
+          "question2": "Are there any specific environmental regulations that need to be followed\n                during the exploration activities?",
+          "answer2": "Yes, exploration activities are typically subject to specific environmental regulations and guidelines\n                to ensure the responsible\n                and sustainable exploration of oil and gas resources. These regulations aim to minimize the\n                environmental impact by implementing measures\n                such as environmental impact assessments, mitigation strategies, and monitoring of the exploration\n                activities. It is important for applicants\n                to familiarize themselves with the applicable environmental regulations and ensure compliance throughout\n                the exploration process.",
+          "question3": "How long does it take to obtain an Exploration License?",
+          "answer3": "The timeframe for obtaining an Exploration License can vary depending on several factors. These factors\n                include the regulatory requirements,\n                the complexity of the project, the completeness of the application, and the efficiency of the licencing\n                process. It is advisable\n                to consult with the relevant authorities or agencies responsible for issuing Exploration Licences to get\n                a better understanding of the expected timeline."
+        }
+      }
+    }
+  }
+}
