@@ -39,6 +39,7 @@ const DynamicFields = props =>{
     <ValidatedForm onSubmit={handlevalue} defaultValues={defaultValue} >
       {fields && fields.map( f => f.fieldType.name === "select" ?
         <ValidatedField
+          key = {f.label}
           type={f.fieldType.name}
           name={f.label}
           label={f.label}//{translate('global.form.username.label')}
@@ -50,6 +51,7 @@ const DynamicFields = props =>{
 
          :f.fieldType.name === "location" ?
           <ValidatedField
+            key = {f.label}
             name={f.label}
             label={f.label}
             autoComplete={"off"}
@@ -64,6 +66,7 @@ const DynamicFields = props =>{
 
           :f.fieldType.name === "checkbox" ?
             <ValidatedField
+              key = {f.label}
               className="mb-0 d-flex flex-column custom-checkbox"
               type={f.fieldType.name}
               name={f.label}
@@ -72,10 +75,12 @@ const DynamicFields = props =>{
             />
 
           :<ValidatedField
+              key = {f.label}
               type={f.fieldType.name}
               name={f.label}
               label={f.label}
               required={f.required}
+              placeholder={f.placeholder}
             />
 
       )

@@ -12,17 +12,14 @@ const adminMenuItems = () => (
     <MenuItem icon="users" to="/admin/user-management">
       <Translate contentKey="global.menu.admin.userManagement">User management</Translate>
     </MenuItem>
-    <MenuItem icon="dagger" to="/admin/location">
-      <FontAwesomeIcon icon={faMap} />
+    <MenuItem icon={faMap} to="/admin/location">
       <Translate contentKey="global.menu.admin.locationReport">Location Report</Translate>
     </MenuItem>
 
-    <MenuItem icon="dagger" to="/form/create">
-      <FontAwesomeIcon icon={faPager} />
+    <MenuItem icon={faPager} to="/form/create">
       <Translate contentKey="form.title">Workflow</Translate>
     </MenuItem>
-    <MenuItem icon="dagger" to="/workflow">
-      <FontAwesomeIcon icon={faCalendarTimes} />
+    <MenuItem icon={faCalendarTimes} to="/workflow">
       <Translate contentKey="global.menu.admin.workflow">Workflow</Translate>
     </MenuItem>
     {/* jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here */}

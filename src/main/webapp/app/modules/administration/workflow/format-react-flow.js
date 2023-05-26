@@ -1,10 +1,24 @@
 import { MarkerType } from 'reactflow';
-export const formatReactFlow = value => {
+export const formatReactFlow = (value, sequence) => {
   const returnValue = [];
   if (value && value.length > 0) {
     let y = 75;
     let x = 125;
-    for (const ele of value) {
+    let sortedValue = [...value];
+
+    if (sequence && sequence.length > 0) {
+      sortedValue = value.slice().sort((a, b) => {
+        const indexA = sequence.indexOf(a.id);
+        const indexB = sequence.indexOf(b.id);
+
+        if (indexA === -1) return 1;
+        if (indexB === -1) return -1;
+
+        return indexA - indexB;
+      });
+    }
+
+    for (const ele of sortedValue) {
       y = y + 75;
       x = x + 75;
       returnValue.push({

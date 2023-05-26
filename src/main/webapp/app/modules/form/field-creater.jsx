@@ -96,12 +96,15 @@ const FieldCreater = (param) =>{
           <Translate contentKey={'form.add'} />
         </Button>
       </div>
-      <FieldCreaterModal showModal = {show}
-                         handleClose = {closeModal}
-                         field = {selectedField}
-                         handleFields = {handleFields}
-                         handleDelete={(value)=>{closeModal();handleDelete(value)}}
-      />
+      {show&&<FieldCreaterModal showModal={show}
+                          handleClose={closeModal}
+                          field={selectedField}
+                          handleFields={handleFields}
+                          handleDelete={(value) => {
+                            closeModal();
+                            handleDelete(value)
+                          }}
+      />}
     </>
   )
 }

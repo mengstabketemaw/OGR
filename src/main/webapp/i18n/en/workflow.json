@@ -7,12 +7,17 @@
     "next": "Next",
     "formedit": "Form Edit",
     "addnode": "Add Node",
-    "moreaction": "More Action",
+    "moreaction": "Proceed",
     "FormEdit": "Form Edit",
     "InitialReview": "Initial Review",
     "TechnicalReview": "Technical Review",
     "SpecializedReview": "Speicialized Review",
     "DecisionMaking": "Decision Making",
-    "decisionmaking": "Decision Making"
+    "decisionmaking": "Decision Making",
+    "proceed": "Finish",
+    "deny": "Deny",
+    "authorize": "Issue",
+    "infoPermit": "Do you want to issue or deny this Request?",
+    "issueordeny": "Issue/Deny"
   }
 }

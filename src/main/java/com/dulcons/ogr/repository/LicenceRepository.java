@@ -1,6 +1,7 @@
 package com.dulcons.ogr.repository;
 
 import com.dulcons.ogr.domain.Licence;
+import com.dulcons.ogr.domain.State;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
@@ -9,8 +10,10 @@ import java.util.stream.Stream;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface LicenceRepository extends PagingAndSortingRepository<Licence, Long> {
     @Query("select l from Licence l where l.user.id = ?1 and l.form.id in ?2")
@@ -44,4 +47,9 @@ public interface LicenceRepository extends PagingAndSortingRepository<Licence, L
 
     @Query("select l from Licence l join fetch l.data where l.id = ?1")
     Optional<Licence> findById(Long aLong);
+
+    @Transactional
+    @Modifying
+    @Query("update Licence l set l.status = ?1, l.stage = ?2 where l.id = ?3")
+    int updateStatusAndStageById(String status, State stage, Long id);
 }

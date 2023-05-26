@@ -134,8 +134,14 @@ const FormData = () => {
                       <th>{data.stage?.name || 'Form'}</th>
                       <th>{data.status}</th>
                       <th>
-                        <Button color="primary" onClick={e => setDetailModal({ show: true, id: data.id, formId: data.form.id })} size="sm">
-                          View
+                        <Button
+                          color="primary"
+                          onClick={() => {
+                            nav(`/sequence/${data.form.id}/${data.id}`);
+                          }}
+                          size="sm"
+                        >
+                          <Translate contentKey={'workflow.moreaction'} />
                         </Button>
 
                         <Button

@@ -52,8 +52,8 @@ const ReactWorkFlow = (param) =>{
       id: getNodeId(),
       data: { label: 'Added node' },
       position: {
-        x: Math.random() * window.innerWidth - 100,
-        y: Math.random() * window.innerHeight,
+        x: 100,
+        y: 200,
       },
     };
     setNodes((nds) => nds.concat(newNode));
