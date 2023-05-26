@@ -82,7 +82,7 @@ const FieldCreater = (param) =>{
             </Button>):<Button color="success">
               FALSE
             </Button>}</td>
-            <td>{field.fieldType.display}</td>
+            <td><Translate contentKey={"fieldstype."+field.fieldType.display}></Translate></td>
           </tr>
         )
       )}
