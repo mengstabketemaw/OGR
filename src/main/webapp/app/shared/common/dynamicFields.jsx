@@ -80,6 +80,7 @@ const DynamicFields = props =>{
               name={f.label}
               label={f.label}
               required={f.required}
+              placeholder={f.placeholder}
             />
 
       )

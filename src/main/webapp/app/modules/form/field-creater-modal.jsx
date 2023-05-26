@@ -5,10 +5,14 @@ import {Link} from "react-router-dom";
 import {useAppSelector} from "app/config/store";
 
 const FieldCreaterModal=(props)=>{
-  const [dropDown, setDropdown] = useState({show: false, value:""});
-
-  const { handleClose, field, handleFields, handleDelete } = props;
+  let { handleClose, field, handleFields, handleDelete } = props;
+  const [fState, setFState] = useState(field.fieldType);
   const fieldTypes = useAppSelector(state => state.form.fieldTypes);
+  const isSelectField = field.fieldType.name === "select";
+  const optionsValue = field.options.map(option=>option.name).join("\n");
+
+  const [dropDown, setDropdown] = useState({ show: isSelectField, value: optionsValue });
+
   const handleSubmitField = value => {
     let valueToSend = {...value}
     valueToSend.fieldType = JSON.parse(valueToSend.fieldType)
@@ -18,8 +22,12 @@ const FieldCreaterModal=(props)=>{
 
   const handleFieldTypesClick = (e) => {
     setDropdown((prev)=>({...prev, show: JSON.parse(e.target.value)?.name === "select"}));
+    setFState(JSON.parse(e.target.value))
   }
 
+  const defaultValue = () => {
+    return {...field, fieldType: field.fieldType.id}
+  }
 
   return(
     <Modal isOpen={props.showModal} toggle={handleClose} backdrop="static" id="form-page" autoFocus={false}>
@@ -29,7 +37,7 @@ const FieldCreaterModal=(props)=>{
         </ModalHeader>
 
         <ModalBody>
-          <ValidatedForm onSubmit={handleSubmitField} defaultValues={field} >
+          <ValidatedForm onSubmit={handleSubmitField} defaultValues={{...field, fieldType: JSON.stringify(fState)}} >
           <ValidatedField
                 type="text"
                 name="label"
@@ -68,7 +76,7 @@ const FieldCreaterModal=(props)=>{
                   </option>
                 ))}
               </ValidatedField >
-              <ValidatedField type={"textarea"} hidden={!dropDown.show} draggable={true} value={dropDown.value} onChange={e=>setDropdown({show: true, value: e.target.value})}>
+              <ValidatedField type={"textarea"} hidden={!dropDown.show} value={dropDown.value} onChange={e=>setDropdown({show: true, value: e.target.value})}>
 
               </ValidatedField>
             <Button color="secondary" onClick={handleClose} tabIndex={1}>

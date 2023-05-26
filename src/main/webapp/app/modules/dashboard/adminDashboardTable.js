@@ -9,9 +9,11 @@ import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { Translate } from 'react-jhipster';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 import { DetailModal } from 'app/modules/home/user-home';
+import { useNavigate } from 'react-router-dom';
 
 const PAGE_SIZE = ITEMS_PER_PAGE;
 export const AdminDashboardTable = ({ type }) => {
+  const nav = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [licences, setLicences] = useState({ loading: true, data: { content: [] } });
@@ -131,8 +133,14 @@ export const AdminDashboardTable = ({ type }) => {
                       <th>{data.stage?.name || 'Form'}</th>
                       <th>{data.status}</th>
                       <th>
-                        <Button color="primary" onClick={e => setDetailModal({ show: true, id: data.id })} size="sm">
-                          <Translate contentKey={'entity.action.view'} />
+                        <Button
+                          color="primary"
+                          onClick={() => {
+                            nav(`/sequence/${data.form.id}/${data.id}`);
+                          }}
+                          size="sm"
+                        >
+                          <Translate contentKey={'workflow.moreaction'} />
                         </Button>
                       </th>
                     </tr>
