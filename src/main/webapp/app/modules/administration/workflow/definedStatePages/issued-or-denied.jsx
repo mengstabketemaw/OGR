@@ -5,11 +5,7 @@ import {translate, Translate, ValidatedField, ValidatedForm} from "react-jhipste
 
 export const IssuedOrDenied = (props) => {
 
-  const { handleClose, showModal } = props;
-  const fieldTypes = useAppSelector(state => state.form.fieldTypes);
-  const handleSubmitField = value => {
-
-  };
+  const { handleClose, showModal, handleSubmit } = props;
 
 
   return(
@@ -27,10 +23,10 @@ export const IssuedOrDenied = (props) => {
               <Translate contentKey="entity.action.cancel">Cancel</Translate>
             </Button>{' '}
 
-            <Button className="bg-gradient-red text-white" >
+            <Button className="bg-gradient-red text-white" onClick={()=> handleSubmit(false)} >
               <Translate contentKey={'workflow.deny'}/>
             </Button>{' '}
-            <Button className={'bg-gradient-green text-white'} type="submit" >
+            <Button className={'bg-gradient-green text-white'} onClick={()=> handleSubmit(true)} >
               <Translate contentKey={'workflow.authorize'}/>
             </Button>
 
