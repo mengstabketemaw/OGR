@@ -6,6 +6,7 @@ import { createLicence } from 'app/modules/licence/license.reducer';
 import { Col, Row } from 'reactstrap';
 import DynamicFields from 'app/shared/common/dynamicFields';
 import { formatValue } from 'app/shared/common/formatValue';
+import { toast } from 'react-toastify';
 
 const ApplyPermit = () => {
   const [params] = useSearchParams();
@@ -25,7 +26,11 @@ const ApplyPermit = () => {
     };
     console.log(valueToSend);
     // @ts-ignore
-    dispatch(createLicence(valueToSend));
+
+    dispatch(createLicence(valueToSend)).then(
+      // @ts-ignore
+      toast.success('Saved Successfully')
+    );
   };
   return (
     <div className="">
