@@ -20,6 +20,7 @@ import axios from "axios";
 import {convertFileToBase64} from "app/shared/common/formatValue";
 import moment from "moment";
 import {toast} from "react-toastify";
+import {faDownload} from "@fortawesome/free-solid-svg-icons";
 
 function getFieldValueName(type){
   switch (type) {
@@ -186,7 +187,28 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
       setFieldData(prev => [...prev, getFieldDataTemplate(name)])
       return "No file chosen";
     }
-    return fData.encodingFileType?.split('~')[0];
+    const fileName = fData.encodingFileType?.split('~')[0];
+    const encodedType = fData.encodingFileType?.split('~')[1];
+
+    return (
+      <>
+        {fileName && encodedType ? (
+          <>
+            <a
+              className="cursor-pointer hover-blue underline-hover d-flex flex-row align-items-center"
+              download={fileName}
+              href={`${encodedType},${fData.file}`}
+            >
+                  <span className="pt-1 text-blue pb-1">
+                    {fileName} <FontAwesomeIcon icon={faDownload} color="#2DCEC8" size="1x" />
+                  </span>
+            </a>
+          </>
+        ) : (
+          <p className="cursor-pointer">No File</p>
+        )}
+      </>
+    );
   }
 
 
@@ -232,7 +254,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
                       required={false}
                       onChange={getOnChangeHandlerForFile(field.label, field.fieldType)}
                     />
-                      <p className="mb3" style={{fontSize:"0.6em", color:"grey", marginLeft:"50px"}}>File chosen: {getFileName(field.label)}</p>
+                      <div className="mb-3 border-info border-bottom border-left border-right p-1 rounded-bottom">{getFileName(field.label)}</div>
                   </>
 
             :field.fieldType.name === "checkbox" ?
