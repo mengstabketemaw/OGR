@@ -18,7 +18,9 @@
   "formModal": {
     "fieldCreater": "Field Creater",
     "order": "Order",
-    "fieldType": "Field Type"
+    "fieldType": "Field Type",
+    "option": "Options",
+    "optionPlaceHolder": "Options must be separated by new line"
   },
 
   "licence": {

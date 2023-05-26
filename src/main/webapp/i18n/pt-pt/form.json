@@ -18,7 +18,9 @@
   "formModal": {
     "fieldCreater": "Criador de campo",
     "order": "Ordem",
-    "fieldType": "Tipo de campo"
+    "fieldType": "Tipo de campo",
+    "option": "opções",
+    "optionPlaceHolder": "As opções devem ser separadas por nova linha"
   },
   "licence": {
     "Exploration licence": "licença de exploração",
