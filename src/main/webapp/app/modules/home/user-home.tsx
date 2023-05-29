@@ -5,14 +5,14 @@ import { isArray } from 'lodash';
 import moment from 'moment';
 import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { useNavigate } from 'react-router-dom';
-import { getWorkflowByForm } from 'app/modules/licence/license.reducer';
-import { useAppDispatch } from 'app/config/store';
 import { Translate } from 'react-jhipster';
+import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
   const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
   const nav = useNavigate();
+  const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
 
   useEffect(() => {
     axios
@@ -125,7 +125,7 @@ const UserHome = () => {
                         <th>
                           <Button
                             color="primary"
-                            onClick={e => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
+                            onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
                             size="sm"
                           >
                             <Translate contentKey={'entity.action.view'} />
@@ -133,11 +133,20 @@ const UserHome = () => {
 
                           <Button
                             color="secondary"
-                            onClick={e => nav('/dataUpdate/' + data.id)}
+                            onClick={() => nav('/dataUpdate/' + data.id)}
                             disabled={!(data.stage?.id === 0 || data.stage === null)}
                             size="sm"
                           >
                             <Translate contentKey={'entity.action.edit'} />
+                          </Button>
+
+                          <Button
+                            color="danger"
+                            onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
+                            disabled={!(data.stage?.id === 0 || data.stage === null)}
+                            size="sm"
+                          >
+                            <Translate contentKey={'entity.action.delete'} />
                           </Button>
                         </th>
                       </tr>
@@ -149,19 +158,20 @@ const UserHome = () => {
           </Col>
         </Row>
       </Container>
-      <DetailModal
-        id={detailModal.id}
-        formId={detailModal.formId}
-        show={detailModal.show}
-        handleClose={() => setDetailModal({ ...detailModal, show: false })}
+      <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
+
+      <DeleteLicenceModal
+        id={deleteLicence.id}
+        show={deleteLicence.show}
+        name={deleteLicence.name}
+        handleClose={() => setDeleteLicence({ id: -1, show: false, name: '' })}
       />
     </>
   );
 };
 
-export const DetailModal = ({ id, formId, show, handleClose }) => {
+export const DetailModal = ({ id, show, handleClose }) => {
   const [data, setDate] = useState({ loading: true, data: { form: { fields: [] }, data: [] } });
-  const nav = useNavigate();
 
   useEffect(() => {
     if (id === -1) return;

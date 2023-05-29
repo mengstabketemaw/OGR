@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
-import loading = toast.loading;
-import { Button, Card, CardHeader, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner, Table } from 'reactstrap';
+import { Button, Card, CardHeader, Col, Row, Spinner, Table } from 'reactstrap';
 import { isArray } from 'lodash';
 import moment from 'moment/moment';
 import CustomPagination from 'app/shared/common/CustomPagination';
-import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { DetailModal } from 'app/modules/home/user-home';
 import { Translate } from 'react-jhipster';
+import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 
 const FormData = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -18,6 +16,7 @@ const FormData = () => {
   const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
   const [param] = useSearchParams();
   const nav = useNavigate();
+  const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
 
   const fetchData = page => {
     // Construct the URL with the page query parameter
@@ -32,8 +31,6 @@ const FormData = () => {
       })
       .catch(console.log);
   };
-
-  const handleShowUpdateModal = id => {};
 
   const handlePageChange = pageNumber => {
     setCurrentPage(pageNumber - 1);
@@ -154,6 +151,14 @@ const FormData = () => {
                         >
                           <Translate contentKey={'workflow.moreaction'} />
                         </Button>
+                        <Button
+                          color="danger"
+                          onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
+                          disabled={!(data.stage?.id === 0 || data.stage === null)}
+                          size="sm"
+                        >
+                          <Translate contentKey={'entity.action.delete'} />
+                        </Button>
                       </th>
                     </tr>
                   ))}
@@ -165,11 +170,12 @@ const FormData = () => {
           )}
         </Card>
       </Col>
-      <DetailModal
-        id={detailModal.id}
-        formId={detailModal.formId}
-        show={detailModal.show}
-        handleClose={() => setDetailModal({ ...detailModal, show: false })}
+      <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
+      <DeleteLicenceModal
+        id={deleteLicence.id}
+        show={deleteLicence.show}
+        name={deleteLicence.name}
+        handleClose={() => setDeleteLicence({ id: -1, show: false, name: '' })}
       />
     </Row>
   );

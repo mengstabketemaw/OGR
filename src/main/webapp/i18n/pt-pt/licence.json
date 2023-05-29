@@ -11,6 +11,8 @@
       "distribution": "Licença de Distribuição",
       "retail": "Licença de Varejo",
       "waste": "Licença de Gestão de Resíduos"
-    }
+    },
+    "delete": "Tem certeza de que deseja excluir isso {{name}}?",
+    "deleted": "{{name}} esta deletado"
   }
 }
