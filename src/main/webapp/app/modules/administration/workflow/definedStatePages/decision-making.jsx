@@ -46,7 +46,10 @@ export const DecisionMaking = (params) => {
                        defaultValue = {fieldDateFormated}
                        licence_id ={parseInt(id)}
                        backButtonShow = {false}
+                       saveButtonName = "form.submit"
+                       saveButtonClass = "bg-gradient-green text-white"
                        currentFields = {fields_data}/>
+
       </Col>
     </>
 

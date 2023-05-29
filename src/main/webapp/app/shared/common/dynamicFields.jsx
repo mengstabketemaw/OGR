@@ -19,6 +19,9 @@ const DynamicFields = props =>{
           licence_id = null,
           backButtonShow= true,
           saveButtonShow = true,
+          backButtonName = null,
+          saveButtonName = null,
+          saveButtonClass = null
           } = props;
 
   const handlevalue = async (value) => {
@@ -89,16 +92,16 @@ const DynamicFields = props =>{
         <FontAwesomeIcon icon="arrow-left" />
         &nbsp;
         <span className="d-none d-md-inline">
-                  <Translate contentKey="entity.action.back">Back</Translate>
+                  <Translate contentKey={backButtonName ? backButtonName:"entity.action.back"}>Back</Translate>
                 </span>
       </Button>
         &nbsp;</>
       }
 
-      {saveButtonShow && <Button color="primary" type="submit" >
+      {saveButtonShow && <Button className={saveButtonClass ? "btn "+saveButtonClass: "btn btn-primary"} type="submit" >
         <FontAwesomeIcon icon="save" />
         &nbsp;
-        <Translate contentKey="entity.action.save">Save</Translate>
+        <Translate contentKey={saveButtonName ? saveButtonName:"entity.action.save"}>Save</Translate>
       </Button>}
     </ValidatedForm>
     </>

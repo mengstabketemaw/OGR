@@ -55,9 +55,13 @@ const PageSwitcher = () => {
         status:issue?'Authorized':'Denied'
       }
     }
-    dispatch(updateStatusAndState(param)).then(
+    dispatch(updateStatusAndState(param)).then(()=>{
       nav(-1)
-    )
+      setTimeout(() => {
+        // Code to execute after 1 second
+        nav(-0)
+      }, 50)}
+      )
   }
 
   return (
