@@ -28,6 +28,7 @@ import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getForm } from 'app/modules/form/form.reducer';
 import { Translate } from 'react-jhipster';
+import ApplyPermit from 'app/modules/permit/ApplyPermit';
 
 const Permit = () => {
   const [params] = useSearchParams();
@@ -93,26 +94,7 @@ const Permit = () => {
                 <Card>
                   {' '}
                   <CardBody>
-                    <div className="">
-                      <Row className="justify-content-center ">
-                        <Col md="8">
-                          <h1 className="">
-                            <Translate contentKey={'form.for'} /> {params.get('name')}
-                          </h1>
-                        </Col>
-                      </Row>
-                      <Row className="justify-content-center">
-                        <Col md="8">
-                          <DynamicFields
-                            fields={form.fields?.filter(f => {
-                              return f.state.id === 0;
-                            })}
-                            handleSubmit={handleSubmit}
-                            formatValue={formatValue}
-                          />
-                        </Col>
-                      </Row>
-                    </div>
+                    <ApplyPermit />
                   </CardBody>{' '}
                 </Card>
               </Col>
