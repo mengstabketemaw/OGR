@@ -87,7 +87,7 @@ const PageSwitcher = () => {
                       return <li  key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
                                   onClick={() => handleSwitchPage(index)}
                                   >
-                        <div>Step {index + 1}<br /><span > {page.type.name}</span></div>
+                        <div>Step {index + 1}<br /><span > {page.props.name}</span></div>
                       </li>
                     }):
                       <h3 className="mb-0">NO WORKFLOW!</h3>
