@@ -114,8 +114,8 @@ public class LicenceController {
     @GetMapping("/user")
     public Iterable<Licence> getAllByUser() {
         User user = userService.getUserWithAuthorities().orElseThrow();
-        List<Long> licenceId = complianceRepository.findLicenceIdByCompany_Id(user.getId());
-        Iterable<Licence> licences = licenceRepository.findByUser_IdAndForm_IdIn(user.getId(), licenceId);
+        List<Long> licenceId = complianceRepository.findLicenceIdByCompany_Id(2L);
+        Iterable<Licence> licences = licenceRepository.findByUser_IdAndForm_IdIn(2L, licenceId);
         return licences;
     }
 

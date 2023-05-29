@@ -110,7 +110,7 @@ const Header = (props: IHeaderProps) => {
 
               <NavDropdown icon="book" name={<Translate contentKey="permit.title" />}>
                 <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Drilling Permit &pageKey=4'}>
-                  Drilling Permit Requirement
+                  Drilling Permit
                 </DropdownItem>
                 <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Air Emission Permit &pageKey=3'}>
                   Air Emission Permit

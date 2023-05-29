@@ -1,5 +1,6 @@
 {
   "form": {
+    "for": "Application Form for",
     "title": "Form",
     "edit": "Edit a form",
     "fields": {
@@ -47,5 +48,11 @@
     "Location": "Location",
     "Text Area": "Text Area",
     "Information": "Information"
+  },
+  "questions": {
+    "title": "Any Questions?\n",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message"
   }
 }

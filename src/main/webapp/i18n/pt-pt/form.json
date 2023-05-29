@@ -1,5 +1,6 @@
 {
   "form": {
+    "for": "Formulário de inscrição para",
     "title": "Forma",
     "edit": "Editar um formulário",
     "fields": {
@@ -46,5 +47,11 @@
     "Location": "Localização",
     "Text Area": "Área de texto",
     "Information": "Informação"
+  },
+  "questions": {
+    "title": "Alguma pergunta?\n",
+    "name": "Nome",
+    "email": "Email",
+    "message": "Mensagem"
   }
 }

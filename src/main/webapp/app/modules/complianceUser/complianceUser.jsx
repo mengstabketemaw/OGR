@@ -13,7 +13,7 @@ export function ComplianceUser() {
 
   const fetchData = () => {
     // Construct the URL with the page query parameter
-    const url = `/api/compliance/user/${param.get('licence')}`;
+    const url = `/api/compliance/user/${param.get('licence')}/${param.get('submittedDate')}`;
 
     axios
       .get(url)

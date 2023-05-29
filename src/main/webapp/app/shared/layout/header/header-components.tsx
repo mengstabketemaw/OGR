@@ -85,7 +85,10 @@ export const ComplianceMonitoringUser = () => {
       ) : (
         <>
           {licence?.data?.map(data => (
-            <DropdownItem tag={'a'} href={`/complianceUser?licence=${data.form.id}&title=${data.form.title}`}>
+            <DropdownItem
+              tag={'a'}
+              href={`/complianceUser?licence=${data.form.id}&title=${data.form.title}&submittedDate=${data.submittedDate}`}
+            >
               {data.form.title}
             </DropdownItem>
           ))}
