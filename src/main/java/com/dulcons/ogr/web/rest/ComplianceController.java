@@ -8,6 +8,7 @@ import com.dulcons.ogr.repository.*;
 import com.dulcons.ogr.service.UserService;
 import com.dulcons.ogr.web.rest.vm.ComplianceBody;
 import com.dulcons.ogr.web.rest.vm.ComplianceHistoryBody;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -141,9 +142,10 @@ public class ComplianceController {
         complianceRepository.updateStatusById(complianceHistoryBody.getStatus(), complianceId);
     }
 
-    @GetMapping("/user/{id}")
-    public Compliance findOneByUserId(@PathVariable Long id) {
+    @GetMapping("/user/{id}/{submittedDate}")
+    public Compliance findOneByUserId(@PathVariable Long id, @PathVariable Instant submittedDate) {
         User user = userService.getUserWithAuthorities().orElseThrow();
-        return complianceRepository.findByCompany_IdAndCustomForm_Id(user.getId(), id);
+        Iterable<Licence> licence = licenceRepository.findAllByUserId(id);
+        return complianceRepository.findByCompany_IdAndCustomForm_IdAndsubmittedDate(2L, id, submittedDate);
     }
 }
