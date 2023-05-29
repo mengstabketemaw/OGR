@@ -13,8 +13,9 @@
     "add": "Adicionar",
     "back": "Back",
     "save": "Save",
-    "state": "State",
-    "delete": "Excluir"
+    "state": "Estada",
+    "delete": "Excluir",
+    "submit": "Enviar"
   },
   "formModal": {
     "fieldCreater": "Criador de campo",
@@ -30,6 +31,7 @@
     "Drilling Permit": "Permissão de Perfuração"
   },
   "state": {
+    "title": "Estada",
     "Form": "Editar formulário",
     "Initial Review": "Revisão inicial",
     "Technical Review": "Revisao Tecnica",

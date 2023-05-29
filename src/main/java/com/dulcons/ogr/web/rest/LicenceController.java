@@ -1,12 +1,11 @@
 package com.dulcons.ogr.web.rest;
 
 import com.dulcons.ogr.domain.*;
-import com.dulcons.ogr.repository.ComplianceRepository;
-import com.dulcons.ogr.repository.LicenceRepository;
-import com.dulcons.ogr.repository.StateRepository;
+import com.dulcons.ogr.repository.*;
 import com.dulcons.ogr.service.UserService;
 import com.dulcons.ogr.web.rest.vm.LocationFormDto;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,22 +18,32 @@ import org.springframework.web.bind.annotation.*;
 public class LicenceController {
 
     private final LicenceRepository licenceRepository;
-
     private final UserService userService;
     private final ComplianceRepository complianceRepository;
-
     private final StateRepository stateRepository;
+    private final InitialReviewRepository initialReviewRepository;
+    private final TechnicalReviewRepository technicalReviewRepository;
+    private final SpecializedReivewRepository specializedReivewRepository;
+    private final DecisionMakingRepository decisionMakingRepository;
 
     public LicenceController(
         LicenceRepository licenceRepository,
         UserService userService,
         ComplianceRepository complianceRepository,
-        StateRepository stateRepository
+        StateRepository stateRepository,
+        InitialReviewRepository initialReviewRepository,
+        TechnicalReviewRepository technicalReviewRepository,
+        SpecializedReivewRepository specializedReivewRepository,
+        DecisionMakingRepository decisionMakingRepository
     ) {
         this.licenceRepository = licenceRepository;
         this.userService = userService;
         this.complianceRepository = complianceRepository;
         this.stateRepository = stateRepository;
+        this.initialReviewRepository = initialReviewRepository;
+        this.technicalReviewRepository = technicalReviewRepository;
+        this.specializedReivewRepository = specializedReivewRepository;
+        this.decisionMakingRepository = decisionMakingRepository;
     }
 
     @GetMapping
@@ -72,6 +81,11 @@ public class LicenceController {
 
     @DeleteMapping("/{id}")
     public void deleteLic(@PathVariable Long id) {
+        Optional<Licence> licence = licenceRepository.findById(id);
+        licence.ifPresent(initialReviewRepository::deleteByLicence);
+        licence.ifPresent(decisionMakingRepository::deleteByLicence);
+        licence.ifPresent(technicalReviewRepository::deleteByLicence);
+        licence.ifPresent(specializedReivewRepository::deleteByLicence);
         licenceRepository.deleteById(id);
     }
 

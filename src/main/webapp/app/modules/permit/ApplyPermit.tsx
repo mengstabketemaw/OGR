@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getForm } from 'app/modules/form/form.reducer';
 import { createLicence } from 'app/modules/licence/license.reducer';
@@ -9,6 +9,7 @@ import { formatValue } from 'app/shared/common/formatValue';
 import { toast } from 'react-toastify';
 
 const ApplyPermit = () => {
+  const nav = useNavigate();
   const [params] = useSearchParams();
   const dispatch = useAppDispatch();
   const form = useAppSelector(state => state.form.form);
@@ -31,6 +32,7 @@ const ApplyPermit = () => {
       // @ts-ignore
       toast.success('Saved Successfully')
     );
+    nav('/checkout');
   };
   return (
     <div className="">

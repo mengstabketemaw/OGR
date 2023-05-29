@@ -14,7 +14,8 @@
     "back": "Back",
     "save": "Save",
     "state": "State",
-    "delete": "Delete"
+    "delete": "Delete",
+    "submit": "Submit"
   },
   "formModal": {
     "fieldCreater": "Field Creater",
@@ -31,6 +32,7 @@
     "Drilling Permit": "Drilling Permit"
   },
   "state": {
+    "title": "State",
     "Form": "Form",
     "Initial Review": "Initial Review",
     "Technical Review": "Technical Review",

@@ -7,7 +7,7 @@ const initialState = {
   loading: false,
   errorMessage: null,
   currentFields:{},
-  currentState:{},
+  currentStateId:{},
   currentFieldData:{},
   totalItems: 0,
 };
@@ -113,7 +113,7 @@ export const WorkflowSlice = createSlice({
       })
       .addCase(getStateOfLicence.fulfilled, (state, action) => {
         state.loading = false;
-        state.currentState = action.payload.data.stage;
+        state.currentStateId = action.payload.data.stage.id;
       })
       .addMatcher(isFulfilled(createInitialReview,createTechnicalReview,createSpecializedReview,createDecisionMaking), (state, action) => {
         state.updating = false;
