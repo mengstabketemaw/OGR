@@ -165,6 +165,12 @@ const UserHome = () => {
         show={deleteLicence.show}
         name={deleteLicence.name}
         handleClose={() => setDeleteLicence({ id: -1, show: false, name: '' })}
+        updateTable={() =>
+          setApplications({
+            ...applications,
+            data: { content: applications.data.content.filter(license => license.id !== deleteLicence.id) },
+          })
+        }
       />
     </>
   );

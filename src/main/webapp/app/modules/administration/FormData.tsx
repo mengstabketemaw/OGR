@@ -176,6 +176,9 @@ const FormData = () => {
         show={deleteLicence.show}
         name={deleteLicence.name}
         handleClose={() => setDeleteLicence({ id: -1, show: false, name: '' })}
+        updateTable={() =>
+          setLicences({ ...licences, data: { content: licences.data.content.filter(license => license.id !== deleteLicence.id) } })
+        }
       />
     </Row>
   );

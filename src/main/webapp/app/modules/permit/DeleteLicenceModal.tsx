@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { useNavigate } from 'react-router-dom';
 
-const DeleteLicenceModal = ({ id, show, handleClose, name }) => {
+const DeleteLicenceModal = ({ id, show, handleClose, name, updateTable }) => {
   const nav = useNavigate();
   const handleSubmit = () => {
     axios
@@ -15,7 +15,7 @@ const DeleteLicenceModal = ({ id, show, handleClose, name }) => {
       .then(() => {
         toast.success(<Translate contentKey={'licence.deleted'} interpolate={{ name }} />);
         handleClose();
-        nav(0);
+        updateTable();
       })
       .catch(e => {
         toast.error(e.message);

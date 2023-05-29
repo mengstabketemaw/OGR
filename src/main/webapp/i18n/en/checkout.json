@@ -1,6 +1,6 @@
 {
   "checkout": {
-    "title": "Checkout form",
+    "title": "Application Fee",
     "billingAddress": "Billing Address",
     "address": "Address",
     "address2": "Address 2 (optional)",
@@ -15,7 +15,7 @@
     "fullNameAs": "Full name as displayed on card",
     "expiration": "Expiration",
     "cvv": "CVV",
-    "continueToCheckout": "Continue to Checkout",
+    "continueToCheckout": "Pay",
     "applicationFee": "Application Fee",
     "total": "Total (USD)",
     "invalidCard": "Invalid Card"
