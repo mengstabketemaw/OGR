@@ -120,15 +120,15 @@ const ComplianceMonitoring = () => {
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
-              <Button
-                className={'mr-4 mb-2 bg-gradient-green text-white'}
-                onClick={() => {
-                  setShowModal(true);
-                  setUpdateCompliance({});
-                }}
-              >
-                <Translate contentKey={'compliance.addInspection'}></Translate>
-              </Button>
+              {/*<Button*/}
+              {/*  className={'mr-4 mb-2 bg-gradient-green text-white'}*/}
+              {/*  onClick={() => {*/}
+              {/*    setShowModal(true);*/}
+              {/*    setUpdateCompliance({});*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  <Translate contentKey={'compliance.addInspection'}></Translate>*/}
+              {/*</Button>*/}
             </div>
             {inspections.loading ? (
               <Spinner
@@ -231,16 +231,16 @@ const ComplianceMonitoring = () => {
                           >
                             <Translate contentKey={'compliance.update'} />
                           </Button>
-                          <Button
-                            color="danger"
-                            onClick={() => {
-                              setShowDeleteModal(true);
-                              setUpdateCompliance({ complianceId: data.id, userId: data.company.id, formId: data.customForm.id });
-                            }}
-                            size="sm"
-                          >
-                            <Translate contentKey={'compliance.delete'} />
-                          </Button>
+                          {/*<Button*/}
+                          {/*  color="danger"*/}
+                          {/*  onClick={() => {*/}
+                          {/*    setShowDeleteModal(true);*/}
+                          {/*    setUpdateCompliance({ complianceId: data.id, userId: data.company.id, formId: data.customForm.id });*/}
+                          {/*  }}*/}
+                          {/*  size="sm"*/}
+                          {/*>*/}
+                          {/*  <Translate contentKey={'compliance.delete'} />*/}
+                          {/*</Button>*/}
                         </th>
                         <th>
                           <Button
