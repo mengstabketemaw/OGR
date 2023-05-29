@@ -16,6 +16,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface LicenceRepository extends PagingAndSortingRepository<Licence, Long> {
+    @Query("select l from Licence l where l.stage.id >= ?1")
+    List<Licence> findByStage_Id(Long id);
+
     @Query("select l from Licence l where l.user.id = ?1 and l.form.id in ?2")
     Iterable<Licence> findByUser_IdAndForm_IdIn(Long id, Collection<Long> ids);
 

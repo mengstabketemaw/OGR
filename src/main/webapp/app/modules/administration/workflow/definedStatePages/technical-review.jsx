@@ -48,6 +48,8 @@ export const TechnicalReview = (params) => {
                        licence_id ={parseInt(id)}
                        backButtonShow = {false}
                        currentFields = {fields_data}
+                       saveButtonName = "form.submit"
+                       saveButtonClass = "bg-gradient-green text-white"
         />
       </Col>
     </>

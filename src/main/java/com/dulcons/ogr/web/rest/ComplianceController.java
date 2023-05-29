@@ -2,11 +2,9 @@ package com.dulcons.ogr.web.rest;
 
 import com.dulcons.ogr.domain.Compliance;
 import com.dulcons.ogr.domain.ComplianceHistory;
+import com.dulcons.ogr.domain.Licence;
 import com.dulcons.ogr.domain.User;
-import com.dulcons.ogr.repository.ComplianceHistoryRepository;
-import com.dulcons.ogr.repository.ComplianceRepository;
-import com.dulcons.ogr.repository.CustomFormRepository;
-import com.dulcons.ogr.repository.UserRepository;
+import com.dulcons.ogr.repository.*;
 import com.dulcons.ogr.service.UserService;
 import com.dulcons.ogr.web.rest.vm.ComplianceBody;
 import com.dulcons.ogr.web.rest.vm.ComplianceHistoryBody;
@@ -27,19 +25,22 @@ public class ComplianceController {
     private final CustomFormRepository customFormRepository;
     private final UserRepository userRepository;
     private final UserService userService;
+    private final LicenceRepository licenceRepository;
 
     public ComplianceController(
         ComplianceRepository complianceRepository,
         ComplianceHistoryRepository complianceHistoryRepository,
         CustomFormRepository customFormRepository,
         UserRepository userRepository,
-        UserService userService
+        UserService userService,
+        LicenceRepository licenceRepository
     ) {
         this.complianceRepository = complianceRepository;
         this.complianceHistoryRepository = complianceHistoryRepository;
         this.customFormRepository = customFormRepository;
         this.userRepository = userRepository;
         this.userService = userService;
+        this.licenceRepository = licenceRepository;
     }
 
     @PostMapping
@@ -69,6 +70,19 @@ public class ComplianceController {
 
     @GetMapping
     public Page<Compliance> findAll(Pageable page) {
+        List<Licence> licences = licenceRepository.findByStage_Id(2L);
+
+        for (Licence licence : licences) {
+            Compliance compliance = new Compliance();
+            try {
+                compliance.setCompany(userRepository.findByIdd(licence.getUser().getId()));
+                compliance.setCustomForm(customFormRepository.findByIdd(licence.getForm().getId()));
+                compliance.setSubmittedDate(licence.getSubmittedDate());
+                complianceRepository.save(compliance);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
         return complianceRepository.findAll(page);
     }
 

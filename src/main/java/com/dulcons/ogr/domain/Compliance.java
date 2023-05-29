@@ -1,21 +1,26 @@
 package com.dulcons.ogr.domain;
 
+import java.time.Instant;
 import javax.persistence.*;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "company_id", "customForm_id" }) })
+@Table
+//uniqueConstraints = { @UniqueConstraint(columnNames = { "company_id", "customForm_id" }) }
 public class Compliance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
+    private Instant submittedDate;
+
     @OneToOne
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    //    @JoinColumn(name = "company_id", referencedColumnName = "id")
     User company;
 
     @OneToOne
-    @JoinColumn(name = "customForm_id", referencedColumnName = "id")
+    //    @JoinColumn(name = "customForm_id", referencedColumnName = "id")
     CustomForm customForm;
 
     String status = "Not Inspected";
@@ -50,5 +55,13 @@ public class Compliance {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Instant getSubmittedDate() {
+        return submittedDate;
+    }
+
+    public void setSubmittedDate(Instant submittedDate) {
+        this.submittedDate = submittedDate;
     }
 }
