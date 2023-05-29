@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+// @ts-ignore
+
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Accordion,
@@ -19,14 +21,21 @@ import {
 } from 'reactstrap';
 import LicencesHeader from 'app/modules/informationPages/licencesHeader';
 import LicencesFaq from 'app/modules/informationPages/licencesFaq';
+import DynamicFields from 'app/shared/common/dynamicFields';
+import { formatValue } from 'app/shared/common/formatValue';
+import { createLicence } from 'app/modules/licence/license.reducer';
+import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from 'app/config/store';
+import { getForm } from 'app/modules/form/form.reducer';
+import { Translate } from 'react-jhipster';
+import ApplyPermit from 'app/modules/permit/ApplyPermit';
+
 const Permit = () => {
   const [params] = useSearchParams();
   const nav = useNavigate();
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    // Handle form submission logic here
-  };
+  const form = useAppSelector(state => state.form.form);
+  const account = useAppSelector(state => state.authentication.account);
+  const dispatch = useAppDispatch();
 
   const [open, setOpen] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -48,17 +57,25 @@ const Permit = () => {
     setModalOpen(false);
   };
 
-  const truncateText = (text, maxLength) => {
-    if (text.length <= maxLength) {
-      return text;
-    }
-    return text.substr(0, maxLength) + '...';
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(getForm(params.get('pageKey')));
+  }, []);
+
+  const handleSubmit = values => {
+    const valueToSend = {
+      form: form,
+      user: account,
+      data: values,
+    };
+    console.log(valueToSend);
+    // @ts-ignore
+
+    dispatch(createLicence(valueToSend)).then(
+      // @ts-ignore
+      toast.success('Saved Successfully')
+    );
   };
-
-  const fullText = `An Exploration Licence grants permission to explore and evaluate the potential presence of oil and gas resources in a specific area.
- It is a crucial step in the process of identifying and harnessing valuable energy resources.`;
-
-  const truncatedText = truncateText(fullText, 35);
 
   return (
     <>
@@ -76,7 +93,9 @@ const Permit = () => {
               <Col md={8}>
                 <Card>
                   {' '}
-                  <CardBody></CardBody>{' '}
+                  <CardBody>
+                    <ApplyPermit />
+                  </CardBody>{' '}
                 </Card>
               </Col>
 
@@ -87,22 +106,31 @@ const Permit = () => {
                   {' '}
                   <CardBody>
                     <div className="feedback-form">
-                      <h3>Any Questions?</h3>
+                      <h3>
+                        {' '}
+                        <Translate contentKey={'questions.title'} />{' '}
+                      </h3>
                       <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                          <label htmlFor="name">Name:</label>
+                          <label htmlFor="name">
+                            <Translate contentKey={'questions.name'} />:
+                          </label>
                           <input type="text" id="name" className="form-control" />
                         </div>
                         <div className="form-group">
-                          <label htmlFor="email">Email:</label>
+                          <label htmlFor="email">
+                            <Translate contentKey={'questions.email'} />:
+                          </label>
                           <input type="email" id="email" className="form-control" />
                         </div>
                         <div className="form-group">
-                          <label htmlFor="message">Message:</label>
+                          <label htmlFor="message">
+                            <Translate contentKey={'questions.message'} />:
+                          </label>
                           <textarea id="message" className="form-control" rows={4}></textarea>
                         </div>
                         <button type="submit" className="btn btn-primary">
-                          Submit
+                          <Translate contentKey={'compliance.submit'} />
                         </button>
                       </form>
                     </div>
@@ -112,7 +140,7 @@ const Permit = () => {
             </Row>
           </Container>
         </div>
-        <Button onClick={() => nav('/apply-permit?name=' + params.get('name') + '&pageKey=' + params.get('pageKey'))}>Apply</Button>
+        {/*<Button onClick={() => nav('/apply-permit?name=' + params.get('name') + '&pageKey=' + params.get('pageKey'))}>Apply</Button>*/}
       </div>
     </>
   );

@@ -49,7 +49,7 @@ export const App = () => {
           <Landing />
         </ErrorBoundary>
       ) : (
-        <div className="app-container" style={{ paddingTop }}>
+        <div className="app-container rounded-top " style={{ paddingTop }}>
           <ToastContainer position={toast.POSITION.TOP_RIGHT} className="toastify-container" toastClassName="toastify-toast" />
           <ErrorBoundary>
             <Header
@@ -62,7 +62,7 @@ export const App = () => {
             />
           </ErrorBoundary>
           <div className="container-fluid view-container mt-4" id="app-view-container">
-            <Card className="jh-card pt-4 pb-8">
+            <Card className="jh-card pt-4 pb-8 rounded-top rounded-bottom">
               <ErrorBoundary>
                 <AppRoutes />
               </ErrorBoundary>

@@ -45,13 +45,12 @@ const LicencesHeader = () => {
   };
 
 
-
   return (
     <>
       {/* Card stats */}
       <Row>
         <Col lg="6" xl="3">
-          <Card className="bg-info card-stats mb-4 mb-xl-0">
+          <Card className="bg-gradient-info card-stats mb-4 mb-xl-0">
             <CardBody>
               <Row>
                 <div className="col">
@@ -65,7 +64,7 @@ const LicencesHeader = () => {
                         </span>
                 </div>
                 <Col className="col-auto">
-                  <div className="icon icon-shape bg-info text-white rounded-circle shadow">
+                  <div className="icon icon-shape bg-gradient-info opacity-0 text-white rounded-circle shadow">
                   </div>
                 </Col>
               </Row>
@@ -87,7 +86,7 @@ const LicencesHeader = () => {
           </Card>
         </Col>
         <Col lg="6" xl="3">
-          <Card className="bg-purple card-stats mb-4 mb-xl-0">
+          <Card className="bg-gradient-purple card-stats mb-4 mb-xl-0">
             <CardBody>
               <Row>
                 <div className="col">
@@ -101,7 +100,7 @@ const LicencesHeader = () => {
                         </span>
                 </div>
                 <Col className="col-auto">
-                  <div className="icon icon-shape bg-purple text-white rounded-circle shadow">
+                  <div className="icon icon-shape bg-gradient-purple opacity-0 text-white rounded-circle shadow">
 
                   </div>
                 </Col>
@@ -124,7 +123,7 @@ const LicencesHeader = () => {
           </Card>
         </Col>
         <Col lg="6" xl="3">
-          <Card className="bg-warning card-stats mb-4 mb-xl-0">
+          <Card className="bg-gradient-warning card-stats mb-4 mb-xl-0">
             <CardBody>
               <Row>
                 <div className="col">
@@ -134,11 +133,11 @@ const LicencesHeader = () => {
                   >
                   </CardTitle>
                   <span className="text-white text-uppercase h2 font-weight-bold mb-0">
-                          <Translate  contentKey={"information.titles.requirements"} />
+                          <Translate contentKey={"information.titles.requirements"}/>
                         </span>
                 </div>
                 <Col className="col-auto">
-                  <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
+                  <div className="icon icon-shape bg-gradient-warning opacity-0 text-white rounded-circle shadow">
                   </div>
                 </Col>
               </Row>
@@ -160,7 +159,7 @@ const LicencesHeader = () => {
           </Card>
         </Col>
         <Col lg="6" xl="3">
-          <Card className="bg-danger text-white card-stats mb-4 mb-xl-0">
+          <Card className="bg-gradient-danger text-white card-stats mb-4 mb-xl-0">
             <CardBody>
               <Row>
                 <div className="col">
@@ -170,11 +169,11 @@ const LicencesHeader = () => {
                   >
                   </CardTitle>
                   <span className="text-white h2  text-uppercase font-weight-bold mb-0">
-                            <Translate  contentKey={"information.titles.regulations"} />
+                            <Translate contentKey={"information.titles.regulations"}/>
                           </span>
                 </div>
                 <Col className="col-auto">
-                  <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
+                  <div className="icon icon-shape bg-gradient-danger opacity-0 text-white rounded-circle shadow">
                     <i className="fas fa-percent"/>
                   </div>
                 </Col>
@@ -207,16 +206,16 @@ const LicencesHeader = () => {
               modalText == 1 ?
                 <Translate contentKey={`information.pageKey.${params.get('pageKey')}.title`}/>
                 :
-              modalText == 2 ?
+                modalText == 2 ?
                   <Translate contentKey={`information.pageKey.${params.get('pageKey')}.process`}/>
                   :
-              modalText == 3 ?
-                  <Translate contentKey={`information.pageKey.${params.get('pageKey')}.requirements`}/>
-                  :
-                modalText == 4 ?
-                  <Translate contentKey={`information.pageKey.${params.get('pageKey')}.regulations`}/>
-                  :
-              <span>No Data</span>
+                  modalText == 3 ?
+                    <Translate contentKey={`information.pageKey.${params.get('pageKey')}.requirements`}/>
+                    :
+                    modalText == 4 ?
+                      <Translate contentKey={`information.pageKey.${params.get('pageKey')}.regulations`}/>
+                      :
+                      <span>No Data</span>
             }
           </p>
         </ModalBody>

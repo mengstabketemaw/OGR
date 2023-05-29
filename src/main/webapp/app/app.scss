@@ -7,7 +7,7 @@
 @import 'custom_css/css/bootstrap.min.css';
 @import 'custom_css/leaflet.css';
 //@import '~bootswatch/dist/minty/bootswatch';
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 /*!
 
 
@@ -32,6 +32,9 @@
   src: url('./argon/Poppins/Poppins-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+}
+body {
+  font-family: 'Poppins', sans-serif;
 }
 .border-top-bottom > div {
   border-top: 1px solid #ddd;
