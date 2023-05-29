@@ -71,7 +71,7 @@ const Header = (props: IHeaderProps) => {
   /* jhipster-needle-add-element-to-menu - JHipster will add new menu items here */
 
   return (
-    <div id="app-header">
+    <div id="app-header rounded-bottom">
       <LoadingBar className="loading-bar" />
       <div className="navbar">
         <Navbar data-cy="navbar" expand="md" fixed="top" className="navbar-horizontal pt-2 pb-2 navbar-dark bg-gradient-success  col-12">
