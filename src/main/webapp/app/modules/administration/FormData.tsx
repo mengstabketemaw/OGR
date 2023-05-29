@@ -154,15 +154,6 @@ const FormData = () => {
                         >
                           <Translate contentKey={'workflow.moreaction'} />
                         </Button>
-
-                        <Button
-                          color="secondary"
-                          onClick={e => nav('/dataUpdate/' + data.id)}
-                          disabled={!(data.stage?.id === 0 || data.stage === null)}
-                          size="sm"
-                        >
-                          Update
-                        </Button>
                       </th>
                     </tr>
                   ))}
