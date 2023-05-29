@@ -32,7 +32,7 @@ const ApplyPermit = () => {
       // @ts-ignore
       toast.success('Saved Successfully')
     );
-    nav(-1);
+    nav('/checkout');
   };
   return (
     <div className="">

@@ -1,0 +1,23 @@
+{
+  "checkout": {
+    "title": "Formulário de Checkout",
+    "billingAddress": "Endereço de Cobrança",
+    "address": "Endereço",
+    "address2": "Endereço 2 (opcional)",
+    "country": "País",
+    "state": "Estado",
+    "zip": "CEP",
+    "saveInfo": "Salvar estas informações para a próxima vez",
+    "payment": "Pagamento",
+    "cardsAccepted": "Cartões Aceitos",
+    "nameOnCard": "Nome no cartão",
+    "creditCardNumber": "Número do cartão de crédito",
+    "fullNameAs": "Nome completo como exibido no cartão",
+    "expiration": "Validade",
+    "cvv": "CVV",
+    "continueToCheckout": "Continuar para o Checkout",
+    "applicationFee": "Taxa de Inscrição",
+    "total": "Total (USD)",
+    "invalidCard": "Cartão Inválido"
+  }
+}
