@@ -45,7 +45,7 @@ const DynamicFields = props =>{
           key = {f.label}
           type={f.fieldType.name}
           name={f.label}
-          label={f.label}//{translate('global.form.username.label')}
+          label={f.required ? f.label+'*':f.label}//{translate('global.form.username.label')}
           //placeholder="add label"//{translate('global.form.username.placeholder')}
           required={f.required}
         >
@@ -56,7 +56,7 @@ const DynamicFields = props =>{
           <ValidatedField
             key = {f.label}
             name={f.label}
-            label={f.label}
+            label={f.required ? f.label+'*':f.label}
             autoComplete={"off"}
             value={locationModal.value}
             placeholder={translate('map.addLocation')}
@@ -72,7 +72,7 @@ const DynamicFields = props =>{
               key = {f.label}
               className="mb-0 d-flex flex-column custom-checkbox"
               type={f.fieldType.name}
-              name={f.label}
+              name={f.required ? f.label+'*':f.label}
               label={f.label}
               required={f.required}
             />
@@ -81,7 +81,7 @@ const DynamicFields = props =>{
               key = {f.label}
               type={f.fieldType.name}
               name={f.label}
-              label={f.label}
+              label={f.required ? f.label+'*':f.label}
               required={f.required}
               placeholder={f.placeholder}
             />
