@@ -132,7 +132,6 @@ export const AdminDashboardTable = ({ type }) => {
                       <th>{data.form.title}</th>
                       <th>{data.stage?.name || 'Form'}</th>
                       <th>
-                        {' '}
                         {data.status === 'Inprogress' ? (
                           <Button className={'btn btn-sm bg-warning text-white'}>{data.status}</Button>
                         ) : data.status === 'Authorized' ? (

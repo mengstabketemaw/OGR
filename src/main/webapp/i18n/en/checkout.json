@@ -1,0 +1,23 @@
+{
+  "checkout": {
+    "title": "Checkout form",
+    "billingAddress": "Billing Address",
+    "address": "Address",
+    "address2": "Address 2 (optional)",
+    "country": "Country",
+    "state": "State",
+    "zip": "zip",
+    "saveInfo": "Save this information for next time",
+    "payment": "Payment",
+    "cardsAccepted": "Cards Accepted",
+    "nameOnCard": "Name on card",
+    "creditCardNumber": "Credit card number",
+    "fullNameAs": "Full name as displayed on card",
+    "expiration": "Expiration",
+    "cvv": "CVV",
+    "continueToCheckout": "Continue to Checkout",
+    "applicationFee": "Application Fee",
+    "total": "Total (USD)",
+    "invalidCard": "Invalid Card"
+  }
+}
