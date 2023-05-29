@@ -131,7 +131,17 @@ export const AdminDashboardTable = ({ type }) => {
                       <th>{data.user.firstName}</th>
                       <th>{data.form.title}</th>
                       <th>{data.stage?.name || 'Form'}</th>
-                      <th>{data.status}</th>
+                      <th>
+                        {data.status === 'Inprogress' ? (
+                          <Button className={'btn btn-sm bg-warning text-white'}>{data.status}</Button>
+                        ) : data.status === 'Authorized' ? (
+                          <Button className={'btn btn-sm bg-gradient-success text-white'}>{data.status}</Button>
+                        ) : data.status === 'Denied' ? (
+                          <Button className={'btn btn-sm bg-danger text-white'}>{data.status}</Button>
+                        ) : (
+                          <Button className={'btn btn-sm bg-gradient-info text-white'}>{data.status}</Button>
+                        )}
+                      </th>
                       <th>
                         <Button
                           color="primary"
