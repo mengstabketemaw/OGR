@@ -149,6 +149,7 @@ const FormData = () => {
                           onClick={() => {
                             nav(`/sequence/${data.form.id}/${data.id}`);
                           }}
+                          disabled={data.status === 'Authorized' || data.status === 'Denied'}
                           size="sm"
                         >
                           <Translate contentKey={'workflow.moreaction'} />

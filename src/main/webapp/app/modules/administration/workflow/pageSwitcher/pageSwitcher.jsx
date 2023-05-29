@@ -30,7 +30,7 @@ const PageSwitcher = () => {
     const param = {
       id : id,
       data : {
-        stateId : sequenceFromDatabase[currentPage],
+        stateId : sequenceFromDatabase[currentPage+1],
         status:'Inprogress'
       }
     }
@@ -82,13 +82,16 @@ const PageSwitcher = () => {
               <div className="box">
                 <div className="steps">
                   <ul className="nav">
-                    {pages.map((page, index) => {
+                    {pages.length > 0 ?
+                      pages.map((page, index) => {
                       return <li  key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
                                   onClick={() => handleSwitchPage(index)}
                                   >
                         <div>Step {index + 1}<br /><span > {page.type.name}</span></div>
                       </li>
-                    })}
+                    }):
+                      <h3 className="mb-0">NO WORKFLOW!</h3>
+                    }
                   </ul>
                 </div>
               </div>
