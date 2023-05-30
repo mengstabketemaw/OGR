@@ -85,6 +85,7 @@
     "file-loader": "^6.2.0",
     "formik": "^2.2.9",
     "leaflet": "^1.9.3",
+    "leaflet-routing-machine": "^3.2.12",
     "lodash": "4.17.21",
     "moment": "2.29.4",
     "nanoid": "^4.0.2",

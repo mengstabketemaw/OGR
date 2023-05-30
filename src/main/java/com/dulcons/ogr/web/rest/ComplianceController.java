@@ -1,9 +1,6 @@
 package com.dulcons.ogr.web.rest;
 
-import com.dulcons.ogr.domain.Compliance;
-import com.dulcons.ogr.domain.ComplianceHistory;
-import com.dulcons.ogr.domain.Licence;
-import com.dulcons.ogr.domain.User;
+import com.dulcons.ogr.domain.*;
 import com.dulcons.ogr.repository.*;
 import com.dulcons.ogr.service.UserService;
 import com.dulcons.ogr.web.rest.vm.ComplianceBody;
@@ -11,6 +8,7 @@ import com.dulcons.ogr.web.rest.vm.ComplianceHistoryBody;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -75,10 +73,26 @@ public class ComplianceController {
 
         for (Licence licence : licences) {
             Compliance compliance = new Compliance();
+            if (complianceRepository.existsBySubmittedDate(licence.getSubmittedDate())) continue;
             try {
                 compliance.setCompany(userRepository.findByIdd(licence.getUser().getId()));
                 compliance.setCustomForm(customFormRepository.findByIdd(licence.getForm().getId()));
                 compliance.setSubmittedDate(licence.getSubmittedDate());
+
+                //setting location on compliance
+                Optional<Licence> licenceWithData = licenceRepository.findById(licence.getId());
+                licenceWithData.ifPresent(licenceData -> {
+                    String location = licenceData
+                        .getData()
+                        .stream()
+                        .filter(licenceFieldData -> licenceFieldData.getFieldType().getName().equals("location"))
+                        .limit(1)
+                        .map(LicenceFieldData::getText)
+                        .findFirst()
+                        .orElse(null);
+                    compliance.setLocation(location);
+                });
+
                 complianceRepository.save(compliance);
             } catch (Exception e) {
                 System.out.println(e);

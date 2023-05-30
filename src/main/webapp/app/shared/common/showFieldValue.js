@@ -89,7 +89,7 @@ const ShowFieldValue = ({ data }) => {
   );
 };
 
-const ShowLocationModal = ({ show, value, handleClose }) => {
+export const ShowLocationModal = ({ show, value, handleClose }) => {
   let location = value.split(',');
 
   if (location.length < 2) return <></>;

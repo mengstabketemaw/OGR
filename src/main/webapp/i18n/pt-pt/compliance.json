@@ -14,6 +14,8 @@
     "viewReport": "Exibir relatório",
     "inspector": "Inspetor",
     "update": "Atualizar",
+    "map": "Mostrar localização no mapa",
+    "route": "Mostrar direção",
     "delete": "Excluir",
     "noClose": "Sem, Fechar",
     "yesDelete": "Sim, Excluir",

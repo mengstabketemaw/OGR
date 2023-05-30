@@ -28,4 +28,6 @@ public interface ComplianceRepository extends JpaRepository<Compliance, Long> {
 
     @Override
     void deleteById(Long aLong);
+
+    boolean existsBySubmittedDate(Instant submittedDate);
 }
