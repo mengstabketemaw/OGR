@@ -224,7 +224,7 @@ const ComplianceMonitoring = () => {
                               </DropdownToggle>
                               <DropdownMenu>
                                 <DropdownItem onClick={() => setLocationModal({ show: true, value: data.location })}>
-                                  <Translate contentKey={'compliance.map'} />
+                                  <Translate contentKey={'compliance.showLocationOnMap'} />
                                 </DropdownItem>
                                 <DropdownItem onClick={() => nav('/admin/location-route?to=' + data.location)}>
                                   <Translate contentKey={'compliance.route'} />

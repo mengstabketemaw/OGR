@@ -1,5 +1,6 @@
 {
   "compliance": {
+    "compliance": "Compliance",
     "addInspection": "Add Inspection",
     "updateInspection": "Update Inspection",
     "complianceInfo": "View and track compliance with regulations for oil and gas refineries.",
@@ -14,7 +15,8 @@
     "viewReport": "View Report",
     "inspector": "Inspector",
     "update": "Edit",
-    "map": "Show Location on map",
+    "map": "map",
+    "showLocationOnMap": "Show Location on map",
     "route": "Show Direction",
     "delete": "Delete",
     "noClose": "No, Close",

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Card, CardTitle, Container, Spinner } from 'reactstrap';
+import { Button, Card, CardTitle, Container, Spinner } from 'reactstrap';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 import MapTiles from 'app/modules/maps/MapTiles';
 import { airIcon, drillIcon, explorationIcon, pipelineIcon, point } from 'app/modules/maps/icons';
@@ -42,27 +42,13 @@ const GeoLocationLocator = () => {
   return (
     <>
       {data.loading ? (
-        <Spinner className="align-self-center" color="primary" style={{ height: '3rem', width: '3rem' }} type="grow">
-          Loading...
-        </Spinner>
+        <div className="d-flex justify-content-center">
+          <Spinner className="align-self-center" color="primary" style={{ height: '3rem', width: '3rem' }} type="grow">
+            Loading...
+          </Spinner>
+        </div>
       ) : (
-        <div className="row p-4">
-          {/*          <div className="col-12 col-md-2 pb-4">
-            <div className="container border p-3 overflow-y-scroll">
-              <h3>Users</h3>
-              {
-                data.data.map(user=>(
-                  <Card className="p-3 m-2">
-                    <CardTitle className="text-uppercase text-muted mb-0">
-                      {user.fullName}
-                    </CardTitle>
-                    <span className="h6 font-weight-bold mb-0">{user.title}</span>
-                  </Card>
-                ))
-              }
-
-            </div>
-          </div>*/}
+        <div className="row">
           <div className="col-12 col-md-12">
             <div className="border p-3">
               <h3>
@@ -77,11 +63,16 @@ const GeoLocationLocator = () => {
                         <Popup>
                           <div className="card">
                             <div className="card-header text-center align-items-center mb-0 pt-0 pb-0">
-                              <h5 className="card-title pb-0 mb-0">{e.fullName}</h5>
+                              <Link to={`/admin/user-management/${e.login}`}>
+                                <h5 className="card-title pb-0 mb-0">{e.fullName}</h5>
+                              </Link>
                             </div>
                             <div className="card-body">
                               <div className="row">{e.title}</div>
-                              <div className="row">{e.type}</div>
+                              {/*<div className="row">{e.type}</div>*/}
+                              <Link to={`/compliance`}>
+                                <Translate contentKey={'compliance.compliance'} />
+                              </Link>
                             </div>
                           </div>
                         </Popup>
@@ -99,48 +90,3 @@ const GeoLocationLocator = () => {
 };
 
 export default GeoLocationLocator;
-/*
-import React from "react"
-import { useEffect, useState } from "react"
-import { MapContainer, Marker, Popup } from "react-leaflet"
-import RoutingMachine from "./createRoutineMachineLayer"
-import DoctorsIcon, { point } from "./icons"
-import MapTiles from "./MapTiles"
-
-const WhereIsThisPatient = ({ userInfo }) => {
-  const [me, setMe] = useState(null)
-  useEffect(() => {
-    window.navigator.geolocation.getCurrentPosition((e) => {
-      setMe([e.coords.latitude, e.coords.longitude])
-    })
-  }, [])
-  return (
-    <div
-      style={{
-        height: "70vh",
-        width: "100%",
-        margin: "10px",
-        border: "2px solid black",
-      }}
-    >
-      {me && (
-        <MapContainer style={{ height: "100%" }} center={me} zoom={20}>
-          <MapTiles />
-          <Marker
-            position={[userInfo.lat, userInfo.lng]}
-            icon={DoctorsIcon(userInfo.username)}
-          >
-            <Popup>{userInfo.name}</Popup>
-          </Marker>
-          <Marker position={me} icon={point}>
-            <Popup>Your are here!</Popup>
-          </Marker>
-          <RoutingMachine me={me} patient={[userInfo.lat, userInfo.lng]} />
-        </MapContainer>
-      )}
-    </div>
-  )
-}
-
-export default WhereIsThisPatient
-*/

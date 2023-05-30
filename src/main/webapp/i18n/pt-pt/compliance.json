@@ -1,5 +1,6 @@
 {
   "compliance": {
+    "compliance": "acompanhe",
     "addInspection": "Adicionar Inspeção",
     "updateInspection": "Atualizar inspeção",
     "complianceInfo": "Visualize e acompanhe a conformidade com os regulamentos para refinarias de petróleo e gás.",
@@ -14,7 +15,8 @@
     "viewReport": "Exibir relatório",
     "inspector": "Inspetor",
     "update": "Atualizar",
-    "map": "Mostrar localização no mapa",
+    "map": "mapa",
+    "showLocationOnMap": "Mostrar localização no mapa",
     "route": "Mostrar direção",
     "delete": "Excluir",
     "noClose": "Sem, Fechar",
