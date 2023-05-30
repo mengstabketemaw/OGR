@@ -15,7 +15,8 @@
     "save": "Save",
     "state": "Estada",
     "delete": "Excluir",
-    "submit": "Enviar"
+    "submit": "Enviar",
+    "loginFirst": "\nFaça login para se inscrever"
   },
   "formModal": {
     "fieldCreater": "Criador de campo",

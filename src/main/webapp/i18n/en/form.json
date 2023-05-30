@@ -15,7 +15,8 @@
     "save": "Save",
     "state": "State",
     "delete": "Delete",
-    "submit": "Submit"
+    "submit": "Submit",
+    "loginFirst": "Login To Apply"
   },
   "formModal": {
     "fieldCreater": "Field Creater",

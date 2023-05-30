@@ -101,7 +101,7 @@ describe('Notification Middleware', () => {
           title: 'Unauthorized',
           status: 401,
           path: '/api/authenticate',
-          message: 'error.http.401',
+          message: 'Login in to continue',
         },
         status: 401,
       },

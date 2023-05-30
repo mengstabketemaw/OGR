@@ -7,6 +7,7 @@ import { Col, Row } from 'reactstrap';
 import DynamicFields from 'app/shared/common/dynamicFields';
 import { formatValue } from 'app/shared/common/formatValue';
 import { toast } from 'react-toastify';
+import { Translate } from 'react-jhipster';
 
 const ApplyPermit = () => {
   const nav = useNavigate();
@@ -38,7 +39,9 @@ const ApplyPermit = () => {
     <div className="">
       <Row className="justify-content-center ">
         <Col md="6">
-          <h1 className="">Application Form for {params.get('name')}</h1>
+          <h1 className="">
+            <Translate contentKey={'form.for'} /> {params.get('name')}
+          </h1>
         </Col>
       </Row>
       <Row className="justify-content-center">

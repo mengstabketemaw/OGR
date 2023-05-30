@@ -36,7 +36,7 @@ const Permit = () => {
   const form = useAppSelector(state => state.form.form);
   const account = useAppSelector(state => state.authentication.account);
   const dispatch = useAppDispatch();
-
+  const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
   const [open, setOpen] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [modalText, setModalText] = useState('' + '');
@@ -58,9 +58,11 @@ const Permit = () => {
   };
 
   useEffect(() => {
-    // @ts-ignore
-    dispatch(getForm(params.get('pageKey')));
-  }, []);
+    if (isAuthenticated) {
+      // @ts-ignore
+      dispatch(getForm(params.get('pageKey')));
+    }
+  }, [, isAuthenticated]);
 
   const handleSubmit = values => {
     const valueToSend = {
@@ -90,16 +92,31 @@ const Permit = () => {
             </div>
 
             <Row>
-              <Col md={8}>
+              <Col lg={8}>
                 <Card>
                   {' '}
                   <CardBody>
-                    <ApplyPermit />
+                    {isAuthenticated ? (
+                      <ApplyPermit />
+                    ) : (
+                      <>
+                        <Row className="justify-content-center ">
+                          <Col md="6">
+                            <h1 className="">
+                              <Translate contentKey={'form.for'} /> {params.get('name')}
+                            </h1>
+                          </Col>
+                        </Row>
+                        <Button onClick={() => nav('/apply-permit?name=' + params.get('name') + '&pageKey=' + params.get('pageKey'))}>
+                          <Translate contentKey={'form.loginFirst'} />
+                        </Button>
+                      </>
+                    )}
                   </CardBody>{' '}
                 </Card>
               </Col>
 
-              <Col md={4}>
+              <Col xl={4}>
                 <LicencesFaq />
 
                 <Card>
