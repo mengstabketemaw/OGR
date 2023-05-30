@@ -8,6 +8,7 @@ import ApplyPermit from 'app/modules/permit/ApplyPermit';
 import ApplyLicence from 'app/modules/licence/ApplyLicence';
 import Workflow from 'app/modules/administration/workflow/workflow';
 import CheckoutForm from 'app/modules/checkout/checkout';
+import Permit from 'app/modules/permit';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -18,7 +19,7 @@ export default () => {
           path="apply-permit"
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
-              <ApplyPermit />
+              <Permit />
             </PrivateRoute>
           }
         />
