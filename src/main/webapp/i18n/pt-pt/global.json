@@ -180,7 +180,9 @@
     "geoLocator": "geolocalizador",
     "report": "Localização de Licenças e Permissões",
     "chooseLocation": "Escolha sua localização arrastando o marcador",
-    "addLocation": "Clique aqui para adicionar localização"
+    "addLocation": "Clique aqui para adicionar localização",
+    "permissionNotGranted": "Conceda permissão ao aplicativo para sua localização",
+    "enterLocationManually": "Insira o local manualmente"
   },
   "toaster": {
     "success": "Operação com sucesso",

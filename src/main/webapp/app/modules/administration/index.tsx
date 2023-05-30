@@ -10,6 +10,7 @@ import Configuration from './configuration/configuration';
 import Docs from './docs/docs';
 import GeoLocationLocator from 'app/modules/maps/GeoLocationLocator';
 import Payment from 'app/modules/administration/Payment';
+import LicenceLocation from 'app/modules/maps/LicenceLocation';
 
 const AdministrationRoutes = () => (
   <div>
@@ -21,6 +22,7 @@ const AdministrationRoutes = () => (
       <Route path="logs" element={<Logs />} />
       <Route path="docs" element={<Docs />} />
       <Route path="location" element={<GeoLocationLocator />} />
+      <Route path="location-route" element={<LicenceLocation />} />
       <Route path="payment" element={<Payment />} />
     </ErrorBoundaryRoutes>
   </div>

@@ -181,7 +181,9 @@
     "geoLocator": "Geolocator",
     "report": "Licenses and Permits Location",
     "chooseLocation": "Choose Your Location By Dragging the Marker",
-    "addLocation": "Click here to add location"
+    "addLocation": "Click here to add location",
+    "permissionNotGranted": "Grant The app permission to your location",
+    "enterLocationManually": "Enter location manually"
   },
   "toaster": {
     "success": "Operation Successfully",

@@ -15,15 +15,15 @@ public class Compliance {
     @Column(unique = true)
     private Instant submittedDate;
 
-    @OneToOne
-    //    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    @ManyToOne
     User company;
 
-    @OneToOne
-    //    @JoinColumn(name = "customForm_id", referencedColumnName = "id")
+    @ManyToOne
     CustomForm customForm;
 
     String status = "Not Inspected";
+
+    String location;
 
     public Long getId() {
         return id;
@@ -63,5 +63,13 @@ public class Compliance {
 
     public void setSubmittedDate(Instant submittedDate) {
         this.submittedDate = submittedDate;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

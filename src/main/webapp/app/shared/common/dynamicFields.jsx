@@ -34,11 +34,7 @@ const DynamicFields = props =>{
     return <p>There is No Form</p>
 
   return(<>
-      <GeoLocationChooser showModal={locationModal.show} setValue={setLocationModal} handleClose={()=>setLocationModal({
-        ...locationModal,
-        show: false,
-      })
-      }/>
+      <GeoLocationChooser showModal={locationModal.show} setLocation={(lat,lon)=> setLocationModal(prev=> ({show:false, value: lat + "," + lon}) ) } handleClose={()=>setLocationModal({...locationModal,show: false,}) }/>
     <ValidatedForm onSubmit={handlevalue} defaultValues={defaultValue} >
       {fields && fields.map( f => f.fieldType.name === "select" ?
         <ValidatedField
@@ -107,7 +103,7 @@ const DynamicFields = props =>{
     </>
   )
 }
-const GeoLocationChooser = ({showModal, handleClose,setValue}) => {
+export const GeoLocationChooser = ({showModal, handleClose,setLocation}) => {
 
   return (
     <Modal
@@ -118,11 +114,7 @@ const GeoLocationChooser = ({showModal, handleClose,setValue}) => {
     >
       <ModalHeader><Translate contentKey="map.geoLocator">Save</Translate></ModalHeader>
       <ModalBody>
-        <ChooseLocation setLocation={(lat,lon)=>{
-        setValue(prev=>{
-          return {show:false, value: lat + "," + lon}
-          })
-        }}/>
+        <ChooseLocation setLocation={setLocation}/>
     </ModalBody>
       <ModalFooter>
         <Button onClick={handleClose}><Translate contentKey="entity.action.cancel">Cancel</Translate></Button>
