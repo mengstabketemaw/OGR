@@ -29,7 +29,13 @@
 
 @font-face {
   font-family: 'Poppins';
-  src: url('./argon/Poppins/Poppins-Regular.ttf') format('truetype');
+  src: url('./argon/Poppins/Poppins-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('./argon/Poppins/Roboto-Light.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
