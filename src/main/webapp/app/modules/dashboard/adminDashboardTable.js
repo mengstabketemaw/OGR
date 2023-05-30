@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import { Button, Card, CardHeader, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner, Table } from 'reactstrap';
+import { Button, Card, CardHeader, Col, Row, Spinner, Table } from 'reactstrap';
 import CustomPagination from 'app/shared/common/CustomPagination';
 import { isArray } from 'lodash';
 import moment from 'moment';
-import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { Translate } from 'react-jhipster';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 import { DetailModal } from 'app/modules/home/user-home';
 import { useNavigate } from 'react-router-dom';
+import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 
 const PAGE_SIZE = ITEMS_PER_PAGE;
 export const AdminDashboardTable = ({ type }) => {
@@ -18,6 +18,7 @@ export const AdminDashboardTable = ({ type }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [licences, setLicences] = useState({ loading: true, data: { content: [] } });
   const [detailModal, setDetailModal] = useState({ show: false, id: -1 });
+  const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
   const fetchData = page => {
     // Construct the URL with the page query parameter
     const url = `/api/licence/formByType?type=${type}&page=${page}&size=${PAGE_SIZE}&sort=submittedDate,desc`;
@@ -153,6 +154,14 @@ export const AdminDashboardTable = ({ type }) => {
                         >
                           <Translate contentKey={'workflow.moreaction'} />
                         </Button>
+                        <Button
+                          color="danger"
+                          onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
+                          disabled={!(data.stage?.id === 0 || data.stage === null)}
+                          size="sm"
+                        >
+                          <Translate contentKey={'entity.action.delete'} />
+                        </Button>
                       </th>
                     </tr>
                   ))}
@@ -164,7 +173,15 @@ export const AdminDashboardTable = ({ type }) => {
           )}
         </Card>
       </Col>
-      <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
+      <DeleteLicenceModal
+        id={deleteLicence.id}
+        show={deleteLicence.show}
+        name={deleteLicence.name}
+        handleClose={() => setDeleteLicence({ id: -1, show: false, name: '' })}
+        updateTable={() =>
+          setLicences({ ...licences, data: { content: licences.data.content.filter(license => license.id !== deleteLicence.id) } })
+        }
+      />
     </>
   );
 };

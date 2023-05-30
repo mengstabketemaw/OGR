@@ -11,6 +11,8 @@
       "distribution": "Distribution License",
       "retail": "Retail License",
       "waste": "Waste Management License"
-    }
+    },
+    "delete": "Are you sure you want to delete this {{name}}?",
+    "deleted": "{{name}} is deleted"
   }
 }

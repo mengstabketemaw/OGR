@@ -67,6 +67,13 @@ export const updateWorkflow = createAsyncThunk(
   { serializeError: serializeAxiosError }
 );
 
+export const deleteLicence = createAsyncThunk(
+  'deleteLicence',
+  async (id) => {
+    return await axios.delete(`/api/licence/${id}`);
+  },
+  { serializeError: serializeAxiosError }
+);
 
 export const LicenceSlice = createSlice({
   name: 'licence',
@@ -78,6 +85,9 @@ export const LicenceSlice = createSlice({
         state.loading = false;
         state.licenses = action.payload.data;
         state.totalItems = parseInt(action.payload.headers['x-total-count'], 10);
+      })
+      .addCase(deleteLicence.fulfilled, (state, action) => {
+        state.loading = false;
       })
       .addCase(getLicenceByForm.fulfilled, (state, action) => {
         state.loading = false;

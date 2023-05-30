@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import {useNavigate, useParams} from "react-router-dom";
-import {Translate, ValidatedBlobField, ValidatedField, ValidatedForm} from "react-jhipster";
+import {Translate, ValidatedBlobField, ValidatedField, ValidatedForm, F} from "react-jhipster";
 import {
   Button,
   Card,

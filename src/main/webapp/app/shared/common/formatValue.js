@@ -3,8 +3,10 @@ import moment from 'moment';
 export const formatValue = async (values, fields, c, f) => {
   let valueToSend = [];
   await Promise.all(
-    Object.keys(values).map(async key => {
-      const fieldType = fields.filter(f => f.label === key)[0].fieldType;
+    Object.keys(values).map(async k => {
+      let key = k.replace('*', '');
+      const current = fields.filter(f => f.label === key)[0];
+      const fieldType = current.fieldType;
       const label = key;
       const value = values[key];
       const fieldValue = await fieldFill(value, fieldType.name, fieldType, label);
