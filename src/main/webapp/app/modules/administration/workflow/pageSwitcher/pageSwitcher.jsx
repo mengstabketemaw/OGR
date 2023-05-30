@@ -66,28 +66,19 @@ const PageSwitcher = () => {
 
   return (
     <>
-
-    <Row className="d-flex justify-content-center">
-      <Col md="8">
+    <Container >
         <Card className="shadow">
           <CardHeader className="border-0">
-            <div  className="d-flex justify-content-between pb-4 pl-4 pt-20">
-              <Button onClick={handlePreviousPage} disabled={currentPage === 0} >
-
-                <span className="d-none d-md-inline">
-                    <Translate contentKey="workflow.previous"></Translate>
-                  </span>
-              </Button>
-              &nbsp;
-              <div className="box">
+            <div  className="row">
+              <div className="box col-md-8 order-md-2">
                 <div className="steps">
-                  <ul className="nav">
+                  <ul className="nav  ">
                     {pages.length > 0 ?
                       pages.map((page, index) => {
-                      return <li  key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
+                      return <li className={""} key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
                                   onClick={() => handleSwitchPage(index)}
                                   >
-                        <div>Step {index + 1}<br /><span > {page.props.name}</span></div>
+                        <div >Step {index + 1}<br /><span> {page.props.name}</span></div>
                       </li>
                     }):
                       <h3 className="mb-0">NO WORKFLOW!</h3>
@@ -103,15 +94,22 @@ const PageSwitcher = () => {
               {/*   </Button> */}
               {/* ))} */}
 
-              <Button onClick={handleNextPage} hidden={currentPage === pages.length - 1} disabled={currentPage === pages.length - 1}>
+              <div className="mt-2 col-12 col-sm-6 col-md-2 prev-button order-md-1">
+                <Button className={"col-12 bg-light"} onClick={handlePreviousPage} disabled={currentPage === 0} >
+                  <Translate contentKey="workflow.previous"></Translate>
+                </Button>
+              </div>
+
+
+              <div className="mt-2 col-12 col-sm-6 col-md-2  order-md-3">
+              <Button className={"col-12 bg-light"}  onClick={handleNextPage} hidden={currentPage === pages.length - 1} disabled={currentPage === pages.length - 1}>
 
                 <Translate contentKey="workflow.next"></Translate>
               </Button>
-              <Button className={'mr-4 mb-2 bg-gradient-green text-white'} onClick={handleProceed} hidden={currentPage !== pages.length - 1} >
-
+              <Button  className={ currentPage !== pages.length - 1 ? 'd-none' : 'col-12 mr-4 mb-2 bg-gradient-green text-white' } onClick={handleProceed}>
                 <Translate contentKey="workflow.proceed"></Translate>
               </Button>
-
+              </div>
             </div>
             &nbsp;
             {/* <Row className="align-items-center"> */}
@@ -122,12 +120,9 @@ const PageSwitcher = () => {
             {/* Render the current page */}
             {pages[currentPage]}
 
-
-
           </CardHeader>
         </Card>
-      </Col>
-    </Row>
+    </Container>
       <IssuedOrDenied showModal={showModal} handleClose={handleClose} handleSubmit = {handleSubmit}/>
     </>
 
