@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {
   getFieldsByState,
   getFieldsDataByLicenceDM,
@@ -8,9 +8,13 @@ import {Link, useParams} from "react-router-dom";
 import {PageContext} from "app/modules/administration/workflow/pageSwitcher/pageSequence";
 import {useAppDispatch, useAppSelector} from "app/config/store";
 import DynamicFields from "app/shared/common/dynamicFields";
-import {formatValue,getFieldValue} from "app/shared/common/formatValueWithCustomField";
+import {formatDisplayOn, formatValue, getFieldValue} from "app/shared/common/formatValueWithCustomField";
 import {Button, Col, Spinner} from "reactstrap";
 import {toast} from "react-toastify";
+import DisplayData from "app/shared/common/displayDynamicData";
+import {Translate} from "react-jhipster";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAnglesDown, faAnglesUp} from "@fortawesome/free-solid-svg-icons";
 
 export const DecisionMaking = (params) => {
   const stateKey = 4;
@@ -21,6 +25,12 @@ export const DecisionMaking = (params) => {
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
   const {  id } = useParams();
   const fieldDateFormated = fields_data && getFieldValue(fields_data);
+  const formData = useAppSelector(state=> state.licence.license.data);
+  const formFields = useAppSelector(state=> state.licence.license.form.fields);
+  const data = formatDisplayOn(getFieldValue(formData)
+    ,[...formFields.filter(f=>f.state.id===0)]
+    ,stateKey)
+  const [collapse,setCollapse] = useState(false);
   useEffect(() => {
     const params = {
       id: parseInt(formId),
@@ -39,9 +49,14 @@ export const DecisionMaking = (params) => {
 
     <>
       <Col  md="8" className={"container"} >
-        <div className="d-flex ">
-          <h1> Decision Making</h1>
+        <div className="d-flex justify-content-between">
+          <h1> <Translate contentKey="workflow.decisionmaking"></Translate> </h1>
+          <div >
+            {collapse ? <FontAwesomeIcon icon={faAnglesDown} onClick={()=>setCollapse(!collapse)} />
+              :<FontAwesomeIcon icon={faAnglesUp} onClick={()=>setCollapse(!collapse)} />}
+          </div>
         </div>
+        <DisplayData data={data} collapse={collapse}/>
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}
                        licence_id ={parseInt(id)}
