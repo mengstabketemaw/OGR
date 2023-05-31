@@ -29,6 +29,18 @@ public class CustomField {
     @Column(name = "order_num")
     private Integer orderNum;
 
+    @ManyToOne
+    @JoinColumn(name = "display_on")
+    private State displayOn;
+
+    public State getDisplayOn() {
+        return displayOn;
+    }
+
+    public void setDisplayOn(State displayOn) {
+        this.displayOn = displayOn;
+    }
+
     public Integer getOrderNum() {
         return orderNum;
     }

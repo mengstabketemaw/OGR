@@ -17,6 +17,7 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
+// @ts-ignore
 import Landing from 'app/modules/landing/landing';
 import Login from 'app/modules/login/login';
 

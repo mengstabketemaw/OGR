@@ -23,7 +23,8 @@
     "order": "Ordem",
     "fieldType": "Tipo de campo",
     "option": "opções",
-    "optionPlaceHolder": "As opções devem ser separadas por nova linha"
+    "optionPlaceHolder": "As opções devem ser separadas por nova linha",
+    "displayOn": "Exibir em"
   },
   "licence": {
     "Exploration licence": "licença de exploração",

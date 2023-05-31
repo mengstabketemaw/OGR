@@ -5,19 +5,22 @@ import {Link} from "react-router-dom";
 import {useAppSelector} from "app/config/store";
 
 const FieldCreaterModal=(props)=>{
-  const { handleClose, field, handleFields, handleDelete } = props;
+  const { handleClose, field, handleFields, handleDelete, states } = props;
   const fieldTypes = useAppSelector(state => state.form.fieldTypes);
 
   const handleSubmitField = value => {
     let valueToSend = {...value}
     valueToSend.options = value.options.split("\n").filter(e=>e !== "").map((e,id)=>({id:null, name:e.trim()}))
     valueToSend.fieldType = JSON.parse(valueToSend.fieldType)
+    valueToSend.displayOn = JSON.parse(valueToSend.displayOn)
     handleFields(valueToSend);
     handleClose();
   };
 
   const defaultValue = () => {
-    return {...field, fieldType: JSON.stringify(field.fieldType), options: field.options.map(op=>op.name).join("\n") }
+    return {...field, fieldType: JSON.stringify(field.fieldType),
+      displayOn: JSON.stringify(field.displayOn)||null
+      , options: field.options.map(op=>op.name).join("\n") }
   }
 
   return(
@@ -59,7 +62,8 @@ const FieldCreaterModal=(props)=>{
 
               />
 
-              <ValidatedField type="select" name="fieldType" label={translate('formModal.fieldType')}
+              <ValidatedField required
+                type="select" name="fieldType" label={translate('formModal.fieldType')}
               >
                 {fieldTypes.map((f,i) => (
                   <option value={JSON.stringify(f)} key={f.id}>
@@ -67,6 +71,16 @@ const FieldCreaterModal=(props)=>{
                   </option>
                 ))}
               </ValidatedField >
+            {states.length > 0 &&
+            <ValidatedField
+              type="select" name="displayOn" label={translate('formModal.displayOn')}
+            >
+              { states.map((f,i) => (
+                <option value={JSON.stringify(f)} key={f.id}>
+                  <Translate contentKey={"state."+f.name}></Translate>
+                </option>
+              ))}
+            </ValidatedField >}
               <ValidatedField type={"textarea"} name="options" label={translate('formModal.option')} placeholder={translate("formModal.optionPlaceHolder")} />
             <Button color="secondary" onClick={handleClose} tabIndex={1}>
               <Translate contentKey="entity.action.cancel">Cancel</Translate>

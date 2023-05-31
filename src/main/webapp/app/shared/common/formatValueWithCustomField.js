@@ -20,6 +20,27 @@ export const formatValue = async (values, fields, currentFields, licence_id) => 
   return valueToSend;
 };
 
+export const formatDisplayOn = (values, fields, stateKey) => {
+  let valueToSend = {};
+  let count = 0;
+  Object.keys(values).map(key => {
+    const field = fields.find(f => f.label === key);
+    const displayOn = field.displayOn;
+    const label = key;
+    let value = values[key];
+    if (field.fieldType.name === 'file') {
+      value = value.split('~')[0];
+    } else if (field.fieldType.name === 'checkbox') {
+      value = value === 1 ? 'True' : 'False';
+    }
+    if (displayOn != null && displayOn.id === stateKey) {
+      valueToSend[key] = value;
+    }
+  });
+
+  return valueToSend;
+};
+
 const fieldFill = async (val, field, custom_field_id, label, dataId, licence_id) => {
   switch (field) {
     case 'textarea':
@@ -126,8 +147,8 @@ export const getFieldValue = list => {
 const getValue = value => {
   return value.text
     ? value.text
-    : value.dropdown
-    ? value.dropdown
+    : value.dropDown
+    ? value.dropDown
     : value.date
     ? value.date
     : value.dateAndTime
@@ -135,8 +156,8 @@ const getValue = value => {
     : value.checkBoxId
     ? value.checkBoxId
     : value.file
-    ? value.file
-    : value.encodingFileType;
+    ? value.encodingFileType
+    : value.file;
 };
 
 export async function convertFileToBase64(file) {

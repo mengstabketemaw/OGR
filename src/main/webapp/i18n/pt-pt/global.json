@@ -168,10 +168,10 @@
     "submittedThisMonth": "Enviado este mês",
     "registeredAccounts": "Contas cadastradas",
     "registeredToday": "Registrado hoje",
-    "requestToday": "PEDIDOS ENVIADOS HOJE",
+    "requestToday": "PEDIDOS HOJE",
     "requestYesterday": "Enviado ontem",
     "totalInspections": "INSPEÇÕES TOTAIS",
-    "inspThisMonth": "Inspeções agendadas para este mês"
+    "inspThisMonth": "Agendadas para este mês"
   },
   "payment": {
     "conf": "Gestão de Pagamentos"

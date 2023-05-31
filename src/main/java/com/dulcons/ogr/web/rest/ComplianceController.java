@@ -69,8 +69,7 @@ public class ComplianceController {
 
     @GetMapping
     public Page<Compliance> findAll(Pageable page) {
-        List<Licence> licences = licenceRepository.findByStage_Id(2L);
-
+        List<Licence> licences = licenceRepository.findByStatus("Authorized");
         for (Licence licence : licences) {
             Compliance compliance = new Compliance();
             if (complianceRepository.existsBySubmittedDate(licence.getSubmittedDate())) continue;

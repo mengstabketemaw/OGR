@@ -123,6 +123,7 @@ const FormCreater = () => {
                  {formForEdit &&
                 <FieldCreater formForEdit={formForEdit} fields = {formForEdit.fields}
                               state={states?.filter((s)=>{return s.id === parseInt(currentState)})[0]}
+                              states={parseInt(currentState) !==0 ? [] : states }
                               handleFields={handleFields} handleDelete={handleDelete}/>}
                </Col>
                <div className="pb-4 pl-4">
