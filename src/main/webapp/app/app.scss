@@ -26,6 +26,18 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+.equal-height-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -1px; /* Adjust the negative margin as per your preference */
+}
+
+.equal-height-cards > [class^='col'] {
+  display: flex;
+  flex-direction: column;
+  //margin: 4px 0px 4px 0px;
+  /* Adjust the margin as per your preference */
+}
 
 @font-face {
   font-family: 'Poppins';
