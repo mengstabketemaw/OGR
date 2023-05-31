@@ -161,7 +161,8 @@
     "close": "Fechar",
     "detail": "Detalhes",
     "name": "Nome",
-    "amount": "Amount"
+    "amount": "Amount",
+    "requested": "Requeridos"
   },
   "stats": {
     "totalSubmissions": "Total de Envios",

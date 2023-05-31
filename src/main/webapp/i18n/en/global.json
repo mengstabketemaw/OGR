@@ -162,7 +162,8 @@
     "close": "Close",
     "detail": "Details",
     "name": "Name",
-    "amount": "Amount"
+    "amount": "Amount",
+    "requested": "Requested"
   },
   "stats": {
     "totalSubmissions": "Total Submissions",
