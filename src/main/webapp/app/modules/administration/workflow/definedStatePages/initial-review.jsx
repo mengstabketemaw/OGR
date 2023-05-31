@@ -12,14 +12,18 @@ import {formatValue,getFieldValue} from "app/shared/common/formatValueWithCustom
 import {Button, Col, Spinner} from "reactstrap";
 import {toast} from "react-toastify";
 import {Translate} from "react-jhipster";
+import DisplayData from "app/shared/common/displayDynamicData";
 export const InitialReview = (params) => {
   const stateKey = 1;
   const dispatch = useAppDispatch();
   const { formId} = useContext(PageContext);
   const {key} = params;
   const fields = useAppSelector(state=> state.workflow.currentFields);
+  const formData = useAppSelector(state=> state.licence.license.data);
+  const formFields = useAppSelector(state=> state.licence.license.form.fields);
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
   const {  id } = useParams();
+  const data = {...getFieldValue(formData)} || {}
   const fieldDateFormated = fields_data && getFieldValue(fields_data);
   useEffect(() => {
     const params = {
@@ -35,6 +39,12 @@ export const InitialReview = (params) => {
       toast.success("Initial Review Saved")
     )
   }
+  // const data = [
+  //   { label: 'first name', value: 'tomas' },
+  //   { label: 'last name', value: 'smith' },
+  // ];
+
+
   return (
 
     <>
@@ -42,6 +52,7 @@ export const InitialReview = (params) => {
         <div className="d-flex ">
           <h1>  <Translate contentKey="workflow.initialreview"></Translate></h1>
         </div>
+        <DisplayData data={data} />
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}
                        licence_id ={parseInt(id)}

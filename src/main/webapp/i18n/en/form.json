@@ -23,7 +23,8 @@
     "order": "Order",
     "fieldType": "Field Type",
     "option": "Options",
-    "optionPlaceHolder": "Options must be separated by new line"
+    "optionPlaceHolder": "Options must be separated by new line",
+    "displayOn": "Reviewed On"
   },
 
   "licence": {

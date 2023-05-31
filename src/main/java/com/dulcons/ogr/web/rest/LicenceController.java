@@ -100,9 +100,7 @@ public class LicenceController {
     public List<LocationFormDto> getAllLicenceWithLocation() {
         return licenceRepository
             .findAllForLocation()
-            .filter(licence ->
-                licence.getForm().getFields().stream().anyMatch(customField -> customField.getFieldType().getName().equals("location"))
-            )
+            .filter(licence -> licence.getData().stream().anyMatch(customField -> customField.getFieldType().getName().equals("location")))
             .map(licence -> {
                 LocationFormDto locationFormDto = new LocationFormDto();
                 locationFormDto.setId(licence.getId());

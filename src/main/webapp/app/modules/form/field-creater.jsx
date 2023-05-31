@@ -11,7 +11,7 @@ import {useAppDispatch, useAppSelector} from "app/config/store";
 const FieldCreater = (param) =>{
   const [show,setShow] = useState(false);
   const dispatch = useAppDispatch();
-  const {formForEdit, state, fields, handleFields, handleDelete} = param;
+  const {formForEdit, state, fields, handleFields, handleDelete, states} = param;
   //const fields = useAppSelector(state => state.form.fieldsForEdit);
   const initalField = {
     "id":0,
@@ -99,6 +99,7 @@ const FieldCreater = (param) =>{
       {show&&<FieldCreaterModal showModal={show}
                           handleClose={closeModal}
                           field={selectedField}
+                          states={...states}
                           handleFields={handleFields}
                           handleDelete={(value) => {
                             closeModal();
