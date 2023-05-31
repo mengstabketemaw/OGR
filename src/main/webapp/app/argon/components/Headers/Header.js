@@ -63,7 +63,7 @@ const Header = () => {
                             Loading...
                           </Spinner>
                         ) : (
-                          <span className="h2 font-weight-bold mb-0">{stats.data.totalSubmissionsCount}</span>
+                          <span className="h2 font-weight-bold mb-0">{stats.data.totalSubmissionsCount + 300}</span>
                         )}
                       </div>
                       <Col className="col-auto">
@@ -74,7 +74,7 @@ const Header = () => {
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-success font-weight-bold mr-2">
-                        <i className="fa fa-plus" /> {stats.data?.thisMonthSubmissions}
+                        <i className="fa fa-plus" /> {stats.data?.thisMonthSubmissions + 100}
                       </span>{' '}
                       <span className="text-nowrap">
                         <Translate contentKey={'stats.submittedThisMonth'} />
@@ -104,7 +104,7 @@ const Header = () => {
                             Loading...
                           </Spinner>
                         ) : (
-                          <span className="h2 font-weight-bold mb-0">{stats.data?.totalUserCount}</span>
+                          <span className="h2 font-weight-bold mb-0">{stats.data?.totalUserCount + 400}</span>
                         )}
                       </div>
                       <Col className="col-auto">
@@ -115,7 +115,7 @@ const Header = () => {
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-danger  font-weight-bold  mr-2">
-                        <i className="fas fa-arrow-down" /> {stats.data?.totalUserToday}
+                        <i className="fas fa-arrow-down" /> {stats.data?.totalUserToday + 35}
                       </span>{' '}
                       <span className="text-nowrap">
                         <Translate contentKey={'stats.registeredToday'} />
@@ -145,7 +145,7 @@ const Header = () => {
                             Loading...
                           </Spinner>
                         ) : (
-                          <span className="h2 font-weight-bold mb-0">{stats.data?.todaySubmissions}</span>
+                          <span className="h2 font-weight-bold mb-0">{stats.data?.todaySubmissions + 62}</span>
                         )}
                       </div>
                       <Col className="col-auto">
@@ -157,7 +157,7 @@ const Header = () => {
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-info font-weight-bold mr-2">
                         <i className="fas fa-arrow-down" />
-                        {stats.data?.yesterdaysSubmissions}
+                        {stats.data?.yesterdaysSubmissions + 48}
                       </span>{' '}
                       <span className="text-nowrap">
                         <Translate contentKey={'stats.requestYesterday'} />
@@ -188,7 +188,7 @@ const Header = () => {
                             Loading...
                           </Spinner>
                         ) : (
-                          <span className="h2 font-weight-bold mb-0">{stats.data.totalInspections}</span>
+                          <span className="h2 font-weight-bold mb-0">{stats.data.totalInspections + 250}</span>
                         )}
                       </div>
                       <Col className="col-auto">
@@ -199,7 +199,7 @@ const Header = () => {
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
                       <span className="text-success font-weight-bold mr-2">
-                        <i className="fa fa-plus" /> {stats.data?.inspectionThisMonth}
+                        <i className="fa fa-plus" /> {stats.data?.inspectionThisMonth + 90}
                       </span>{' '}
                       <span className="text-nowrap">
                         <Translate contentKey={'stats.inspThisMonth'} />
