@@ -167,12 +167,12 @@
   "stats": {
     "totalSubmissions": "Total Submissions",
     "submittedThisMonth": "Submitted this month",
-    "registeredAccounts": "Registered Accounts",
+    "registeredAccounts": "Registered Users",
     "registeredToday": "Registered Today",
-    "requestToday": "REQUESTS SUBMITTED TODAY",
+    "requestToday": "REQUESTS TODAY",
     "requestYesterday": "Submitted yesterday",
     "totalInspections": "TOTAL INSPECTIONS",
-    "inspThisMonth": "Scheduled Inspections this month"
+    "inspThisMonth": "Scheduled this month"
   },
   "payment": {
     "conf": "Payment Management"

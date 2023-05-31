@@ -6,7 +6,7 @@ import {
   AccordionItem,
   Button,
   Card,
-  CardBody,
+  CardBody, CardFooter,
   CardTitle,
   Col,
   Container, Modal, ModalBody, ModalFooter, ModalHeader,
@@ -44,13 +44,12 @@ const LicencesHeader = () => {
     setModalOpen(false);
   };
 
-
   return (
     <>
       {/* Card stats */}
-      <Row>
+      <Row className={"equal-height-cards"}>
         <Col lg="6" xl="3">
-          <Card className="bg-gradient-info card-stats mb-4 mb-xl-0">
+          <Card className="h-100  card-stats mb-4 mb-xl-0" style={{backgroundColor:"#2dce89"}}>
             <CardBody>
               <Row>
                 <div className="col">
@@ -68,7 +67,10 @@ const LicencesHeader = () => {
                   </div>
                 </Col>
               </Row>
-              <p className="mt-3 mb-0 text-muted text-sm">
+
+            </CardBody>
+            <CardFooter className="border-top-0 pt-0" style={{backgroundColor:"#2dce89"}}>
+              <p className="mb-0 text-muted text-sm">
                       <span className="text-white mr-2">
                       </span>{" "}
                 <span className="text-white text-wrap">
@@ -82,11 +84,11 @@ const LicencesHeader = () => {
                   <Translate contentKey={"information.more"}/>
                 </a>
               </p>
-            </CardBody>
+            </CardFooter>
           </Card>
         </Col>
         <Col lg="6" xl="3">
-          <Card className="bg-gradient-purple card-stats mb-4 mb-xl-0">
+          <Card className="h-100   card-stats mb-4 mb-xl-0" style={{backgroundColor:"#2dcecc"}}>
             <CardBody>
               <Row>
                 <div className="col">
@@ -105,10 +107,12 @@ const LicencesHeader = () => {
                   </div>
                 </Col>
               </Row>
-              <p className="mt-3 mb-0 text-muted text-sm">
+            </CardBody>
+            <CardFooter className="border-top-0 pt-0" style={{backgroundColor:"#2dcecc"}}>
+              <p className=" mb-0 text-muted  text-sm">
                       <span className="text-white mr-2">
                       </span>{" "}
-                <span className="text-white text-wrap">
+                <span className="text-white text-wrap ">
                         <Translate contentKey={`information.pageKey.${params.get('pageKey')}.processShort`}/>
                       </span>
                 <a className=" btn-link text-white pl-0" onClick={() => {
@@ -119,11 +123,11 @@ const LicencesHeader = () => {
                   <Translate contentKey={"information.more"}/>
                 </a>
               </p>
-            </CardBody>
+            </CardFooter>
           </Card>
         </Col>
         <Col lg="6" xl="3">
-          <Card className="bg-gradient-warning card-stats mb-4 mb-xl-0">
+          <Card className="h-100    card-stats mb-4 mb-xl-0" style={{backgroundColor:"#2dce89"}}>
             <CardBody>
               <Row>
                 <div className="col">
@@ -141,7 +145,10 @@ const LicencesHeader = () => {
                   </div>
                 </Col>
               </Row>
-              <p className="mt-3 mb-0 text-muted text-sm">
+
+            </CardBody>
+            <CardFooter className="border-top-0 pt-0" style={{backgroundColor:"#2dce89"}}>
+              <p className=" mb-0 text-muted text-sm">
                       <span className="text-white mr-2">
                       </span>{" "}
                 <span className="text-white text-wrap">
@@ -155,11 +162,11 @@ const LicencesHeader = () => {
                   <Translate contentKey={"information.more"}/>
                 </a>
               </p>
-            </CardBody>
+            </CardFooter>
           </Card>
         </Col>
         <Col lg="6" xl="3">
-          <Card className="bg-gradient-danger text-white card-stats mb-4 mb-xl-0">
+          <Card className="h-100  text-white  card-stats mb-4 mb-xl-0" style={{backgroundColor:"#2dcecc"}}>
             <CardBody>
               <Row>
                 <div className="col">
@@ -178,7 +185,10 @@ const LicencesHeader = () => {
                   </div>
                 </Col>
               </Row>
-              <p className="mt-3 mb-0 text-muted text-sm">
+
+            </CardBody>
+            <CardFooter className="border-top-0 pt-0" style={{backgroundColor:"#2dcecc"}}>
+              <p className=" mb-0 text-muted text-sm">
                       <span className="text-white mr-2">
                       </span>{" "}
                 <span className="text-white text-wrap">
@@ -192,7 +202,7 @@ const LicencesHeader = () => {
                   <Translate contentKey={"information.more"}/>
                 </a>
               </p>
-            </CardBody>
+            </CardFooter>
           </Card>
         </Col>
       </Row>
