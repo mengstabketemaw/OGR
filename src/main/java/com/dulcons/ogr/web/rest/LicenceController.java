@@ -58,12 +58,16 @@ public class LicenceController {
 
     @GetMapping("/formByType")
     public Page<Licence> get(@RequestParam String type, Pageable pageable) {
-        return licenceRepository.findDistinctByForm_Type(type, pageable);
+        Page<Licence> licences = licenceRepository.findDistinctByForm_Type(type, pageable);
+        licences.getContent().forEach(this::changeUserName);
+        return licences;
     }
 
     @GetMapping("/form/{id}")
     public Page<Licence> getbyForm(@PathVariable Long id, Pageable page) {
-        return licenceRepository.findDistinctByForm_Id(id, page);
+        Page<Licence> licences = licenceRepository.findDistinctByForm_Id(id, page);
+        licences.getContent().forEach(this::changeUserName);
+        return licences;
     }
 
     @PostMapping
@@ -139,5 +143,19 @@ public class LicenceController {
     ) {
         State state = stateRepository.findById(stateId).orElse(stateRepository.findById(stateId).orElseThrow());
         licenceRepository.updateStatusAndStageById(status, state, id);
+    }
+
+    void changeUserName(Licence original) {
+        Licence licenceWithData = licenceRepository.findById(original.getId()).orElseThrow();
+        String applicantName = licenceWithData
+            .getData()
+            .stream()
+            .filter(licenceFieldData -> licenceFieldData.getLabel().equalsIgnoreCase("Applicant Email"))
+            .limit(1)
+            .map(LicenceFieldData::getText)
+            .findFirst()
+            .orElse(original.getUser().getLogin());
+
+        original.setApplicantUsername(applicantName);
     }
 }

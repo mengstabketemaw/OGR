@@ -34,8 +34,10 @@ public interface LicenceRepository extends PagingAndSortingRepository<Licence, L
     @Query("select count(l) from Licence l")
     long countFirstBy();
 
+    @Transactional(readOnly = true)
     Page<Licence> findDistinctByForm_Type(String type, Pageable pageable);
 
+    @Transactional(readOnly = true)
     Page<Licence> findDistinctByForm_Id(Long id, Pageable pageable);
 
     @EntityGraph(attributePaths = { "user", "form.fields", "data.fieldType" })
