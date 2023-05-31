@@ -173,6 +173,16 @@
     "totalInspections": "INSPEÇÕES TOTAIS",
     "inspThisMonth": "Agendadas para este mês"
   },
+  "userStats": {
+    "approvedSubmissions": "Submissões Aprovadas",
+    "pendingSubmissions": "Submissões Pendentes",
+    "deniedSubmissions": "Submissões Negadas",
+    "upcomingInspections": "Inspeções Futuras",
+    "licence": "Licença",
+    "permit": "Permissão",
+    "licences": "Licenças",
+    "permits": "Permissões"
+  },
   "payment": {
     "conf": "Gestão de Pagamentos"
   },
