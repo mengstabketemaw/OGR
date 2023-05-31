@@ -13,9 +13,9 @@ export const IssuedOrDenied = (props) => {
            contentClassName="bg-gradient-info">
 
      <div className="modal-header">
-        <h6 className="modal-title" id="modal-title-denyIssue">
+        <h3 className="modal-title" id="modal-title-denyIssue">
           <Translate contentKey={'workflow.issueordeny'}/>
-        </h6>
+        </h3>
         <button
           aria-label="Close"
           className="close"
