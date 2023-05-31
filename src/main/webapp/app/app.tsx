@@ -51,7 +51,12 @@ export const App = () => {
         </ErrorBoundary>
       ) : (
         <div className="app-container rounded-top " style={{ paddingTop }}>
-          <ToastContainer position={toast.POSITION.TOP_RIGHT} className="toastify-container" toastClassName="toastify-toast" />
+          <ToastContainer
+            position={toast.POSITION.TOP_RIGHT}
+            className="toastify-container"
+            toastClassName="toastify-toast"
+            autoClose={500}
+          />
           <ErrorBoundary>
             <Header
               isAuthenticated={isAuthenticated}
