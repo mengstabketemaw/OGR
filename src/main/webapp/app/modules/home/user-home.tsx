@@ -7,6 +7,8 @@ import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { useNavigate } from 'react-router-dom';
 import { Translate } from 'react-jhipster';
 import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
+import Header from 'app/argon/components/Headers/Header';
+import UserStats from 'app/modules/dashboard/userStats';
 
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
@@ -23,6 +25,7 @@ const UserHome = () => {
 
   return (
     <>
+      <UserStats />
       <Container className="mt--7 pt-7" fluid>
         <Row className="mt-5">
           <Col className="mb-5 mb-xl-12" xl="12">
