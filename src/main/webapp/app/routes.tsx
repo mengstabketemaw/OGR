@@ -53,7 +53,7 @@ const AppRoutes = () => {
       <ErrorBoundaryRoutes>
         <Route path="home" element={<Home />} />
         <Route path="login" element={<Login />} />
-        <Route path="logout" element={<Logout />} />
+        <Route path="logouts" element={<Logout />} />
         <Route path="permit" element={<Permit />} />
         <Route path="licence" element={<Licence />} />
         {/*        <Route path="sequence" element={<TempLanding />} />*/}
