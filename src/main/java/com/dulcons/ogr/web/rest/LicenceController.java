@@ -151,9 +151,8 @@ public class LicenceController {
             .getData()
             .stream()
             .filter(licenceFieldData -> licenceFieldData.getLabel().equalsIgnoreCase("Applicant Email"))
-            .limit(1)
-            .map(LicenceFieldData::getText)
             .findFirst()
+            .map(LicenceFieldData::getText)
             .orElse(original.getUser().getLogin());
 
         original.setApplicantUsername(applicantName);
