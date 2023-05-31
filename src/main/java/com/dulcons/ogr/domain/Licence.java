@@ -24,6 +24,8 @@ public class Licence {
 
     private String status = "Inprogress";
 
+    private String applicantUsername;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private State stage = new State(0L, "Form");
 
@@ -84,5 +86,13 @@ public class Licence {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getApplicantUsername() {
+        return applicantUsername;
+    }
+
+    public void setApplicantUsername(String applicantUsername) {
+        this.applicantUsername = applicantUsername;
     }
 }
