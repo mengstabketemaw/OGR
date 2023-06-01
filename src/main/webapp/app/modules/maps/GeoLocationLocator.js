@@ -8,7 +8,7 @@ import { airIcon, drillIcon, explorationIcon, pipelineIcon, point } from 'app/mo
 import { Translate } from 'react-jhipster';
 const GeoLocationLocator = () => {
   const [data, setData] = useState({ loading: true, data: [] });
-  const [me, setMe] = useState([9.0079232, 38.7678208]);
+  const [me, setMe] = useState([-11.2027, 17.8739]);
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition(e => {
       setMe([e.coords.latitude, e.coords.longitude]);
@@ -55,7 +55,7 @@ const GeoLocationLocator = () => {
                 <Translate contentKey={'map.report'} />
               </h3>
               <div>
-                <MapContainer style={{ height: '75vh' }} center={me} zoom={13}>
+                <MapContainer style={{ height: '75vh' }} center={me} zoom={9}>
                   <MapTiles />
                   {data.data.map(e => {
                     return (

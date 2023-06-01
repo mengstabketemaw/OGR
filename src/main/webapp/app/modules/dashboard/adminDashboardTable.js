@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 
 const PAGE_SIZE = ITEMS_PER_PAGE;
-export const AdminDashboardTable = ({ type }) => {
+export const AdminDashboardTable = ({ title }) => {
   const nav = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
@@ -21,7 +21,7 @@ export const AdminDashboardTable = ({ type }) => {
   const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
   const fetchData = page => {
     // Construct the URL with the page query parameter
-    const url = `/api/licence/formByType?type=${type}&page=${page}&size=${PAGE_SIZE}&sort=submittedDate,desc`;
+    const url = `/api/licence/formByTitle?title=${title}&page=${page}&size=${PAGE_SIZE}&sort=submittedDate,desc`;
 
     axios
       .get(url)
@@ -46,12 +46,20 @@ export const AdminDashboardTable = ({ type }) => {
   return (
     <>
       <Col className="mb-5 mb-xl-0" xl="6">
-        <Card className="shadow">
+        <Card className="shadow ">
           <CardHeader className="border-0">
             <Row className="align-items-center">
               <div className="col">
                 <h3 className="mb-0">
-                  {type === 'permit' ? <Translate contentKey="permit.title" /> : <Translate contentKey="licence.title" />}
+                  {title === 'Exploration licence' ? (
+                    <Translate contentKey="licence.types.exploration" />
+                  ) : title === 'Pipeline Licence' ? (
+                    <Translate contentKey="licence.types.pipeline" />
+                  ) : title === 'Air Permit' ? (
+                    <Translate contentKey="permit.types.air" />
+                  ) : (
+                    <Translate contentKey="permit.types.drilling" />
+                  )}
                 </h3>
               </div>
             </Row>
@@ -101,7 +109,7 @@ export const AdminDashboardTable = ({ type }) => {
             </>
           ) : (
             <>
-              <Table className="align-items-center table-flush" responsive>
+              <Table className="d-block align-items-center table-flush" responsive style={{ height: '40vh', overflowY: 'scroll' }}>
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">
@@ -128,7 +136,7 @@ export const AdminDashboardTable = ({ type }) => {
                 <tbody>
                   {licences.data?.content.map(data => (
                     <tr key={data.id}>
-                      <th>{moment(data.submittedDate).format('MMMM Do YYYY, h:mm:ss a')}</th>
+                      <th>{moment(data.submittedDate).format('MMMM Do YYYY')}</th>
                       <th>{data.applicantUsername}</th>
                       <th>{data.form.title}</th>
                       <th>{data.stage?.name || 'Form'}</th>
@@ -179,7 +187,10 @@ export const AdminDashboardTable = ({ type }) => {
         name={deleteLicence.name}
         handleClose={() => setDeleteLicence({ id: -1, show: false, name: '' })}
         updateTable={() =>
-          setLicences({ ...licences, data: { content: licences.data.content.filter(license => license.id !== deleteLicence.id) } })
+          setLicences({
+            ...licences,
+            data: { content: licences.data.content.filter(license => license.id !== deleteLicence.id) },
+          })
         }
       />
     </>

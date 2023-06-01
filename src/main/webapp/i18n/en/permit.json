@@ -1,6 +1,9 @@
 {
   "permit": {
     "title": "Permit",
-    "types": {}
+    "types": {
+      "air": "Air Permit",
+      "drilling": "Drilling Permit"
+    }
   }
 }
