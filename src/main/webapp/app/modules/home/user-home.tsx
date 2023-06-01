@@ -61,7 +61,7 @@ const UserHome = () => {
                           <Translate contentKey={'table.submittedDate'} />{' '}
                         </th>
                         <th scope="col">
-                          <Translate contentKey={'table.user'} />
+                          <Translate contentKey={'table.requested'} />
                         </th>
                         <th scope="col">
                           <Translate contentKey={'table.type'} />
@@ -90,7 +90,7 @@ const UserHome = () => {
                         <Translate contentKey={'table.submittedDate'} />{' '}
                       </th>
                       <th scope="col">
-                        <Translate contentKey={'table.user'} />
+                        <Translate contentKey={'table.requested'} />
                       </th>
                       <th scope="col">
                         <Translate contentKey={'table.type'} />
