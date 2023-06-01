@@ -8,16 +8,20 @@
     "formedit": "Editar formulário",
     "addnode": "Adicionar nó",
     "moreaction": "Mais ação",
-    "Form Edit": "Editar formulário",
+    "Form Edit": "Editar formu",
     "Initial Review": "Revisão inicial",
-    "Technical Review": "Revisao Tecnica",
-    "Specialized Review": "Revisão Especializada",
+    "Technical Review": "Revisao ecn",
+    "Specialized Review": "Revisão Especiali",
     "Decision Making": "Tomando uma decisão",
     "decisionmaking": "Tomando uma decisão",
     "proceed": "Terminar",
     "deny": "Negar",
     "authorize": "Autorizar",
     "infoPermit": "Deseja Autorizar ou Negar esta Solicitação?",
-    "issueordeny": "Emitir/Negar"
+    "issueordeny": "Emitir/Negar",
+    "moreReq": "Mais Solicitação",
+    "backToUser": "Voltar ao usuário",
+    "weNeed": "Precisamos de mais informações",
+    "requestInfo": "Solicite informações"
   }
 }

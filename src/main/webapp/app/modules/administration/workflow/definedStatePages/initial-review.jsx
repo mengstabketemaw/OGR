@@ -2,9 +2,9 @@ import React, {useContext, useEffect, useState} from "react";
 import {
   getFieldsByState,
   getFieldsDataByLicence,
-  createInitialReview
+  createInitialReview, updateStatusAndState
 } from "app/modules/administration/workflow/workflow.reducer";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {PageContext} from "app/modules/administration/workflow/pageSwitcher/pageSequence";
 import {useAppDispatch, useAppSelector} from "app/config/store";
 import DynamicFields from "app/shared/common/dynamicFields";
@@ -18,13 +18,15 @@ import {
   faAnglesDown,
   faAnglesUp,
   faCircleMinus,
-  faFolderMinus,
+  faCodePullRequest,
   faPlugCircleMinus
 } from "@fortawesome/free-solid-svg-icons";
+
 export const InitialReview = (params) => {
+  const nav = useNavigate();
   const stateKey = 1;
   const dispatch = useAppDispatch();
-  const { formId} = useContext(PageContext);
+  const { formId, currentPage , sequenceFromDatabase, showReqModal ,pages, switchPage} = useContext(PageContext);
   const {key} = params;
   const fields = useAppSelector(state=> state.workflow.currentFields);
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
@@ -44,16 +46,37 @@ export const InitialReview = (params) => {
     dispatch(getFieldsByState(params));
     dispatch(getFieldsDataByLicence(parseInt(id)));
   }, []);
+  const handleSwitchPage = (pageNumber) => {
+
+    if (pageNumber >= 0 && pageNumber < pages.length) {
+      switchPage(pageNumber);
+    }
+  };
   const handleSumbit = (values) =>{
+
     console.log(values)
-    dispatch(createInitialReview(values)).then(
+    dispatch(createInitialReview(values)).then( () =>{
       toast.success("Initial Review Saved")
+       handleSwitchPage(currentPage+1)
+    }
     )
   }
-  // const data = [
-  //   { label: 'first name', value: 'tomas' },
-  //   { label: 'last name', value: 'smith' },
-  // ];
+   const handleValue = (issue) =>{
+    const param = {
+      id : id,
+      data : {
+        stateId : sequenceFromDatabase[currentPage],
+        status:issue?'Authorized':'Denied'
+      }
+    }
+    dispatch(updateStatusAndState(param)).then(()=>{
+      nav(-1)
+      setTimeout(() => {
+        // Code to execute after 1 second
+        nav(-0)
+      }, 50)}
+    )
+  }
 
 
   return (
@@ -74,9 +97,19 @@ export const InitialReview = (params) => {
                        defaultValue = {fieldDateFormated}
                        licence_id ={parseInt(id)}
                        currentFields = {fields_data}
-                       backButtonShow = {false}
+                       backButtonShow = {true}
+                       backButtonName = 'workflow.deny'
+                       backButtonIcon = {faCircleMinus}
+                       backButtonClass = "bg-gradient-danger text-white"
+                       backButtonAction = {()=>{handleValue(false)}}
                        saveButtonName = "form.submit"
                        saveButtonClass = "bg-gradient-green text-white"
+                       moreReqButtonShow = {true}
+                       moreReqButtonName = 'workflow.moreReq'
+                       moreReqButtonIcon = {faCodePullRequest}
+                       moreReqButtonClass = "bg-gradient-info text-white"
+                       moreReqButtonAction = {showReqModal}
+
         />
       </Col>
     </>

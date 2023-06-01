@@ -18,6 +18,10 @@
     "deny": "Deny",
     "authorize": "Issue",
     "infoPermit": "Do you want to issue or deny this Request?",
-    "issueordeny": "Issue/Deny"
+    "issueordeny": "Issue/Deny",
+    "moreReq": "More Request",
+    "backToUser": "Back To User",
+    "weNeed": "We Need More Information",
+    "requestInfo": "Request Info"
   }
 }

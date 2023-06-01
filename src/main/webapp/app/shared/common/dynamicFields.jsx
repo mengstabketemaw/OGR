@@ -21,7 +21,17 @@ const DynamicFields = props =>{
           saveButtonShow = true,
           backButtonName = null,
           saveButtonName = null,
-          saveButtonClass = null
+          saveButtonClass = null,
+          backButtonClass = null,
+          moreReqButtonShow = false,
+          moreReqButtonName = null,
+          moreReqButtonClass = null,
+          saveButtonAction = null,
+          backButtonAction=null,
+          moreReqButtonAction=null,
+          saveButtonIcon = null,
+          backButtonIcon = null,
+          moreReqButtonIcon = null
           } = props;
 
   const handlevalue = async (value) => {
@@ -84,8 +94,11 @@ const DynamicFields = props =>{
 
       )
       }
-      {backButtonShow && <><Button onClick={()=>{nav(-1)}} replace color="info">
-        <FontAwesomeIcon icon="arrow-left" />
+      {backButtonShow && <><Button
+                                  onClick={ backButtonAction ?  backButtonAction : ()=>{nav(-1)}}
+                                  replace
+                                   className={backButtonClass ? "btn "+backButtonClass: "btn btn-primary"}>
+        <FontAwesomeIcon icon={backButtonIcon ? backButtonIcon :"arrow-left"} />
         &nbsp;
         <span className="d-none d-md-inline">
                   <Translate contentKey={backButtonName ? backButtonName:"entity.action.back"}>Back</Translate>
@@ -93,9 +106,22 @@ const DynamicFields = props =>{
       </Button>
         &nbsp;</>
       }
+      {moreReqButtonShow && <><Button
+        onClick={ moreReqButtonAction ?  moreReqButtonAction : ()=>{nav(-1)}}
+        replace
+        className={moreReqButtonClass ? "btn "+moreReqButtonClass: "btn btn-primary"}>
+        <FontAwesomeIcon icon={moreReqButtonIcon ? moreReqButtonIcon :"arrow-left"} />
+        &nbsp;
+        <span className="d-none d-md-inline">
+                  <Translate contentKey={moreReqButtonName ? moreReqButtonName:"entity.action.back"}>Back</Translate>
+                </span>
+      </Button>
+        &nbsp;</>
+      }
 
-      {saveButtonShow && <Button className={saveButtonClass ? "btn "+saveButtonClass: "btn btn-primary"} type="submit" >
-        <FontAwesomeIcon icon="save" />
+      {saveButtonShow && <Button className={saveButtonClass ? "btn "+saveButtonClass: "btn btn-primary"}
+                                 type="submit" >
+        <FontAwesomeIcon icon={saveButtonIcon ? saveButtonIcon : "save"} />
         &nbsp;
         <Translate contentKey={saveButtonName ? saveButtonName:"entity.action.save"}>Save</Translate>
       </Button>}

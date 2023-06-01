@@ -16,6 +16,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface LicenceRepository extends PagingAndSortingRepository<Licence, Long> {
+    @Transactional
+    @Modifying
+    @Query("update Licence l set l.remark = ?1 where l.id = ?2")
+    void updateRemarkById(String remark, Long id);
+
     @Query("select count(l) from Licence l where l.status = ?1 and l.form.id >= ?2 and l.user.id = ?3")
     long countByStatusAndForm_IdGreaterThanEqual(String status, Long id, Long userId);
 

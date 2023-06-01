@@ -80,6 +80,14 @@ export const updateStatusAndState = createAsyncThunk(
   },
   { serializeError: serializeAxiosError }
 );
+export const updateRemark = createAsyncThunk(
+  'update_status_state',
+  async (p, thunkAPI) => {
+    const url = `/api/licence/moreReqRemark/${p.id}?remark=${p.data.remark}`;
+    return await axios.put(url);
+  },
+  { serializeError: serializeAxiosError }
+);
 export const getStateOfLicence  = createAsyncThunk('fetch_licence', async (id) => axios.get(`api/licence/${id}`), {
   serializeError: serializeAxiosError,
 });

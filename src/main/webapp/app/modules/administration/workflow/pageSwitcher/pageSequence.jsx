@@ -10,7 +10,7 @@ const PageSequence = ({ id,formId, children }) => {
   const currentState = useAppSelector(state => state.workflow.currentStateId) | 0;
   const [currentPage, setCurrentPage] = useState( 0);
   const pagesFromDatabase = sequenceFromDatabase.map((pageIndex) => pages[pageIndex]);
-
+  const [sRM,setSRM] = useState(false)
   useEffect(() => {
     setCurrentPage( sequenceFromDatabase.indexOf(currentState) === -1 ? 0 : sequenceFromDatabase.indexOf(currentState))
   }, [currentState]);
@@ -18,9 +18,15 @@ const PageSequence = ({ id,formId, children }) => {
   const switchPage = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  const showReqModal = () =>{
+    setSRM(true)
+  }
+  const handleReqClose = () =>{
+    setSRM(false)
+  }
 
   return (
-    <PageContext.Provider value={{ pages: pagesFromDatabase, currentPage, switchPage, id ,formId }}>
+    <PageContext.Provider value={{ pages: pagesFromDatabase, currentPage, switchPage, id ,formId , sequenceFromDatabase ,showReqModal , handleReqClose ,sRM }}>
       <PageSwitcher />
     </PageContext.Provider>
   );

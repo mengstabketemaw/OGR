@@ -145,6 +145,11 @@ public class LicenceController {
         licenceRepository.updateStatusAndStageById(status, state, id);
     }
 
+    @PutMapping("/moreReqRemark/{id}")
+    public void updateRemark(@PathVariable Long id, @RequestParam(value = "remark") String remark) {
+        licenceRepository.updateRemarkById(remark, id);
+    }
+
     void changeUserName(Licence original) {
         Licence licenceWithData = licenceRepository.findById(original.getId()).orElseThrow();
         String applicantName = licenceWithData

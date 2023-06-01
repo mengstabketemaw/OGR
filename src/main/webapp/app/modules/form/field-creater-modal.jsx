@@ -73,8 +73,12 @@ const FieldCreaterModal=(props)=>{
               </ValidatedField >
             {states.length > 0 &&
             <ValidatedField
-              type="select" name="displayOn" label={translate('formModal.displayOn')}
+              type="select" name="displayOn"
+              label={translate('formModal.displayOn')}
             >
+              <option value={JSON.stringify({})} key={0}>
+
+              </option>
               { states.map((f,i) => (
                 <option value={JSON.stringify(f)} key={f.id}>
                   <Translate contentKey={"state."+f.name}></Translate>

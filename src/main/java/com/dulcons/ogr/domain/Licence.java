@@ -21,16 +21,23 @@ public class Licence {
     private User user;
 
     private Instant submittedDate = Instant.now();
-
     private String status = "Inprogress";
-
     private String applicantUsername;
+    private String remark;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private State stage = new State(0L, "Form");
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LicenceFieldData> data = new ArrayList<>();
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public Long getId() {
         return id;
