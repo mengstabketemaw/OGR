@@ -182,6 +182,11 @@ const UserHome = () => {
                             >
                               <Translate contentKey={'entity.action.delete'} />
                             </Button>
+                            {data.remark && !(data.status === 'Authorized' || data.status === 'Denied') && (
+                              <Button color="warning" onClick={() => showRemarkModal(data.remark)} size="sm">
+                                <Translate contentKey={'workflow.requestInfo'} />
+                              </Button>
+                            )}
                           </th>
                         </tr>
                       ))}
