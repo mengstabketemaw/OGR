@@ -9,18 +9,37 @@ import { Translate } from 'react-jhipster';
 import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import Header from 'app/argon/components/Headers/Header';
 import UserStats from 'app/modules/dashboard/userStats';
+import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
+import CustomPagination from 'app/shared/common/CustomPagination';
 
+const PAGE_SIZE = ITEMS_PER_PAGE;
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
   const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
   const nav = useNavigate();
   const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchData = page => {
+    // Construct the URL with the page query parameter
+    axios
+      .get(`/api/licence/formByUser?page=${page}&size=${PAGE_SIZE}&sort=submittedDate,desc`)
+      .then(({ data }) => {
+        setApplications({ loading: false, data });
+        setTotalPages(Math.ceil(data.totalElements / PAGE_SIZE));
+      })
+      .catch(console.log);
+  };
+
+  const handlePageChange = pageNumber => {
+    setCurrentPage(pageNumber - 1);
+    fetchData(pageNumber - 1);
+  };
 
   useEffect(() => {
-    axios
-      .get('/api/licence/formByUser')
-      .then(({ data }) => setApplications({ loading: false, data }))
-      .catch(console.log);
+    // Fetch the initial data when the component mounts
+    fetchData(currentPage);
   }, []);
 
   return (
@@ -83,79 +102,82 @@ const UserHome = () => {
                   </p>
                 </>
               ) : (
-                <Table className="align-items-center table-flush" responsive>
-                  <thead className="thead-light">
-                    <tr>
-                      <th scope="col">
-                        <Translate contentKey={'table.submittedDate'} />{' '}
-                      </th>
-                      <th scope="col">
-                        <Translate contentKey={'table.requested'} />
-                      </th>
-                      <th scope="col">
-                        <Translate contentKey={'table.type'} />
-                      </th>
-                      <th scope="col">
-                        <Translate contentKey={'table.stage'} />
-                      </th>
-                      <th scope="col">
-                        <Translate contentKey={'table.status'} />
-                      </th>
-                      <th scope="col">
-                        <Translate contentKey={'table.actions'} />
-                      </th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {applications.data?.content.map(data => (
-                      <tr key={data.id}>
-                        <th>{moment(data.submittedDate).format('MMMM Do YYYY')}</th>
-                        <th>{data.form.title}</th>
-                        <th>{data.form.type}</th>
-                        <th>{data.stage?.name || 'Form'}</th>
-                        <th>
-                          {data.status === 'Inprogress' ? (
-                            <Button className={'btn btn-sm bg-warning text-white'}>{data.status}</Button>
-                          ) : data.status === 'Authorized' ? (
-                            <Button className={'btn btn-sm bg-gradient-success text-white'}>{data.status}</Button>
-                          ) : data.status === 'Denied' ? (
-                            <Button className={'btn btn-sm bg-danger text-white'}>{data.status}</Button>
-                          ) : (
-                            <Button className={'btn btn-sm bg-gradient-info text-white'}>{data.status}</Button>
-                          )}
+                <>
+                  <Table className="align-items-center table-flush" responsive>
+                    <thead className="thead-light">
+                      <tr>
+                        <th scope="col">
+                          <Translate contentKey={'table.submittedDate'} />{' '}
                         </th>
-                        <th>
-                          <Button
-                            color="primary"
-                            onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
-                            size="sm"
-                          >
-                            <Translate contentKey={'entity.action.view'} />
-                          </Button>
-
-                          <Button
-                            color="secondary"
-                            onClick={() => nav('/dataUpdate/' + data.id)}
-                            disabled={!(data.stage?.id === 0 || data.stage === null)}
-                            size="sm"
-                          >
-                            <Translate contentKey={'entity.action.edit'} />
-                          </Button>
-
-                          <Button
-                            color="danger"
-                            onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
-                            disabled={!(data.stage?.id === 0 || data.stage === null)}
-                            size="sm"
-                          >
-                            <Translate contentKey={'entity.action.delete'} />
-                          </Button>
+                        <th scope="col">
+                          <Translate contentKey={'table.requested'} />
+                        </th>
+                        <th scope="col">
+                          <Translate contentKey={'table.type'} />
+                        </th>
+                        <th scope="col">
+                          <Translate contentKey={'table.stage'} />
+                        </th>
+                        <th scope="col">
+                          <Translate contentKey={'table.status'} />
+                        </th>
+                        <th scope="col">
+                          <Translate contentKey={'table.actions'} />
                         </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                    </thead>
+
+                    <tbody>
+                      {applications.data?.content.map(data => (
+                        <tr key={data.id}>
+                          <th>{moment(data.submittedDate).format('MMMM Do YYYY')}</th>
+                          <th>{data.form.title}</th>
+                          <th>{data.form.type}</th>
+                          <th>{data.stage?.name || 'Form'}</th>
+                          <th>
+                            {data.status === 'Inprogress' ? (
+                              <Button className={'btn btn-sm bg-warning text-white'}>{data.status}</Button>
+                            ) : data.status === 'Authorized' ? (
+                              <Button className={'btn btn-sm bg-gradient-success text-white'}>{data.status}</Button>
+                            ) : data.status === 'Denied' ? (
+                              <Button className={'btn btn-sm bg-danger text-white'}>{data.status}</Button>
+                            ) : (
+                              <Button className={'btn btn-sm bg-gradient-info text-white'}>{data.status}</Button>
+                            )}
+                          </th>
+                          <th>
+                            <Button
+                              color="primary"
+                              onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
+                              size="sm"
+                            >
+                              <Translate contentKey={'entity.action.view'} />
+                            </Button>
+
+                            <Button
+                              color="secondary"
+                              onClick={() => nav('/dataUpdate/' + data.id)}
+                              disabled={!(data.stage?.id === 0 || data.stage === null)}
+                              size="sm"
+                            >
+                              <Translate contentKey={'entity.action.edit'} />
+                            </Button>
+
+                            <Button
+                              color="danger"
+                              onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
+                              disabled={!(data.stage?.id === 0 || data.stage === null)}
+                              size="sm"
+                            >
+                              <Translate contentKey={'entity.action.delete'} />
+                            </Button>
+                          </th>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                  <CustomPagination currentPage={currentPage + 1} totalPages={totalPages} onPageChange={handlePageChange} />
+                </>
               )}
             </Card>
           </Col>
