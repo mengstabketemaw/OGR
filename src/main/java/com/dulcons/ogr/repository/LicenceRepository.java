@@ -16,6 +16,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface LicenceRepository extends PagingAndSortingRepository<Licence, Long> {
+    @Query("select l from Licence l where l.form.title = ?1")
+    Page<Licence> findByForm_Title(String title, Pageable pageable);
+
     @Query("select count(l) from Licence l where l.status = ?1 and l.form.id >= ?2 and l.user.id = ?3")
     long countByStatusAndForm_IdGreaterThanEqual(String status, Long id, Long userId);
 
