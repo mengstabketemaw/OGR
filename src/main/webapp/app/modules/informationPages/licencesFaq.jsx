@@ -23,7 +23,7 @@ const LicencesFaq = () => {
     <>
       <Card> <CardBody>
         <div className="mt-4">
-          <h1><Translate  contentKey={"information.titles.faq"}/></h1>
+          <h2 className={"text-uppercase text-success"}><Translate  contentKey={"information.titles.faq"}/></h2>
           <Accordion className={"text-justify"} open={open}>
             <AccordionItem onClick={() => {
               open == '1' ? setOpen('') : setOpen("1")
