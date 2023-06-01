@@ -20,7 +20,7 @@ export const SpecializedReview = (params) => {
   const nav = useNavigate();
   const stateKey = 3;
   const dispatch = useAppDispatch();
-  const { formId, currentPage ,page, sequenceFromDatabase, showReqModal,switchPage } = useContext(PageContext);
+  const { formId, currentPage ,pages, sequenceFromDatabase, showReqModal,switchPage } = useContext(PageContext);
   const {key} = params;
   const fields = useAppSelector(state=> state.workflow.currentFields);
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
