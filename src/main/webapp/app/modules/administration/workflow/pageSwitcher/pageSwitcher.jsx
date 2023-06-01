@@ -70,6 +70,24 @@ const PageSwitcher = () => {
         <Card className="shadow">
           <CardHeader className="border-0">
             <div  className="row">
+              <div className="row">
+                <div className="col-2"></div>
+                <div className="col-md-8">
+                  <h2 className={"container"}>
+                    {formId == 1 ?
+                    <Translate contentKey={'licence.types.exploration'}/>
+                      :
+                      formId == 2 ?
+                      <Translate contentKey={'licence.types.pipeline'}/>
+                      :
+                      formId == 3 ?
+                        <Translate contentKey={'permit.types.air'}/>
+                      :
+                        <Translate contentKey={'permit.types.drilling'}/>
+                    }
+                  </h2>
+                </div>
+              </div>
               <div className="box col-md-8 order-md-2">
                 <div className="steps">
                   <ul className="nav  ">
@@ -78,7 +96,7 @@ const PageSwitcher = () => {
                       return <li className={""} key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
                                   onClick={() => handleSwitchPage(index)}
                                   >
-                        <div >Step {index + 1}<br /><span> {page.props.name}</span></div>
+                        <div >Step {index + 1}<br /><span> <Translate contentKey={"workflow." + page.props.name}></Translate></span></div>
                       </li>
                     }):
                       <h3 className="mb-0">NO WORKFLOW!</h3>

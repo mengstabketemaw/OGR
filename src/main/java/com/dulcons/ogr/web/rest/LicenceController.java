@@ -63,6 +63,13 @@ public class LicenceController {
         return licences;
     }
 
+    @GetMapping("/formByTitle")
+    public Page<Licence> getByTitle(@RequestParam String title, Pageable pageable) {
+        Page<Licence> licences = licenceRepository.findByForm_Title(title, pageable);
+        licences.getContent().forEach(this::changeUserName);
+        return licences;
+    }
+
     @GetMapping("/form/{id}")
     public Page<Licence> getbyForm(@PathVariable Long id, Pageable page) {
         Page<Licence> licences = licenceRepository.findDistinctByForm_Id(id, page);

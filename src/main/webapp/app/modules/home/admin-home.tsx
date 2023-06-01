@@ -12,8 +12,12 @@ export const AdminHome = () => {
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row className="mt-5">
-          <AdminDashboardTable type="licence" />
-          <AdminDashboardTable type="permit" />
+          <AdminDashboardTable title="Exploration licence" />
+          <AdminDashboardTable title="Pipeline Licence" />
+        </Row>
+        <Row className="mt-5">
+          <AdminDashboardTable title="Air Permit" />
+          <AdminDashboardTable title="Drilling Permit" />
         </Row>
       </Container>
     </>

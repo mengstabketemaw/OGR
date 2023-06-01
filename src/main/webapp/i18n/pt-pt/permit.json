@@ -1,6 +1,9 @@
 {
   "permit": {
     "title": "Permitir",
-    "types": {}
+    "types": {
+      "air": "Permissão Aérea",
+      "drilling": "Permissão de Perfuração"
+    }
   }
 }
