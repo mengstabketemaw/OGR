@@ -6,14 +6,15 @@ import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useAppSelector, useAppDispatch} from "app/config/store";
 import {IssuedOrDenied} from "app/modules/administration/workflow/definedStatePages/issued-or-denied";
-import {updateStatusAndState} from "app/modules/administration/workflow/workflow.reducer";
+import {updateStatusAndState, updateRemark} from "app/modules/administration/workflow/workflow.reducer";
 import {useNavigate} from "react-router-dom";
 import './pageS.css'
+import {MoreRequestInfoModal} from '../definedStatePages/more-request-info-modal'
 
 const PageSwitcher = () => {
   const dispatch = useAppDispatch();
   const nav = useNavigate()
-  const { pages, currentPage, switchPage, id , formId } = useContext(PageContext);
+  const { pages, currentPage, switchPage, id , formId, showReqModal, handleReqClose, sRM } = useContext(PageContext);
   const sequenceFromDatabase = useAppSelector(state => state.licence.currentSequence);
   const [showModal,setShowModal] = useState(false)
   const handleSwitchPage = (pageNumber) => {
@@ -40,11 +41,36 @@ const PageSwitcher = () => {
     // console.log(sequenceFromDatabase[currentPage])
     // console.log(switchPage)
   };
+
   const handleProceed = () =>{
     setShowModal(true)
   }
   const handleClose = () =>{
     setShowModal(false)
+  }
+  const handleReqSubmit = (remark) =>{
+    const param = {
+      id : id,
+      data : {
+        remark : remark
+      }
+    }
+    dispatch(updateRemark(param)).then(()=>{
+      const param = {
+        id : id,
+        data : {
+          stateId : 0,
+          status:'Request More Info'
+        }
+      }
+      dispatch(updateStatusAndState(param)).then(()=>{
+        nav(-1)
+        setTimeout(() => {
+          // Code to execute after 1 second
+          nav(-0)
+        }, 50)}
+      )
+    })
   }
 
   const handleSubmit = (issue) =>{
@@ -93,7 +119,7 @@ const PageSwitcher = () => {
                   <ul className="nav  ">
                     {pages.length > 0 ?
                       pages.map((page, index) => {
-                      return <li className={""} key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
+                      return <li  key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
                                   onClick={() => handleSwitchPage(index)}
                                   >
                         <div >Step {index + 1}<br /><span> <Translate contentKey={"workflow." + page.props.name}></Translate></span></div>
@@ -142,6 +168,7 @@ const PageSwitcher = () => {
         </Card>
     </Container>
       <IssuedOrDenied showModal={showModal} handleClose={handleClose} handleSubmit = {handleSubmit}/>
+      <MoreRequestInfoModal showModal={sRM} handleClose={handleReqClose} handleSubmit = {handleReqSubmit}/>
     </>
 
   );

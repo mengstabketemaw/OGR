@@ -136,7 +136,7 @@ export const AdminDashboardTable = ({ title }) => {
                 <tbody>
                   {licences.data?.content.map(data => (
                     <tr key={data.id}>
-                      <th>{moment(data.submittedDate).format('MMMM Do YYYY')}</th>
+                      <th>{moment(data.submittedDate).format('MMM DD, YYYY')}</th>
                       <th>{data.applicantUsername}</th>
                       <th>{data.form.title}</th>
                       <th>{data.stage?.name || 'Form'}</th>

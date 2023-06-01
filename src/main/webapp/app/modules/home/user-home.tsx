@@ -9,6 +9,7 @@ import { Translate } from 'react-jhipster';
 import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import Header from 'app/argon/components/Headers/Header';
 import UserStats from 'app/modules/dashboard/userStats';
+import { ShowRemarkModal } from 'app/modules/home/showRemarkModal';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 import CustomPagination from 'app/shared/common/CustomPagination';
 
@@ -18,6 +19,8 @@ const UserHome = () => {
   const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
   const nav = useNavigate();
   const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
+  const [showRemark, setShowRemark] = useState(false);
+  const [remark, setRemark] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -41,6 +44,14 @@ const UserHome = () => {
     // Fetch the initial data when the component mounts
     fetchData(currentPage);
   }, []);
+
+  const showRemarkModal = value => {
+    setShowRemark(true);
+    setRemark(value);
+  };
+  const handleClose = () => {
+    setShowRemark(false);
+  };
 
   return (
     <>
@@ -130,7 +141,7 @@ const UserHome = () => {
                     <tbody>
                       {applications.data?.content.map(data => (
                         <tr key={data.id}>
-                          <th>{moment(data.submittedDate).format('MMMM Do YYYY')}</th>
+                          <th>{moment(data.submittedDate).format('MMM DD, YYYY')}</th>
                           <th>{data.form.title}</th>
                           <th>{data.form.type}</th>
                           <th>{data.stage?.name || 'Form'}</th>
@@ -171,6 +182,11 @@ const UserHome = () => {
                             >
                               <Translate contentKey={'entity.action.delete'} />
                             </Button>
+                            {data.remark && !(data.status === 'Authorized' || data.status === 'Denied') && (
+                              <Button color="warning" onClick={() => showRemarkModal(data.remark)} size="sm">
+                                <Translate contentKey={'workflow.requestInfo'} />
+                              </Button>
+                            )}
                           </th>
                         </tr>
                       ))}
@@ -184,7 +200,7 @@ const UserHome = () => {
         </Row>
       </Container>
       <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
-
+      <ShowRemarkModal showModal={showRemark} content={remark} handleClose={handleClose} />
       <DeleteLicenceModal
         id={deleteLicence.id}
         show={deleteLicence.show}

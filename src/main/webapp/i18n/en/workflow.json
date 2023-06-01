@@ -19,6 +19,10 @@
     "authorize": "Issue",
     "infoPermit": "Do you want to issue or deny this Request?",
     "issueordeny": "Issue/Deny",
+    "moreReq": "More Request",
+    "backToUser": "Back To User",
+    "weNeed": "We Need More Information",
+    "requestInfo": "Request Info",
     "faq": {
       "tip": "Quick Tip: Creating a workflow sequence",
       "1q": "Can the sequence of pages in the application process be customized?",

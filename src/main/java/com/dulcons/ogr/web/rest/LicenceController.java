@@ -111,6 +111,7 @@ public class LicenceController {
     public List<LocationFormDto> getAllLicenceWithLocation() {
         return licenceRepository
             .findAllForLocation()
+            .filter(licence -> licence.getStatus().equalsIgnoreCase("authorized"))
             .filter(licence -> licence.getData().stream().anyMatch(customField -> customField.getFieldType().getName().equals("location")))
             .map(licence -> {
                 LocationFormDto locationFormDto = new LocationFormDto();
@@ -150,6 +151,11 @@ public class LicenceController {
     ) {
         State state = stateRepository.findById(stateId).orElse(stateRepository.findById(stateId).orElseThrow());
         licenceRepository.updateStatusAndStageById(status, state, id);
+    }
+
+    @PutMapping("/moreReqRemark/{id}")
+    public void updateRemark(@PathVariable Long id, @RequestParam(value = "remark") String remark) {
+        licenceRepository.updateRemarkById(remark, id);
     }
 
     void changeUserName(Licence original) {

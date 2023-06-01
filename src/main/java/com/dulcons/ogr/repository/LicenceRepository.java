@@ -16,6 +16,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface LicenceRepository extends PagingAndSortingRepository<Licence, Long> {
+    @Transactional
+    @Modifying
+    @Query("update Licence l set l.remark = ?1 where l.id = ?2")
+    void updateRemarkById(String remark, Long id);
+
     @Query("select l from Licence l where l.form.title = ?1")
     Page<Licence> findByForm_Title(String title, Pageable pageable);
 

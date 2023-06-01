@@ -19,6 +19,10 @@
     "authorize": "Autorizar",
     "infoPermit": "Deseja Autorizar ou Negar esta Solicitação?",
     "issueordeny": "Emitir/Negar",
+    "moreReq": "Mais Solicitação",
+    "backToUser": "Voltar ao usuário",
+    "weNeed": "Precisamos de mais informações",
+    "requestInfo": "Solicite informações",
     "faq": {
       "tip": "Dica rápida: criando uma sequência de fluxo de trabalho",
       "1q": "A sequência de páginas no processo de inscrição pode ser personalizada?",

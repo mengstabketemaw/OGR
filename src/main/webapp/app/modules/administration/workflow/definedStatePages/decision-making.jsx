@@ -2,9 +2,9 @@ import React, {useContext, useEffect, useState} from "react";
 import {
   getFieldsByState,
   getFieldsDataByLicenceDM,
-  createDecisionMaking
+  createDecisionMaking, updateStatusAndState
 } from "app/modules/administration/workflow/workflow.reducer";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {PageContext} from "app/modules/administration/workflow/pageSwitcher/pageSequence";
 import {useAppDispatch, useAppSelector} from "app/config/store";
 import DynamicFields from "app/shared/common/dynamicFields";
@@ -14,12 +14,13 @@ import {toast} from "react-toastify";
 import DisplayData from "app/shared/common/displayDynamicData";
 import {Translate} from "react-jhipster";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAnglesDown, faAnglesUp} from "@fortawesome/free-solid-svg-icons";
+import {faAnglesDown, faAnglesUp,faCodePullRequest,faCircleMinus} from "@fortawesome/free-solid-svg-icons";
 
 export const DecisionMaking = (params) => {
+  const nav = useNavigate();
   const stateKey = 4;
   const dispatch = useAppDispatch();
-  const { formId} = useContext(PageContext);
+  const { formId, currentPage , sequenceFromDatabase, showReqModal,pages ,switchPage } = useContext(PageContext);
   const {key} = params;
   const fields = useAppSelector(state=> state.workflow.currentFields);
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
@@ -39,10 +40,35 @@ export const DecisionMaking = (params) => {
     dispatch(getFieldsByState(params));
     dispatch(getFieldsDataByLicenceDM(parseInt(id)));
   }, []);
+  const handleSwitchPage = (pageNumber) => {
+
+    if (pageNumber >= 0 && pageNumber < pages.length) {
+      switchPage(pageNumber);
+    }
+  };
   const handleSumbit = (values) =>{
     console.log(values)
-    dispatch(createDecisionMaking(values)).then(
-      toast.success("Dec. Making Saved")
+    dispatch(createDecisionMaking(values)).then( ()=>{
+        toast.success("Dec. Making Saved")
+      handleSwitchPage(currentPage+1)
+    }
+
+    )
+  }
+  const handleValue = (issue) =>{
+    const param = {
+      id : id,
+      data : {
+        stateId : sequenceFromDatabase[currentPage],
+        status:issue?'Authorized':'Denied'
+      }
+    }
+    dispatch(updateStatusAndState(param)).then(()=>{
+      nav(-1)
+      setTimeout(() => {
+        // Code to execute after 1 second
+        nav(-0)
+      }, 50)}
     )
   }
   return (
@@ -60,10 +86,18 @@ export const DecisionMaking = (params) => {
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}
                        licence_id ={parseInt(id)}
-                       backButtonShow = {false}
+                       backButtonShow = {true}
+                       backButtonName = 'workflow.deny'
+                       backButtonIcon = {faCircleMinus}
+                       backButtonClass = "bg-gradient-danger text-white"
+                       backButtonAction = {()=>{handleValue(false)}}
                        saveButtonName = "form.submit"
                        saveButtonClass = "bg-gradient-green text-white"
-                       currentFields = {fields_data}/>
+                       moreReqButtonShow = {true}
+                       moreReqButtonName = 'workflow.moreReq'
+                       moreReqButtonIcon = {faCodePullRequest}
+                       moreReqButtonClass = "bg-gradient-info text-white"
+                       moreReqButtonAction = {showReqModal}/>
 
       </Col>
     </>
