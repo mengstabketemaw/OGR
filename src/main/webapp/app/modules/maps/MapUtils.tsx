@@ -9,7 +9,7 @@ import { Button, Label, Tooltip } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 
 const UserMarkerExp = forwardRef((props, ref) => {
-  const [position, setPosition] = useState({ lat: 9.0079232, lng: 38.7678208 });
+  const [position, setPosition] = useState({ lat: -11.2027, lng: 17.8739 });
   const map = useMapEvents({
     locationfound(e) {
       setPosition(e.latlng);
@@ -69,7 +69,7 @@ const ChooseLocation = ({ setLocation }) => {
         <Translate contentKey={'map.chooseLocation'} />
       </Label>
 
-      <MapContainer style={{ height: '100%' }} center={[9.0079232, 38.7678208]} zoom={15} scrollWheelZoom={true}>
+      <MapContainer style={{ height: '100%' }} center={[-11.2027, 17.8739]} zoom={7} scrollWheelZoom={true}>
         <MapTiles />
         <UserMarkerExp ref={child} />
       </MapContainer>
