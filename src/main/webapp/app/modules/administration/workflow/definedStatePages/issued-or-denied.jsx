@@ -10,10 +10,10 @@ export const IssuedOrDenied = (props) => {
 
   return(
     <Modal isOpen={showModal} toggle={handleClose}  size={"sm"}   className="modal-dialog-centered modal-info"
-           contentClassName="bg-gradient-info">
+           contentClassName="bg-gradient-white">
 
-     <div className="modal-header">
-        <h3 className="modal-title" id="modal-title-denyIssue">
+     <div className="modal-header bg-success">
+        <h3 className="modal-title  text-white" id="modal-title-denyIssue">
           <Translate contentKey={'workflow.issueordeny'}/>
         </h3>
         <button
@@ -23,14 +23,11 @@ export const IssuedOrDenied = (props) => {
           type="button"
           onClick={handleClose}
         >
-          <span aria-hidden={true}>×</span>
+          <span aria-hidden={true} className="text-black-50">×</span>
         </button>
       </div>
       <div className="modal-body">
-        <div className="py-3 text-center">
-          <i className="ni ni-bell-55 ni-3x" />
-          <FontAwesomeIcon icon={faWarning} size={"2x"}/>
-          <h4 className="heading mt-4"><Translate contentKey={'compliance.readThis'}/></h4>
+        <div className="py-3 text-center text-black-50">
           <p>
             <Translate contentKey={"workflow.infoPermit"}/>
           </p>

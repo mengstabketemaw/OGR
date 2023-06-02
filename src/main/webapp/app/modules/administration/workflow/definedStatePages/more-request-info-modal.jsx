@@ -9,11 +9,11 @@ export const MoreRequestInfoModal = (props) => {
   const [remark,setRemark] = useState('')
 
   return(
-    <Modal isOpen={showModal} toggle={handleClose}  size={"sm"}   className="modal-dialog-centered modal-info"
-           contentClassName="bg-gradient-info">
+    <Modal isOpen={showModal} toggle={handleClose}  size={"sm"}   className="modal-dialog-centered modal-white"
+           contentClassName="bg-gradient-white">
 
-     <div className="modal-header">
-        <h3 className="modal-title" id="modal-title-denyIssue">
+     <div className="modal-header bg-success">
+        <h3 className="modal-title text-white" id="modal-title-denyIssue">
           <Translate contentKey={'workflow.moreReq'}/>
         </h3>
         <button
@@ -35,7 +35,7 @@ export const MoreRequestInfoModal = (props) => {
         {/*     <Translate contentKey={"workflow.infoPermit"}/> */}
         {/*   </p> */}
         {/* </div> */}
-        <div className="justify-content-center">
+        <div className="justify-content-center text-black">
           <ValidatedField
 
             type="textarea"
@@ -45,6 +45,10 @@ export const MoreRequestInfoModal = (props) => {
         </div>
       </div>
       <div className="modal-footer">
+        <Button className={' text-black'} onClick={handleClose
+        } ><Translate contentKey={'entity.action.cancel'}/>
+
+        </Button>
         <Button className={'bg-gradient-warning text-white'} onClick={()=> {handleSubmit(remark)
         }} >
           <FontAwesomeIcon icon="arrow-left" />
