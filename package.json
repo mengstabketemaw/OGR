@@ -87,6 +87,7 @@
     "leaflet": "^1.9.3",
     "leaflet-routing-machine": "^3.2.12",
     "lodash": "4.17.21",
+    "mdb-react-ui-kit": "^6.1.0",
     "moment": "2.29.4",
     "nanoid": "^4.0.2",
     "nouislider": "15.2.0",
