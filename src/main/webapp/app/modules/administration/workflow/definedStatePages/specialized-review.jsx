@@ -50,7 +50,17 @@ export const SpecializedReview = (params) => {
     console.log(values)
     dispatch(createSpecializedReview(values)).then(()=>{
       toast.success("Special Review Saved")
-      handleSwitchPage(currentPage+1)}
+      handleSwitchPage(currentPage+1)
+      if (currentPage >= 0 && currentPage < pages.length) {
+        const param = {
+          id: id,
+          data: {
+            stateId: sequenceFromDatabase[currentPage + 1],
+            status: 'Inprogress'
+          }
+        }
+        dispatch(updateStatusAndState(param))
+      }}
 
     )
   }

@@ -50,7 +50,17 @@ export const TechnicalReview = (params) => {
     console.log(values)
     dispatch(createTechnicalReview(values)).then(()=>{
       toast.success("Tech Review Saved")
-      handleSwitchPage(currentPage+1)}
+      handleSwitchPage(currentPage+1)
+      if (currentPage >= 0 && currentPage < pages.length) {
+        const param = {
+          id: id,
+          data: {
+            stateId: sequenceFromDatabase[currentPage + 1],
+            status: 'Inprogress'
+          }
+        }
+        dispatch(updateStatusAndState(param))
+      }}
 
     )
   }

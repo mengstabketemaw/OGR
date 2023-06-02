@@ -55,10 +55,20 @@ export const InitialReview = (params) => {
   const handleSumbit = (values) =>{
 
     console.log(values)
-    dispatch(createInitialReview(values)).then( () =>{
-      toast.success("Initial Review Saved")
-       handleSwitchPage(currentPage+1)
-    }
+    dispatch(createInitialReview(values)).then( () => {
+        toast.success("Initial Review Saved")
+        handleSwitchPage(currentPage + 1)
+        if (currentPage >= 0 && currentPage < pages.length) {
+          const param = {
+            id: id,
+            data: {
+              stateId: sequenceFromDatabase[currentPage + 1],
+              status: 'Inprogress'
+            }
+          }
+          dispatch(updateStatusAndState(param))
+        }
+      }
     )
   }
    const handleValue = (issue) =>{
