@@ -59,20 +59,21 @@ code {
   z-index: 2;
 }
 .box .steps ul li.done div {
-  border-color: #20a8d8 !important;
+  border-color: #3ebb81 !important;
   color: #fff !important;
-  background: #20a8d8 !important;
+  /*font-weight: bold;*/
+  background: #3ebb81 !important;
 }
 .box .steps ul li.done div::after {
-  border-left: 30px solid #20a8d8;
+  border-left: 30px solid #3ebb81;
 }
 .box .steps ul li.active div {
-  border-color: #167495 !important;
+  border-color: #045929 !important;
   color: #fff !important;
-  background: #167495 !important;
+  background: #045929 !important;
 }
 .box .steps ul li.active div::after {
-  border-left: 30px solid #167495;
+  border-left: 30px solid #045929;
 }
 
 .box .step-component {
