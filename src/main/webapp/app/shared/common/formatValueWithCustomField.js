@@ -163,8 +163,12 @@ const getValue = value => {
 export async function convertFileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onerror = reject;
-    reader.onload = () => resolve(reader.result);
+    if (file instanceof Blob) {
+      reader.readAsDataURL(file);
+      reader.onerror = reject;
+      reader.onload = () => resolve(reader.result);
+    } else {
+      resolve('this is really, bad work');
+    }
   });
 }

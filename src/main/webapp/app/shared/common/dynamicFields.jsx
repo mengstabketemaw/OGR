@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {MapContainer, Marker, Popup, TileLayer, useMap} from 'react-leaflet'
 import ChooseLocation from "app/modules/maps/MapUtils";
 import {isArray} from "lodash";
+import {faDownload} from "@fortawesome/free-solid-svg-icons";
 // import 'leaflet/dist/leaflet.css'
 
 const DynamicFields = props =>{
@@ -39,6 +40,28 @@ const DynamicFields = props =>{
     handleSubmit(formattedValue);
   }
 
+  const getFileName = name => {
+
+    const fileName = name + ".pdf";
+    const encodedType = "data:application/pdf;base64text/plain";
+
+    return (
+      <>
+          <>
+            <a
+              className="cursor-pointer hover-blue underline-hover d-flex flex-row align-items-center"
+              download={fileName}
+              href={`${encodedType},"QW5kcjBtM2Q0"`}
+            >
+                  <span className="pt-1 text-blue pb-1">
+                    {fileName} <FontAwesomeIcon icon={faDownload} color="#2DCEC8" size="1x" />
+                  </span>
+            </a>
+          </>
+
+      </>
+    );
+  }
 
   if(fields?.length === 0 || !isArray(fields))
     return <p>There is No Form</p>
@@ -58,18 +81,31 @@ const DynamicFields = props =>{
           {f.options.map((a,i)=>(<option key={i} value={a.name}>{a.name}</option>))  }
         </ValidatedField>
 
-         :f.fieldType.name === "location" ?
-          <ValidatedField
-            key = {f.label}
-            name={f.label}
-            label={f.required ? f.label+'*':f.label}
-            autoComplete={"off"}
-            value={locationModal.value}
-            placeholder={translate('map.addLocation')}
-            required={f.required}
-            onClick={()=>setLocationModal({...locationModal, show: true})}
-          />
+        :f.fieldType.name === "location" ?
+            <ValidatedField
+              key = {f.label}
+              name={f.label}
+              label={f.required ? f.label+'*':f.label}
+              autoComplete={"off"}
+              value={locationModal.value}
+              placeholder={translate('map.addLocation')}
+              required={f.required}
+              onClick={()=>setLocationModal({...locationModal, show: true})}
+            />
 
+         :f.fieldType.name === "file" ?
+            <>
+              <ValidatedField
+                key = {f.label}
+                type={f.fieldType.name}
+                name={f.label}
+                label={f.required ? f.label+'*':f.label}
+                required={f.required}
+                placeholder={f.placeholder}
+              />
+              <div className="mb-3 border-info border-bottom border-left border-right p-1 rounded-bottom">{getFileName(f.label)}</div>
+
+            </>
           :f.fieldType.name === "info" ?
             <i>{f.label}</i>
 
