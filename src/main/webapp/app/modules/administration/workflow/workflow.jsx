@@ -32,7 +32,7 @@ import {getFieldType, getFormType} from "app/modules/form/form.reducer";
 import {formatReactFlow, formatWorkFlowSequences, formatEdge} from "app/modules/administration/workflow/format-react-flow";
 import ReactWorkFlow from "app/modules/administration/workflow/react-flow";
 import {useSelector} from "react-redux";
-import reactFlowGif from "../../../../content/images/reactFlow.gif"
+import reactFlowGif from "../../../../content/images/reactFlow2.gif"
 
 
 const Workflow = () => {
