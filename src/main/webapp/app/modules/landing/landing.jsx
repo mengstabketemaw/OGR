@@ -56,7 +56,7 @@ const Landing = () => {
         />
         <meta
           name="description"
-          content="The external portal of the Ministry of Finance in the Kingdom of Saudi Arabia"
+          content="Oil and Gas Regulation and Licencing body of Angola"
         />
         <style
           dangerouslySetInnerHTML={{
