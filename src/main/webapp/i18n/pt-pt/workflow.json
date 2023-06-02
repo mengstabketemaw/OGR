@@ -8,10 +8,10 @@
     "formedit": "Editar formulário",
     "addnode": "Adicionar nó",
     "moreaction": "Mais ação",
-    "Form Edit": "Editar formu",
+    "Form Edit": "Editar formulário",
     "Initial Review": "Revisão inicial",
-    "Technical Review": "Revisao ecn",
-    "Specialized Review": "Revisão Especiali",
+    "Technical Review": "Revisao Tecnica",
+    "Specialized Review": "Revisão Especializada",
     "Decision Making": "Tomando uma decisão",
     "decisionmaking": "Tomando uma decisão",
     "proceed": "Terminar",
@@ -22,6 +22,19 @@
     "moreReq": "Mais Solicitação",
     "backToUser": "Voltar ao usuário",
     "weNeed": "Precisamos de mais informações",
-    "requestInfo": "Solicite informações"
+    "requestInfo": "Solicite informações",
+    "faq": {
+      "tip": "Dica rápida: criando uma sequência de fluxo de trabalho",
+      "1q": "A sequência de páginas no processo de inscrição pode ser personalizada?",
+      "1a": "Sim, como administrador, você tem controle sobre a sequência de fluxo de trabalho. Você pode escolher a ordem das páginas desde a página de inscrição do usuário até a página de tomada de decisão. Isso permite que você adapte o processo de acordo com os requisitos da sua organização.",
+      "2q": "É possível mudar a sequência de páginas depois que a inscrição é enviada?",
+      "2a": "Sim, como administrador, você pode modificar a sequência de páginas mesmo depois que a inscrição é enviada. Essa flexibilidade permite que você se adapte a quaisquer alterações ou atualizações no processo de licenciamento.",
+      "3q": "Como posso controlar o fluxo geral do processo da página de inscrição do usuário até a página de tomada de decisão?",
+      "3a": "Como administrador no site OGR, você tem a autoridade para gerenciar e controlar todo o fluxo do processo. Você pode definir os passos e a ordem das páginas, garantindo uma progressão lógica desde a página de inscrição do usuário até a página de tomada de decisão. Ao ter controle sobre o fluxo do processo, você pode otimizar a eficiência e eficácia do fluxo de trabalho para uma melhor tomada de decisão.",
+      "4q": "Existem limitações no número de páginas que posso incluir no processo do fluxo de trabalho?",
+      "4a": "Não há limitações específicas no número de páginas que você pode incluir no processo de fluxo de trabalho. Como administrador, você pode determinar o número de páginas exigido com base na complexidade do processo de licenciamento e nas informações que você precisa coletar. No entanto, é recomendável manter o fluxo de trabalho conciso e direto para evitar sobrecarregar os usuários e tomadores de decisão.",
+      "5q": "Posso revisar o processo de fluxo de trabalho e fazer melhorias com base no feedback do usuário ou em requisitos em mudança?",
+      "5a": "Com certeza! Como administrador, você tem a capacidade de revisar e melhorar o processo de fluxo de trabalho com base no feedback do usuário ou em requisitos em mudança. Ao ouvir ativamente as experiências dos usuários e levar em consideração quaisquer modificações ou atualizações em regulamentos, você pode refinar o processo de fluxo de trabalho ao longo do tempo para aumentar a satisfação do usuário e garantir a conformidade com as diretrizes mais recentes."
+    }
   }
 }

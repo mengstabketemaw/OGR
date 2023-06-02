@@ -22,6 +22,19 @@
     "moreReq": "More Request",
     "backToUser": "Back To User",
     "weNeed": "We Need More Information",
-    "requestInfo": "Request Info"
+    "requestInfo": "Request Info",
+    "faq": {
+      "tip": "Quick Tip: Creating a workflow sequence",
+      "1q": "Can the sequence of pages in the application process be customized?",
+      "1a": "Yes, as an admin, you have control over the workflow sequence. You can choose the order of the pages from the user application page to the decision-making page. This allows you to tailor the process according to your organization's requirements.",
+      "2q": "Is it possible to change the page sequence after the application is submitted?",
+      "2a": "Yes, as an admin, you can modify the page sequence even after the application is submitted. This flexibility allows you to adapt to any changes or updates in the licensing process.",
+      "3q": "How can I control the overall process flow from the user application page to the decision-making page?",
+      "3a": "As an admin on the OGR website, you have the authority to manage and control the entire process flow of the workflow. You can define the steps and order of pages, ensuring a logical progression from the user application page to the decision-making page. By having control over the process flow, you can optimize the efficiency and effectiveness of the workflow for better decision-making.",
+      "4q": "Are there any limitations on the number of pages I can include in the workflow process?",
+      "4a": "There are no specific limitations on the number of pages you can include in the workflow process. As an admin, you can determine the number of pages required based on the complexity of the licensing process and the information you need to collect. However, it is recommended to keep the workflow concise and straightforward to avoid overwhelming users and decision-makers.",
+      "5q": "Can I review the workflow process and make improvements based on user feedback or changing requirements?",
+      "5a": "Absolutely! As an admin, you have the ability to review and improve the workflow process based on user feedback or changing requirements. By actively listening to user experiences and taking into account any modifications or updates in regulations, you can refine the workflow process over time to enhance user satisfaction and ensure compliance with the latest guidelines."
+    }
   }
 }

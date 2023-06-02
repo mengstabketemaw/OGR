@@ -59,7 +59,15 @@ body {
   padding: 10px;
   margin-bottom: 10px; /* increase the margin-bottom value to increase spacing */
 }
-
+@keyframes growShrink {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
 :root {
   --blue: #5e72e4;
   --indigo: #5603ad;

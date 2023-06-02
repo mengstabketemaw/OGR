@@ -107,7 +107,7 @@ export const InitialReview = (params) => {
                        moreReqButtonShow = {true}
                        moreReqButtonName = 'workflow.moreReq'
                        moreReqButtonIcon = {faCodePullRequest}
-                       moreReqButtonClass = "bg-gradient-info text-white"
+                       moreReqButtonClass = "bg-gray text-white"
                        moreReqButtonAction = {showReqModal}
 
         />

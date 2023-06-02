@@ -96,7 +96,7 @@ export const SpecializedReview = (params) => {
                        moreReqButtonShow = {true}
                        moreReqButtonName = 'workflow.moreReq'
                        moreReqButtonIcon = {faCodePullRequest}
-                       moreReqButtonClass = "bg-gradient-info text-white"
+                       moreReqButtonClass = "bg-gray text-white"
                        moreReqButtonAction = {showReqModal}
         />
       </Col>

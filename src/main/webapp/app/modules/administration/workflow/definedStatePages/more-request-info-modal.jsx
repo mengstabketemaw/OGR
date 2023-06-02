@@ -9,8 +9,8 @@ export const MoreRequestInfoModal = (props) => {
   const [remark,setRemark] = useState('')
 
   return(
-    <Modal isOpen={showModal} toggle={handleClose}  size={"sm"}   className="modal-dialog-centered modal-info"
-           contentClassName="bg-gradient-info">
+    <Modal isOpen={showModal} toggle={handleClose}  size={"sm"}   className="modal-dialog-centered modal-"
+           contentClassName="">
 
      <div className="modal-header">
         <h3 className="modal-title" id="modal-title-denyIssue">
