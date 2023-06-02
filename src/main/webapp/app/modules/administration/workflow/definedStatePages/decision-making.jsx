@@ -51,6 +51,16 @@ export const DecisionMaking = (params) => {
     dispatch(createDecisionMaking(values)).then( ()=>{
         toast.success("Dec. Making Saved")
       handleSwitchPage(currentPage+1)
+        if (currentPage >= 0 && currentPage < pages.length) {
+          const param = {
+            id: id,
+            data: {
+              stateId: sequenceFromDatabase[currentPage + 1],
+              status: 'Inprogress'
+            }
+          }
+          dispatch(updateStatusAndState(param))
+        }
     }
 
     )

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import React from 'react';
 import { Button, Card, CardHeader, Col, Row, Spinner, Table } from 'reactstrap';
 import CustomPagination from 'app/shared/common/CustomPagination';
@@ -10,6 +10,10 @@ import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 import { DetailModal } from 'app/modules/home/user-home';
 import { useNavigate } from 'react-router-dom';
 import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
+import { useReactToPrint } from 'react-to-print';
+import ReportForm from 'app/shared/common/reportForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPrint, faWarning } from '@fortawesome/free-solid-svg-icons';
 
 const PAGE_SIZE = ITEMS_PER_PAGE;
 export const AdminDashboardTable = ({ title }) => {
@@ -43,13 +47,19 @@ export const AdminDashboardTable = ({ title }) => {
     fetchData(currentPage);
   }, []);
 
+  const tableRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => tableRef.current,
+  });
+
   return (
     <>
       <Col className="mb-5 mb-xl-0" xl="6">
         <Card className="shadow ">
           <CardHeader className="border-0">
             <Row className="align-items-center">
-              <div className="col">
+              <div className="col d-flex justify-content-between">
                 <h3 className="mb-0">
                   {title === 'Exploration licence' ? (
                     <Translate contentKey="licence.types.exploration" />
@@ -61,6 +71,10 @@ export const AdminDashboardTable = ({ title }) => {
                     <Translate contentKey="permit.types.drilling" />
                   )}
                 </h3>
+                <button className="border-0 bg-white" onClick={handlePrint}>
+                  <FontAwesomeIcon color={'#2dce89'} size={'1x'} icon={faPrint} />
+                </button>
+                <ReportForm ref={tableRef} data={licences.data?.content} />
               </div>
             </Row>
           </CardHeader>
@@ -88,9 +102,7 @@ export const AdminDashboardTable = ({ title }) => {
                     <th scope="col">
                       <Translate contentKey={'table.user'} />
                     </th>
-                    <th scope="col">
-                      <Translate contentKey={'table.type'} />
-                    </th>
+
                     <th scope="col">
                       <Translate contentKey={'table.stage'} />
                     </th>
@@ -109,7 +121,7 @@ export const AdminDashboardTable = ({ title }) => {
             </>
           ) : (
             <>
-              <Table className="d-block align-items-center table-flush" responsive style={{ height: '40vh', overflowY: 'scroll' }}>
+              <Table className="d-block  d-table  table-flush table-hover" responsive style={{ height: '40vh', overflowY: 'scroll' }}>
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">
@@ -118,9 +130,7 @@ export const AdminDashboardTable = ({ title }) => {
                     <th scope="col">
                       <Translate contentKey={'table.user'} />
                     </th>
-                    <th scope="col">
-                      <Translate contentKey={'table.type'} />
-                    </th>
+
                     <th scope="col">
                       <Translate contentKey={'table.stage'} />
                     </th>
@@ -135,10 +145,15 @@ export const AdminDashboardTable = ({ title }) => {
 
                 <tbody>
                   {licences.data?.content.map(data => (
-                    <tr key={data.id}>
+                    <tr
+                      key={data.id}
+                      onClick={() => {
+                        if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                      }}
+                    >
                       <th>{moment(data.submittedDate).format('MMM DD, YYYY')}</th>
                       <th>{data.applicantUsername}</th>
-                      <th>{data.form.title}</th>
+
                       <th>{data.stage?.name || 'Form'}</th>
                       <th>
                         {data.status === 'Inprogress' ? (
@@ -147,6 +162,8 @@ export const AdminDashboardTable = ({ title }) => {
                           <Button className={'btn btn-sm bg-gradient-success text-white'}>{data.status}</Button>
                         ) : data.status === 'Denied' ? (
                           <Button className={'btn btn-sm bg-danger text-white'}>{data.status}</Button>
+                        ) : data.status === 'undefined' ? (
+                          <Button className={'btn btn-sm bg-warning text-white'}>Inprogress</Button>
                         ) : (
                           <Button className={'btn btn-sm bg-gradient-info text-white'}>{data.status}</Button>
                         )}
