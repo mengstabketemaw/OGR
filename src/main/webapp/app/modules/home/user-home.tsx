@@ -17,7 +17,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 
-const PAGE_SIZE = ITEMS_PER_PAGE;
+const PAGE_SIZE = 4;
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
   const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
