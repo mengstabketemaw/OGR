@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="15" height="17" viewBox="0 0 15 17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #989899;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path d="M14.737,16.997 L0.269,16.997 C0.121,16.997 0.001,16.870 0.001,16.713 L0.001,4.534 L0.001,1.418 C0.001,1.261 0.121,1.135 0.269,1.135 L2.144,1.135 L2.144,0.285 C2.144,0.128 2.264,0.002 2.412,0.002 L4.288,0.002 C4.436,0.002 4.556,0.128 4.556,0.285 L4.556,1.135 L10.450,1.135 L10.450,0.285 C10.450,0.128 10.570,0.002 10.718,0.002 L12.594,0.002 C12.742,0.002 12.861,0.128 12.861,0.285 L12.861,1.135 L14.737,1.135 C14.885,1.135 15.005,1.261 15.005,1.418 L15.005,4.534 L15.005,16.713 C15.005,16.870 14.885,16.997 14.737,16.997 ZM4.020,1.418 L4.020,0.568 L2.680,0.568 L2.680,1.418 L2.680,2.268 L4.020,2.268 L4.020,1.418 ZM12.326,1.418 L12.326,0.568 L10.986,0.568 L10.986,1.418 L10.986,2.268 L12.326,2.268 L12.326,1.418 ZM14.469,1.701 L12.861,1.701 L12.861,2.551 C12.861,2.708 12.742,2.834 12.594,2.834 L10.718,2.834 C10.570,2.834 10.450,2.708 10.450,2.551 L10.450,1.701 L4.556,1.701 L4.556,2.551 C4.556,2.708 4.436,2.834 4.288,2.834 L2.412,2.834 C2.264,2.834 2.144,2.708 2.144,2.551 L2.144,1.701 L0.537,1.701 L0.537,4.251 L14.469,4.251 L14.469,1.701 ZM14.469,4.817 L0.537,4.817 L0.537,16.430 L14.469,16.430 L14.469,4.817 ZM5.360,8.061 L7.235,8.061 L7.771,8.061 L9.646,8.061 L10.182,8.061 L12.594,8.061 L12.594,10.611 L12.594,11.177 L12.594,13.160 L12.594,13.726 L12.058,13.726 L10.182,13.726 L9.646,13.726 L7.771,13.726 L7.235,13.726 L5.360,13.726 L4.824,13.726 L2.948,13.726 L2.412,13.726 L2.412,13.160 L2.412,11.177 L2.412,10.611 L2.412,8.061 L4.824,8.061 L5.360,8.061 ZM10.182,13.160 L12.058,13.160 L12.058,11.177 L10.182,11.177 L10.182,13.160 ZM10.182,10.611 L12.058,10.611 L12.058,8.628 L10.182,8.628 L10.182,10.611 ZM7.771,13.160 L9.646,13.160 L9.646,11.177 L7.771,11.177 L7.771,13.160 ZM7.771,10.611 L9.646,10.611 L9.646,8.628 L7.771,8.628 L7.771,10.611 ZM5.360,13.160 L7.235,13.160 L7.235,11.177 L5.360,11.177 L5.360,13.160 ZM5.360,10.611 L7.235,10.611 L7.235,8.628 L5.360,8.628 L5.360,10.611 ZM2.948,13.160 L4.824,13.160 L4.824,11.177 L2.948,11.177 L2.948,13.160 ZM2.948,10.611 L4.824,10.611 L4.824,8.628 L2.948,8.628 L2.948,10.611 Z" class="cls-1"/>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</svg>
