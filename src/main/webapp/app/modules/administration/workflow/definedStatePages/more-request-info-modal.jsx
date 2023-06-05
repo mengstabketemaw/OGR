@@ -12,8 +12,8 @@ export const MoreRequestInfoModal = (props) => {
     <Modal isOpen={showModal} toggle={handleClose}  size={"sm"}   className="modal-dialog-centered modal-white"
            contentClassName="bg-gradient-white">
 
-     <div className="modal-header bg-success">
-        <h3 className="modal-title text-white" id="modal-title-denyIssue">
+     <div className="modal-header">
+        <h3 className="modal-title text-dark" id="modal-title-denyIssue">
           <Translate contentKey={'workflow.moreReq'}/>
         </h3>
         <button
@@ -23,7 +23,7 @@ export const MoreRequestInfoModal = (props) => {
           type="button"
           onClick={handleClose}
         >
-          <span aria-hidden={true}>×</span>
+          <span className="text-dark" aria-hidden={true}>×</span>
         </button>
       </div>
       <div className="modal-body">
@@ -45,11 +45,11 @@ export const MoreRequestInfoModal = (props) => {
         </div>
       </div>
       <div className="modal-footer">
-        <Button className={' text-black'} onClick={handleClose
+        <Button className={'bg-translucent-dark text-black'} onClick={handleClose
         } ><Translate contentKey={'entity.action.cancel'}/>
 
         </Button>
-        <Button className={'bg-gradient-warning text-white'} onClick={()=> {handleSubmit(remark)
+        <Button className={'bg-translucent-warning text-warning'} onClick={()=> {handleSubmit(remark)
         }} >
           <FontAwesomeIcon icon="arrow-left" />
           <Translate contentKey={'workflow.backToUser'}/>

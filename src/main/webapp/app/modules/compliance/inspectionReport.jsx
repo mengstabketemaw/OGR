@@ -54,7 +54,7 @@ export function InspectionReport() {
         (
           <Col  md="8" className={"container"} >
             <div className="d-flex  ">
-              <Link tag={"a"} to={`/complianceHistory?compliance=${param.get('compliance')}`} > <FontAwesomeIcon  className={ "h1 cursor-pointer rounded-circle bg-gradient-success text-white p-2 mr-3"} icon={faArrowLeft}/> </Link>
+              <Link tag={"a"} to={`/complianceHistory?compliance=${param.get('compliance')}`} > <FontAwesomeIcon  className={ "h1 cursor-pointer rounded-circle bg-translucent-primary text-primary p-2 mr-3"} icon={faArrowLeft}/> </Link>
               <h1><Translate contentKey={"compliance.inspectionReport"}/></h1>
             </div>
 

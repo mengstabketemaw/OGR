@@ -4,7 +4,6 @@ import {
   Card,
   CardHeader,
   Col,
-  Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
@@ -173,7 +172,7 @@ const ComplianceMonitoring = () => {
               </>
             ) : (
               <>
-                <Table className="align-items-center table-flush" responsive>
+                <Table className="align-items-center table-flush table-hover" responsive>
                   <thead className="thead-light">
                     <tr>
                       <th scope="col">
@@ -200,10 +199,32 @@ const ComplianceMonitoring = () => {
                   <tbody>
                     {filteredData?.content?.map(data => (
                       <tr key={data.id}>
-                        <th>{data.id}</th>
-                        <th>{data.company.login}</th>
-                        <th>{data.customForm.title}</th>
-                        <th>
+                        <th
+                          onClick={() => {
+                            nav(`/complianceHistory?compliance=${data.id}`);
+                          }}
+                        >
+                          {data.id}
+                        </th>
+                        <th
+                          onClick={() => {
+                            nav(`/complianceHistory?compliance=${data.id}`);
+                          }}
+                        >
+                          {data.company.login}
+                        </th>
+                        <th
+                          onClick={() => {
+                            nav(`/complianceHistory?compliance=${data.id}`);
+                          }}
+                        >
+                          {data.customForm.title}
+                        </th>
+                        <th
+                          onClick={() => {
+                            nav(`/complianceHistory?compliance=${data.id}`);
+                          }}
+                        >
                           {`${data.status}` == 'Non-Compliant' ? (
                             <p className={'text-danger text-sm'}>{data.status}</p>
                           ) : `${data.status}` == 'Not Inspected' ? (
@@ -214,9 +235,18 @@ const ComplianceMonitoring = () => {
                         </th>
 
                         <th>
-                          <Button color="primary" tag={'a'} href={`/complianceHistory?compliance=${data.id}`} size="sm">
-                            <Translate contentKey={'compliance.view'} />
+                          <Button
+                            // color="primary"
+                            className="bg-translucent-primary"
+                            tag={'a'}
+                            href={`/complianceHistory?compliance=${data.id}`}
+                            size="sm"
+                          >
+                            <span className={'text-primary'}>
+                              <Translate contentKey={'compliance.view'} />
+                            </span>
                           </Button>
+
                           {data.location && (
                             <UncontrolledButtonDropdown direction={'down'} setActiveFromChild={true} size={'sm'}>
                               <DropdownToggle caret>
@@ -235,7 +265,8 @@ const ComplianceMonitoring = () => {
                         </th>
                         <th>
                           <Button
-                            color="info"
+                            // color="info"
+                            className="bg-translucent-light"
                             onClick={() => {
                               setScheduleModal(true);
                               setScheduleParams({
@@ -248,7 +279,9 @@ const ComplianceMonitoring = () => {
                             }}
                             size="sm"
                           >
-                            <Translate contentKey={'compliance.scheduleInspection'} />
+                            <span className={'text-dark'}>
+                              <Translate contentKey={'compliance.scheduleInspection'} />
+                            </span>
                           </Button>
                         </th>
                       </tr>

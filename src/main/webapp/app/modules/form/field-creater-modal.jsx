@@ -86,13 +86,22 @@ const FieldCreaterModal=(props)=>{
               ))}
             </ValidatedField >}
               <ValidatedField type={"textarea"} name="options" label={translate('formModal.option')} placeholder={translate("formModal.optionPlaceHolder")} />
-            <Button color="secondary" onClick={handleClose} tabIndex={1}>
+            <Button
+              // color="secondary"
+              className="bg-translucent-light text-dark"
+              onClick={handleClose} tabIndex={1}>
               <Translate contentKey="entity.action.cancel">Cancel</Translate>
             </Button>{' '}
-            <Button color="primary" type="submit" >
+            <Button
+              // color="primary"
+              className="bg-translucent-primary text-primary"
+              type="submit" >
               <Translate contentKey={'form.add'}/>
             </Button>{' '}
-            <Button color="danger" onClick={()=>handleDelete(field.id)}>
+            <Button
+              // color="danger"
+              className="bg-translucent-danger text-danger"
+              onClick={()=>handleDelete(field.id)}>
               <Translate contentKey={'form.delete'}/>
             </Button>
           </ValidatedForm>

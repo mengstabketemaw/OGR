@@ -99,14 +99,14 @@ export const DecisionMaking = (params) => {
                        backButtonShow = {true}
                        backButtonName = 'workflow.deny'
                        backButtonIcon = {faCircleMinus}
-                       backButtonClass = "bg-gradient-danger text-white"
+                       backButtonClass = "bg-translucent-danger text-danger"
                        backButtonAction = {()=>{handleValue(false)}}
                        saveButtonName = "form.submit"
-                       saveButtonClass = "bg-gradient-green text-white"
+                       saveButtonClass = "bg-translucent-success text-success"
                        moreReqButtonShow = {true}
                        moreReqButtonName = 'workflow.moreReq'
                        moreReqButtonIcon = {faCodePullRequest}
-                       moreReqButtonClass = "bg-gray text-white"
+                       moreReqButtonClass = "bg-translucent-dark text-dark"
                        moreReqButtonAction = {showReqModal}/>
 
       </Col>
