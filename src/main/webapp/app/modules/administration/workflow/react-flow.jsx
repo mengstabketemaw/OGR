@@ -83,11 +83,9 @@ const ReactWorkFlow = (param) =>{
                   type="submit" onClick={onSave}>
             <Translate contentKey="entity.action.save">Save</Translate>
           </Button>{' '}
-          <Button color="danger" onClick={()=>{setShowModal(true)}} >
-          <Button
-            // color="danger"
-            className="bg-translucent-danger text-danger"
-            onClick={onAdd} >
+          <Button color="danger"
+                  className="bg-translucent-danger text-danger"
+                  onClick={()=>{setShowModal(true)}} >
             <Translate contentKey={'workflow.addnode'} />
           </Button>
         </Panel>
@@ -95,8 +93,8 @@ const ReactWorkFlow = (param) =>{
       <Modal isOpen={showModal}  toggle={()=>{setShowModal(false)}} size={"sm"}   className="modal-dialog-centered modal-info"
              contentClassName="bg-white">
 
-        <div className="modal-header bg-success">
-          <h3 className="modal-title  text-white" id="modal-title-denyIssue">
+        <div className="modal-header">
+          <h3 className="modal-title  text-dark" id="modal-title-denyIssue">
             <Translate contentKey={'workflow.nodeName'}/>
           </h3>
           <button
@@ -122,7 +120,7 @@ const ReactWorkFlow = (param) =>{
         </div>
         <div className="modal-footer">
 
-          <Button className={'bg-green text-white'} onClick={onAdd} >
+          <Button className={'bg-translucent-success text-success'} onClick={onAdd} >
             <Translate contentKey={'workflow.create'}/>
           </Button>
         </div>

@@ -80,10 +80,10 @@ const Workflow = () => {
     valueToSend.name = valueToSend.name ? valueToSend.name : formForEdit.title + ' Licence'
     valueToSend.id=0
     dispatch(createWorkflow(valueToSend)).then(
-      toast.success("Workflow Saved")
+      toast.success(<Translate contentKey={'workflow.saved'}/>)
     );
     }else{
-      toast.error("Invalid Workflow ")
+      toast.error(<Translate contentKey={'workflow.notSaved'}/>)
     }
   }
 

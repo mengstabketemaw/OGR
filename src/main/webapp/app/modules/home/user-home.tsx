@@ -150,25 +150,25 @@ const UserHome = () => {
                           </th>
                           <th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })} className={'pl-0 pr-0'}>
                             {data.status === 'Inprogress' ? (
-                              <Button className="btn btn-sm shadow-none border-0 bg-translucent-warning">
+                              <p className="btn btn-sm shadow-none border-0 ">
                                 <span className="font-weight-bold  text-warning">{data.status}</span>
-                              </Button>
+                              </p>
                             ) : data.status === 'Authorized' ? (
-                              <Button className="btn btn-sm shadow-none border-0 bg-translucent-success">
+                              <p className="btn btn-sm shadow-none border-0 ">
                                 <span className={'font-weight-bold text-success'}>{data.status}</span>
-                              </Button>
+                              </p>
                             ) : data.status === 'Denied' ? (
-                              <Button className="btn btn-sm shadow-none border-0 bg-translucent-danger">
+                              <p className="btn btn-sm shadow-none border-0 ">
                                 <span className={' font-weight-bold text-danger'}>{data.status}</span>
-                              </Button>
+                              </p>
                             ) : data.status === 'undefined' ? (
-                              <Button className="btn btn-sm shadow-none border-0 bg-translucent-gray">
+                              <p className="btn btn-sm shadow-none border-0">
                                 <span className={'font-weight-bold  text-gray'}>Inprogress</span>
-                              </Button>
+                              </p>
                             ) : (
-                              <Button className="btn btn-sm shadow-none border-0 bg-translucent-info">
+                              <p className="btn btn-sm shadow-none border-0">
                                 <span className={' font-weight-bold text-info'}>{data.status}</span>
-                              </Button>
+                              </p>
                             )}
                           </th>
                           <th>
