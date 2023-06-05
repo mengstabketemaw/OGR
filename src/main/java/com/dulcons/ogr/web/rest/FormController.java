@@ -61,4 +61,14 @@ public class FormController {
         customForm.setId(id);
         customFormRepository.save(customForm);
     }
+
+    @PutMapping("/changePayment/{id}")
+    public void updatePayment(@PathVariable Long id, @RequestParam Long money) {
+        customFormRepository
+            .findById(id)
+            .ifPresent(form -> {
+                form.setMoney(money);
+                customFormRepository.save(form);
+            });
+    }
 }

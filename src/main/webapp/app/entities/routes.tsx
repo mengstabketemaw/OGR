@@ -24,7 +24,7 @@ export default () => {
           }
         />
         <Route
-          path="checkout"
+          path="checkout/:id"
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
               <CheckoutForm />
