@@ -144,7 +144,7 @@ const UserHome = () => {
                             {moment(data.submittedDate).format('MMM DD, YYYY')}
                           </th>
                           <th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}>{data.form.title}</th>
-                          <th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}>{data.form.type}</th>
+                          {/*<th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}>{data.form.type}</th>*/}
                           <th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}>
                             {data.stage?.name || 'Form'}
                           </th>
