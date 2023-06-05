@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { translate, Translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import cardImage from './card_img.png';
 import { toast } from 'react-toastify';
 import { Spinner } from 'reactstrap';
+import { useParams } from 'react-router-dom';
 export const CheckoutForm = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
   const [loading, setLoading] = useState(false);
+  const [moneyValue, setMoneyValue] = useState(false);
+  const { id } = useParams();
+
+  useEffect(() => {
+    axios
+      .get(`/api/forms/${id}`)
+      .then(({ data }) => {
+        setMoneyValue(data.money || 0);
+      })
+      .catch(console.log);
+  }, []);
 
   const handleChangeExp = event => {
     let formattedDate = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
@@ -68,13 +80,13 @@ export const CheckoutForm = () => {
                         <Translate contentKey={'checkout.applicationFee'} />
                       </h6>
                     </div>
-                    <span className="text-muted">$30</span>
+                    <span className="text-muted">${moneyValue === false ? 'loading . . .' : Number(moneyValue)}</span>
                   </li>
                   <li className="list-group-item d-flex justify-content-between">
                     <span>
                       <Translate contentKey={'checkout.total'} />
                     </span>
-                    <strong>$30</strong>
+                    <strong>${moneyValue === false ? 'loading . . .' : Number(moneyValue)}</strong>
                   </li>
                 </ul>
               </div>

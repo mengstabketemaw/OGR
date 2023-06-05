@@ -185,7 +185,10 @@
     "permits": "Permissões"
   },
   "payment": {
-    "conf": "Gestão de Pagamentos"
+    "conf": "Gestão de Pagamentos",
+    "payment": "Configuração de pagamento",
+    "amount": "Quantia",
+    "menu": "Configuração de pagamento"
   },
   "map": {
     "geoLocator": "geolocalizador",

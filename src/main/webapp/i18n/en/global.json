@@ -186,7 +186,10 @@
     "permits": "Permits"
   },
   "payment": {
-    "conf": "Payment Management"
+    "conf": "Payment Management",
+    "payment": "Setting Payment",
+    "amount": "Amount",
+    "menu": "Payment setting"
   },
   "map": {
     "geoLocator": "Geolocator",
