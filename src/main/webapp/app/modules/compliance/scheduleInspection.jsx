@@ -34,7 +34,9 @@ export const ScheduleInspection = ({show,refreshTable, handleClose, users,schedu
 
   return (
     <Modal size={""} isOpen={show}>
-      <ModalHeader><h2><Translate contentKey={"compliance.scheduleInspection"}/></h2></ModalHeader>
+      <ModalHeader toggle={handleClose}>
+        <h2><Translate contentKey={"compliance.scheduleInspection"}/></h2>
+      </ModalHeader>
       <ModalBody>
         <ValidatedForm onSubmit={values => handleSubmit(values)}>
           <ValidatedField type="text" disabled={true} value={scheduleParams.licenceName} name="formId" required={true} label={translate('compliance.table.licenceType')}>
@@ -56,18 +58,24 @@ export const ScheduleInspection = ({show,refreshTable, handleClose, users,schedu
               )
             ))}
           </ValidatedField>
+          <div className="d-flex">
 
-          <Button color="primary" type="submit">
+
+          <Button
+            // color="primary"
+            className={"bg-translucent-primary text-primary"}
+            type="submit">
             <FontAwesomeIcon icon="save"/>
             &nbsp;
             <Translate contentKey="entity.action.save"/>
           </Button>
+          <Button className={"bg-translucent-danger text-danger"} onClick={handleClose}><Translate
+            contentKey={"compliance.close"}/></Button>
+
+          </div>
         </ValidatedForm>
+
       </ModalBody>
-      <ModalFooter>
-        <Button className={"bg-gradient-red"} onClick={handleClose}><Translate
-          contentKey={"compliance.close"}/></Button>
-      </ModalFooter>
     </Modal>
   );
 };

@@ -31,7 +31,7 @@ export const Brand = () => {
       className="brand-logo"
     >
       <BrandIcon />
-      <span className="navbar-version">{VERSION}</span>
+      {/*<span className="navbar-version">{VERSION}</span>*/}
     </NavbarBrand>
   );
 };

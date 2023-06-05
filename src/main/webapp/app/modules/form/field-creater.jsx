@@ -77,9 +77,15 @@ const FieldCreater = (param) =>{
           <tr id={field.id} key={field.id} onClick={()=>editField(field.id)}>
             <td>{field.label}</td>
             <td>{field.placeholder}</td>
-            <td>{field.required ? (<Button color="success">
+            <td>{field.required ? (<Button
+              // color="success"
+            className="btn-sm bg-translucent-success text-success"
+            >
               TRUE
-            </Button>):<Button color="success">
+            </Button>):<Button
+              // color="danger"
+              className="btn-sm bg-translucent-danger text-danger"
+            >
               FALSE
             </Button>}</td>
             <td><Translate contentKey={"fieldstype."+field.fieldType.display}></Translate></td>
@@ -90,7 +96,7 @@ const FieldCreater = (param) =>{
 
     </Table>
       <div className="d-flex justify-content-end">
-        <Button color="primary mt-3" onClick={showModal} >
+        <Button className="bg-translucent-primary text-primary mt-3" onClick={showModal} >
           <FontAwesomeIcon icon="add" />
           &nbsp;
           <Translate contentKey={'form.add'} />

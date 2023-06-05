@@ -223,7 +223,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
                 key={field.id}
                 type={field.fieldType.name}
                 value={getFieldValue(field.label)}
-                label={field.label}
+                label={field.required ? field.label+' *':field.label}
                 required={field.required}
                 onChange={getOnChangeHandler(field.label, field.fieldType)}
               >
@@ -233,7 +233,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
             :field.fieldType.name === "location" ?
                 <ValidatedField
                   key={field.id}
-                  label={field.label}
+                  label={field.required ? field.label+' *':field.label}
                   autoComplete={"off"}
                   value={getFieldValue(field.label)}
                   placeholder={"Click here to add location"}
@@ -250,7 +250,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
                       className="mb-0"
                       key={field.id}
                       type={field.fieldType.name}
-                      label={field.label}
+                      label={field.required ? field.label+' *':field.label}
                       required={false}
                       onChange={getOnChangeHandlerForFile(field.label, field.fieldType)}
                     />
@@ -264,7 +264,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
                 type={field.fieldType.name}
                 name={field.label}
                 checked={getFieldValue(field.label) === 1}
-                label={field.label}
+                label={field.required ? field.label+' *':field.label}
                 required={field.required}
                 onChange={getOnChangeHandlerForCheckbox(field.label, field.fieldType)}
               />
@@ -274,7 +274,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
               type={field.fieldType.name}
               name={field.label}
               value={getFieldValue(field.label)}
-              label={field.label}
+              label={field.required ? field.label+' *':field.label}
               required={field.required}
               onChange={getOnChangeHandler(field.label, field.fieldType)}
             />
@@ -290,7 +290,10 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
                 </span>
         </Button>
         &nbsp;</>}
-        <Button color="primary" onClick={handleSubmit}>
+        <Button
+          // color="primary"
+          className="bg-translucent-primary text-primary"
+          onClick={handleSubmit}>
           <FontAwesomeIcon icon="save"/>
           &nbsp;
           <Translate contentKey="entity.action.save">Save</Translate>

@@ -12,8 +12,12 @@ import UserStats from 'app/modules/dashboard/userStats';
 import { ShowRemarkModal } from 'app/modules/home/showRemarkModal';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 import CustomPagination from 'app/shared/common/CustomPagination';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 
-const PAGE_SIZE = ITEMS_PER_PAGE;
+const PAGE_SIZE = 4;
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
   const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
@@ -87,15 +91,13 @@ const UserHome = () => {
                   <Table className="align-items-center table-flush" responsive>
                     <thead className="thead-light">
                       <tr>
-                        <th scope="col">
+                        <th scope="col" className={'pr-0'}>
                           <Translate contentKey={'table.submittedDate'} />{' '}
                         </th>
                         <th scope="col">
                           <Translate contentKey={'table.requested'} />
                         </th>
-                        <th scope="col">
-                          <Translate contentKey={'table.type'} />
-                        </th>
+
                         <th scope="col">
                           <Translate contentKey={'table.stage'} />
                         </th>
@@ -114,17 +116,14 @@ const UserHome = () => {
                 </>
               ) : (
                 <>
-                  <Table className="align-items-center table-flush" responsive>
+                  <Table className="align-items-center table-flush table-hover" responsive>
                     <thead className="thead-light">
                       <tr>
-                        <th scope="col">
+                        <th scope="col" className={'pr-0'}>
                           <Translate contentKey={'table.submittedDate'} />{' '}
                         </th>
                         <th scope="col">
                           <Translate contentKey={'table.requested'} />
-                        </th>
-                        <th scope="col">
-                          <Translate contentKey={'table.type'} />
                         </th>
                         <th scope="col">
                           <Translate contentKey={'table.stage'} />
@@ -141,46 +140,80 @@ const UserHome = () => {
                     <tbody>
                       {applications.data?.content.map(data => (
                         <tr key={data.id}>
-                          <th>{moment(data.submittedDate).format('MMM DD, YYYY')}</th>
-                          <th>{data.form.title}</th>
-                          <th>{data.form.type}</th>
-                          <th>{data.stage?.name || 'Form'}</th>
-                          <th>
+                          <th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })} className={'pr-0'}>
+                            {moment(data.submittedDate).format('MMM DD, YYYY')}
+                          </th>
+                          <th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}>{data.form.title}</th>
+                          {/*<th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}>{data.form.type}</th>*/}
+                          <th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}>
+                            {data.stage?.name || 'Form'}
+                          </th>
+                          <th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })} className={'pl-0 pr-0'}>
                             {data.status === 'Inprogress' ? (
-                              <Button className={'btn btn-sm bg-warning text-white'}>{data.status}</Button>
+                              <Button className="btn btn-sm shadow-none border-0 bg-translucent-warning">
+                                <span className="font-weight-bold  text-warning">{data.status}</span>
+                              </Button>
                             ) : data.status === 'Authorized' ? (
-                              <Button className={'btn btn-sm bg-gradient-success text-white'}>{data.status}</Button>
+                              <Button className="btn btn-sm shadow-none border-0 bg-translucent-success">
+                                <span className={'font-weight-bold text-success'}>{data.status}</span>
+                              </Button>
                             ) : data.status === 'Denied' ? (
-                              <Button className={'btn btn-sm bg-danger text-white'}>{data.status}</Button>
+                              <Button className="btn btn-sm shadow-none border-0 bg-translucent-danger">
+                                <span className={' font-weight-bold text-danger'}>{data.status}</span>
+                              </Button>
+                            ) : data.status === 'undefined' ? (
+                              <Button className="btn btn-sm shadow-none border-0 bg-translucent-gray">
+                                <span className={'font-weight-bold  text-gray'}>Inprogress</span>
+                              </Button>
                             ) : (
-                              <Button className={'btn btn-sm bg-gradient-info text-white'}>{data.status}</Button>
+                              <Button className="btn btn-sm shadow-none border-0 bg-translucent-info">
+                                <span className={' font-weight-bold text-info'}>{data.status}</span>
+                              </Button>
                             )}
                           </th>
                           <th>
                             <Button
-                              color="primary"
+                              // color="primary"
+                              className="bg-translucent-primary text-primary"
                               onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
                               size="sm"
                             >
-                              <Translate contentKey={'entity.action.view'} />
+                              {/*<Translate contentKey={'entity.action.view'} />*/}
+                              <FontAwesomeIcon icon={faEye} />
                             </Button>
 
                             <Button
-                              color="secondary"
+                              // color="secondary"
+                              color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
+                              // className="bg-translucent-light text-dark"
                               onClick={() => nav('/dataUpdate/' + data.id)}
                               disabled={!(data.stage?.id === 0 || data.stage === null)}
                               size="sm"
                             >
-                              <Translate contentKey={'entity.action.edit'} />
+                              {/*<Translate contentKey={'entity.action.edit'} />*/}
+                              {/*<FontAwesomeIcon icon={faPencil} />*/}
+                              <FontAwesomeIcon
+                                color={!(data.stage?.id === 0 || data.stage === null) ? 'white' : 'blue'}
+                                size="1x"
+                                icon={faPencil}
+                              />
                             </Button>
 
                             <Button
-                              color="danger"
+                              // color="danger"
+                              // className="bg-translucent-danger text-danger"
+                              color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
                               onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
                               disabled={!(data.stage?.id === 0 || data.stage === null)}
                               size="sm"
                             >
-                              <Translate contentKey={'entity.action.delete'} />
+                              {/*<Translate contentKey={'entity.action.delete'} />*/}
+                              {/*<FontAwesomeIcon  icon={faTrash} />*/}
+                              <FontAwesomeIcon
+                                color={!(data.stage?.id === 0 || data.stage === null) ? 'white' : 'red'}
+                                size="1x"
+                                icon={faTrash}
+                              />
                             </Button>
                             {data.remark && !(data.status === 'Authorized' || data.status === 'Denied') && (
                               <Button color="warning" onClick={() => showRemarkModal(data.remark)} size="sm">
@@ -239,7 +272,7 @@ export const DetailModal = ({ id, show, handleClose }) => {
 
   return (
     <Modal isOpen={show} onClosed={handleClose}>
-      <ModalHeader>Detail</ModalHeader>
+      <ModalHeader toggle={handleClose}>Detail</ModalHeader>
       <ModalBody>
         <Container className="p--5 d-flex flex-column justify-content-center">
           {data.loading ? (
