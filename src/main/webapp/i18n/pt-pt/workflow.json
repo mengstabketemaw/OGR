@@ -39,6 +39,7 @@
     "create": "Criar",
     "nodeName": "Nome do Nó",
     "Payment": "Pagamento",
-    "notify": "notificar"
+    "notify": "notificar",
+    "PaymentNotPaid": "O pagamento não foi feito."
   }
 }

@@ -91,8 +91,18 @@ const PageSwitcher = () => {
       )
   }
   const handleNotify = () =>{
-    toast.success("User Notified")
-    nav(-1)
+    const param = {
+      id : id,
+      data : {
+        stateId : sequenceFromDatabase[currentPage+1],
+        status:'Inprogress'
+      }
+    }
+    dispatch(updateStatusAndState(param)).then(()=>{
+      toast.success("User Notified")
+      nav(-1)}
+    )
+
   }
 
   return (
@@ -146,11 +156,11 @@ const PageSwitcher = () => {
 
               <div className="mt-2 col-12 col-sm-6 col-md-2  order-md-3">
 
-              <Button hidden={sequenceFromDatabase[currentPage] !== 3} disabled={sequenceFromDatabase[currentPage] !== 3}  className={ 'col-12 mr-4 mb-2 bg-orange text-white' } onClick={handleNotify}>
+              <Button hidden={sequenceFromDatabase[currentPage+1] !== 3} disabled={sequenceFromDatabase[currentPage+1] !== 3}  className={ 'col-12 mr-4 mb-2 bg-orange text-white' } onClick={handleNotify}>
                 <Translate contentKey="workflow.notify"></Translate>
               </Button>
 
-              <Button className={"col-12 bg-light"}  onClick={handleNextPage} hidden={sequenceFromDatabase[currentPage] === 3 || currentPage === pages.length - 1} disabled={sequenceFromDatabase[currentPage] === 3 || currentPage === pages.length - 1}>
+              <Button className={"col-12 bg-light"}  onClick={handleNextPage} hidden={sequenceFromDatabase[currentPage+1] === 3 || currentPage === pages.length - 1} disabled={sequenceFromDatabase[currentPage] === 3 || currentPage === pages.length - 1}>
 
                 <Translate contentKey="workflow.next"></Translate>
               </Button>
