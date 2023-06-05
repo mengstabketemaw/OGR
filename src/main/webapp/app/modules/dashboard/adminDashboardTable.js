@@ -17,7 +17,7 @@ import { faPrint, faWarning } from '@fortawesome/free-solid-svg-icons';
 import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 
-const PAGE_SIZE = ITEMS_PER_PAGE;
+const PAGE_SIZE = 7;
 export const AdminDashboardTable = ({ title }) => {
   const nav = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
@@ -123,7 +123,7 @@ export const AdminDashboardTable = ({ title }) => {
             </>
           ) : (
             <>
-              <Table className="d-block  d-table  table-flush table-hover" responsive style={{ height: '40vh', overflowY: 'scroll' }}>
+              <Table className="d-block  d-table  table-flush table-hover" responsive style={{ overflowY: 'scroll' }}>
                 <thead className="thead-light">
                   <tr>
                     <th scope="col" className={'pr-0'}>
