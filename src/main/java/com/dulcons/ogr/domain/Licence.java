@@ -25,11 +25,22 @@ public class Licence {
     private String applicantUsername;
     private String remark;
 
+    @Column(name = "notify_payment", nullable = false)
+    private Boolean notifyPayment = false;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private State stage = new State(0L, "Form");
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LicenceFieldData> data = new ArrayList<>();
+
+    public Boolean getNotifyPayment() {
+        return notifyPayment;
+    }
+
+    public void setNotifyPayment(Boolean notifyPayment) {
+        this.notifyPayment = notifyPayment;
+    }
 
     public String getRemark() {
         return remark;

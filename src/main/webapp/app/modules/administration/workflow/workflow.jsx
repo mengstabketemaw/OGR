@@ -83,7 +83,7 @@ const Workflow = () => {
       toast.success("Workflow Saved")
     );
     }else{
-      toast.error("Invalid Format")
+      toast.error("Invalid Workflow ")
     }
   }
 

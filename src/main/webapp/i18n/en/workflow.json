@@ -35,6 +35,10 @@
       "4a": "There are no specific limitations on the number of pages you can include in the workflow process. As an admin, you can determine the number of pages required based on the complexity of the licensing process and the information you need to collect. However, it is recommended to keep the workflow concise and straightforward to avoid overwhelming users and decision-makers.",
       "5q": "Can I review the workflow process and make improvements based on user feedback or changing requirements?",
       "5a": "Absolutely! As an admin, you have the ability to review and improve the workflow process based on user feedback or changing requirements. By actively listening to user experiences and taking into account any modifications or updates in regulations, you can refine the workflow process over time to enhance user satisfaction and ensure compliance with the latest guidelines."
-    }
+    },
+    "create": "Create",
+    "nodeName": "Node Name",
+    "Payment": "Payment",
+    "notify": "Notify Payment"
   }
 }

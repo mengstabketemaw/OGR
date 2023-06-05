@@ -39,7 +39,8 @@
     "Initial Review": "Initial Review",
     "Technical Review": "Technical Review",
     "Specialized Review": "Speicialized Review",
-    "Decision Making": "Decision Making"
+    "Decision Making": "Decision Making",
+    "Payment": "Payment"
   },
   "fieldstype": {
     "Text": "Text",

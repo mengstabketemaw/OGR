@@ -15,7 +15,7 @@ const DynamicWorkFlow = (props) => {
       <FormEdit name ="Form Edit" />
       <InitialReview name ="Initial Review"/>
       <TechnicalReview name ="Technical Review" />
-      <SpecializedReview name ="Specialized Review"/>
+      <SpecializedReview name ="Payment"/>
       <DecisionMaking name ="Decision Making" />
     </PageSequence >
   )

@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import ReactFlow, {addEdge, MarkerType, Panel, useEdgesState, useNodesState, useReactFlow} from "reactflow";
-import {Button} from "reactstrap";
+import {Button, Modal} from "reactstrap";
 import {ValidateEdges} from "app/modules/administration/workflow/validateEdges";
 import 'reactflow/dist/style.css';
-import {Translate} from "react-jhipster";
+import {Translate, ValidatedField} from "react-jhipster";
 const ReactWorkFlow = (param) =>{
   const markEnd = {markerEnd: {
       type: MarkerType.ArrowClosed,
@@ -19,6 +19,8 @@ const ReactWorkFlow = (param) =>{
   const [nodes, setNodes, onNodesChange] = useNodesState(formatedNode);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback((params) => setEdges((eds) => addEdge({...params,...markEnd}, eds)), [setEdges]);
+  const [showModal,setShowModal] = useState(false);
+  const [nodeName,setNodeName] = useState("Added node")
   const onSave = ()=>{
 
     if (rfInstance) {
@@ -45,19 +47,20 @@ const ReactWorkFlow = (param) =>{
     };
 
     restoreFlow();
-  }, [setNodes, setViewport]);
+  }, [setNodes, setViewport, setEdges]);
 
   const onAdd = useCallback(() => {
     const newNode = {
       id: getNodeId(),
-      data: { label: 'Added node' },
+      data: { label: nodeName },
       position: {
         x: 100,
         y: 200,
       },
     };
     setNodes((nds) => nds.concat(newNode));
-  }, [setNodes]);
+    setShowModal(false)
+  }, [setNodes,nodeName]);
   return(
     <div style={{ height: 500 }}>
        <ReactFlow
@@ -76,11 +79,47 @@ const ReactWorkFlow = (param) =>{
           <Button color="primary" type="submit" onClick={onSave}>
             <Translate contentKey="entity.action.save">Save</Translate>
           </Button>{' '}
-          <Button color="danger" onClick={onAdd} >
+          <Button color="danger" onClick={()=>{setShowModal(true)}} >
             <Translate contentKey={'workflow.addnode'} />
           </Button>
         </Panel>
       </ReactFlow>
+      <Modal isOpen={showModal}  toggle={()=>{setShowModal(false)}} size={"sm"}   className="modal-dialog-centered modal-info"
+             contentClassName="bg-white">
+
+        <div className="modal-header bg-success">
+          <h3 className="modal-title  text-white" id="modal-title-denyIssue">
+            <Translate contentKey={'workflow.nodeName'}/>
+          </h3>
+          <button
+            aria-label="Close"
+            className="close"
+            data-dismiss="modal"
+            type="button"
+            onClick={()=>{setShowModal(false)}}
+          >
+            <span aria-hidden={true} className="text-black-50">×</span>
+          </button>
+        </div>
+        <div className="modal-body">
+          <div className="py-3 text-center text-black-50">
+            <ValidatedField
+              key = "node"
+              name = "node"
+              type="input"
+              onChange={(e)=>setNodeName(e.target.value)}
+
+            />
+          </div>
+        </div>
+        <div className="modal-footer">
+
+          <Button className={'bg-gradient-green text-white'} onClick={onAdd} >
+            <Translate contentKey={'workflow.create'}/>
+          </Button>
+        </div>
+
+      </Modal>
     </div>
   )
 }

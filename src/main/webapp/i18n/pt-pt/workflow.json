@@ -35,6 +35,10 @@
       "4a": "Não há limitações específicas no número de páginas que você pode incluir no processo de fluxo de trabalho. Como administrador, você pode determinar o número de páginas exigido com base na complexidade do processo de licenciamento e nas informações que você precisa coletar. No entanto, é recomendável manter o fluxo de trabalho conciso e direto para evitar sobrecarregar os usuários e tomadores de decisão.",
       "5q": "Posso revisar o processo de fluxo de trabalho e fazer melhorias com base no feedback do usuário ou em requisitos em mudança?",
       "5a": "Com certeza! Como administrador, você tem a capacidade de revisar e melhorar o processo de fluxo de trabalho com base no feedback do usuário ou em requisitos em mudança. Ao ouvir ativamente as experiências dos usuários e levar em consideração quaisquer modificações ou atualizações em regulamentos, você pode refinar o processo de fluxo de trabalho ao longo do tempo para aumentar a satisfação do usuário e garantir a conformidade com as diretrizes mais recentes."
-    }
+    },
+    "create": "Criar",
+    "nodeName": "Nome do Nó",
+    "Payment": "Pagamento",
+    "notify": "notificar"
   }
 }

@@ -10,6 +10,7 @@ import {updateStatusAndState, updateRemark} from "app/modules/administration/wor
 import {useNavigate} from "react-router-dom";
 import './pageS.css'
 import {MoreRequestInfoModal} from '../definedStatePages/more-request-info-modal'
+import {toast} from "react-toastify";
 
 const PageSwitcher = () => {
   const dispatch = useAppDispatch();
@@ -89,6 +90,10 @@ const PageSwitcher = () => {
       }, 50)}
       )
   }
+  const handleNotify = () =>{
+    toast.success("User Notified")
+    nav(-1)
+  }
 
   return (
     <>
@@ -120,7 +125,7 @@ const PageSwitcher = () => {
                     {pages.length > 0 ?
                       pages.map((page, index) => {
                       return <li  key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
-                                  onClick={() => handleSwitchPage(index)}
+                                  onClick={() => {if (currentPage>index) handleSwitchPage(index)}}
                                   >
                         <div >Step {index + 1}<br /><span> <Translate contentKey={"workflow." + page.props.name}></Translate></span></div>
                       </li>
@@ -130,13 +135,7 @@ const PageSwitcher = () => {
                   </ul>
                 </div>
               </div>
-              {/* {pages.map((page, index) => ( */}
-              {/*   <Button  key={index}  disabled={sequenceFromDatabase[currentState.id] < index} */}
-              {/*            onClick={() => handleSwitchPage(index)} className={currentPage === index ? "bg-blue text-white btn btn-secondary btn-sm":"bg-white text-blue btn btn-secondary btn-sm"}> */}
 
-              {/*     <Translate contentKey={"workflow."+page.type.name}></Translate> */}
-              {/*   </Button> */}
-              {/* ))} */}
 
               <div className="mt-2 col-12 col-sm-6 col-md-2 prev-button order-md-1">
                 <Button className={"col-12 bg-light"} onClick={handlePreviousPage} disabled={currentPage === 0} >
@@ -146,22 +145,23 @@ const PageSwitcher = () => {
 
 
               <div className="mt-2 col-12 col-sm-6 col-md-2  order-md-3">
-              <Button className={"col-12 bg-light"}  onClick={handleNextPage} hidden={currentPage === pages.length - 1} disabled={currentPage === pages.length - 1}>
+
+              <Button hidden={sequenceFromDatabase[currentPage] !== 3} disabled={sequenceFromDatabase[currentPage] !== 3}  className={ 'col-12 mr-4 mb-2 bg-orange text-white' } onClick={handleNotify}>
+                <Translate contentKey="workflow.notify"></Translate>
+              </Button>
+
+              <Button className={"col-12 bg-light"}  onClick={handleNextPage} hidden={sequenceFromDatabase[currentPage] === 3 || currentPage === pages.length - 1} disabled={sequenceFromDatabase[currentPage] === 3 || currentPage === pages.length - 1}>
 
                 <Translate contentKey="workflow.next"></Translate>
               </Button>
+
               <Button  className={ currentPage !== pages.length - 1 ? 'd-none' : 'col-12 mr-4 mb-2 bg-gradient-green text-white' } onClick={handleProceed}>
                 <Translate contentKey="workflow.proceed"></Translate>
               </Button>
+
               </div>
             </div>
             &nbsp;
-            {/* <Row className="align-items-center"> */}
-            {/*   <div className="col"> */}
-            {/*     <h3 className="mb-0"><Translate contentKey="form.edit"> Edit a form</Translate></h3> */}
-            {/*   </div> */}
-            {/* </Row> */}
-            {/* Render the current page */}
             {pages[currentPage]}
 
           </CardHeader>

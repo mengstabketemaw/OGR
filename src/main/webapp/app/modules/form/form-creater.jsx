@@ -78,6 +78,10 @@ const FormCreater = () => {
       toast.success("Form Saved")}
     );
   }
+  const trans = (v) =>{
+    const returnValue =  translate("state."+v);
+    return returnValue.startsWith('translation-not-found[') ? v : returnValue;
+  }
 
    return (
      <Row className="d-flex justify-content-center">
@@ -113,7 +117,8 @@ const FormCreater = () => {
 
                    {states.map((f,i) => (
                    <option value={f.id} key={f.id}>
-                     <Translate contentKey={"state."+f.name}></Translate>
+                     {trans(f.name)}
+
                    </option>
                  ))}
                  </>
