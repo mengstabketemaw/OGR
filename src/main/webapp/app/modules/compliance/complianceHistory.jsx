@@ -76,7 +76,7 @@ const ComplianceHistory = ({complianceId,compliance}) => {
               <Row className="align-items-center">
                 <div className="col d-flex align-items-center justify-content-between">
                   <h1 className="mb-0"><Translate contentKey={"compliance.complianceHistory"}></Translate></h1>
-                  <Button className={'mr-4 mb-2 bg-gradient-green text-white'}
+                  <Button className={'mr-4 mb-2 bg-translucent-light text-dark'}
                           onClick={() => {
 
                             setScheduleModal(true);
@@ -157,13 +157,18 @@ const ComplianceHistory = ({complianceId,compliance}) => {
                             <p className={"text-success col-6"}>{data.status}</p>
                       } </th>
                       <th>
-                        <Button color="primary" tag={"a"} href={`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`}
+                        <Button
+                          // color="primary"
+                           className="bg-translucent-primary text-primary"
+
+                                tag={"a"} href={`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`}
                                  size="sm">
                           <Translate contentKey={'compliance.viewReport'}/>
                         </Button>
 
                         <Button
-                          color="danger"
+                          // color="danger"
+                          className="bg-translucent-danger text-danger"
 
                           onClick={() => {
                             setShowDeleteModal(true);
@@ -176,8 +181,8 @@ const ComplianceHistory = ({complianceId,compliance}) => {
                       </th>
                       <th>
                         <Button
-                          color="warning"
-
+                          // color="warning"
+                          className="bg-translucent-warning  text-warning"
                           onClick={() => {
 
                             setShowInspectModal(true);
@@ -268,8 +273,8 @@ const DeleteInspection = ({ show,refreshTable, handleClose,updateInspection }) =
   return (
 
     <Modal
-      className="modal-dialog-centered modal-danger"
-      contentClassName="bg-gradient-danger"
+      className="modal-dialog-centered "
+      contentClassName=""
       isOpen={show}
       toggle={() => this.toggleModal("notificationModal")}
       size={"sm"}
@@ -303,7 +308,7 @@ const DeleteInspection = ({ show,refreshTable, handleClose,updateInspection }) =
           <Translate contentKey={'compliance.noClose'}/>
         </Button>
         <Button
-          className="text-white ml-auto"
+          className="text-white bg-danger ml-auto"
           color="link"
           data-dismiss="modal"
           type="button"

@@ -14,6 +14,8 @@ import { useReactToPrint } from 'react-to-print';
 import ReportForm from 'app/shared/common/reportForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faWarning } from '@fortawesome/free-solid-svg-icons';
+import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 
 const PAGE_SIZE = ITEMS_PER_PAGE;
 export const AdminDashboardTable = ({ title }) => {
@@ -96,17 +98,17 @@ export const AdminDashboardTable = ({ title }) => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">
+                    <th scope="col" className={'pr-0'}>
                       <Translate contentKey={'table.submittedDate'} />{' '}
                     </th>
-                    <th scope="col">
+                    <th scope="col" className={'pl-0'}>
                       <Translate contentKey={'table.user'} />
                     </th>
 
-                    <th scope="col">
+                    <th scope="col" className={'pl-0 pr-1'}>
                       <Translate contentKey={'table.stage'} />
                     </th>
-                    <th scope="col">
+                    <th scope="col" className={'pl-0 pr-0'}>
                       <Translate contentKey={'table.status'} />
                     </th>
                     <th scope="col">
@@ -124,17 +126,17 @@ export const AdminDashboardTable = ({ title }) => {
               <Table className="d-block  d-table  table-flush table-hover" responsive style={{ height: '40vh', overflowY: 'scroll' }}>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">
+                    <th scope="col" className={'pr-0'}>
                       <Translate contentKey={'table.submittedDate'} />{' '}
                     </th>
-                    <th scope="col">
+                    <th scope="col" className={'pl-0'}>
                       <Translate contentKey={'table.user'} />
                     </th>
 
-                    <th scope="col">
+                    <th scope="col" className={'pl-0 pr-1'}>
                       <Translate contentKey={'table.stage'} />
                     </th>
-                    <th scope="col">
+                    <th scope="col" className={'pl-0 pr-0'}>
                       <Translate contentKey={'table.status'} />
                     </th>
                     <th scope="col">
@@ -147,45 +149,92 @@ export const AdminDashboardTable = ({ title }) => {
                   {licences.data?.content.map(data => (
                     <tr
                       key={data.id}
-                      onClick={() => {
-                        if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
-                      }}
+                      // onClick={() => {
+                      //   if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                      // }}
                     >
-                      <th>{moment(data.submittedDate).format('MMM DD, YYYY')}</th>
-                      <th>{data.applicantUsername}</th>
+                      <th
+                        onClick={() => {
+                          if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                        }}
+                        className={'pr-0'}
+                      >
+                        {moment(data.submittedDate).format('MMM DD, YYYY')}
+                      </th>
 
-                      <th>{data.stage?.name || 'Form'}</th>
-                      <th>
+                      <th
+                        onClick={() => {
+                          if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                        }}
+                        className={'pl-0'}
+                      >
+                        {data.applicantUsername}
+                      </th>
+
+                      <th
+                        onClick={() => {
+                          if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                        }}
+                        className={'pl-0 pr-1'}
+                      >
+                        {data.stage?.name || 'Form'}
+                      </th>
+                      <th
+                        onClick={() => {
+                          if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                        }}
+                        className={'pl-0 pr-0'}
+                      >
                         {data.status === 'Inprogress' ? (
-                          <Button className={'btn btn-sm bg-warning text-white'}>{data.status}</Button>
+                          <Button className="btn btn-sm shadow-none border-0 bg-translucent-warning">
+                            <span className="font-weight-bold  text-warning">{data.status}</span>
+                          </Button>
                         ) : data.status === 'Authorized' ? (
-                          <Button className={'btn btn-sm bg-gradient-success text-white'}>{data.status}</Button>
+                          <Button className="btn btn-sm shadow-none border-0 bg-translucent-success">
+                            <span className={'font-weight-bold text-success'}>{data.status}</span>
+                          </Button>
                         ) : data.status === 'Denied' ? (
-                          <Button className={'btn btn-sm bg-danger text-white'}>{data.status}</Button>
+                          <Button className="btn btn-sm shadow-none border-0 bg-translucent-danger">
+                            <span className={' font-weight-bold text-danger'}>{data.status}</span>
+                          </Button>
                         ) : data.status === 'undefined' ? (
-                          <Button className={'btn btn-sm bg-warning text-white'}>Inprogress</Button>
+                          <Button className="btn btn-sm shadow-none border-0 bg-translucent-gray">
+                            <span className={'font-weight-bold  text-gray'}>Inprogress</span>
+                          </Button>
                         ) : (
-                          <Button className={'btn btn-sm bg-gradient-info text-white'}>{data.status}</Button>
+                          <Button className="btn btn-sm shadow-none border-0 bg-translucent-info">
+                            <span className={' font-weight-bold text-info'}>{data.status}</span>
+                          </Button>
                         )}
                       </th>
                       <th>
                         <Button
-                          color="primary"
+                          color={data.status === 'Authorized' || data.status === 'Denied' ? 'light' : 'white'}
                           onClick={() => {
                             nav(`/sequence/${data.form.id}/${data.id}`);
                           }}
                           disabled={data.status === 'Authorized' || data.status === 'Denied'}
-                          size="sm"
+                          size={'sm'}
                         >
-                          <Translate contentKey={'workflow.moreaction'} />
+                          <FontAwesomeIcon
+                            color={data.status === 'Authorized' || data.status === 'Denied' ? 'white' : 'blue'}
+                            size="1x"
+                            icon={faCogs}
+                          />
+                          {/*<Translate contentKey={'workflow.moreaction'} />*/}
                         </Button>
                         <Button
-                          color="danger"
+                          color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
                           onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
                           disabled={!(data.stage?.id === 0 || data.stage === null)}
                           size="sm"
                         >
-                          <Translate contentKey={'entity.action.delete'} />
+                          {/*<Translate contentKey={'entity.action.delete'} />*/}
+                          <FontAwesomeIcon
+                            color={!(data.stage?.id === 0 || data.stage === null) ? 'white' : 'red'}
+                            size="1x"
+                            icon={faTrash}
+                          />
                         </Button>
                       </th>
                     </tr>

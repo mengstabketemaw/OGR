@@ -23,7 +23,7 @@ const DeleteLicenceModal = ({ id, show, handleClose, name, updateTable }) => {
   };
 
   return (
-    <Modal className="modal-dialog-centered modal-danger" contentClassName="bg-gradient-danger" isOpen={show} size={'sm'}>
+    <Modal className="modal-dialog-centered " contentClassName="" isOpen={show} size={'sm'}>
       <div className="modal-header">
         <h6 className="modal-title" id="modal-title-notification">
           <Translate contentKey={'compliance.attentionRequired'} />
@@ -48,7 +48,7 @@ const DeleteLicenceModal = ({ id, show, handleClose, name, updateTable }) => {
         <Button className="btn-white" color="default" type="button" onClick={handleClose}>
           <Translate contentKey={'compliance.noClose'} />
         </Button>
-        <Button className="text-white ml-auto" color="link" data-dismiss="modal" type="button" onClick={handleSubmit}>
+        <Button className="text-white bg-danger ml-auto" color="link" data-dismiss="modal" type="button" onClick={handleSubmit}>
           <Translate contentKey={'compliance.yesDelete'} />
         </Button>
       </div>

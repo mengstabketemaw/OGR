@@ -132,7 +132,10 @@ const FormCreater = () => {
                               handleFields={handleFields} handleDelete={handleDelete}/>}
                </Col>
                <div className="pb-4 pl-4">
-                 <Button color="primary" onClick={()=>handleSubmit(formForEdit)} >
+                 <Button
+                   // color="primary"
+                   className="bg-translucent-primary text-primary"
+                   onClick={()=>handleSubmit(formForEdit)} >
                    <FontAwesomeIcon icon="save" />
                    &nbsp;
                    <Translate contentKey="entity.action.save">Save</Translate>

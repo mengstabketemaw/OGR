@@ -12,8 +12,8 @@ export const IssuedOrDenied = (props) => {
     <Modal isOpen={showModal} toggle={handleClose}  size={"sm"}   className="modal-dialog-centered modal-info"
            contentClassName="bg-gradient-white">
 
-     <div className="modal-header bg-success">
-        <h3 className="modal-title  text-white" id="modal-title-denyIssue">
+     <div className="modal-header">
+        <h3 className="modal-title  text-dark" id="modal-title-denyIssue">
           <Translate contentKey={'workflow.issueordeny'}/>
         </h3>
         <button
@@ -34,10 +34,10 @@ export const IssuedOrDenied = (props) => {
         </div>
       </div>
       <div className="modal-footer">
-        <Button className="bg-gradient-red text-white" onClick={()=> handleSubmit(false)}>
+        <Button className="bg-translucent-danger text-danger" onClick={()=> handleSubmit(false)}>
           <Translate contentKey={'workflow.deny'}/>
         </Button>
-        <Button className={'bg-gradient-green text-white'} onClick={()=> handleSubmit(true)} >
+        <Button className={'bg-translucent-success text-success'} onClick={()=> handleSubmit(true)} >
           <Translate contentKey={'workflow.authorize'}/>
         </Button>
       </div>
