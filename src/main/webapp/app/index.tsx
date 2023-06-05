@@ -11,6 +11,8 @@ import ErrorBoundary from 'app/shared/error/error-boundary';
 import AppComponent from 'app/app';
 import { loadIcons } from 'app/config/icon-loader';
 
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
+
 const store = getStore();
 registerLocale(store);
 
@@ -29,6 +31,7 @@ const render = Component =>
         <div>
           <Component />
         </div>
+        <TawkMessengerReact propertyId="6479a4bbad80445890f0988c" widgetId="1h1timva3" />
       </Provider>
     </ErrorBoundary>
   );

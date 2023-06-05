@@ -60,7 +60,7 @@ public class SecurityConfiguration {
                 .accessDeniedHandler(problemSupport)
         .and()
             .headers()
-                .contentSecurityPolicy("default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org http://*.google.com; font-src 'self' data:")
+                .contentSecurityPolicy("default-src 'self' https://router.project-osrm.org https://*.tawk.to;connect-src 'self' wss://*.tawk.to https://*.tawk.to https://router.project-osrm.org;style-src 'self' 'unsafe-inline' https://*.tawk.to; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com  https://*.tawk.to https://cdn.jsdelivr.net; img-src 'self' data: https://*.tile.openstreetmap.org http://*.google.com https://*.tawk.to; font-src 'self' data: https://*.tawk.to")
             .and()
                 .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
             .and()
