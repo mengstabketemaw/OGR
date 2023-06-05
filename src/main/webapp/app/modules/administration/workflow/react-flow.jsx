@@ -122,7 +122,7 @@ const ReactWorkFlow = (param) =>{
         </div>
         <div className="modal-footer">
 
-          <Button className={'bg-gradient-green text-white'} onClick={onAdd} >
+          <Button className={'bg-green text-white'} onClick={onAdd} >
             <Translate contentKey={'workflow.create'}/>
           </Button>
         </div>

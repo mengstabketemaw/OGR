@@ -31,7 +31,7 @@ export const SpecializedReview = (params) => {
   const data = formatDisplayOn(getFieldValue(formData)
     ,[...formFields.filter(f=>f.state.id===0)]
     ,stateKey)
-  const [collapse,setCollapse] = useState(false);
+  const [collapse,setCollapse] = useState(true);
   useEffect(() => {
     const params = {
       id: parseInt(formId),
@@ -85,11 +85,15 @@ export const SpecializedReview = (params) => {
     <>
       <Col  md="8" className={"container"} >
         <div className="d-flex justify-content-between">
-          <h1> <Translate contentKey="workflow.specializedreview"></Translate></h1>
+          <h1> <Translate contentKey="workflow.Payment"></Translate></h1>
           <div >
             {collapse ? <FontAwesomeIcon icon={faAnglesDown} onClick={()=>setCollapse(!collapse)} />
               :<FontAwesomeIcon icon={faAnglesUp} onClick={()=>setCollapse(!collapse)} />}
           </div>
+        </div>
+        <div className="alert alert-warning" role="alert">
+          <Translate contentKey="workflow.PaymentNotPaid"></Translate>
+
         </div>
         <DisplayData data={data} collapse={collapse}/>
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
@@ -97,6 +101,7 @@ export const SpecializedReview = (params) => {
                        licence_id ={parseInt(id)}
                        currentFields = {fields_data}
                        backButtonShow = {true}
+                       saveButtonShow = {false}
                        backButtonName = 'workflow.deny'
                        backButtonIcon = {faCircleMinus}
                        backButtonClass = "bg-translucent-danger text-danger"

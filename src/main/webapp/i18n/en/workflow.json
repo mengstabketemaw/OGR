@@ -39,6 +39,7 @@
     "create": "Create",
     "nodeName": "Node Name",
     "Payment": "Payment",
-    "notify": "Notify Payment"
+    "notify": "Notify Payment",
+    "PaymentNotPaid": "The payment has not been made."
   }
 }
