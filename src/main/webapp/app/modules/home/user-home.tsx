@@ -14,7 +14,7 @@ import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 import CustomPagination from 'app/shared/common/CustomPagination';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
-import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faMoneyBill, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 
 const PAGE_SIZE = 4;
@@ -190,8 +190,6 @@ const UserHome = () => {
                               disabled={!(data.stage?.id === 0 || data.stage === null)}
                               size="sm"
                             >
-                              {/*<Translate contentKey={'entity.action.edit'} />*/}
-                              {/*<FontAwesomeIcon icon={faPencil} />*/}
                               <FontAwesomeIcon
                                 color={!(data.stage?.id === 0 || data.stage === null) ? 'white' : 'blue'}
                                 size="1x"
@@ -207,8 +205,6 @@ const UserHome = () => {
                               disabled={!(data.stage?.id === 0 || data.stage === null)}
                               size="sm"
                             >
-                              {/*<Translate contentKey={'entity.action.delete'} />*/}
-                              {/*<FontAwesomeIcon  icon={faTrash} />*/}
                               <FontAwesomeIcon
                                 color={!(data.stage?.id === 0 || data.stage === null) ? 'white' : 'red'}
                                 size="1x"
@@ -218,6 +214,12 @@ const UserHome = () => {
                             {data.remark && !(data.status === 'Authorized' || data.status === 'Denied') && (
                               <Button color="warning" onClick={() => showRemarkModal(data.remark)} size="sm">
                                 <Translate contentKey={'workflow.requestInfo'} />
+                              </Button>
+                            )}
+                            {data.stage?.id == 3 && !(data.status === 'Authorized' || data.status === 'Denied') && (
+                              <Button onClick={() => nav('/checkout/' + data.form.id)} size="sm">
+                                <FontAwesomeIcon color={'green'} size="1x" icon={faMoneyBill} />
+                                <Translate contentKey={'checkout.continueToCheckout'} />
                               </Button>
                             )}
                           </th>
