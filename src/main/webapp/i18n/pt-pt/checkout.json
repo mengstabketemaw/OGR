@@ -15,7 +15,7 @@
     "fullNameAs": "Nome completo como exibido no cartão",
     "expiration": "Validade",
     "cvv": "CVV",
-    "continueToCheckout": "Continuar para o Checkout",
+    "continueToCheckout": "Pagar",
     "applicationFee": "Taxa de Inscrição",
     "total": "Total (USD)",
     "invalidCard": "Cartão Inválido"

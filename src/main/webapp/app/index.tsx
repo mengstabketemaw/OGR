@@ -24,6 +24,10 @@ loadIcons();
 const rootEl = document.getElementById('root');
 const root = createRoot(rootEl);
 
+const handleChatOnLoad = () => {
+  // @ts-ignore
+  [...document.getElementsByClassName('tawk-branding')].forEach(a => a.remove());
+};
 const render = Component =>
   root.render(
     <ErrorBoundary>
@@ -31,7 +35,7 @@ const render = Component =>
         <div>
           <Component />
         </div>
-        <TawkMessengerReact propertyId="6479a4bbad80445890f0988c" widgetId="1h1timva3" />
+        <TawkMessengerReact propertyId="6479a4bbad80445890f0988c" widgetId="1h1timva3" onLoad={handleChatOnLoad} />
       </Provider>
     </ErrorBoundary>
   );
