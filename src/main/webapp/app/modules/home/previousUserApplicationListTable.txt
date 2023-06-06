@@ -1,0 +1,179 @@
+  <Container className="mt--7 pt-7" fluid>
+        <Row className="mt-5">
+          <Col className="mb-5 mb-xl-12" xl="12">
+            <Card className="shadow">
+              <CardHeader className="border-0">
+                <Row className="align-items-center">
+                  <div className="col">
+                    <h3 className="mb-0">
+                      <Translate contentKey={'global.applications'}/>
+                    </h3>
+                  </div>
+                </Row>
+              </CardHeader>
+
+              {applications.loading ? (
+                <Spinner
+                  className="align-self-center"
+                  color="primary"
+                  style={{
+                    height: '3rem',
+                    width: '3rem',
+                  }}
+                  type="grow"
+                >
+                  Loading...
+                </Spinner>
+              ) : !isArray(applications.data.content) || applications.data?.content.length === 0 ? (
+                <>
+                  <Table className="align-items-center table-flush" responsive>
+                    <thead className="thead-light">
+                    <tr>
+                      <th scope="col" className={'pr-0'}>
+                        <Translate contentKey={'table.submittedDate'}/>{' '}
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.requested'}/>
+                      </th>
+
+                      <th scope="col">
+                        <Translate contentKey={'table.stage'}/>
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.status'}/>
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.actions'}/>
+                      </th>
+                    </tr>
+                    </thead>
+                  </Table>
+                  <p className="align-self-center">
+                    <Translate contentKey={'table.noData'}/>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <Table className="align-items-center table-flush table-hover" responsive>
+                    <thead className="thead-light">
+                    <tr>
+                      <th scope="col" className={'pr-0'}>
+                        <Translate contentKey={'table.submittedDate'}/>{' '}
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.requested'}/>
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.stage'}/>
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.status'}/>
+                      </th>
+                      <th scope="col">
+                        <Translate contentKey={'table.actions'}/>
+                      </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {applications.data?.content.map(data => (
+                      <tr key={data.id}>
+                        <th onClick={() => setDetailModal({show: true, id: data.id, formId: data.form.id})}
+                            className={'pr-0'}>
+                          {moment(data.submittedDate).format('MMM DD, YYYY')}
+                        </th>
+                        <th onClick={() => setDetailModal({
+                          show: true,
+                          id: data.id,
+                          formId: data.form.id
+                        })}>{data.form.title}</th>
+                        {/*<th onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}>{data.form.type}</th>*/}
+                        <th onClick={() => setDetailModal({show: true, id: data.id, formId: data.form.id})}>
+                          {data.stage?.name || 'Form'}
+                        </th>
+                        <th onClick={() => setDetailModal({show: true, id: data.id, formId: data.form.id})}
+                            className={'pl-0 pr-0'}>
+                          {data.status === 'Inprogress' ? (
+                            <p className="btn btn-sm shadow-none border-0 ">
+                              <span className="font-weight-bold  text-warning">{data.status}</span>
+                            </p>
+                          ) : data.status === 'Authorized' ? (
+                            <p className="btn btn-sm shadow-none border-0 ">
+                              <span className={'font-weight-bold text-success'}>{data.status}</span>
+                            </p>
+                          ) : data.status === 'Denied' ? (
+                            <p className="btn btn-sm shadow-none border-0 ">
+                              <span className={' font-weight-bold text-danger'}>{data.status}</span>
+                            </p>
+                          ) : data.status === 'undefined' ? (
+                            <p className="btn btn-sm shadow-none border-0">
+                              <span className={'font-weight-bold  text-gray'}>Inprogress</span>
+                            </p>
+                          ) : (
+                            <p className="btn btn-sm shadow-none border-0">
+                              <span className={' font-weight-bold text-info'}>{data.status}</span>
+                            </p>
+                          )}
+                        </th>
+                        <th>
+                          <Button
+                            // color="primary"
+                            className="bg-translucent-primary text-primary"
+                            onClick={() => setDetailModal({show: true, id: data.id, formId: data.form.id})}
+                            size="sm"
+                          >
+                            {/*<Translate contentKey={'entity.action.view'} />*/}
+                            <FontAwesomeIcon icon={faEye}/>
+                          </Button>
+
+                          <Button
+                            // color="secondary"
+                            color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
+                            // className="bg-translucent-light text-dark"
+                            onClick={() => nav('/dataUpdate/' + data.id)}
+                            disabled={!(data.stage?.id === 0 || data.stage === null)}
+                            size="sm"
+                          >
+                            {/*<Translate contentKey={'entity.action.edit'} />*/}
+                            {/*<FontAwesomeIcon icon={faPencil} />*/}
+                            <FontAwesomeIcon
+                              color={!(data.stage?.id === 0 || data.stage === null) ? 'white' : 'blue'}
+                              size="1x"
+                              icon={faPencil}
+                            />
+                          </Button>
+
+                          <Button
+                            // color="danger"
+                            // className="bg-translucent-danger text-danger"
+                            color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
+                            onClick={() => setDeleteLicence({id: data.id, show: true, name: data.form.title})}
+                            disabled={!(data.stage?.id === 0 || data.stage === null)}
+                            size="sm"
+                          >
+                            {/*<Translate contentKey={'entity.action.delete'} />*/}
+                            {/*<FontAwesomeIcon  icon={faTrash} />*/}
+                            <FontAwesomeIcon
+                              color={!(data.stage?.id === 0 || data.stage === null) ? 'white' : 'red'}
+                              size="1x"
+                              icon={faTrash}
+                            />
+                          </Button>
+                          {data.remark && !(data.status === 'Authorized' || data.status === 'Denied') && (
+                            <Button color="warning" onClick={() => showRemarkModal(data.remark)} size="sm">
+                              <Translate contentKey={'workflow.requestInfo'}/>
+                            </Button>
+                          )}
+                        </th>
+                      </tr>
+                    ))}
+                    </tbody>
+                  </Table>
+                  <CustomPagination currentPage={currentPage + 1} totalPages={totalPages}
+                                    onPageChange={handlePageChange}/>
+                </>
+              )}
+            </Card>
+          </Col>
+        </Row>
+      </Container>
