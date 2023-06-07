@@ -76,11 +76,7 @@ const ReactWorkFlow = (param) =>{
       >
         <Panel position="bottom-left">
 
-          <Button
-            // color="primary"
-            className="bg-translucent-primary text-primary"
-
-                  type="submit" onClick={onSave}>
+          <Button color="primary" type="submit" onClick={onSave}>
             <Translate contentKey="entity.action.save">Save</Translate>
           </Button>{' '}
           <Button color="danger"
