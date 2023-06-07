@@ -9,7 +9,7 @@ import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import UserStats from 'app/modules/dashboard/userStats';
 import { ShowRemarkModal } from 'app/modules/home/showRemarkModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoneyBill, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faInfo, faMoneyBill, faPencil, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import profilePic from '../../../content/images/avatar.png';
 import { useAppSelector } from 'app/config/store';
@@ -106,12 +106,11 @@ const UserHome = () => {
             ) : (
               <>
                 {applications.data?.content.map(data => (
-                  <Card
-                    border="primary"
-                    onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
-                    className={'col-12 ' + columnClass + ' ml-0 mt-2 card-hover '}
-                  >
-                    <CardHeader className="text-left font-weight-bold border-0 pt-8 pt-md-4 pb-0 pb-md-4 d-flex justify-content-between cursor-">
+                  <Card border="primary" className={'col-12 ' + columnClass + ' ml-0 mt-2 card-hover '}>
+                    <CardHeader
+                      onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
+                      className="text-left font-weight-bold border-0 pt-8 pt-md-4 pb-0 pb-md-4 d-flex justify-content-between cursor-"
+                    >
                       <Translate contentKey={'userDashboard.' + data?.form?.title} />
                       <div style={{ width: 70, height: 70 }}>
                         {data?.status === 'Authorized' ? (
@@ -136,7 +135,7 @@ const UserHome = () => {
                       </div>
                     </CardHeader>
                     <CardBody className="pt-0 pt-md-1">
-                      <Row>
+                      <Row onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}>
                         <div className="col">
                           <div className="card-profile-stats d-flex justify-content-between">
                             <div>
@@ -176,7 +175,7 @@ const UserHome = () => {
                       <Row>
                         <div className="col">
                           <div className="card-profile-stats d-flex justify-content-between">
-                            <div className="text-center">
+                            <div onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })} className="text-center">
                               <h4>
                                 <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
                               </h4>
@@ -225,9 +224,12 @@ const UserHome = () => {
                                   icon={faTrash}
                                 />
                               </Button>
+                              <Button color="white" size="sm">
+                                <FontAwesomeIcon color="orange" size="1x" icon={faUndo} />
+                              </Button>
                               {data.remark && !(data.status === 'Authorized' || data.status === 'Denied') && (
-                                <Button color="warning" onClick={() => showRemarkModal(data.remark)} size="sm">
-                                  <Translate contentKey={'workflow.requestInfo'} />
+                                <Button color="white" onClick={() => showRemarkModal(data.remark)} size="sm">
+                                  <FontAwesomeIcon color={'blue'} icon={faInfo} />
                                 </Button>
                               )}
                               {data.status === 'Authorized' && (

@@ -9,8 +9,8 @@ export const ShowRemarkModal = (props) => {
 
 
   return(
-    <Modal isOpen={showModal} toggle={handleClose}  size={"md"}   className="modal-dialog-centered modal-info"
-           contentClassName="bg-gradient-info">
+    <Modal isOpen={showModal} toggle={handleClose}  size={"md"}   className="modal-dialog-centered text-dark"
+           contentClassName="text-dark">
 
       <div className="modal-header">
         <h3 className="modal-title" id="modal-title-denyIssue">
