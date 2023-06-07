@@ -11,7 +11,7 @@ import {useNavigate} from "react-router-dom";
 import './pageS.css'
 import {MoreRequestInfoModal} from '../definedStatePages/more-request-info-modal'
 import {toast} from "react-toastify";
-
+import moment from 'moment';
 const PageSwitcher = () => {
   const dispatch = useAppDispatch();
   const nav = useNavigate()
@@ -79,7 +79,8 @@ const PageSwitcher = () => {
       id : id,
       data : {
         stateId : sequenceFromDatabase[currentPage],
-        status:issue?'Authorized':'Denied'
+        status:issue?'Authorized':'Denied',
+        approvedDate:moment().format('YYYY-MM-DD')
       }
     }
     dispatch(updateStatusAndState(param)).then(()=>{
@@ -160,7 +161,7 @@ const PageSwitcher = () => {
                 <Translate contentKey="workflow.notify"></Translate>
               </Button>
 
-              <Button className={"col-12 bg-light"}  onClick={handleNextPage} hidden={sequenceFromDatabase[currentPage+1] === 3 || currentPage === pages.length - 1} disabled={sequenceFromDatabase[currentPage] === 3 || currentPage === pages.length - 1}>
+              <Button className={"col-12 bg-light"}  onClick={handleNextPage} hidden={sequenceFromDatabase[currentPage+1] === 3 || currentPage === pages.length - 1} disabled={ currentPage === pages.length - 1}>
 
                 <Translate contentKey="workflow.next"></Translate>
               </Button>

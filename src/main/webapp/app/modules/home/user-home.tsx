@@ -15,6 +15,9 @@ import profilePic from '../../../content/images/avatar.png';
 import { useAppSelector } from 'app/config/store';
 import Stages from './stages';
 import { CircularProgressbar } from 'react-circular-progressbar';
+import { useRef } from 'react/react.shared-subset';
+import { useReactToPrint } from 'react-to-print';
+import Certificate from 'app/modules/certificates/certificate';
 
 const PAGE_SIZE = 5;
 const UserHome = () => {
@@ -49,6 +52,11 @@ const UserHome = () => {
     fetchData(currentPage);
   }, []);
 
+  const certRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => certRef.current,
+  });
   const showRemarkModal = value => {
     setShowRemark(true);
     setRemark(value);
@@ -222,6 +230,14 @@ const UserHome = () => {
                                 <Button color="warning" onClick={() => showRemarkModal(data.remark)} size="sm">
                                   <Translate contentKey={'workflow.requestInfo'} />
                                 </Button>
+                              )}
+                              {data.status === 'Authorized' && (
+                                <>
+                                  <button className="border-0 bg-white" onClick={handlePrint}>
+                                    button
+                                  </button>
+                                  <Certificate ref={certRef} />
+                                </>
                               )}
                             </div>
                           </div>
