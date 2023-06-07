@@ -145,7 +145,7 @@ const AppRoutes = () => {
         <Route
           path="dataUpdate/:id"
           element={
-            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER, AUTHORITIES.ADMIN]}>
               <FormUpdateLandingPage />
             </PrivateRoute>
           }

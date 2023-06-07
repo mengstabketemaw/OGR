@@ -125,7 +125,7 @@ const FormData = () => {
                     <tr key={data.id}>
                       <th
                         onClick={() => {
-                          nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (data.status !== 'Authorized' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={' pr-0'}
                       >
@@ -133,7 +133,7 @@ const FormData = () => {
                       </th>
                       <th
                         onClick={() => {
-                          nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (data.status !== 'Authorized' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={'pl-0'}
                       >
@@ -142,7 +142,7 @@ const FormData = () => {
 
                       <th
                         onClick={() => {
-                          nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (data.status !== 'Authorized' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={'pl-0 pr-1'}
                       >
@@ -150,7 +150,7 @@ const FormData = () => {
                       </th>
                       <th
                         onClick={() => {
-                          if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (data.status !== 'Authorized' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={'pl-0 pr-0'}
                       >
