@@ -50,11 +50,6 @@ const UserHome = () => {
     fetchData(currentPage);
   }, []);
 
-  const certRef = useRef();
-
-  const handlePrint = useReactToPrint({
-    content: () => certRef.current,
-  });
   const showRemarkModal = value => {
     setShowRemark(true);
     setRemark(value);
@@ -228,13 +223,6 @@ const UserHome = () => {
                                 <Button color="warning" onClick={() => showRemarkModal(data.remark)} size="sm">
                                   <Translate contentKey={'workflow.requestInfo'} />
                                 </Button>
-                              )}
-                              {data.status === 'Authorized' && (
-                                <>
-                                  <button className="border-0 bg-white" onClick={handlePrint}>
-                                    button
-                                  </button>
-                                </>
                               )}
                             </div>
                           </div>
