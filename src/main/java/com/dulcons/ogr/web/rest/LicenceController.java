@@ -4,6 +4,7 @@ import com.dulcons.ogr.domain.*;
 import com.dulcons.ogr.repository.*;
 import com.dulcons.ogr.service.UserService;
 import com.dulcons.ogr.web.rest.vm.LocationFormDto;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -147,10 +148,11 @@ public class LicenceController {
     public void updateLiSAS(
         @PathVariable Long id,
         @RequestParam(value = "stateId") Long stateId,
-        @RequestParam(value = "status") String status
+        @RequestParam(value = "status") String status,
+        @RequestParam(value = "approvedDate") String date
     ) {
         State state = stateRepository.findById(stateId).orElse(stateRepository.findById(stateId).orElseThrow());
-        licenceRepository.updateStatusAndStageById(status, state, id);
+        licenceRepository.updateStatusAndStageById(status, state, id, date);
     }
 
     @PutMapping("/moreReqRemark/{id}")

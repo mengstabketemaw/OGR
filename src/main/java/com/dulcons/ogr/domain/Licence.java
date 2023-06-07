@@ -25,11 +25,22 @@ public class Licence {
     private String applicantUsername;
     private String remark;
 
+    @Column(name = "approved_date")
+    private String approvedDate;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private State stage = new State(0L, "Form");
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LicenceFieldData> data = new ArrayList<>();
+
+    public String getApprovedDate() {
+        return approvedDate;
+    }
+
+    public void setApprovedDate(String approvedDate) {
+        this.approvedDate = approvedDate;
+    }
 
     public String getRemark() {
         return remark;

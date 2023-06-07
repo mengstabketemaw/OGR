@@ -15,6 +15,7 @@ import profilePic from '../../../content/images/avatar.png';
 import { useAppSelector } from 'app/config/store';
 import Stages from './stages';
 import { CircularProgressbar } from 'react-circular-progressbar';
+import { useReactToPrint } from 'react-to-print';
 
 const PAGE_SIZE = 5;
 const UserHome = () => {

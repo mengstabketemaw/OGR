@@ -75,8 +75,8 @@ public interface LicenceRepository extends PagingAndSortingRepository<Licence, L
 
     @Transactional
     @Modifying
-    @Query("update Licence l set l.status = ?1, l.stage = ?2 where l.id = ?3")
-    int updateStatusAndStageById(String status, State stage, Long id);
+    @Query("update Licence l set l.status = ?1, l.stage = ?2, l.approvedDate = ?4 where l.id = ?3")
+    int updateStatusAndStageById(String status, State stage, Long id, String date);
 
     @Query("select (count(l) > 0) from Licence l inner join l.data data where data.fieldType.name = ?1")
     boolean existsByData_FieldType_Name(String name);

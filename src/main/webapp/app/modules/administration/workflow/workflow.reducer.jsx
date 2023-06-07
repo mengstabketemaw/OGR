@@ -75,7 +75,7 @@ export const createDecisionMaking = createAsyncThunk(
 export const updateStatusAndState = createAsyncThunk(
   'update_status_state',
   async (p, thunkAPI) => {
-    const url = `/api/licence/updateLicenceStage/${p.id}?stateId=${p.data.stateId}&status=${p.data.status}`;
+    const url = `/api/licence/updateLicenceStage/${p.id}?stateId=${p.data.stateId}&status=${p.data.status}&approvedDate=${p.data.approvedDate}`;
     return await axios.put(url);
   },
   { serializeError: serializeAxiosError }
