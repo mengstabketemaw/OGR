@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Card, CardBody, CardHeader, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner } from 'reactstrap';
 import axios from 'axios';
 import moment from 'moment';
 import ShowFieldValue from 'app/shared/common/showFieldValue';
 import { useNavigate } from 'react-router-dom';
-import { Translate } from 'react-jhipster';
+import { Translate, translate } from 'react-jhipster';
 import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import UserStats from 'app/modules/dashboard/userStats';
 import { ShowRemarkModal } from 'app/modules/home/showRemarkModal';
@@ -16,6 +16,7 @@ import { useAppSelector } from 'app/config/store';
 import Stages from './stages';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import { useReactToPrint } from 'react-to-print';
+import Certificate from 'app/modules/certificates/certificate';
 
 const PAGE_SIZE = 5;
 const UserHome = () => {
@@ -57,6 +58,11 @@ const UserHome = () => {
   const handleClose = () => {
     setShowRemark(false);
   };
+  const certRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => certRef.current,
+  });
 
   let numberOfCards = 6;
   let columnClass;
@@ -224,6 +230,14 @@ const UserHome = () => {
                                   <Translate contentKey={'workflow.requestInfo'} />
                                 </Button>
                               )}
+                              {data.status === 'Authorized' && (
+                                <>
+                                  <button className="border-0 bg-white" onClick={handlePrint}>
+                                    button
+                                  </button>
+                                  <Certificate ref={certRef} />
+                                </>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -235,6 +249,7 @@ const UserHome = () => {
             )}
           </Row>
         </Col>
+
         <Col className="order-xl-1 mb-5 mb-xl-0 mt-xl--6" xl="3">
           {/*<Card className="card-profile shadow">*/}
           {/*  <Row className="justify-content-center">*/}
@@ -306,6 +321,7 @@ const UserHome = () => {
           </Card>
         </Col>
       </Row>
+
       <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
       <ShowRemarkModal showModal={showRemark} content={remark} handleClose={handleClose} />
       <DeleteLicenceModal
