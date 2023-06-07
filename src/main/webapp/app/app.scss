@@ -6,6 +6,7 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import 'custom_css/css/bootstrap.min.css';
 @import 'custom_css/leaflet.css';
+@import '../content/css/circular-progress.css';
 //@import '~bootswatch/dist/minty/bootswatch';
 //@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 /*!
@@ -26,10 +27,38 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
+.MuiTimelineItem-missingOppositeContent {
+  disply: none;
+  flex: 0;
+}
+.MuiTimelineOppositeContent-root {
+  flex: 0 !important;
+}
+
+.MuiTimelineItem-missingOppositeContent::before {
+  flex: 0;
+  display: none;
+}
+
+.MuiTimelineItem-missingOppositeContent:before {
+  flex: 0;
+  display: none;
+}
+
 .equal-height-cards {
   display: flex;
   flex-wrap: wrap;
   margin: -1px; /* Adjust the negative margin as per your preference */
+}
+
+.card-hover {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card-hover:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 .equal-height-cards > [class^='col'] {

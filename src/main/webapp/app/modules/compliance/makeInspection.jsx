@@ -78,17 +78,20 @@ export const MakeInspection = ({show,refreshTable, handleClose, users,schedulePa
           </ValidatedField>
           <ValidatedField type="textarea" name="report"  defaultValue={scheduleParams.report} label={translate('compliance.report')}>
           </ValidatedField>
-          <Button color="primary" type="submit">
+
+          <div className="d-flex">
+          <Button className={"bg-translucent-primary text-primary"} type="submit">
             <FontAwesomeIcon icon="save"/>
             &nbsp;
             <Translate contentKey="entity.action.save"/>
           </Button>
+          <Button className={"bg-translucent-danger text-danger"} onClick={handleClose}><Translate
+            contentKey={"compliance.close"}/></Button>
+          </div>
+
         </ValidatedForm>
       </ModalBody>
-      <ModalFooter>
-        <Button className={"bg-gradient-red"} onClick={handleClose}><Translate
-          contentKey={"compliance.close"}/></Button>
-      </ModalFooter>
+
     </Modal>
   );
 };

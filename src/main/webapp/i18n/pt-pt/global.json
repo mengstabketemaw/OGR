@@ -3,6 +3,7 @@
     "title": "OGR",
     "browsehappy": "Está a usar um navegador <strong>desatualizado</strong>. Por favor <a href=\"http://browsehappy.com/?locale=pt_PT\">atualize o seu navegador</a> para ter uma experiência melhor.",
     "applications": "Formulários",
+    "version": "Versão",
     "menu": {
       "home": "Início",
       "compliance": "Monitoramento de Conformidade",
@@ -185,7 +186,10 @@
     "permits": "Permissões"
   },
   "payment": {
-    "conf": "Gestão de Pagamentos"
+    "conf": "Gestão de Pagamentos",
+    "payment": "Configuração de pagamento",
+    "amount": "Quantia",
+    "menu": "Configuração de pagamento"
   },
   "map": {
     "geoLocator": "geolocalizador",

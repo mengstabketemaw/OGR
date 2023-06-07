@@ -2,6 +2,7 @@
   "global": {
     "title": "OGR",
     "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
+    "version": "Version",
     "menu": {
       "home": "Home",
       "compliance": "Compliance Monitoring",
@@ -186,7 +187,10 @@
     "permits": "Permits"
   },
   "payment": {
-    "conf": "Payment Management"
+    "conf": "Payment Management",
+    "payment": "Setting Payment",
+    "amount": "Amount",
+    "menu": "Payment setting"
   },
   "map": {
     "geoLocator": "Geolocator",

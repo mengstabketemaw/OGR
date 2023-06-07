@@ -5,9 +5,16 @@ import { Translate } from 'react-jhipster';
 import { Col, Row } from 'reactstrap';
 
 const Footer = () => (
-  <div className="footer d-none p-0 page-content fixed-bottom bg-gradient-success d-sm-flex text-white justify-content-center m-auto">
-    <Translate contentKey="footer"></Translate>
-  </div>
+  <>
+    <div className="footer d-none p-0 page-content fixed-bottom bg-gradient-success d-sm-flex text-white justify-content-between align-items-center m-auto">
+      <span className="navbar-version text-white font-weight-bold">
+        {' '}
+        <Translate contentKey={'global.version'} /> {'  '} {VERSION}
+      </span>
+      <Translate contentKey="footer"></Translate>
+      <div className=""></div>
+    </div>
+  </>
 );
 
 export default Footer;

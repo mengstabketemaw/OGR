@@ -40,6 +40,8 @@
     "nodeName": "Nome do Nó",
     "Payment": "Pagamento",
     "notify": "notificar",
-    "PaymentNotPaid": "O pagamento não foi feito."
+    "PaymentNotPaid": "O pagamento não foi feito.",
+    "saved": "Workflow Saved",
+    "notSaved": "Unable to save Workflow sequence"
   }
 }

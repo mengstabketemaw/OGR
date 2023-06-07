@@ -93,7 +93,7 @@ const DynamicFields = props =>{
               onClick={()=>setLocationModal({...locationModal, show: true})}
             />
 
-         :f.fieldType.name === "file" ?
+         :(f.fieldType.name === "file" && backButtonName) ?
             <>
               <ValidatedField
                 key = {f.label}

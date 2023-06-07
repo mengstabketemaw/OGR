@@ -1,0 +1,28 @@
+{
+  "userDashboard": {
+    "myactivities": "My Activities",
+    "licences": "Licences",
+    "permits": "Permits",
+    "luanda": "Luanda, Angola",
+    "welcome": "Welcome",
+    "logged": "Logged In\n",
+    "appliedLicence": "Applied for Exploration License",
+    "appliedPermit": "Applied for Drilling Permit\n",
+    "assistance": "Requested Technical Assistance",
+    "granted": "Environmental Permit Granted\n",
+    "renewed": "Renewed Exploration License\n",
+    "review": "Application Under Review",
+    "pending": "Payment Pending for Exploration License\n",
+    "inspected": "Inspection Completed",
+    "Pipeline Licence": "Pipeline Licence",
+    "Drilling Permit": "Drilling Permit",
+    "Air Permit": "Air Permit",
+    "Exploration licence": "Exploration licence",
+    "Decision Making": "Decision Making",
+    "Form": "Form",
+    "Initial Review": "Initial Review",
+    "Payment": "Payment",
+    "Technical Review": "Technical Review",
+    "detail": "Detail"
+  }
+}

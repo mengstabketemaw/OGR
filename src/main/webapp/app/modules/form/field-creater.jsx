@@ -77,17 +77,17 @@ const FieldCreater = (param) =>{
           <tr id={field.id} key={field.id} onClick={()=>editField(field.id)}>
             <td>{field.label}</td>
             <td>{field.placeholder}</td>
-            <td>{field.required ? (<Button
+            <td>{field.required ? (<p
               // color="success"
-            className="btn-sm bg-translucent-success text-success"
+            className="btn-sm  text-success"
             >
               TRUE
-            </Button>):<Button
+            </p>):<p
               // color="danger"
-              className="btn-sm bg-translucent-danger text-danger"
+              className="btn-sm  text-danger"
             >
               FALSE
-            </Button>}</td>
+            </p>}</td>
             <td><Translate contentKey={"fieldstype."+field.fieldType.display}></Translate></td>
           </tr>
         )

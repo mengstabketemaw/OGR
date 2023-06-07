@@ -1,0 +1,28 @@
+{
+  "userDashboard": {
+    "myactivities": "Minhas Atividades",
+    "licences": "Licenças",
+    "permits": "Permissões",
+    "luanda": "Luanda, Angola",
+    "welcome": "Bem-vindo",
+    "logged": "Conectado\n",
+    "appliedLicence": "Solicitou Licença de Exploração",
+    "appliedPermit": "Solicitou Permissão de Perfuração\n",
+    "assistance": "Solicitou Assistência Técnica",
+    "granted": "Permissão Ambiental Concedida\n",
+    "renewed": "Licença de Exploração Renovada\n",
+    "review": "Aplicação em Análise",
+    "pending": "Pagamento Pendente para Licença de Exploração\n",
+    "inspected": "Inspeção Concluída",
+    "Pipeline Licence": "Licença de Oleoduto",
+    "Drilling Permit": "Permissão de Perfuração",
+    "Air Permit": "Permissão de Ar",
+    "Exploration licence": "Licença de Exploração",
+    "Decision Making": "Tomada de Decisão",
+    "Form": "Formulário",
+    "Initial Review": "Análise Inicial",
+    "Payment": "Pagamento",
+    "Technical Review": "Análise Técnica",
+    "detail": "Detalhe"
+  }
+}
