@@ -9,7 +9,7 @@ import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import UserStats from 'app/modules/dashboard/userStats';
 import { ShowRemarkModal } from 'app/modules/home/showRemarkModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faMoneyBill, faPencil } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import profilePic from '../../../content/images/avatar.png';
 import { useAppSelector } from 'app/config/store';
@@ -100,8 +100,9 @@ const UserHome = () => {
               <>
                 {applications.data?.content.map(data => (
                   <Card
+                    border="primary"
                     onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
-                    className={'col-12 ' + columnClass + ' ml-0 mt-2 card-hover curs'}
+                    className={'col-12 ' + columnClass + ' ml-0 mt-2 card-hover '}
                   >
                     <CardHeader className="text-left font-weight-bold border-0 pt-8 pt-md-4 pb-0 pb-md-4 d-flex justify-content-between cursor-">
                       <Translate contentKey={'userDashboard.' + data?.form?.title} />
@@ -179,6 +180,11 @@ const UserHome = () => {
                             </div>
 
                             <div className="text-center">
+                              {data.stage?.id == 3 && !(data.status === 'Authorized' || data.status === 'Denied') && (
+                                <Button onClick={() => nav('/checkout/' + data.form.id)} size="sm">
+                                  <FontAwesomeIcon color={'green'} size="1x" icon={faMoneyBill} />
+                                </Button>
+                              )}
                               <Button
                                 // color="secondary"
                                 color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}

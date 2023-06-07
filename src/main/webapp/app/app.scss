@@ -53,6 +53,8 @@
 }
 
 .card-hover {
+  border: 1px solid #2dceb6 !important;
+  border-radius: 5px;
   transition: box-shadow 0.3s ease-in-out;
 }
 
