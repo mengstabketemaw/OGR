@@ -29,14 +29,11 @@
   height: 40px;
   width: 100%;
 }
-body {
-  padding: 20px 0;
-  background: #ccc;
-}
+
 .pm-certificate-container {
   position: relative;
-  width: 1150px;
-  height: 800px;
+  width: 1200px;
+  height: 850px;
   background-color: #618597;
   padding: 30px;
   color: #333;

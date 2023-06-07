@@ -1,0 +1,19 @@
+{
+  "cert": {
+    "licence": "Este Certificado de Licença é emitido para",
+    "permit": "Este Certificado de Permissão é emitido para",
+    "by": "por",
+    "exploration": "para a exploração de minerais na terra localizada em",
+    "pipeline": "para o oleoduto na terra localizada em",
+    "air": "para a licença aérea na terra localizada em",
+    "drilling": "para a licença de perfuração na terra localizada em",
+    "valid": "A Licença é válida de",
+    "to": "a",
+    "exploreEnt": "O Titular da Licença tem o direito de explorar minerais",
+    "pipelineEnt": "O Titular da Licença tem o direito de construir um oleoduto",
+    "airEnt": "A Permissão tem o direito de voar",
+    "drillingEnt": "A Permissão tem o direito de perfurar",
+    "land": "na Terra de acordo com os termos e condições deste Certificado",
+    "issueAut": "A Autoridade Emitente pode revogar este Certificado se o Titular da Licença deixar de cumprir algum dos termos e condições deste Certificado"
+  }
+}
