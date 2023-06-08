@@ -216,7 +216,7 @@ const UserHome = () => {
 
                             <div className="text-center">
                               {data.stage?.id == 3 && !(data.status === 'Authorized' || data.status === 'Denied') && (
-                                <Button onClick={() => nav('/checkout/' + data.form.id)} size="sm">
+                                <Button onClick={() => nav(`/checkout/${data.form.id}?licenceId=${data.id}`)} size="sm">
                                   <FontAwesomeIcon color={'green'} size="1x" icon={faMoneyBill} />
                                 </Button>
                               )}

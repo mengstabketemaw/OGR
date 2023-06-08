@@ -160,6 +160,16 @@ public class LicenceController {
         licenceRepository.updateRemarkById(remark, id);
     }
 
+    @PutMapping("/payment")
+    public void makePayment(@RequestParam Long licenceId) {
+        licenceRepository
+            .findById(licenceId)
+            .ifPresent(licence -> {
+                licence.setPayment(true);
+                licenceRepository.save(licence);
+            });
+    }
+
     void changeUserName(Licence original) {
         Licence licenceWithData = licenceRepository.findById(original.getId()).orElseThrow();
         String applicantName = licenceWithData
