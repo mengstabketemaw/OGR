@@ -24,8 +24,8 @@ const Certificate = React.forwardRef((props, ref) => {
           <div className="">
             <div className="col-xs-12">
               <div className="row">
-                <div className="underline margin-0 col-xs-8 text-center">
-                  <span className="pm-certificate-name text-uppercase">{title}</span>
+                <div className="underline m-0 col-xs-8 text-center">
+                  <span className="pm-certificate-name m-0 pb-0 text-uppercase">{title}</span>
                 </div>
               </div>
             </div>
