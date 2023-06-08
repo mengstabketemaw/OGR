@@ -261,28 +261,7 @@ const UserHome = () => {
                                   <FontAwesomeIcon color={'blue'} icon={faInfo} />
                                 </Button>
                               )}
-                              {data.status === 'Authorized' && (
-                                <>
-                                  <ReactToPrint
-                                    onBeforeGetContent={async () => {
-                                      await handleBeforeGetContent({
-                                        title: translate('userDashboard.' + data?.form?.title),
-                                        companyName: account.firstName,
-                                        location: "Cabinda",
-                                        fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
-                                        type: data?.form?.id,
-                                        link: window.location.origin + `/sequence/${data?.form?.id}/${data?.id}`
-                                      })
-                                    }}
-                                    trigger={() => <button className="border-0 bg-white">button</button>}
-                                    content={() => certRef.current}
-                                  />
 
-                                  {printData && <Certificate
-                                    data={printData}
-                                    ref={certRef} />}
-                                </>
-                              )}
                             </div>
                           </div>
                         </div>
