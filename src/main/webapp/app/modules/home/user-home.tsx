@@ -96,8 +96,8 @@ const UserHome = () => {
               </Spinner>
             ) : !Array.isArray(applications.data?.content) || applications.data?.content.length === 0 ? (
               <>
-                <Card className={'card-profile shadow col-12 col-lg-12 ml-0 mt-2 border-bottom'}>
-                  <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"></CardHeader>
+                <Card className={'card-profile shadow  ml-0 mt-2 border-bottom'}>
+                  <CardHeader className="text-center border-0 pt-md-4 pb-0 pb-md-4 d-flex justify-content-between"></CardHeader>
                   <CardBody className="pt-0 pt-md-1">
                     <h2>No Data</h2>
                   </CardBody>
@@ -109,9 +109,10 @@ const UserHome = () => {
                   <Card border="primary" className={'col-12 ' + columnClass + ' ml-0 mt-2 card-hover '}>
                     <CardHeader
                       onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
-                      className="text-left font-weight-bold border-0 pt-8 pt-md-4 pb-0 pb-md-4 d-flex justify-content-between cursor-"
+                      className="text-left font-weight-bold border-0  pt-md-4 pb-0 pb-md-4 d-flex justify-content-between cursor-"
                     >
                       <Translate contentKey={'userDashboard.' + data?.form?.title} />
+
                       <div style={{ width: 70, height: 70 }}>
                         {data?.status === 'Authorized' ? (
                           <CircularProgressbar value={100} text={`100%`} />

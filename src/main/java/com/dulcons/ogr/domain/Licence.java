@@ -24,6 +24,8 @@ public class Licence {
     private String status = "Inprogress";
     private String applicantUsername;
     private String remark;
+    private String identifierTitle;
+    private String identifierValue;
 
     @Column(name = "approved_date")
     private String approvedDate;
@@ -112,5 +114,21 @@ public class Licence {
 
     public void setApplicantUsername(String applicantUsername) {
         this.applicantUsername = applicantUsername;
+    }
+
+    public String getIdentifierTitle() {
+        return identifierTitle;
+    }
+
+    public void setIdentifierTitle(String identifierTitle) {
+        this.identifierTitle = identifierTitle;
+    }
+
+    public String getIdentifierValue() {
+        return identifierValue;
+    }
+
+    public void setIdentifierValue(String identifierValue) {
+        this.identifierValue = identifierValue;
     }
 }
