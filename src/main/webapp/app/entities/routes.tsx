@@ -39,14 +39,6 @@ export default () => {
             </PrivateRoute>
           }
         />
-        <Route
-          path="workflow"
-          element={
-            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
-              <Workflow />
-            </PrivateRoute>
-          }
-        />
       </ErrorBoundaryRoutes>
     </div>
   );
