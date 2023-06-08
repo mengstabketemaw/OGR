@@ -31,8 +31,8 @@
 }
 .pm-certificate-container {
   position: relative;
-  width: 1150px;
-  height: 800px;
+  width: 1200px;
+  height: 850px;
   background-color: #618597;
   padding: 30px;
   color: #333;
@@ -97,7 +97,7 @@
   font-size: 15px;
 }
 .pm-certificate-container .pm-certificate-border .pm-earned .pm-credits-text {
-  font-size: 40px;
+  font-size: 20px;
 }
 .pm-certificate-container .pm-certificate-border .pm-course-title .pm-earned-text {
   font-size: 7px;

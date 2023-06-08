@@ -23,6 +23,7 @@ import { ComplianceDetail } from 'app/modules/compliance/complianceDetail';
 import FormUpdateLandingPage from 'app/shared/form/form-update-landing-page';
 import { InspectionReport } from 'app/modules/compliance/inspectionReport';
 import { ComplianceUser } from 'app/modules/complianceUser/complianceUser';
+import Workflow from 'app/modules/administration/workflow/workflow';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -58,7 +59,14 @@ const AppRoutes = () => {
         <Route path="licence" element={<Licence />} />
         {/*        <Route path="sequence" element={<TempLanding />} />*/}
         <Route path="compliance" element={<ComplianceMonitoring />} />
-        <Route path="sequence/:formId/:id" element={<SequenceLanding />} />
+        <Route
+          path="sequence/:formId/:id"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
+              <SequenceLanding />
+            </PrivateRoute>
+          }
+        />
         <Route path="account">
           <Route
             path="*"
@@ -83,7 +91,14 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-
+        <Route
+          path="workflow"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
+              <Workflow />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="form/*"
           element={
@@ -138,7 +153,7 @@ const AppRoutes = () => {
         <Route
           path="dataUpdate/:id"
           element={
-            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER, AUTHORITIES.ADMIN]}>
               <FormUpdateLandingPage />
             </PrivateRoute>
           }

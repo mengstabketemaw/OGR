@@ -15,7 +15,7 @@ import profilePic from '../../../content/images/avatar.png';
 import { useAppSelector } from 'app/config/store';
 import Stages from './stages';
 import { CircularProgressbar } from 'react-circular-progressbar';
-import { useReactToPrint } from 'react-to-print';
+import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import Certificate from 'app/modules/certificates/certificate';
 
 const PAGE_SIZE = 5;
@@ -55,14 +55,16 @@ const UserHome = () => {
     setShowRemark(true);
     setRemark(value);
   };
+  const [printData,setPrintData] = useState(null)
   const handleClose = () => {
     setShowRemark(false);
   };
   const certRef = useRef();
 
-  const handlePrint = useReactToPrint({
-    content: () => certRef.current,
-  });
+  const handleBeforeGetContent = (data) => {
+    setPrintData(data);
+    return Promise.resolve();
+  }
 
   let numberOfCards = 6;
   let columnClass;
@@ -235,10 +237,24 @@ const UserHome = () => {
                               )}
                               {data.status === 'Authorized' && (
                                 <>
-                                  <button className="border-0 bg-white" onClick={handlePrint}>
-                                    button
-                                  </button>
-                                  <Certificate ref={certRef} />
+                                  <ReactToPrint
+                                    onBeforeGetContent={async () => {
+                                      await handleBeforeGetContent({
+                                        title: translate('userDashboard.' + data?.form?.title),
+                                        companyName: account.firstName,
+                                        location: "Cabinda",
+                                        fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
+                                        type: data?.form?.id,
+                                        link: window.location.origin + `/sequence/${data?.form?.id}/${data?.id}`
+                                      })
+                                    }}
+                                    trigger={() => <button className="border-0 bg-white">button</button>}
+                                    content={() => certRef.current}
+                                  />
+
+                                  {printData && <Certificate
+                                    data={printData}
+                                    ref={certRef} />}
                                 </>
                               )}
                             </div>

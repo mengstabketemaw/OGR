@@ -1,0 +1,19 @@
+{
+  "cert": {
+    "licence": "This License Certificate is issued to",
+    "permit": "This Permit Certificate is issued to",
+    "by": "by",
+    "exploration": "for the exploration of minerals on the land located at ",
+    "pipeline": "for the pipeline on the land located at ",
+    "air": "for the air permit on the land located at",
+    "drilling": "for the drilling permit on the land located at",
+    "valid": "The certificate is valid from",
+    "to": "to",
+    "exploreEnt": "The licensee is entitled to explore for minerals ",
+    "pipelineEnt": "The licensee is entitled to pipeline ",
+    "airEnt": "The permit is entitled to fly ",
+    "drillingEnt": "The Permit is entitled to drill ",
+    "land": "on the land in accordance with the terms and conditions of this certificate",
+    "issueAut": "The issuing authority may revoke this certificate if it fails to comply with any of the terms and conditions of the regulation"
+  }
+}
