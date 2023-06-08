@@ -23,6 +23,7 @@ import { ComplianceDetail } from 'app/modules/compliance/complianceDetail';
 import FormUpdateLandingPage from 'app/shared/form/form-update-landing-page';
 import { InspectionReport } from 'app/modules/compliance/inspectionReport';
 import { ComplianceUser } from 'app/modules/complianceUser/complianceUser';
+import Workflow from 'app/modules/administration/workflow/workflow';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -90,7 +91,14 @@ const AppRoutes = () => {
             </PrivateRoute>
           }
         />
-
+        <Route
+          path="workflow"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.ADMIN]}>
+              <Workflow />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="form/*"
           element={
