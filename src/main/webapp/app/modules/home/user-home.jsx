@@ -223,7 +223,7 @@ const UserHome = () => {
                             <div className="card-profile-stats d-flex justify-content-between pt-0 pl-0 pr-0">
                               <div className="text-right pl-0 pr-0 ">
                                 {data.stage?.id == 3 && !(data.status === 'Authorized' || data.status === 'Denied') && (
-                                  <Button className="ml-0 mt-1 " onClick={() => nav('/checkout/' + data.form.id)} size="sm">
+                                  <Button className="ml-0 mt-1 " onClick={() => nav(`/checkout/${data.form.id}?licenceId=${data.id}`)} size="sm">
                                     <FontAwesomeIcon color={'green'} size="1x" icon={faMoneyBill} />
                                   </Button>
                                 )}
@@ -381,19 +381,12 @@ export const DetailModal = ({ id, show, handleClose }) => {
             </Spinner>
           ) : (
             <>
-              <ShowFieldValue data={getDataBasedOnState()} />
+              <ShowFieldValue data={getDataBasedOnState()} form={data.data.form} />
             </>
           )}
         </Container>
       </ModalBody>
       <ModalFooter>
-        {/*<Button
-          onClick={() => {
-            nav(`/sequence/${formId}/${id}`);
-          }}
-        >
-          <Translate contentKey={'workflow.moreaction'} />
-        </Button>*/}
         <Button onClick={handleClose}>
           <Translate contentKey={'table.close'} />
         </Button>
