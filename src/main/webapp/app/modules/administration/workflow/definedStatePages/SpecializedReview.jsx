@@ -29,6 +29,7 @@ import {trans} from "app/shared/common/translator";
   const fieldDateFormated = fields_data && getFieldValue(fields_data);
   const formData = useAppSelector(state=> state.licence.license.data);
   const formFields = useAppSelector(state=> state.licence.license.form.fields);
+   const licencePayment = useAppSelector(state => state.licence.license.payment) || false;
   const data = formatDisplayOn(getFieldValue(formData)
     ,[...formFields.filter(f=>f.state.id===0)]
     ,key)
@@ -92,10 +93,12 @@ import {trans} from "app/shared/common/translator";
               :<FontAwesomeIcon icon={faAnglesUp} onClick={()=>setCollapse(!collapse)} />}
           </div>
         </div>
+        {licencePayment? <div className="alert alert-success" role="alert">
+            <Translate contentKey="workflow.PaymentPaid"></Translate>
+          </div>:
         <div className="alert alert-warning" role="alert">
           <Translate contentKey="workflow.PaymentNotPaid"></Translate>
-
-        </div>
+        </div>}
         <DisplayData data={data} collapse={collapse}/>
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}

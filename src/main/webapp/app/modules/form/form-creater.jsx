@@ -118,7 +118,7 @@ const FormCreater = () => {
 
          </Nav>
 
-         <div className="d-flex flex-wrap justify-content-between  " style={{maxHeight :"72vh",overflowY :'scroll'}}>
+         <div className="d-flex flex-wrap justify-content-evenly  " style={{maxHeight :"72vh",overflowY :'scroll'}}>
            {states.map((f,i) => (
            <Card
              className="my-2 card-hover2"

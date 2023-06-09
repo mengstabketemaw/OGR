@@ -42,11 +42,15 @@
     "Payment": "Payment",
     "notify": "Notify Payment",
     "PaymentNotPaid": "The payment has not been made.",
+    "PaymentPaid": "The payment has been made.",
     "saved": "Workflow Saved",
     "stateSaved": "State Saved",
     "notSaved": "Unable to save Workflow sequence",
     "stateNotSaved": "Unable to save state",
     "sequence": "Sequence",
-    "sequenceInfo": "The Sequence functions as a flexible workflow page, with each state representing a specific page within the workflow. The component intelligently adapts its rendering based on the provided states variable, allowing for easy customization and dynamic page sequencing."
+    "sequenceInfo": "The Sequence functions as a flexible workflow page, with each state representing a specific page within the workflow. The component intelligently adapts its rendering based on the provided states variable, allowing for easy customization and dynamic page sequencing.",
+    "stay": "Stay",
+    "leave": "Leave",
+    "stayOrLeave": "Do you want to stay or leave the page"
   }
 }
