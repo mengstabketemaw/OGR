@@ -49,9 +49,9 @@ export const MoreRequestInfoModal = (props) => {
         } ><Translate contentKey={'entity.action.cancel'}/>
 
         </Button>
-        <Button className={'bg-translucent-warning text-warning'} onClick={()=> {handleSubmit(remark)
+        <Button className={'bg-translucent-success text-success'} onClick={()=> {handleSubmit(remark)
         }} >
-          <FontAwesomeIcon icon="arrow-left" />
+
           <Translate contentKey={'workflow.backToUser'}/>
         </Button>
       </div>
