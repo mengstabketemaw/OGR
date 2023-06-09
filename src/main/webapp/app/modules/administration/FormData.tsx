@@ -172,7 +172,7 @@ const FormData = () => {
                           </p>
                         ) : (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={' font-weight-bold text-info'}>{data.status}</span>
+                            <span className={' font-weight-bold text-warning'}>{data.status}</span>
                           </p>
                         )}
                       </th>
