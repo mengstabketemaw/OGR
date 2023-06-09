@@ -7,9 +7,9 @@ import {Translate} from "react-jhipster";
 import moment from "moment";
 const Certificate = React.forwardRef((props, ref) => {
 
-  const {title, companyName, location, fromDate, link, type} = props?.data
+  const {title, companyName, location, fromDate, link, type,display="none"} = props?.data
   return(
-    <div style={{display:"none"}} >
+    <div style={{display}} >
     <div className=" pm-certificate-container" ref={ref} style={{ backgroundImage: `url(${BackGround})`, backgroundSize: "cover" }}>
        <div className="pm-certificate-border col-xs-12">
         <div className="row pm-certificate-header">
