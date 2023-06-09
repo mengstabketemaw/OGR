@@ -134,7 +134,7 @@ const UserHome = () => {
                                   location: "Cabinda",
                                   fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
                                   type: data?.form?.id,
-                                  link: window.location.origin + `/sequence/${data?.form?.id}/${data?.id}`
+                                  link: window.location.origin + `/certificate-validator/${data?.id}`
                                 })
                               }}
                               trigger={() =>
@@ -388,18 +388,21 @@ export const DetailModal = ({ id, show, handleClose }) => {
   return (
     <Modal isOpen={show} onClosed={handleClose}>
       <ModalHeader toggle={handleClose}>
-        {' '}
-        <Translate contentKey={'userDashboard.detail'} />{' '}
+        {data.data.form?.title?.slice(0,2).toUpperCase()}{data.data?.id}496
       </ModalHeader>
       <ModalBody>
-        <Container className="p--5 d-flex flex-column justify-content-center">
+        <Container className="d-flex flex-column justify-content-center">
           {data.loading ? (
             <Spinner className="align-self-center" color="primary" style={{ height: '3rem', width: '3rem' }} type="grow">
               Loading...
             </Spinner>
           ) : (
             <>
-              <ShowFieldValue data={getDataBasedOnState()} form={data.data.form} />
+              <div className="d-flex justify-content-between">
+                <h3>{data.data.user.firstName}</h3>
+                <h4>{moment(data.data.submittedDate).format('MMM DD, YYYY')}</h4>
+              </div>
+              <ShowFieldValue data={getDataBasedOnState()} form={data?.data.form} />
             </>
           )}
         </Container>

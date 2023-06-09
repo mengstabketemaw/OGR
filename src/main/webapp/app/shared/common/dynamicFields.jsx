@@ -67,7 +67,7 @@ const DynamicFields = props =>{
     return <p></p>
 
   return(<>
-      <GeoLocationChooser showModal={locationModal.show} setLocation={(lat,lon)=> setLocationModal(prev=> ({show:false, value: lat + "," + lon}) ) } handleClose={()=>setLocationModal({...locationModal,show: false,}) }/>
+    <GeoLocationChooser showModal={locationModal.show} setLocation={(lat,lon)=> setLocationModal(prev=> ({show:false, value: lat + "," + lon}) ) } handleClose={()=>setLocationModal({...locationModal,show: false,}) }/>
     <ValidatedForm onSubmit={handlevalue} defaultValues={defaultValue} >
       {fields && fields.map( f => f.fieldType.name === "select" ?
         <ValidatedField
