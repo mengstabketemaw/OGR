@@ -47,8 +47,9 @@ const FieldCreater = (param) =>{
     }
   }
   return (
-    <div >
-      <Table className="align-items-center table-flush table-hover" responsive>
+    <>
+    <div style={{ maxHeight: "62vh", overflowY: 'auto' }}>
+      <Table className="align-items-center table-flush table-hover" >
         <thead className="thead-light" style={{ position: 'sticky', top: 0 }}>
         <tr>
           <th scope="col">
@@ -68,7 +69,7 @@ const FieldCreater = (param) =>{
           <Translate contentKey="form.fields.type"></Translate>
         </th>
 
-
+        <th />
       </tr>
       </thead>
       <tbody >
@@ -94,11 +95,12 @@ const FieldCreater = (param) =>{
       </tbody>
 
     </Table>
+    </div>
       <div className="d-flex justify-content-end">
         <Button className="bg-translucent-primary text-primary mt-3" onClick={showModal} >
           <FontAwesomeIcon icon="add" />
           &nbsp;
-          <Translate contentKey={'form.add'} />
+          <Translate contentKey={'form.addField'} />
         </Button>
       </div>
       {show&&<FieldCreaterModal showModal={show}
@@ -111,7 +113,7 @@ const FieldCreater = (param) =>{
                             handleDelete(value)
                           }}
       />}
-    </div>
+    </>
   )
 }
 
