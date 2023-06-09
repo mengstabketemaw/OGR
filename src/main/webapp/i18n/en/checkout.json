@@ -18,6 +18,7 @@
     "continueToCheckout": "Pay",
     "applicationFee": "Application Fee",
     "total": "Total (USD)",
-    "invalidCard": "Invalid Card"
+    "invalidCard": "Invalid Card",
+    "paymentSuccess": "Transaction is successful"
   }
 }

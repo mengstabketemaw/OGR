@@ -4,7 +4,7 @@ import { translate, Translate, ValidatedField, ValidatedForm } from 'react-jhips
 import cardImage from './card_img.png';
 import { toast } from 'react-toastify';
 import { Spinner } from 'reactstrap';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 export const CheckoutForm = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
@@ -12,6 +12,7 @@ export const CheckoutForm = () => {
   const [moneyValue, setMoneyValue] = useState(false);
   const { id } = useParams();
   const [params] = useSearchParams();
+  const nav = useNavigate();
 
   useEffect(() => {
     axios
@@ -48,7 +49,7 @@ export const CheckoutForm = () => {
       .put(`/api/licence/payment?licenceId=${params.get('licenceId')}`)
       .then(() => {
         setLoading(false);
-        toast.error(translate('checkout.invalidCard'));
+        toast.success(translate('checkout.paymentSuccess'));
       })
       .catch(e => {
         setLoading(false);
