@@ -21,7 +21,7 @@ import {trans} from "app/shared/common/translator";
   const nav = useNavigate();
   const stateKey = 3;
   const dispatch = useAppDispatch();
-  const { formId, currentPage ,pages, sequenceFromDatabase, showReqModal,switchPage } = useContext(PageContext);
+  const { formId, currentPage ,pages, sequenceFromDatabase, showReqModal,switchPage,showDenModal } = useContext(PageContext);
    const {id :key,name} = params;
   const fields = useAppSelector(state=> state.workflow.currentFields);
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
@@ -106,7 +106,7 @@ import {trans} from "app/shared/common/translator";
                        backButtonName = 'workflow.deny'
                        backButtonIcon = {faCircleMinus}
                        backButtonClass = "bg-translucent-danger text-danger"
-                       backButtonAction = {()=>{handleValue(false)}}
+                       backButtonAction = {showDenModal}
                        saveButtonName = "form.submit"
                        saveButtonClass = "bg-translucent-success text-success"
                        moreReqButtonShow = {true}

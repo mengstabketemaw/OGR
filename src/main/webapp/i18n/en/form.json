@@ -35,10 +35,10 @@
   },
   "state": {
     "title": "State",
-    "Form": "Form",
+    "Form": "Application Form",
     "Initial Review": "Initial Review",
     "Technical Review": "Technical Review",
-    "Specialized Review": "Speicialized Review",
+    "Specialized Review": "Specialized Review",
     "Decision Making": "Decision Making",
     "Payment": "Payment"
   },

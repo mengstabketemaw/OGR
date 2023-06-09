@@ -30,10 +30,11 @@ import moment from 'moment';
 import {trans} from "app/shared/common/translator";
 import workflow from "../../../../../content/images/workflow.gif";
 import {faRecycle} from "@fortawesome/free-solid-svg-icons";
+import {Denied} from "app/modules/administration/workflow/definedStatePages/denied";
 const PageSwitcher = () => {
   const dispatch = useAppDispatch();
   const nav = useNavigate()
-  const { pages, currentPage, switchPage, id , formId, showReqModal, handleReqClose, sRM } = useContext(PageContext);
+  const { pages, currentPage, switchPage, id , formId, showReqModal, handleReqClose, sRM, showDenModal, handleDenClose, sDM } = useContext(PageContext);
   const sequenceFromDatabase = useAppSelector(state => state.licence.currentSequence);
   const [showModal,setShowModal] = useState(false)
   const handleSwitchPage = (pageNumber) => {
@@ -44,6 +45,14 @@ const PageSwitcher = () => {
   };
   const handlePreviousPage = () => {
     handleSwitchPage(currentPage - 1);
+    const param = {
+      id : id,
+      data : {
+        stateId : sequenceFromDatabase[currentPage -1],
+        status:'Inprogress'
+      }
+    }
+    dispatch(updateStatusAndState(param))
   };
   const handleNextPage = () => {
     handleSwitchPage(currentPage + 1);
@@ -219,6 +228,7 @@ const PageSwitcher = () => {
 
       <IssuedOrDenied showModal={showModal} handleClose={handleClose} handleSubmit = {handleSubmit}/>
       <MoreRequestInfoModal showModal={sRM} handleClose={handleReqClose} handleSubmit = {handleReqSubmit}/>
+      <Denied showModal={sDM} handleClose={handleDenClose} handleSubmit = {handleSubmit}/>
     </>
 
   );

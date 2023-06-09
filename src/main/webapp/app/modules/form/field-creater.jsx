@@ -47,15 +47,14 @@ const FieldCreater = (param) =>{
     }
   }
   return (
-    <>
-    <Table className="align-items-center table-flush" responsive>
-      <thead className="thead-light">
-      <tr>
-
-        <th  scope="col" >
-          <Translate contentKey="form.fields.label"></Translate>
-          <FontAwesomeIcon icon="sort" />
-        </th>
+    <div >
+      <Table className="align-items-center table-flush table-hover" responsive>
+        <thead className="thead-light" style={{ position: 'sticky', top: 0 }}>
+        <tr>
+          <th scope="col">
+            <Translate contentKey="form.fields.label" />
+            <FontAwesomeIcon icon="sort" />
+          </th>
         <th  scope="col">
           <Translate contentKey="form.fields.placeholder"></Translate>
           <FontAwesomeIcon icon="sort" />
@@ -69,10 +68,10 @@ const FieldCreater = (param) =>{
           <Translate contentKey="form.fields.type"></Translate>
         </th>
 
-        <th />
+
       </tr>
       </thead>
-      <tbody>
+      <tbody >
       {fields?.map( (field) =>(
           <tr id={field.id} key={field.id} onClick={()=>editField(field.id)}>
             <td>{field.label}</td>
@@ -112,7 +111,7 @@ const FieldCreater = (param) =>{
                             handleDelete(value)
                           }}
       />}
-    </>
+    </div>
   )
 }
 

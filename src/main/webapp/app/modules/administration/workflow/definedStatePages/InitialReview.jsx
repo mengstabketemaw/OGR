@@ -27,7 +27,7 @@ const InitialReview = (params) => {
   const nav = useNavigate();
   const stateKey = 1;
   const dispatch = useAppDispatch();
-  const { formId, currentPage , sequenceFromDatabase, showReqModal ,pages, switchPage} = useContext(PageContext);
+  const { formId, currentPage , sequenceFromDatabase, showReqModal ,pages, switchPage,showDenModal} = useContext(PageContext);
   const {id :key,name} = params;
   const fields = useAppSelector(state=> state.workflow.currentFields);
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
@@ -112,7 +112,7 @@ const InitialReview = (params) => {
                        backButtonName = 'workflow.deny'
                        backButtonIcon = {faCircleMinus}
                        backButtonClass = "bg-translucent-danger text-danger"
-                       backButtonAction = {()=>{handleValue(false)}}
+                       backButtonAction = {showDenModal}
                        saveButtonName = "form.submit"
                        saveButtonClass = "bg-translucent-success text-success"
                        moreReqButtonShow = {true}
