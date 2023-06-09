@@ -13,6 +13,26 @@ public class State {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    private String pageName;
+
+    private String sourceId;
+
+    public String getSourceId() {
+        return sourceId;
+    }
+
+    public void setSourceId(String sourceId) {
+        this.sourceId = sourceId;
+    }
+
+    public String getPageName() {
+        return pageName;
+    }
+
+    public void setPageName(String pageName) {
+        this.pageName = pageName;
+    }
+
     public State() {}
 
     public State(Long id, String name) {

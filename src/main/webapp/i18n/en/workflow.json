@@ -8,7 +8,7 @@
     "formedit": "Form Edit",
     "addnode": "Add Node",
     "moreaction": "Proceed",
-    "Form Edit": "Form Edit",
+    "Form": "Register Form",
     "Initial Review": "Initial Review",
     "Technical Review": "Technical Review",
     "Specialized Review": "Speicialized Review",
@@ -42,6 +42,10 @@
     "notify": "Notify Payment",
     "PaymentNotPaid": "The payment has not been made.",
     "saved": "Workflow Saved",
-    "notSaved": "Unable to save Workflow sequence"
+    "stateSaved": "State Saved",
+    "notSaved": "Unable to save Workflow sequence",
+    "stateNotSaved": "Unable to save state",
+    "sequence": "Sequence",
+    "sequenceInfo": "The Sequence functions as a flexible workflow page, with each state representing a specific page within the workflow. The component intelligently adapts its rendering based on the provided states variable, allowing for easy customization and dynamic page sequencing."
   }
 }

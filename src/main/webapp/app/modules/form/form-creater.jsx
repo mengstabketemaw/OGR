@@ -85,6 +85,23 @@ const FormCreater = () => {
 
    return (
      <Row className="d-flex justify-content-center">
+       <Col md={"4"}>
+         <ul className="nav nav-pills nav-fill flex-row flex-sm-row" id="tabs-text" role="tablist">
+           <li className="nav-item">
+             <a className="nav-link mb-sm-3 mb-md-0 active" id="tabs-text-1-tab" data-toggle="tab" href="#tabs-text-1"
+                role="tab" aria-controls="tabs-text-1" aria-selected="true">UI/UX Design</a>
+           </li>
+           <li className="nav-item">
+             <a className="nav-link mb-sm-3 mb-md-0" id="tabs-text-2-tab" data-toggle="tab" href="#tabs-text-2"
+                role="tab" aria-controls="tabs-text-2" aria-selected="false">Programming</a>
+           </li>
+           <li className="nav-item">
+             <a className="nav-link mb-sm-3 mb-md-0" id="tabs-text-3-tab" data-toggle="tab" href="#tabs-text-3"
+                role="tab" aria-controls="tabs-text-3" aria-selected="false">Graphic</a>
+           </li>
+         </ul>
+
+       </Col>
        <Col md="8">
          <Card className="shadow">
            <CardHeader className="border-0">

@@ -1,27 +1,34 @@
 import React, {useContext, useEffect, useState} from "react";
 import {
   getFieldsByState,
-  getFieldsDataByLicenceDM,
-  createDecisionMaking, updateStatusAndState
+  getFieldsDataByLicence,
+  createInitialReview, updateStatusAndState
 } from "app/modules/administration/workflow/workflow.reducer";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {PageContext} from "app/modules/administration/workflow/pageSwitcher/pageSequence";
 import {useAppDispatch, useAppSelector} from "app/config/store";
 import DynamicFields from "app/shared/common/dynamicFields";
-import {formatDisplayOn, formatValue, getFieldValue} from "app/shared/common/formatValueWithCustomField";
+import {formatValue,getFieldValue,formatDisplayOn} from "app/shared/common/formatValueWithCustomField";
 import {Button, Col, Spinner} from "reactstrap";
 import {toast} from "react-toastify";
-import DisplayData from "app/shared/common/displayDynamicData";
 import {Translate} from "react-jhipster";
+import DisplayData from "app/shared/common/displayDynamicData";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAnglesDown, faAnglesUp,faCodePullRequest,faCircleMinus} from "@fortawesome/free-solid-svg-icons";
+import {
+  faAnglesDown,
+  faAnglesUp,
+  faCircleMinus,
+  faCodePullRequest,
+  faPlugCircleMinus
+} from "@fortawesome/free-solid-svg-icons";
+import {trans} from "app/shared/common/translator";
 
-export const DecisionMaking = (params) => {
+const InitialReview = (params) => {
   const nav = useNavigate();
-  const stateKey = 4;
+  const stateKey = 1;
   const dispatch = useAppDispatch();
-  const { formId, currentPage , sequenceFromDatabase, showReqModal,pages ,switchPage } = useContext(PageContext);
-  const {key} = params;
+  const { formId, currentPage , sequenceFromDatabase, showReqModal ,pages, switchPage} = useContext(PageContext);
+  const {id :key,name} = params;
   const fields = useAppSelector(state=> state.workflow.currentFields);
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
   const {  id } = useParams();
@@ -30,15 +37,15 @@ export const DecisionMaking = (params) => {
   const formFields = useAppSelector(state=> state.licence.license.form.fields);
   const data = formatDisplayOn(getFieldValue(formData)
     ,[...formFields.filter(f=>f.state.id===0)]
-    ,stateKey)
+    ,key)
   const [collapse,setCollapse] = useState(false);
   useEffect(() => {
     const params = {
       id: parseInt(formId),
-      state_id: stateKey,
+      state_id: key,
     };
     dispatch(getFieldsByState(params));
-    dispatch(getFieldsDataByLicenceDM(parseInt(id)));
+    dispatch(getFieldsDataByLicence(parseInt(id)));
   }, []);
   const handleSwitchPage = (pageNumber) => {
 
@@ -47,10 +54,11 @@ export const DecisionMaking = (params) => {
     }
   };
   const handleSumbit = (values) =>{
+
     console.log(values)
-    dispatch(createDecisionMaking(values)).then( ()=>{
-        toast.success("Dec. Making Saved")
-      handleSwitchPage(currentPage+1)
+    dispatch(createInitialReview(values)).then( () => {
+        toast.success("Initial Review Saved")
+        handleSwitchPage(currentPage + 1)
         if (currentPage >= 0 && currentPage < pages.length) {
           const param = {
             id: id,
@@ -61,11 +69,10 @@ export const DecisionMaking = (params) => {
           }
           dispatch(updateStatusAndState(param))
         }
-    }
-
+      }
     )
   }
-  const handleValue = (issue) =>{
+   const handleValue = (issue) =>{
     const param = {
       id : id,
       data : {
@@ -81,21 +88,26 @@ export const DecisionMaking = (params) => {
       }, 50)}
     )
   }
+
+
   return (
 
     <>
       <Col  md="8" className={"container"} >
         <div className="d-flex justify-content-between">
-          <h1> <Translate contentKey="workflow.decisionmaking"></Translate> </h1>
+          <h2>  {trans("workflow",name)}
+            </h2>
           <div >
-            {collapse ? <FontAwesomeIcon icon={faAnglesDown} onClick={()=>setCollapse(!collapse)} />
-              :<FontAwesomeIcon icon={faAnglesUp} onClick={()=>setCollapse(!collapse)} />}
+          {collapse ? <FontAwesomeIcon icon={faAnglesDown} onClick={()=>setCollapse(!collapse)} />
+          :<FontAwesomeIcon icon={faAnglesUp} onClick={()=>setCollapse(!collapse)} />}
           </div>
         </div>
         <DisplayData data={data} collapse={collapse}/>
+
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}
                        licence_id ={parseInt(id)}
+                       currentFields = {fields_data}
                        backButtonShow = {true}
                        backButtonName = 'workflow.deny'
                        backButtonIcon = {faCircleMinus}
@@ -107,10 +119,13 @@ export const DecisionMaking = (params) => {
                        moreReqButtonName = 'workflow.moreReq'
                        moreReqButtonIcon = {faCodePullRequest}
                        moreReqButtonClass = "bg-translucent-dark text-dark"
-                       moreReqButtonAction = {showReqModal}/>
+                       moreReqButtonAction = {showReqModal}
 
+        />
       </Col>
     </>
 
   )
 }
+
+export default InitialReview;

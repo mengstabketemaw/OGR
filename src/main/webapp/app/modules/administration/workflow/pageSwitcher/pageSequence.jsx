@@ -9,7 +9,7 @@ const PageSequence = ({ id,formId, children }) => {
   const pages = React.Children.toArray(children);
   const currentState = useAppSelector(state => state.workflow.currentStateId) | 0;
   const [currentPage, setCurrentPage] = useState( 0);
-  const pagesFromDatabase = sequenceFromDatabase.map((pageIndex) => pages[pageIndex]);
+  const pagesFromDatabase = pages.length > 0 && sequenceFromDatabase.map((pageIndex) => pages.find((f)=> f.props.id===pageIndex)||null);
   const [sRM,setSRM] = useState(false)
   useEffect(() => {
     setCurrentPage( sequenceFromDatabase.indexOf(currentState) === -1 ? 0 : sequenceFromDatabase.indexOf(currentState))

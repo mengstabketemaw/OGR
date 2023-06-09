@@ -52,6 +52,14 @@ export const getState = createAsyncThunk('fetch_state',
   async () => axios.get(`api/workflow/state`), {
     serializeError: serializeAxiosError,
   });
+
+export const  createState =  createAsyncThunk(
+  'create_state',
+  async (state) => {
+    return await axios.post('/api/workflow/state', state);
+  },
+  { serializeError: serializeAxiosError }
+);
 export const  createWorkflow =  createAsyncThunk(
   'create_workflow',
   async (workflow) => {
@@ -104,6 +112,10 @@ export const LicenceSlice = createSlice({
         state.currentSequence = formatSequence(action.payload.data?.workFlowSequences)
       })
       .addCase(getState.fulfilled, (state, action) => {
+        state.loading = false;
+        state.states = action.payload.data;
+      })
+      .addCase(createState.fulfilled, (state, action) => {
         state.loading = false;
         state.states = action.payload.data;
       })

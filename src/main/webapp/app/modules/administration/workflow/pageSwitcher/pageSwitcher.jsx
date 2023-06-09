@@ -1,6 +1,21 @@
 import React, {useContext,useState} from "react";
 import {PageContext} from './pageSequence'
-import { Button, Card, CardHeader, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner, Table} from "reactstrap";
+import {
+  Accordion, AccordionBody, AccordionHeader, AccordionItem,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Container,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Row,
+  Spinner,
+  Table
+} from "reactstrap";
 import {Translate} from "react-jhipster";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -12,6 +27,9 @@ import './pageS.css'
 import {MoreRequestInfoModal} from '../definedStatePages/more-request-info-modal'
 import {toast} from "react-toastify";
 import moment from 'moment';
+import {trans} from "app/shared/common/translator";
+import workflow from "../../../../../content/images/workflow.gif";
+import {faRecycle} from "@fortawesome/free-solid-svg-icons";
 const PageSwitcher = () => {
   const dispatch = useAppDispatch();
   const nav = useNavigate()
@@ -108,14 +126,32 @@ const PageSwitcher = () => {
 
   return (
     <>
-    <Container >
+
+      <Row className=" p-3 h-100">
+        <Col xl={"3"}>
+          <Card className="shadow mt-xl-0 mt-4">
+            <CardHeader>
+              <div className="d-flex justify-content-center flex-column">
+                <FontAwesomeIcon icon={faRecycle} size ={'3x'}/>
+                <h2 className="text-uppercase text-success text-center" ><Translate contentKey={'workflow.sequence'}/></h2>
+              </div>
+
+
+            </CardHeader>
+            <CardBody>
+
+              <span className="text-sm"><Translate contentKey={'workflow.sequenceInfo'}/></span>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col xl="8">
         <Card className="shadow">
           <CardHeader className="border-0">
             <div  className="row">
               <div className="row">
                 <div className="col-2"></div>
                 <div className="col-md-8">
-                  <h2 className={"container"}>
+                  <h1 className={"container"}>
                     {formId == 1 ?
                     <Translate contentKey={'licence.types.exploration'}/>
                       :
@@ -127,7 +163,7 @@ const PageSwitcher = () => {
                       :
                         <Translate contentKey={'permit.types.drilling'}/>
                     }
-                  </h2>
+                  </h1>
                 </div>
               </div>
               <div className="box col-md-8 order-md-2">
@@ -138,7 +174,7 @@ const PageSwitcher = () => {
                       return <li  key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
                                   onClick={() => {if (currentPage>index) handleSwitchPage(index)}}
                                   >
-                        <div >Step {index + 1}<br /><span> <Translate contentKey={"workflow." + page.props.name}></Translate></span></div>
+                        <div >Step {index + 1}<br /><span> {trans("workflow",page?.props?.name)}</span></div>
                       </li>
                     }):
                       <h3 className="mb-0">NO WORKFLOW!</h3>
@@ -177,7 +213,10 @@ const PageSwitcher = () => {
 
           </CardHeader>
         </Card>
-    </Container>
+      </Col>
+
+    </Row>
+
       <IssuedOrDenied showModal={showModal} handleClose={handleClose} handleSubmit = {handleSubmit}/>
       <MoreRequestInfoModal showModal={sRM} handleClose={handleReqClose} handleSubmit = {handleReqSubmit}/>
     </>

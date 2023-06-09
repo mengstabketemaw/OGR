@@ -141,4 +141,27 @@
             <where>name = 'specialized review'</where>
         </update>
     </changeSet>
+    <changeSet id="6" author="betselot">
+        <update tableName="state">
+            <column name="page_name" value="FormEdit"/>
+            <where>name = 'Form'</where>
+        </update>
+        <update tableName="state">
+            <column name="page_name" value="DecisionMaking"/>
+            <where>name = 'Decision Making'</where>
+        </update>
+        <update tableName="state">
+            <column name="page_name" value="InitialReview"/>
+            <where>name = 'Initial Review'</where>
+        </update>
+        <update tableName="state">
+            <column name="page_name" value="TechnicalReview"/>
+            <where>name = 'Technical Review'</where>
+        </update>
+        <update tableName="state">
+            <column name="page_name" value="SpecializedReview"/>
+            <where>name = 'Payment'</where>
+        </update>
+
+    </changeSet>
 </databaseChangeLog>

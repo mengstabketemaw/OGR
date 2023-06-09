@@ -41,8 +41,8 @@ export const formatWorkFlowSequences = (values, states) => {
       y++;
       returnValue.push({
         id: 0,
-        state: { ...states.filter(s => s.id === parseInt(ele.source))[0] },
-        toState: { ...states.filter(s => s.id === parseInt(ele.target))[0] },
+        state: { ...states.filter(s => s.id === parseInt(ele.source) || s.sourceId === ele.source)[0] },
+        toState: { ...states.filter(s => s.id === parseInt(ele.target) || s.sourceId === ele.target)[0] },
         sequence: y,
       });
     }
