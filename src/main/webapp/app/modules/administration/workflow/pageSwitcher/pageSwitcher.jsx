@@ -1,6 +1,21 @@
 import React, {useContext,useState} from "react";
 import {PageContext} from './pageSequence'
-import { Button, Card, CardHeader, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner, Table} from "reactstrap";
+import {
+  Accordion, AccordionBody, AccordionHeader, AccordionItem,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Container,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Row,
+  Spinner,
+  Table
+} from "reactstrap";
 import {Translate} from "react-jhipster";
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -12,12 +27,21 @@ import './pageS.css'
 import {MoreRequestInfoModal} from '../definedStatePages/more-request-info-modal'
 import {toast} from "react-toastify";
 import moment from 'moment';
+import {trans} from "app/shared/common/translator";
+import workflow from "../../../../../content/images/workflow.gif";
+import {faRecycle} from "@fortawesome/free-solid-svg-icons";
+import {Denied} from "app/modules/administration/workflow/definedStatePages/denied";
+import {StayOrLeave} from "app/modules/administration/workflow/definedStatePages/stayOrLeave";
 const PageSwitcher = () => {
   const dispatch = useAppDispatch();
   const nav = useNavigate()
-  const { pages, currentPage, switchPage, id , formId, showReqModal, handleReqClose, sRM } = useContext(PageContext);
+  const { pages, currentPage, switchPage, id , formId, showReqModal, handleReqClose
+    , sRM, showDenModal, handleDenClose, sDM
+    ,showNotifyModal , closeNotifyModal ,notifyModal} = useContext(PageContext);
   const sequenceFromDatabase = useAppSelector(state => state.licence.currentSequence);
   const [showModal,setShowModal] = useState(false)
+  const [showNotify,setShowNotify] = useState(false)
+  const licencePayment = useAppSelector(state => state.licence.license.payment) || false;
   const handleSwitchPage = (pageNumber) => {
 
     if (pageNumber >= 0 && pageNumber < pages.length) {
@@ -26,6 +50,14 @@ const PageSwitcher = () => {
   };
   const handlePreviousPage = () => {
     handleSwitchPage(currentPage - 1);
+    const param = {
+      id : id,
+      data : {
+        stateId : sequenceFromDatabase[currentPage -1],
+        status:'Inprogress'
+      }
+    }
+    dispatch(updateStatusAndState(param))
   };
   const handleNextPage = () => {
     handleSwitchPage(currentPage + 1);
@@ -91,7 +123,7 @@ const PageSwitcher = () => {
       }, 50)}
       )
   }
-  const handleNotify = () =>{
+  const handleNotifyConfirm = (value) =>{
     const param = {
       id : id,
       data : {
@@ -99,23 +131,45 @@ const PageSwitcher = () => {
         status:'Inprogress'
       }
     }
-    dispatch(updateStatusAndState(param)).then(()=>{
+    dispatch(updateStatusAndState(param))
+    if(value){
+      handleSwitchPage(currentPage + 1);
       toast.success("User Notified")
-      nav(-1)}
-    )
-
+    }
+    else{
+      toast.success("User Notified")
+      nav(-1)
+    }
+    setShowNotify(false);
   }
+
 
   return (
     <>
-    <Container >
+
+      <Row className=" p-3 h-100">
+        <Col xl={"2"}>
+          <Card className="shadow mt-xl-0 mt-4">
+            <CardHeader>
+              <div className="d-flex justify-content-center flex-column">
+                <FontAwesomeIcon icon={faRecycle} size ={'3x'}/>
+                <h2 className="text-uppercase text-success text-center" ><Translate contentKey={'workflow.sequence'}/></h2>
+              </div>
+           </CardHeader>
+            <CardBody>
+
+              <span className="text-sm"><Translate contentKey={'workflow.sequenceInfo'}/></span>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col xl="9">
         <Card className="shadow">
           <CardHeader className="border-0">
             <div  className="row">
               <div className="row">
                 <div className="col-2"></div>
                 <div className="col-md-8">
-                  <h2 className={"container"}>
+                  <h1 className={"container"}>
                     {formId == 1 ?
                     <Translate contentKey={'licence.types.exploration'}/>
                       :
@@ -127,7 +181,7 @@ const PageSwitcher = () => {
                       :
                         <Translate contentKey={'permit.types.drilling'}/>
                     }
-                  </h2>
+                  </h1>
                 </div>
               </div>
               <div className="box col-md-8 order-md-2">
@@ -138,7 +192,7 @@ const PageSwitcher = () => {
                       return <li  key={index} className={`${currentPage === index ? 'active' : ''} ${currentPage > index ? 'done' : ''}`}
                                   onClick={() => {if (currentPage>index) handleSwitchPage(index)}}
                                   >
-                        <div >Step {index + 1}<br /><span> <Translate contentKey={"workflow." + page.props.name}></Translate></span></div>
+                        <div >Step {index + 1}<br /><span> {trans("workflow",page?.props?.name)}</span></div>
                       </li>
                     }):
                       <h3 className="mb-0">NO WORKFLOW!</h3>
@@ -156,12 +210,12 @@ const PageSwitcher = () => {
 
 
               <div className="mt-2 col-12 col-sm-6 col-md-2  order-md-3">
-
-              <Button hidden={sequenceFromDatabase[currentPage+1] !== 3} disabled={sequenceFromDatabase[currentPage+1] !== 3}  className={ 'col-12 mr-4 mb-2 bg-translucent-light text-dark' } onClick={handleNotify}>
+              {!licencePayment &&
+              <Button hidden={sequenceFromDatabase[currentPage+1] !== 3} disabled={sequenceFromDatabase[currentPage+1] !== 3}  className={ 'col-12 mr-4 mb-2 bg-translucent-light text-dark' } onClick={()=>{setShowNotify(true)}}>
                 <Translate contentKey="workflow.notify"></Translate>
-              </Button>
+              </Button>}
 
-              <Button className={"col-12 bg-light"}  onClick={handleNextPage} hidden={sequenceFromDatabase[currentPage+1] === 3 || currentPage === pages.length - 1} disabled={ currentPage === pages.length - 1}>
+              <Button className={"col-12 bg-light"}  onClick={handleNextPage} hidden={(sequenceFromDatabase[currentPage+1] === 3 && !licencePayment) || currentPage === pages.length - 1} disabled={(sequenceFromDatabase[currentPage] === 3 && !licencePayment ) || currentPage === pages.length - 1}>
 
                 <Translate contentKey="workflow.next"></Translate>
               </Button>
@@ -177,9 +231,14 @@ const PageSwitcher = () => {
 
           </CardHeader>
         </Card>
-    </Container>
+      </Col>
+
+    </Row>
+
       <IssuedOrDenied showModal={showModal} handleClose={handleClose} handleSubmit = {handleSubmit}/>
       <MoreRequestInfoModal showModal={sRM} handleClose={handleReqClose} handleSubmit = {handleReqSubmit}/>
+      <Denied showModal={sDM} handleClose={handleDenClose} handleSubmit = {handleSubmit}/>
+      <StayOrLeave showModal={showNotify} handleClose={()=>{setShowNotify(false)}} handleSubmit = {handleNotifyConfirm}/>
     </>
 
   );

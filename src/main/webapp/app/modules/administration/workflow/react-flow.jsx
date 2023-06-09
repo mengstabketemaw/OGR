@@ -4,6 +4,10 @@ import {Button, Modal} from "reactstrap";
 import {ValidateEdges} from "app/modules/administration/workflow/validateEdges";
 import 'reactflow/dist/style.css';
 import {Translate, ValidatedField} from "react-jhipster";
+import {createState} from "app/modules/licence/license.reducer";
+import {useAppDispatch} from "app/config/store";
+import licence from "app/modules/licence";
+import {toast} from "react-toastify";
 const ReactWorkFlow = (param) =>{
   const markEnd = {markerEnd: {
       type: MarkerType.ArrowClosed,
@@ -11,6 +15,7 @@ const ReactWorkFlow = (param) =>{
       height: 20,
       color: '#FF0072',
     }}
+  const dispatch = useAppDispatch();
   const getNodeId = () => `randomnode_${+new Date()}`;
   const flowKey = 'work-flow';
   const {formatedNode, initialEdges, handleSubmit} = param;
@@ -58,8 +63,20 @@ const ReactWorkFlow = (param) =>{
         y: 200,
       },
     };
-    setNodes((nds) => nds.concat(newNode));
-    setShowModal(false)
+    const state = {
+      id:-1,
+      name:nodeName,
+      pageName:'NewPage',
+      sourceId:newNode.id
+    }
+    dispatch(createState(state)).then(()=>{
+      setNodes((nds) => nds.concat(newNode));
+      toast.success(<Translate contentKey={'workflow.stateSaved'}/>)
+      setShowModal(false)
+    }).catch(()=>{
+      toast.error(<Translate contentKey={'workflow.stateNotSaved'}/>)
+    })
+
   }, [setNodes,nodeName]);
   return(
     <div style={{ height: 500 }}>

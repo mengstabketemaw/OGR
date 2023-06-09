@@ -15,13 +15,14 @@ import {Translate} from "react-jhipster";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAnglesDown, faAnglesUp, faCircleMinus, faCodePullRequest} from "@fortawesome/free-solid-svg-icons";
 import DisplayData from "app/shared/common/displayDynamicData";
+import {trans} from "app/shared/common/translator";
 
-export const SpecializedReview = (params) => {
+const NewPage = (params) => {
   const nav = useNavigate();
   const stateKey = 3;
   const dispatch = useAppDispatch();
-  const { formId, currentPage ,pages, sequenceFromDatabase, showReqModal,switchPage } = useContext(PageContext);
-  const {key} = params;
+  const { formId, currentPage ,pages, sequenceFromDatabase, showReqModal,switchPage,showDenModal } = useContext(PageContext);
+  const {id :key,name} = params;
   const fields = useAppSelector(state=> state.workflow.currentFields);
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
   const {  id } = useParams();
@@ -30,12 +31,12 @@ export const SpecializedReview = (params) => {
   const formFields = useAppSelector(state=> state.licence.license.form.fields);
   const data = formatDisplayOn(getFieldValue(formData)
     ,[...formFields.filter(f=>f.state.id===0)]
-    ,stateKey)
+    ,key)
   const [collapse,setCollapse] = useState(true);
   useEffect(() => {
     const params = {
       id: parseInt(formId),
-      state_id: stateKey,
+      state_id: key,
     };
     dispatch(getFieldsByState(params));
     dispatch(getFieldsDataByLicenceSR(parseInt(id)));
@@ -85,16 +86,13 @@ export const SpecializedReview = (params) => {
     <>
       <Col  md="8" className={"container"} >
         <div className="d-flex justify-content-between">
-          <h1> <Translate contentKey="workflow.Payment"></Translate></h1>
+          <h2> {trans("workflow",name)} </h2>
           <div >
             {collapse ? <FontAwesomeIcon icon={faAnglesDown} onClick={()=>setCollapse(!collapse)} />
               :<FontAwesomeIcon icon={faAnglesUp} onClick={()=>setCollapse(!collapse)} />}
           </div>
         </div>
-        <div className="alert alert-warning" role="alert">
-          <Translate contentKey="workflow.PaymentNotPaid"></Translate>
 
-        </div>
         <DisplayData data={data} collapse={collapse}/>
         <DynamicFields fields={fields} handleSubmit={handleSumbit} formatValue = {formatValue}
                        defaultValue = {fieldDateFormated}
@@ -105,7 +103,7 @@ export const SpecializedReview = (params) => {
                        backButtonName = 'workflow.deny'
                        backButtonIcon = {faCircleMinus}
                        backButtonClass = "bg-translucent-danger text-danger"
-                       backButtonAction = {()=>{handleValue(false)}}
+                       backButtonAction = {showDenModal}
                        saveButtonName = "form.submit"
                        saveButtonClass = "bg-translucent-success text-success"
                        moreReqButtonShow = {true}
@@ -119,3 +117,5 @@ export const SpecializedReview = (params) => {
 
   )
 }
+
+export default NewPage;

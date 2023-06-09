@@ -4,13 +4,15 @@ import {Col} from "reactstrap";
 import DynamicFields from "app/shared/common/dynamicFields";
 import {formatValue} from "app/shared/common/formatValueWithCustomField";
 import {Translate} from "react-jhipster";
- const FormEdit = () => {
+import {trans} from "app/shared/common/translator";
+ const FormEdit = (params) => {
+   const {id :key,name} = params;
   return (
 
    <>
      <Col  md="8" className={"container"} >
        <div className="d-flex ">
-         <h1> <Translate contentKey="workflow.formedit"></Translate></h1>
+         <h2> {trans("workflow",name)}</h2>
        </div>
        <FormDataUpdate seq={true}/>
      </Col>

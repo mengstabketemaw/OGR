@@ -8,7 +8,7 @@
     "formedit": "Editar formulário",
     "addnode": "Adicionar nó",
     "moreaction": "Mais ação",
-    "Form Edit": "Editar formulário",
+    "Form": "Editar formulário",
     "Initial Review": "Revisão inicial",
     "Technical Review": "Revisao Tecnica",
     "Specialized Review": "Revisão Especializada",
@@ -41,7 +41,14 @@
     "Payment": "Pagamento",
     "notify": "notificar",
     "PaymentNotPaid": "O pagamento não foi feito.",
+    "PaymentPaid": "O pagamento foi feito.",
     "saved": "Workflow Saved",
-    "notSaved": "Unable to save Workflow sequence"
+    "stateSaved": "Estado salvo",
+    "notSaved": "Unable to save Workflow sequence",
+    "stateNotSaved": "Não foi possível salvar o estado",
+    "sequence": "Seqüência",
+    "sequenceInfo": "A Sequência funciona como uma página de fluxo de trabalho flexível, com cada estado representando uma página específica dentro do fluxo de trabalho. O componente adapta de forma inteligente sua renderização com base na variável de estados fornecida, permitindo fácil personalização e sequenciamento dinâmico de páginas.",
+    "stay": "Permanecer",
+    "leave": "Sair"
   }
 }

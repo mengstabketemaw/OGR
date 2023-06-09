@@ -3,7 +3,7 @@ import {Button, Modal} from "reactstrap";
 import { Translate } from "react-jhipster";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCloud, faWarning} from '@fortawesome/free-solid-svg-icons';
-export const IssuedOrDenied = (props) => {
+export const Denied = (props) => {
 
   const { handleClose, showModal, handleSubmit } = props;
 
@@ -14,7 +14,7 @@ export const IssuedOrDenied = (props) => {
 
      <div className="modal-header">
         <h3 className="modal-title  text-dark" id="modal-title-denyIssue">
-          <Translate contentKey={'workflow.issueordeny'}/>
+          <Translate contentKey={'workflow.deny'}/>
         </h3>
         <button
           aria-label="Close"
@@ -29,7 +29,7 @@ export const IssuedOrDenied = (props) => {
       <div className="modal-body">
         <div className="py-3 text-center text-black-50">
           <p>
-            <Translate contentKey={"workflow.infoPermit"}/>
+            <Translate contentKey={"workflow.infoDeny"}/>
           </p>
         </div>
       </div>
@@ -38,8 +38,8 @@ export const IssuedOrDenied = (props) => {
         } ><Translate contentKey={'entity.action.cancel'}/>
 
         </Button>
-        <Button className={'bg-translucent-success text-success'} onClick={()=> handleSubmit(true)} >
-          <Translate contentKey={'workflow.authorize'}/>
+        <Button className={'bg-translucent-danger text-danger'} onClick={()=> handleSubmit(false)} >
+          <Translate contentKey={'workflow.deny'}/>
         </Button>
       </div>
 

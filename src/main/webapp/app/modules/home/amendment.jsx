@@ -3,7 +3,7 @@ import {Button, Modal} from "reactstrap";
 import {Translate, ValidatedField} from "react-jhipster";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCloud, faWarning} from '@fortawesome/free-solid-svg-icons';
-export const MoreRequestInfoModal = (props) => {
+export const Amendment = (props) => {
 
   const { handleClose, showModal, handleSubmit } = props;
   const [remark,setRemark] = useState('')
@@ -14,7 +14,7 @@ export const MoreRequestInfoModal = (props) => {
 
      <div className="modal-header">
         <h3 className="modal-title text-dark" id="modal-title-denyIssue">
-          <Translate contentKey={'workflow.moreReq'}/>
+          <Translate contentKey={'home.amendment'}/>
         </h3>
         <button
           aria-label="Close"
@@ -52,7 +52,7 @@ export const MoreRequestInfoModal = (props) => {
         <Button className={'bg-translucent-success text-success'} onClick={()=> {handleSubmit(remark)
         }} >
 
-          <Translate contentKey={'workflow.backToUser'}/>
+          <Translate contentKey={'home.sendAmendment'}/>
         </Button>
       </div>
 

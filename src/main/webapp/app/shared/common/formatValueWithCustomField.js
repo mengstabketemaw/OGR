@@ -29,7 +29,7 @@ export const formatDisplayOn = (values, fields, stateKey) => {
     const label = key;
     let value = values[key];
     if (field.fieldType.name === 'file') {
-      value = value.split('~')[0];
+      value = value?.split('~')[0];
     } else if (field.fieldType.name === 'checkbox') {
       value = value === 1 ? 'True' : 'False';
     }

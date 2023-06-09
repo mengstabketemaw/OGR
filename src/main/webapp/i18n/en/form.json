@@ -11,6 +11,7 @@
       "type": "Type"
     },
     "add": "Add",
+    "addField": "Add New Field",
     "back": "Back",
     "save": "Save",
     "state": "State",
@@ -35,10 +36,10 @@
   },
   "state": {
     "title": "State",
-    "Form": "Form",
+    "Form": "Application Form",
     "Initial Review": "Initial Review",
     "Technical Review": "Technical Review",
-    "Specialized Review": "Speicialized Review",
+    "Specialized Review": "Specialized Review",
     "Decision Making": "Decision Making",
     "Payment": "Payment"
   },

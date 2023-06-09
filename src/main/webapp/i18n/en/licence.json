@@ -12,6 +12,14 @@
       "retail": "Retail License",
       "waste": "Waste Management License"
     },
+    "desc": {
+      "Form": "The initial form where users input required information to initiate the workflow.",
+      "Initial Review": "A stage where the submitted form undergoes an initial review process.",
+      "Technical Review": "A stage where technical experts evaluate and review the submitted information.",
+      "Specialized Review": "Specialized Review",
+      "Decision Making": "Decision makers evaluate all the information and make a final decision based on the provided details.",
+      "Payment": "This stage involves the payment process for the workflow."
+    },
     "delete": "Are you sure you want to delete this {{name}}?",
     "deleted": "{{name}} is deleted"
   }

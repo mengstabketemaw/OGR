@@ -27,8 +27,7 @@ public class Licence {
     private String identifierTitle;
     private String identifierValue;
     private Boolean payment = false;
-
-    @Column(name = "approved_date")
+    private String amendment;
     private String approvedDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -36,6 +35,14 @@ public class Licence {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LicenceFieldData> data = new ArrayList<>();
+
+    public String getAmendment() {
+        return amendment;
+    }
+
+    public void setAmendment(String amendment) {
+        this.amendment = amendment;
+    }
 
     public String getApprovedDate() {
         return approvedDate;

@@ -18,6 +18,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import Certificate from 'app/modules/certificates/certificate';
 import medal from './assets/medal.png';
+import {Amendment} from "app/modules/home/amendment";
 
 const PAGE_SIZE = 5;
 const UserHome = () => {
@@ -30,7 +31,7 @@ const UserHome = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const account = useAppSelector(state => state.authentication.account);
-
+  const [showAmen, setshowAmen] = useState(false);
   const fetchData = page => {
     // Construct the URL with the page query parameter
     axios
@@ -133,7 +134,7 @@ const UserHome = () => {
                                   location: "Cabinda",
                                   fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
                                   type: data?.form?.id,
-                                  link: window.location.origin + `/sequence/${data?.form?.id}/${data?.id}`
+                                  link: window.location.origin + `/certificate-validator/${data?.id}`
                                 })
                               }}
                               trigger={() =>
@@ -223,7 +224,7 @@ const UserHome = () => {
                             <div className="card-profile-stats d-flex justify-content-between pt-0 pl-0 pr-0">
                               <div className="text-right pl-0 pr-0 ">
                                 {data.stage?.id == 3 && !(data.status === 'Authorized' || data.status === 'Denied') && (
-                                  <Button className="ml-0 mt-1 " onClick={() => nav('/checkout/' + data.form.id)} size="sm">
+                                  <Button className="ml-0 mt-1 " onClick={() => nav(`/checkout/${data.form.id}?licenceId=${data.id}`)} size="sm">
                                     <FontAwesomeIcon color={'green'} size="1x" icon={faMoneyBill} />
                                   </Button>
                                 )}
@@ -238,7 +239,7 @@ const UserHome = () => {
                                           location: "Cabinda",
                                           fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
                                           type: data?.form?.id,
-                                          link: window.location.origin + `/sequence/${data?.form?.id}/${data?.id}`
+                                          link: window.location.origin + `/certificate-validator/${data?.id}`
                                         })
                                       }}
                                       trigger={() =>
@@ -256,13 +257,30 @@ const UserHome = () => {
                                       ref={certRef} />}
                                   </>
                                 ): ""}
+                                {data?.status === 'Authorized' || data?.status === 'Denied' ?
                                 <Button className="ml-0 mt-1 "
                                   // color="secondary"
-                                  color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
+                                  color={'white'}
                                   // className="bg-translucent-light text-dark"
-                                  onClick={() => nav('/dataUpdate/' + data.id)}
-                                  disabled={!(data.stage?.id === 0 || data.stage === null)}
+                                  onClick={() => setshowAmen(true)}
+
                                   size="sm"
+                                >
+                                  {/*<Translate contentKey={'entity.action.edit'} />*/}
+                                  {/*<FontAwesomeIcon icon={faPencil} />*/}
+                                  <FontAwesomeIcon
+                                    color={'blue'}
+                                    size="1x"
+                                    icon={faPencil}
+                                  />
+                                </Button> :
+                                <Button className="ml-0 mt-1 "
+                                  // color="secondary"
+                                        color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
+                                  // className="bg-translucent-light text-dark"
+                                        onClick={() => nav('/dataUpdate/' + data.id)}
+                                        disabled={!(data.stage?.id === 0 || data.stage === null)}
+                                        size="sm"
                                 >
                                   {/*<Translate contentKey={'entity.action.edit'} />*/}
                                   {/*<FontAwesomeIcon icon={faPencil} />*/}
@@ -271,8 +289,7 @@ const UserHome = () => {
                                     size="1x"
                                     icon={faPencil}
                                   />
-                                </Button>
-
+                                </Button>}
                                 <Button className="ml-0 mt-1 "
                                   // color="danger"
                                   // className="bg-translucent-danger text-danger"
@@ -331,6 +348,7 @@ const UserHome = () => {
 
       <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
       <ShowRemarkModal showModal={showRemark} content={remark} handleClose={handleClose} />
+      <Amendment showModal={showAmen} handleClose={()=>{setshowAmen(false)}}/>
       <DeleteLicenceModal
         id={deleteLicence.id}
         show={deleteLicence.show}
@@ -370,30 +388,26 @@ export const DetailModal = ({ id, show, handleClose }) => {
   return (
     <Modal isOpen={show} onClosed={handleClose}>
       <ModalHeader toggle={handleClose}>
-        {' '}
-        <Translate contentKey={'userDashboard.detail'} />{' '}
+        {data.data.form?.title?.slice(0,2).toUpperCase()}{data.data?.id}496
       </ModalHeader>
       <ModalBody>
-        <Container className="p--5 d-flex flex-column justify-content-center">
+        <Container className="d-flex flex-column justify-content-center">
           {data.loading ? (
             <Spinner className="align-self-center" color="primary" style={{ height: '3rem', width: '3rem' }} type="grow">
               Loading...
             </Spinner>
           ) : (
             <>
-              <ShowFieldValue data={getDataBasedOnState()} />
+              <div className="d-flex justify-content-between">
+                <h3>{data.data.user.firstName}</h3>
+                <h4>{moment(data.data.submittedDate).format('MMM DD, YYYY')}</h4>
+              </div>
+              <ShowFieldValue data={getDataBasedOnState()} form={data?.data.form} />
             </>
           )}
         </Container>
       </ModalBody>
       <ModalFooter>
-        {/*<Button
-          onClick={() => {
-            nav(`/sequence/${formId}/${id}`);
-          }}
-        >
-          <Translate contentKey={'workflow.moreaction'} />
-        </Button>*/}
         <Button onClick={handleClose}>
           <Translate contentKey={'table.close'} />
         </Button>

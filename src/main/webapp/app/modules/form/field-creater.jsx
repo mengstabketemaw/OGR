@@ -48,14 +48,14 @@ const FieldCreater = (param) =>{
   }
   return (
     <>
-    <Table className="align-items-center table-flush" responsive>
-      <thead className="thead-light">
-      <tr>
-
-        <th  scope="col" >
-          <Translate contentKey="form.fields.label"></Translate>
-          <FontAwesomeIcon icon="sort" />
-        </th>
+    <div style={{ maxHeight: "62vh", overflowY: 'auto' }}>
+      <Table className="align-items-center table-flush table-hover" >
+        <thead className="thead-light" style={{ position: 'sticky', top: 0 }}>
+        <tr>
+          <th scope="col">
+            <Translate contentKey="form.fields.label" />
+            <FontAwesomeIcon icon="sort" />
+          </th>
         <th  scope="col">
           <Translate contentKey="form.fields.placeholder"></Translate>
           <FontAwesomeIcon icon="sort" />
@@ -72,7 +72,7 @@ const FieldCreater = (param) =>{
         <th />
       </tr>
       </thead>
-      <tbody>
+      <tbody >
       {fields?.map( (field) =>(
           <tr id={field.id} key={field.id} onClick={()=>editField(field.id)}>
             <td>{field.label}</td>
@@ -95,11 +95,12 @@ const FieldCreater = (param) =>{
       </tbody>
 
     </Table>
+    </div>
       <div className="d-flex justify-content-end">
         <Button className="bg-translucent-primary text-primary mt-3" onClick={showModal} >
           <FontAwesomeIcon icon="add" />
           &nbsp;
-          <Translate contentKey={'form.add'} />
+          <Translate contentKey={'form.addField'} />
         </Button>
       </div>
       {show&&<FieldCreaterModal showModal={show}

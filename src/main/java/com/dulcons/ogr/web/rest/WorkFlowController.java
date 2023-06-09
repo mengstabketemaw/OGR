@@ -5,6 +5,7 @@ import com.dulcons.ogr.domain.WorkFlow;
 import com.dulcons.ogr.domain.mapper.WorkFlowDto;
 import com.dulcons.ogr.domain.mapper.WorkFlowMapper;
 import com.dulcons.ogr.exception.ResourceNotFoundException;
+import com.dulcons.ogr.repository.StateRepository;
 import com.dulcons.ogr.repository.WorkFlowRepository;
 import java.util.List;
 import java.util.Objects;
@@ -17,11 +18,12 @@ import org.springframework.web.bind.annotation.*;
 public class WorkFlowController {
 
     private final WorkFlowRepository workFlowRepository;
-
+    private final StateRepository stateRepository;
     private final WorkFlowMapper workFlowMapper;
 
-    public WorkFlowController(WorkFlowRepository workFlowRepository, WorkFlowMapper workFlowMapper) {
+    public WorkFlowController(WorkFlowRepository workFlowRepository, StateRepository stateRepository, WorkFlowMapper workFlowMapper) {
         this.workFlowRepository = workFlowRepository;
+        this.stateRepository = stateRepository;
         this.workFlowMapper = workFlowMapper;
     }
 
@@ -42,6 +44,13 @@ public class WorkFlowController {
 
     @GetMapping("/state")
     public Iterable<State> getAllState() {
+        return workFlowRepository.findAllState();
+    }
+
+    @PostMapping("/state")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Iterable<State> addState(@RequestBody State state) {
+        stateRepository.save(state);
         return workFlowRepository.findAllState();
     }
 

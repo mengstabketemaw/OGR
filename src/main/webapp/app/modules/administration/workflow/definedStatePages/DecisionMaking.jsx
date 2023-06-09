@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import {
   getFieldsByState,
-  getFieldsDataByLicenceTR,
-  createTechnicalReview, updateStatusAndState
+  getFieldsDataByLicenceDM,
+  createDecisionMaking, updateStatusAndState
 } from "app/modules/administration/workflow/workflow.reducer";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {PageContext} from "app/modules/administration/workflow/pageSwitcher/pageSequence";
@@ -11,17 +11,18 @@ import DynamicFields from "app/shared/common/dynamicFields";
 import {formatDisplayOn, formatValue, getFieldValue} from "app/shared/common/formatValueWithCustomField";
 import {Button, Col, Spinner} from "reactstrap";
 import {toast} from "react-toastify";
-import {Translate} from "react-jhipster";
 import DisplayData from "app/shared/common/displayDynamicData";
+import {Translate} from "react-jhipster";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAnglesDown, faAnglesUp,faCodePullRequest,faCircleMinus } from "@fortawesome/free-solid-svg-icons";
+import {faAnglesDown, faAnglesUp,faCodePullRequest,faCircleMinus} from "@fortawesome/free-solid-svg-icons";
+import {trans} from "app/shared/common/translator";
 
-export const TechnicalReview = (params) => {
+const DecisionMaking = (params) => {
   const nav = useNavigate();
-  const stateKey = 2;
+  const stateKey = 4;
   const dispatch = useAppDispatch();
-  const { formId, currentPage , sequenceFromDatabase, showReqModal, pages, switchPage} = useContext(PageContext);
-  const {key} = params;
+  const { formId, currentPage , sequenceFromDatabase, showReqModal,pages ,switchPage,showDenModal } = useContext(PageContext);
+  const {id :key,name} = params;
   const fields = useAppSelector(state=> state.workflow.currentFields);
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
   const {  id } = useParams();
@@ -30,15 +31,15 @@ export const TechnicalReview = (params) => {
   const formFields = useAppSelector(state=> state.licence.license.form.fields);
   const data = formatDisplayOn(getFieldValue(formData)
     ,[...formFields.filter(f=>f.state.id===0)]
-    ,stateKey)
+    ,key)
   const [collapse,setCollapse] = useState(false);
   useEffect(() => {
     const params = {
       id: parseInt(formId),
-      state_id: stateKey,
+      state_id: key,
     };
     dispatch(getFieldsByState(params));
-    dispatch(getFieldsDataByLicenceTR(parseInt(id)));
+    dispatch(getFieldsDataByLicenceDM(parseInt(id)));
   }, []);
   const handleSwitchPage = (pageNumber) => {
 
@@ -48,19 +49,20 @@ export const TechnicalReview = (params) => {
   };
   const handleSumbit = (values) =>{
     console.log(values)
-    dispatch(createTechnicalReview(values)).then(()=>{
-      toast.success("Tech Review Saved")
+    dispatch(createDecisionMaking(values)).then( ()=>{
+        toast.success("Dec. Making Saved")
       handleSwitchPage(currentPage+1)
-      if (currentPage >= 0 && currentPage < pages.length) {
-        const param = {
-          id: id,
-          data: {
-            stateId: sequenceFromDatabase[currentPage + 1],
-            status: 'Inprogress'
+        if (currentPage >= 0 && currentPage < pages.length) {
+          const param = {
+            id: id,
+            data: {
+              stateId: sequenceFromDatabase[currentPage + 1],
+              status: 'Inprogress'
+            }
           }
+          dispatch(updateStatusAndState(param))
         }
-        dispatch(updateStatusAndState(param))
-      }}
+    }
 
     )
   }
@@ -85,7 +87,7 @@ export const TechnicalReview = (params) => {
     <>
       <Col  md="8" className={"container"} >
         <div className="d-flex justify-content-between">
-          <h1> <Translate contentKey="workflow.technicalreview"></Translate></h1>
+          <h2> {trans("workflow",name)} </h2>
           <div >
             {collapse ? <FontAwesomeIcon icon={faAnglesDown} onClick={()=>setCollapse(!collapse)} />
               :<FontAwesomeIcon icon={faAnglesUp} onClick={()=>setCollapse(!collapse)} />}
@@ -99,17 +101,19 @@ export const TechnicalReview = (params) => {
                        backButtonName = 'workflow.deny'
                        backButtonIcon = {faCircleMinus}
                        backButtonClass = "bg-translucent-danger text-danger"
-                       backButtonAction = {()=>{handleValue(false)}}
+                       backButtonAction = {showDenModal}
                        saveButtonName = "form.submit"
                        saveButtonClass = "bg-translucent-success text-success"
                        moreReqButtonShow = {true}
                        moreReqButtonName = 'workflow.moreReq'
                        moreReqButtonIcon = {faCodePullRequest}
                        moreReqButtonClass = "bg-translucent-dark text-dark"
-                       moreReqButtonAction = {showReqModal}
-        />
+                       moreReqButtonAction = {showReqModal}/>
+
       </Col>
     </>
 
   )
 }
+
+export default DecisionMaking;

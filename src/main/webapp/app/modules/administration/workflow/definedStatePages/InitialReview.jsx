@@ -21,13 +21,14 @@ import {
   faCodePullRequest,
   faPlugCircleMinus
 } from "@fortawesome/free-solid-svg-icons";
+import {trans} from "app/shared/common/translator";
 
-export const InitialReview = (params) => {
+const InitialReview = (params) => {
   const nav = useNavigate();
   const stateKey = 1;
   const dispatch = useAppDispatch();
-  const { formId, currentPage , sequenceFromDatabase, showReqModal ,pages, switchPage} = useContext(PageContext);
-  const {key} = params;
+  const { formId, currentPage , sequenceFromDatabase, showReqModal ,pages, switchPage,showDenModal} = useContext(PageContext);
+  const {id :key,name} = params;
   const fields = useAppSelector(state=> state.workflow.currentFields);
   const fields_data = useAppSelector(state=> state.workflow.currentFieldData);
   const {  id } = useParams();
@@ -36,12 +37,12 @@ export const InitialReview = (params) => {
   const formFields = useAppSelector(state=> state.licence.license.form.fields);
   const data = formatDisplayOn(getFieldValue(formData)
     ,[...formFields.filter(f=>f.state.id===0)]
-    ,stateKey)
+    ,key)
   const [collapse,setCollapse] = useState(false);
   useEffect(() => {
     const params = {
       id: parseInt(formId),
-      state_id: stateKey,
+      state_id: key,
     };
     dispatch(getFieldsByState(params));
     dispatch(getFieldsDataByLicence(parseInt(id)));
@@ -94,8 +95,8 @@ export const InitialReview = (params) => {
     <>
       <Col  md="8" className={"container"} >
         <div className="d-flex justify-content-between">
-          <h1>  <Translate contentKey="workflow.initialreview"></Translate> {'  '}
-            </h1>
+          <h2>  {trans("workflow",name)}
+            </h2>
           <div >
           {collapse ? <FontAwesomeIcon icon={faAnglesDown} onClick={()=>setCollapse(!collapse)} />
           :<FontAwesomeIcon icon={faAnglesUp} onClick={()=>setCollapse(!collapse)} />}
@@ -111,7 +112,7 @@ export const InitialReview = (params) => {
                        backButtonName = 'workflow.deny'
                        backButtonIcon = {faCircleMinus}
                        backButtonClass = "bg-translucent-danger text-danger"
-                       backButtonAction = {()=>{handleValue(false)}}
+                       backButtonAction = {showDenModal}
                        saveButtonName = "form.submit"
                        saveButtonClass = "bg-translucent-success text-success"
                        moreReqButtonShow = {true}
@@ -126,3 +127,5 @@ export const InitialReview = (params) => {
 
   )
 }
+
+export default InitialReview;
