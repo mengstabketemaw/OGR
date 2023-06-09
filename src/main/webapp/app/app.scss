@@ -29,11 +29,14 @@
 */
 
 .MuiTimelineItem-missingOppositeContent {
-  disply: none;
+  display: none;
   flex: 0;
+  font-size: 13px !important;
 }
 .MuiTimelineOppositeContent-root {
   flex: 0 !important;
+  padding: 0 !important;
+  font-size: 13px !important;
 }
 
 .MuiTimelineItem-missingOppositeContent::before {
@@ -46,6 +49,10 @@
   display: none;
 }
 
+//.smaller-div{
+//  flex: 0 0 100%;
+//}
+
 .equal-height-cards {
   display: flex;
   flex-wrap: wrap;
@@ -56,6 +63,8 @@
   border: 1px solid #2dceb6 !important;
   border-radius: 5px;
   transition: box-shadow 0.3s ease-in-out;
+  width: 50px !important;
+  //height: 300px;
 }
 
 .card-hover:hover {

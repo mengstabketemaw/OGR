@@ -36,7 +36,7 @@ export default function Stage() {
           <TimelineDot variant="outlined" color={'secondary'} />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent><Translate contentKey={'userDashboard.logged'}/></TimelineContent>
+        <TimelineContent style={{fontSize: "14px"}}><Translate contentKey={'userDashboard.logged'}/></TimelineContent>
       </TimelineItem>
 
       <TimelineItem>
@@ -47,7 +47,7 @@ export default function Stage() {
           <TimelineDot variant="outlined" color={'primary'} />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent><Translate contentKey={'userDashboard.appliedLicence'}/>
+        <TimelineContent style={{fontSize: "14px"}}><Translate contentKey={'userDashboard.appliedLicence'}/>
 
         </TimelineContent>
       </TimelineItem>
@@ -61,7 +61,7 @@ export default function Stage() {
           <TimelineDot  variant="outlined" color={'secondary'} />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent><Translate contentKey={'userDashboard.assistance'}/></TimelineContent>
+        <TimelineContent style={{fontSize: "14px"}}><Translate contentKey={'userDashboard.assistance'}/></TimelineContent>
       </TimelineItem>
 
       <TimelineItem>
@@ -72,7 +72,7 @@ export default function Stage() {
           <TimelineDot  variant="outlined" color={'success'} />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent><Translate contentKey={'userDashboard.granted'}/></TimelineContent>
+        <TimelineContent style={{fontSize: "14px"}}><Translate contentKey={'userDashboard.granted'}/></TimelineContent>
       </TimelineItem>
 
       <TimelineItem>
@@ -83,7 +83,7 @@ export default function Stage() {
           <TimelineDot  variant="outlined" color={'primary'} />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent><Translate contentKey={'userDashboard.renewed'}/></TimelineContent>
+        <TimelineContent style={{fontSize: "14px"}}><Translate contentKey={'userDashboard.renewed'}/></TimelineContent>
       </TimelineItem>
 
       <TimelineItem>
@@ -94,7 +94,7 @@ export default function Stage() {
           <TimelineDot  variant="outlined" color={'primary'} />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent><Translate contentKey={'userDashboard.inspected'}/></TimelineContent>
+        <TimelineContent style={{fontSize: "14px"}}><Translate contentKey={'userDashboard.inspected'}/></TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineOppositeContent color="text.secondary" className="flex-none">
@@ -104,7 +104,7 @@ export default function Stage() {
           <TimelineDot  variant="outlined" color={'secondary'} />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent><Translate contentKey={'userDashboard.review'}/></TimelineContent>
+        <TimelineContent style={{fontSize: "14px"}}><Translate contentKey={'userDashboard.review'}/></TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineOppositeContent color="text.secondary" className="flex-none">
@@ -114,7 +114,7 @@ export default function Stage() {
           <TimelineDot  variant="outlined" color={'secondary'} />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent><Translate contentKey={'userDashboard.pending'}/></TimelineContent>
+        <TimelineContent style={{fontSize: "14px"}}><Translate contentKey={'userDashboard.pending'}/></TimelineContent>
       </TimelineItem>
     </Timeline>
   );
