@@ -9,7 +9,7 @@ import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import UserStats from 'app/modules/dashboard/userStats';
 import { ShowRemarkModal } from 'app/modules/home/showRemarkModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faFileAlt, faFilePdf, faInfo, faMoneyBill, faPencil, faUndo} from '@fortawesome/free-solid-svg-icons';
+import {faFileAlt, faFilePdf, faInfo, faMoneyBill, faPencil, faPrint, faUndo} from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import profilePic from '../../../content/images/avatar.png';
 import { useAppSelector } from 'app/config/store';
@@ -245,9 +245,8 @@ const UserHome = () => {
 
                                         // <button className="border-0 bg-white">button</button>
                                         <Button color="white" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
-                                          <FontAwesomeIcon color="teal" size="2x"  icon={faFileAlt} />
+                                          <FontAwesomeIcon color="teal" size="2x"  icon={faPrint} />
                                         </Button>
-
                                       }
                                       content={() => certRef.current}
                                     />
