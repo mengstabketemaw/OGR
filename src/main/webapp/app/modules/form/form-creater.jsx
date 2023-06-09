@@ -118,14 +118,13 @@ const FormCreater = () => {
 
          </Nav>
 
-         <div className="d-flex flex-wrap justify-content-between  " style={{maxHeight :"68vh",overflowY :'scroll'}}>
+         <div className="d-flex flex-wrap justify-content-between  " style={{maxHeight :"72vh",overflowY :'scroll'}}>
            {states.map((f,i) => (
            <Card
-             className="my-2"
+             className="my-2 card-hover2"
              color={currentState===f.id ? "light":"secondary"}
              style={{
-               width: '18rem',
-               cursor: 'pointer'
+               width: '18rem'
              }}
              onClick={()=>{handleSelectState(f.id)}}
 
@@ -152,7 +151,7 @@ const FormCreater = () => {
            <CardHeader className="border-0">
              <Row className="align-items-center">
                <div className="col">
-                 <h3 className="mb-0">{currentFormName && translator("licence",currentFormName)}</h3>
+                 <h2 className="mb-0">{currentFormName && translator("licence",currentFormName)}</h2>
                </div>
              </Row>
            </CardHeader>
@@ -170,7 +169,7 @@ const FormCreater = () => {
                <div className="pb-4 pl-4">
                  <Button
                    // color="primary"
-                   className="bg-translucent-primary text-primary"
+                   className="bg-translucent-success text-success"
                    onClick={()=>handleSubmit(formForEdit)} >
                    <FontAwesomeIcon icon="save" />
                    &nbsp;

@@ -12,6 +12,14 @@
       "retail": "Licença de Varejo",
       "waste": "Licença de Gestão de Resíduos"
     },
+    "desc": {
+      "Form": "O formulário inicial onde os usuários inserem as informações necessárias para iniciar o fluxo de trabalho.",
+      "Initial Review": "Uma etapa em que o formulário enviado passa por um processo de revisão inicial.",
+      "Technical Review": "Uma etapa em que especialistas técnicos avaliam e revisam as informações enviadas.",
+      "Specialized Review": "Revisão Especializada",
+      "Decision Making": "Tomadores de decisão avaliam todas as informações e tomam uma decisão final com base nos detalhes fornecidos.",
+      "Payment": "Esta etapa envolve o processo de pagamento para o fluxo de trabalho."
+    },
     "delete": "Tem certeza de que deseja excluir isso {{name}}?",
     "deleted": "{{name}} esta deletado"
   }

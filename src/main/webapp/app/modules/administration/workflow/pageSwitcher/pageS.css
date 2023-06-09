@@ -68,12 +68,12 @@ code {
   border-left: 30px solid #3ebb81;
 }
 .box .steps ul li.active div {
-  border-color: #045929 !important;
+  border-color: #0a8141 !important;
   color: #fff !important;
-  background: #045929 !important;
+  background: #0a8141 !important;
 }
 .box .steps ul li.active div::after {
-  border-left: 30px solid #045929;
+  border-left: 30px solid #0a8141;
 }
 
 .box .step-component {
