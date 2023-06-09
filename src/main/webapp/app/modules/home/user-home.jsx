@@ -17,6 +17,7 @@ import Stages from './stages';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import Certificate from 'app/modules/certificates/certificate';
+import medal from './assets/medal.png';
 
 const PAGE_SIZE = 5;
 const UserHome = () => {
@@ -98,8 +99,8 @@ const UserHome = () => {
               </Spinner>
             ) : !Array.isArray(applications.data?.content) || applications.data?.content.length === 0 ? (
               <>
-                <Card className={'card-profile shadow col-12 col-lg-12 ml-0 mt-2 border-bottom'}>
-                  <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"></CardHeader>
+                <Card className={'card-profile shadow  ml-0 mt-2 border-bottom'}>
+                  <CardHeader className="text-center border-0 pt-md-4 pb-0 pb-md-4 d-flex justify-content-between"></CardHeader>
                   <CardBody className="pt-0 pt-md-1">
                     <h2>No Data</h2>
                   </CardBody>
@@ -110,13 +111,39 @@ const UserHome = () => {
                 {applications.data?.content.map(data => (
                   <Card border="primary" className={'col-12 ' + columnClass + ' ml-0 mt-2 card-hover '}>
                     <CardHeader
-                      onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
-                      className="text-left font-weight-bold border-0 pt-8 pt-md-4 pb-0 pb-md-4 d-flex justify-content-between cursor-"
+                      // onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
+                      className="text-left font-weight-bold border-0  pt-md-4 pb-0 pb-md-4 d-flex pr-0 justify-content-between cursor-"
                     >
                       <Translate contentKey={'userDashboard.' + data?.form?.title} />
+
                       <div style={{ width: 70, height: 70 }}>
                         {data?.status === 'Authorized' ? (
-                          <CircularProgressbar value={100} text={`100%`} />
+                          <>
+                            <ReactToPrint
+                              onBeforeGetContent={async () => {
+                                await handleBeforeGetContent({
+                                  title: translate('userDashboard.' + data?.form?.title),
+                                  companyName: account.firstName,
+                                  location: "Cabinda",
+                                  fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
+                                  type: data?.form?.id,
+                                  link: window.location.origin + `/sequence/${data?.form?.id}/${data?.id}`
+                                })
+                              }}
+                              trigger={() =>
+
+                                // <button className="border-0 bg-white">button</button>
+                                <img className={"w-100 h-100 text-right"} src={medal} />
+
+                            }
+                              content={() => certRef.current}
+                            />
+
+                            {printData && <Certificate
+                              data={printData}
+                              ref={certRef} />}
+                          </>
+
                         ) : data?.status === 'Denied' ? (
                           <CircularProgressbar value={0} text={`0%`} />
                         ) : data.status === 'undefined' ? (
@@ -189,7 +216,7 @@ const UserHome = () => {
 
                             <div className="text-center">
                               {data.stage?.id == 3 && !(data.status === 'Authorized' || data.status === 'Denied') && (
-                                <Button onClick={() => nav('/checkout/' + data.form.id)} size="sm">
+                                <Button onClick={() => nav(`/checkout/${data.form.id}?licenceId=${data.id}`)} size="sm">
                                   <FontAwesomeIcon color={'green'} size="1x" icon={faMoneyBill} />
                                 </Button>
                               )}
@@ -234,28 +261,7 @@ const UserHome = () => {
                                   <FontAwesomeIcon color={'blue'} icon={faInfo} />
                                 </Button>
                               )}
-                              {data.status === 'Authorized' && (
-                                <>
-                                  <ReactToPrint
-                                    onBeforeGetContent={async () => {
-                                      await handleBeforeGetContent({
-                                        title: translate('userDashboard.' + data?.form?.title),
-                                        companyName: account.firstName,
-                                        location: "Cabinda",
-                                        fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
-                                        type: data?.form?.id,
-                                        link: window.location.origin + `/sequence/${data?.form?.id}/${data?.id}`
-                                      })
-                                    }}
-                                    trigger={() => <button className="border-0 bg-white">button</button>}
-                                    content={() => certRef.current}
-                                  />
 
-                                  {printData && <Certificate
-                                    data={printData}
-                                    ref={certRef} />}
-                                </>
-                              )}
                             </div>
                           </div>
                         </div>

@@ -140,6 +140,20 @@ const Header = (props: IHeaderProps) => {
               {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
               <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />
               <AccountMenu isAuthenticated={props.isAuthenticated} />
+              <NavDropdown icon="help" name={<Translate contentKey="support.support" />}>
+                <DropdownItem tag="a" href={'https://ograngola.tawk.help/'}>
+                  {' '}
+                  <Translate contentKey="support.knowledgeBased" />
+                </DropdownItem>
+                <DropdownItem>
+                  {' '}
+                  <Translate contentKey="support.contactUs" />
+                </DropdownItem>
+                <DropdownItem>
+                  {' '}
+                  <Translate contentKey="support.FAQ" />
+                </DropdownItem>
+              </NavDropdown>
             </Nav>
           </Collapse>
         </Navbar>
