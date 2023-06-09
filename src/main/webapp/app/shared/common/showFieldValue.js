@@ -1,85 +1,140 @@
 import React, { useState } from 'react';
-import { Button, Col, FormText, Modal, ModalFooter, ModalHeader, Row } from 'reactstrap';
+import { Button, Modal, ModalFooter, ModalHeader, Row } from 'reactstrap';
 import moment from 'moment';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 import MapTiles from 'app/modules/maps/MapTiles';
-import DoctorsIcon, { point } from 'app/modules/maps/icons';
+import { point } from 'app/modules/maps/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloudDownload, faDownload } from '@fortawesome/free-solid-svg-icons';
-const ShowFieldValue = ({ data }) => {
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { ValidatedField } from 'react-jhipster';
+function getValue(fieldData, fieldType) {
+  switch (fieldType.name) {
+    case 'location':
+    case 'textarea':
+    case 'text':
+      return fieldData.text;
+    case 'select':
+      return fieldData.dropDown;
+    case 'date':
+      return fieldData.date;
+    case 'checkbox':
+      return Number(fieldData.checkBoxId);
+    case 'datetime-local':
+      return moment(fieldData.dateAndTime).format('YYYY-MM-DDTHH:MM');
+    case 'file':
+      return fieldData.file;
+  }
+  return undefined;
+}
+const ShowFieldValue = ({ data, form }) => {
   const [locationModal, setLocationModal] = useState({ show: false, value: '' });
-  const getFieldValue = field => {
-    switch (field.fieldType.name) {
-      case 'location':
-        return (
-          <a className="cursor-pointer hover-blue underline-hover" onClick={() => setLocationModal({ show: true, value: field.text })}>
-            {field.text}
-          </a>
-        );
-      case 'text':
-      case 'textarea':
-        return field.text;
-      case 'select':
-        return field.dropDown;
-      case 'date':
-        return moment(field.date).format('MMMM do YYYY');
-      case 'datetime-local':
-        return moment(field.dateAndTime).format('MMMM Do YYYY, h:mm:ss a');
-      case 'checkbox':
-        return field.checkBoxId === 1;
-      case 'file':
-        const fileName = field.encodingFileType?.split('~')[0];
-        const encodedType = field.encodingFileType?.split('~')[1];
 
-        return (
-          <>
-            {fileName && encodedType ? (
-              <>
-                <a
-                  className="cursor-pointer hover-blue underline-hover d-flex flex-row align-items-center"
-                  download={fileName}
-                  href={`${encodedType},${field.file}`}
-                >
-                  <span className="pt-1 text-black pb-1">
-                    {fileName} <FontAwesomeIcon icon={faDownload} color="#2DCEC8" size="1x" />
-                  </span>
-                </a>
-              </>
-            ) : (
-              <p className="cursor-pointer">No File</p>
-            )}
-          </>
-        );
+  const formFields = form.fields.filter(field => field.state.id === 0);
+  const halfLength = Math.ceil(formFields.length / 2);
+  const firstHalf = formFields.slice(0, halfLength);
+  const secondHalf = formFields.slice(halfLength);
+  const getFileName = name => {
+    let fData = data.find(fData => fData.label === name);
+    if (fData === undefined) {
+      return 'No file chosen';
     }
-    return 'Data Type is not found';
+    const fileName = fData.encodingFileType?.split('~')[0];
+    const encodedType = fData.encodingFileType?.split('~')[1];
+
+    return (
+      <>
+        {fileName && encodedType ? (
+          <>
+            <a
+              className="cursor-pointer hover-blue underline-hover d-flex flex-row align-items-center"
+              download={fileName}
+              href={`${encodedType},${fData.file}`}
+            >
+              <span className="pt-1 text-blue pb-1">
+                {fileName} <FontAwesomeIcon icon={faDownload} color="#2DCEC8" size="1x" />
+              </span>
+            </a>
+          </>
+        ) : (
+          <p className="cursor-pointer">No File</p>
+        )}
+      </>
+    );
+  };
+  const InsideFieldValue = field => {
+    let fData = data.find(fData => fData.label === field.label);
+
+    const value = getValue(fData, field.fieldType);
+
+    return field.fieldType.name === 'select' ? (
+      <ValidatedField
+        key={field.id}
+        name={field.label}
+        disabled={true}
+        type={field.fieldType.name}
+        value={value}
+        label={field.required ? field.label + ' *' : field.label}
+      >
+        {field.options.map((a, i) => (
+          <option key={i} value={a.name}>
+            {a.name}
+          </option>
+        ))}
+      </ValidatedField>
+    ) : field.fieldType.name === 'location' ? (
+      <ValidatedField
+        name={field.label}
+        disabled={true}
+        key={field.id}
+        label={field.required ? field.label + ' *' : field.label}
+        autoComplete={'off'}
+        value={value}
+        placeholder={'Click here to add location'}
+      />
+    ) : field.fieldType.name === 'info' ? (
+      <i>{field.label}</i>
+    ) : field.fieldType.name === 'file' ? (
+      <div className="mb-3 border-info border-bottom p-3 rounded-bottom">
+        {field.label}
+        {getFileName(field.label)}
+      </div>
+    ) : field.fieldType.name === 'checkbox' ? (
+      <ValidatedField
+        disabled={true}
+        className="mb-0 d-flex flex-column custom-checkbox"
+        key={field.id}
+        type={field.fieldType.name}
+        name={field.label}
+        checked={value === 1}
+        label={field.required ? field.label + ' *' : field.label}
+      />
+    ) : (
+      <ValidatedField
+        disabled={true}
+        key={field.id}
+        type={field.fieldType.name}
+        name={field.label}
+        value={value}
+        label={field.required ? field.label + ' *' : field.label}
+      />
+    );
   };
 
   return (
     <>
-      {data.map(field => {
-        return (
-          <>
-            <Row xs="12">
-              <Col>
-                {field.fieldType.name === 'checkbox' ? (
-                  <>
-                    <input type="checkbox" checked={getFieldValue(field)} /> <span>{field.label}</span>
-                  </>
-                ) : field.fieldType.name === 'info' ? (
-                  <>
-                    <FormText className="pt-3">{field.label}</FormText>
-                  </>
-                ) : (
-                  <>
-                    <FormText className="pt-3">{field.label}</FormText>
-                    <span className="pt-1 text-black pb-1">{getFieldValue(field)}</span>
-                  </>
-                )}
-              </Col>
-            </Row>
-          </>
-        );
-      })}
+      <Row xs="2">
+        <Row xs="1" className="p-3">
+          {firstHalf.map(field => {
+            return InsideFieldValue(field);
+          })}
+        </Row>
+
+        <Row xs="1" className="p-3 ml-3">
+          {secondHalf.map(field => {
+            return InsideFieldValue(field);
+          })}
+        </Row>
+      </Row>
       <ShowLocationModal
         show={locationModal.show}
         value={locationModal.value}
@@ -111,4 +166,5 @@ export const ShowLocationModal = ({ show, value, handleClose }) => {
     </Modal>
   );
 };
+
 export default ShowFieldValue;
