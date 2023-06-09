@@ -175,10 +175,10 @@ public class LicenceController {
         String applicantName = licenceWithData
             .getData()
             .stream()
-            .filter(licenceFieldData -> licenceFieldData.getLabel().equalsIgnoreCase("Applicant Email"))
+            .filter(licenceFieldData -> licenceFieldData.getLabel().equalsIgnoreCase("Applicant Name"))
             .findFirst()
             .map(LicenceFieldData::getText)
-            .orElse(original.getUser().getLogin());
+            .orElse(original.getUser().getLastName());
 
         original.setApplicantUsername(applicantName);
     }

@@ -14,6 +14,8 @@
     "airEnt": "The permit is entitled to fly ",
     "drillingEnt": "The Permit is entitled to drill ",
     "land": "on the land in accordance with the terms and conditions of this certificate",
-    "issueAut": "The issuing authority may revoke this certificate if it fails to comply with any of the terms and conditions of the regulation"
+    "issueAut": "The issuing authority may revoke this certificate if it fails to comply with any of the terms and conditions of the regulation",
+    "validCert": "This is valid certificate",
+    "invalidCert": "This is invalid certificate"
   }
 }

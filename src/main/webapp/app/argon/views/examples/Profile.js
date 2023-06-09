@@ -20,6 +20,7 @@
 import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, Container, Row, Col } from 'reactstrap';
 // core components
 import UserHeader from 'components/Headers/UserHeader.js';
+import { Translate } from 'react-jhipster';
 
 const Profile = () => {
   return (
@@ -143,7 +144,7 @@ const Profile = () => {
                       <Col lg="6">
                         <FormGroup>
                           <label className="form-control-label" htmlFor="input-first-name">
-                            First name
+                            <Translate contentKey={'userManagement.firstName'} />
                           </label>
                           <Input
                             className="form-control-alternative"
@@ -157,7 +158,7 @@ const Profile = () => {
                       <Col lg="6">
                         <FormGroup>
                           <label className="form-control-label" htmlFor="input-last-name">
-                            Last name
+                            <Translate contentKey={'userManagement.lastName'} />
                           </label>
                           <Input
                             className="form-control-alternative"

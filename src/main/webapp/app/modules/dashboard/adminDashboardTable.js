@@ -5,17 +5,16 @@ import { Button, Card, CardHeader, Col, Row, Spinner, Table } from 'reactstrap';
 import CustomPagination from 'app/shared/common/CustomPagination';
 import { isArray } from 'lodash';
 import moment from 'moment';
-import { Translate } from 'react-jhipster';
-import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
-import { DetailModal } from 'app/modules/home/user-home';
+import { translate, Translate } from 'react-jhipster';
 import { useNavigate } from 'react-router-dom';
 import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
-import { useReactToPrint } from 'react-to-print';
+import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import ReportForm from 'app/shared/common/reportForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPrint, faWarning } from '@fortawesome/free-solid-svg-icons';
+import { faPrint } from '@fortawesome/free-solid-svg-icons';
 import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import Certificate from 'app/modules/certificates/certificate';
 
 const PAGE_SIZE = 7;
 export const AdminDashboardTable = ({ title }) => {
@@ -23,8 +22,15 @@ export const AdminDashboardTable = ({ title }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const [licences, setLicences] = useState({ loading: true, data: { content: [] } });
-  const [detailModal, setDetailModal] = useState({ show: false, id: -1 });
   const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
+  const [printData, setPrintData] = useState(null);
+  const certRef = useRef();
+
+  const handleBeforeGetContent = data => {
+    setPrintData(data);
+    return Promise.resolve();
+  };
+
   const fetchData = page => {
     // Construct the URL with the page query parameter
     const url = `/api/licence/formByTitle?title=${title}&page=${page}&size=${PAGE_SIZE}&sort=submittedDate,desc`;
@@ -236,6 +242,33 @@ export const AdminDashboardTable = ({ title }) => {
                             icon={faTrash}
                           />
                         </Button>
+                        {data?.status === 'Authorized' ? (
+                          <>
+                            <ReactToPrint
+                              onBeforeGetContent={async () => {
+                                await handleBeforeGetContent({
+                                  title: translate('userDashboard.' + data?.form?.title),
+                                  companyName: data.user.firstName,
+                                  location: 'Cabinda',
+                                  fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
+                                  type: data?.form?.id,
+                                  link: window.location.origin + `/sequence/${data?.form?.id}/${data?.id}`,
+                                });
+                              }}
+                              trigger={() => (
+                                // <button className="border-0 bg-white">button</button>
+                                <Button color="white" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
+                                  <FontAwesomeIcon color="teal" size="2x" icon={faPrint} />
+                                </Button>
+                              )}
+                              content={() => certRef.current}
+                            />
+
+                            {printData && <Certificate data={printData} ref={certRef} />}
+                          </>
+                        ) : (
+                          ''
+                        )}
                       </th>
                     </tr>
                   ))}

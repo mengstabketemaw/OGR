@@ -24,6 +24,7 @@ import FormUpdateLandingPage from 'app/shared/form/form-update-landing-page';
 import { InspectionReport } from 'app/modules/compliance/inspectionReport';
 import { ComplianceUser } from 'app/modules/complianceUser/complianceUser';
 import Workflow from 'app/modules/administration/workflow/workflow';
+import CertificateValidator from 'app/modules/certificates/CertificateValidator';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -57,8 +58,8 @@ const AppRoutes = () => {
         <Route path="logouts" element={<Logout />} />
         <Route path="permit" element={<Permit />} />
         <Route path="licence" element={<Licence />} />
-        {/*        <Route path="sequence" element={<TempLanding />} />*/}
         <Route path="compliance" element={<ComplianceMonitoring />} />
+        <Route path="certificate-validator/:id" element={<CertificateValidator />} />
         <Route
           path="sequence/:formId/:id"
           element={
