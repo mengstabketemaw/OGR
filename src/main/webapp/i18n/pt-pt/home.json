@@ -16,6 +16,8 @@
     "like": "Se gosta do JHipster, não se esqueça de avaliar no",
     "github": "GitHub",
     "amendment": "Emenda",
-    "sendAmendment": "Enviar alteração"
+    "sendAmendment": "Enviar alteração",
+    "acceptAmendment": "Aceitar Emenda",
+    "ignore": "Ignorar"
   }
 }
