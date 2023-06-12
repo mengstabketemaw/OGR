@@ -224,7 +224,7 @@ const UserHome = () => {
                             </div>
                             <div className="card-profile-stats d-flex justify-content-between pt-0 pl-0 pr-0">
                               <div className="text-right pl-0 pr-0 ">
-                                {data.stage?.id == 3 && !(data.status === 'Authorized' || data.status === 'Denied') && (
+                                {data.stage?.id == 3 && !data.payment && !(data.status === 'Authorized' || data.status === 'Denied') && (
                                   <Button className="ml-0 mt-1 " onClick={() => nav(`/checkout/${data.form.id}?licenceId=${data.id}`)} size="sm">
                                     <FontAwesomeIcon color={'green'} size="1x" icon={faMoneyBill} />
                                   </Button>
