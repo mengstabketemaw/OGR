@@ -154,7 +154,7 @@
   "footer": "© 2023 Oil and Gas Regulatory Information System",
   "table": {
     "submittedDate": "Submitted Date",
-    "user": "User",
+    "user": "Applicant Name",
     "type": "Type",
     "stage": "Stage",
     "status": "Status",

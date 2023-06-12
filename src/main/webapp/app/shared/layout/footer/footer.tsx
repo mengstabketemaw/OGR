@@ -9,7 +9,7 @@ const Footer = () => (
     <div className="footer d-none p-0 page-content fixed-bottom bg-gradient-success d-sm-flex text-white justify-content-between align-items-center m-auto">
       <span className="navbar-version text-white font-weight-bold">
         {' '}
-        <Translate contentKey={'global.version'} /> {'  '} {VERSION}
+        <Translate contentKey={'global.version'} /> {'  '} 2.23
       </span>
       <Translate contentKey="footer"></Translate>
       <div className=""></div>

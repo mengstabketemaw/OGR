@@ -401,8 +401,8 @@ export const DetailModal = ({ id, show, handleClose }) => {
           ) : (
             <>
               <div className="d-flex justify-content-between">
-                <h3>{data.data.user.firstName}</h3>
-                <h4>{moment(data.data.submittedDate).format('MMM DD, YYYY')}</h4>
+                <span className="text-black"><Translate contentKey={"userManagement.firstName"}/>: {data.data.user.firstName}<span style={{fontSize:"10px"}}></span></span>
+                <span className="text-black"><Translate contentKey={'table.submittedDate'} />: <span>{moment(data.data.submittedDate).format('MMM DD, YYYY')}</span></span>
               </div>
               <ShowFieldValue data={getDataBasedOnState()} form={data?.data.form} />
             </>
