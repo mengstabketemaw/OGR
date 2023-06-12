@@ -48,7 +48,7 @@ export const CheckoutForm = () => {
     axios
       .put(`/api/licence/payment?licenceId=${params.get('licenceId')}`)
       .then(() => {
-        setLoading(false);
+        nav('/home');
         toast.success(translate('checkout.paymentSuccess'));
       })
       .catch(e => {
