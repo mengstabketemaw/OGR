@@ -104,7 +104,7 @@ const UserHome = () => {
                 <Card className={'card-profile shadow  ml-0 mt-2 border-bottom'}>
                   <CardHeader className="text-center border-0 pt-md-4 pb-0 pb-md-4 d-flex justify-content-between"></CardHeader>
                   <CardBody className="pt-0 pt-md-1">
-                    <h2>No Data</h2>
+                    <h2> <Translate contentKey={'global.noApplied'} /> </h2>
                   </CardBody>
                 </Card>
               </>
