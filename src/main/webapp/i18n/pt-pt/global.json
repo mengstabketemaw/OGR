@@ -4,6 +4,8 @@
     "browsehappy": "Está a usar um navegador <strong>desatualizado</strong>. Por favor <a href=\"http://browsehappy.com/?locale=pt_PT\">atualize o seu navegador</a> para ter uma experiência melhor.",
     "applications": "Formulários",
     "version": "Versão",
+    "services": "Serviços",
+    "noApplied": "Nenhuma licença aplicada",
     "menu": {
       "home": "Início",
       "compliance": "Monitoramento de Conformidade",

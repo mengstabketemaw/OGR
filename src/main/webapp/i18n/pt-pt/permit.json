@@ -1,9 +1,18 @@
 {
   "permit": {
     "title": "Permitir",
+    "titles": "Permitirs",
     "types": {
-      "air": "Permissão Aérea",
-      "drilling": "Permissão de Perfuração"
+      "air": "Permissão de Emissão de Ar",
+      "drilling": "Permissão de Perfuração",
+      "production": "Permissão de Produção",
+      "transport": "Permissão de Transporte",
+      "storage": "Permissão de Armazenamento",
+      "waste": "Permissão de Gerenciamento de Resíduos",
+      "pipeline": "Permissão de Pipeline",
+      "flaring": "Permissão de Queima e Ventilação",
+      "water": "Permissão de Uso de Água",
+      "emission": "Permissão de Emissões"
     }
   }
 }

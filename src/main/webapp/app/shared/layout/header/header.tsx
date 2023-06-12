@@ -2,7 +2,19 @@ import './header.scss';
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Translate, Storage } from 'react-jhipster';
-import { Navbar, Nav, NavbarToggler, Collapse, DropdownItem, NavItem, NavLink } from 'reactstrap';
+import {
+  Navbar,
+  Nav,
+  NavbarToggler,
+  Collapse,
+  DropdownItem,
+  NavItem,
+  NavLink,
+  DropdownMenu,
+  DropdownToggle,
+  UncontrolledDropdown,
+  Dropdown,
+} from 'reactstrap';
 import LoadingBar from 'react-redux-loading-bar';
 
 import { Home, Brand, ComplianceMonitoringUser } from './header-components';
@@ -13,7 +25,7 @@ import { languages, locales } from 'app/config/translation';
 import { NavDropdown } from 'app/shared/layout/menus/menu-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleRight, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -70,6 +82,11 @@ const Header = (props: IHeaderProps) => {
   };
   /* jhipster-needle-add-element-to-menu - JHipster will add new menu items here */
 
+  const [licenceDropdownOpen, setLicenceDropdownOpen] = useState(false);
+  const [permitDropdownOpen, setPermitDropdownOpen] = useState(false);
+
+  const deviceWidth = window.innerWidth;
+
   return (
     <div id="app-header rounded-bottom">
       <LoadingBar className="loading-bar" />
@@ -81,49 +98,115 @@ const Header = (props: IHeaderProps) => {
           <Collapse className={menuOpen ? 'show mt-6 mt-md-0' : 'mt-6 mt-md-0'} navbar>
             <Nav id="header-tabs" className="ms-auto" navbar>
               {props.isAuthenticated && <Home />}
-              <NavDropdown icon="book" name={<Translate contentKey="licence.title" />}>
-                <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Exploration Licence&pageKey=1'}>
-                  <Translate contentKey="licence.types.exploration" />
-                </DropdownItem>
-                <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=PipeLine Licence&pageKey=2'}>
-                  <Translate contentKey="licence.types.pipeline" />
-                </DropdownItem>
-                <DropdownItem>
-                  <Translate contentKey="licence.types.storage" />
-                </DropdownItem>
-                <DropdownItem>
-                  <Translate contentKey="licence.types.transportation" />
-                </DropdownItem>
-                <DropdownItem>
-                  <Translate contentKey="licence.types.processing" />
-                </DropdownItem>
-                <DropdownItem>
-                  <Translate contentKey="licence.types.distribution" />
-                </DropdownItem>
-                <DropdownItem>
-                  <Translate contentKey="licence.types.retail" />
-                </DropdownItem>
-                <DropdownItem>
-                  <Translate contentKey="licence.types.waste" />
-                </DropdownItem>
+              <NavDropdown icon="cogs" name={<Translate contentKey="global.services" />} className={'row'}>
+                <Dropdown
+                  className={'col-6 col-md-12'}
+                  onMouseLeave={() => {
+                    setLicenceDropdownOpen(false);
+                  }}
+                  isOpen={licenceDropdownOpen}
+                  direction={deviceWidth > 768 ? 'end' : 'down'}
+                >
+                  <div
+                    onMouseEnter={() => {
+                      setLicenceDropdownOpen(true);
+                    }}
+                  >
+                    <DropdownToggle
+                      icon="book"
+                      className=" pl-0 pr-0 h3 shadow-none w-100 d-flex justify-content-between bg-transparent border-0 text-dark font-weight-light"
+                    >
+                      <Translate contentKey="licence.titles" />
+                      {deviceWidth > 768 ? <FontAwesomeIcon icon={faAngleRight} /> : <FontAwesomeIcon icon={faAngleDown} />}
+                    </DropdownToggle>
+                  </div>
+                  <DropdownMenu className="border-bottom-dark border-left-dark border-right-dark border-1 shadow ">
+                    <DropdownItem className={'text-gray'} header>
+                      <Translate contentKey="licence.titles" />
+                    </DropdownItem>
+                    <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Exploration Licence&pageKey=1'}>
+                      <Translate contentKey="licence.types.exploration" />
+                    </DropdownItem>
+                    <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=PipeLine Licence&pageKey=2'}>
+                      <Translate contentKey="licence.types.pipeline" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="licence.types.storage" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="licence.types.transportation" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="licence.types.processing" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="licence.types.distribution" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="licence.types.retail" />
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+
+                <Dropdown
+                  className={'col-6 col-md-12'}
+                  onMouseLeave={() => {
+                    setPermitDropdownOpen(false);
+                  }}
+                  isOpen={permitDropdownOpen}
+                  direction={deviceWidth > 768 ? 'end' : 'down'}
+                >
+                  <div
+                    onMouseEnter={() => {
+                      setPermitDropdownOpen(true);
+                    }}
+                  >
+                    <DropdownToggle
+                      icon="book"
+                      className=" pl-0 pr-0 h3 shadow-none w-100 d-flex justify-content-between bg-transparent border-0 text-dark font-weight-light"
+                    >
+                      <Translate contentKey="permit.titles" />
+                      {deviceWidth > 768 ? <FontAwesomeIcon icon={faAngleRight} /> : <FontAwesomeIcon icon={faAngleDown} />}
+                    </DropdownToggle>
+                  </div>
+                  <DropdownMenu className="border-bottom-dark border-left-dark border-right-dark border-1 shadow ">
+                    <DropdownItem className={'text-gray'} header>
+                      <Translate contentKey="permit.titles" />
+                    </DropdownItem>
+                    <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Drilling Permit &pageKey=4'}>
+                      <Translate contentKey="permit.types.drilling" />
+                    </DropdownItem>
+                    <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Air Emission Permit &pageKey=3'}>
+                      <Translate contentKey="permit.types.air" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="permit.types.production" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="permit.types.transport" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="permit.types.storage" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="permit.types.waste" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="permit.types.pipeline" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="permit.types.flaring" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="permit.types.water" />
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Translate contentKey="permit.types.emission" />
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
               </NavDropdown>
 
-              <NavDropdown icon="book" name={<Translate contentKey="permit.title" />}>
-                <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Drilling Permit &pageKey=4'}>
-                  Drilling Permit
-                </DropdownItem>
-                <DropdownItem tag="a" href={(props.isAdmin ? '/formData' : '/permit') + '?name=Air Emission Permit &pageKey=3'}>
-                  Air Emission Permit
-                </DropdownItem>
-                <DropdownItem> Production Permit</DropdownItem>
-                <DropdownItem> Transportation Permit</DropdownItem>
-                <DropdownItem> Storage Permit</DropdownItem>
-                <DropdownItem> Waste Management Permit</DropdownItem>
-                <DropdownItem> Pipeline Permit</DropdownItem>
-                <DropdownItem> Flaring and Venting Permit</DropdownItem>
-                <DropdownItem> Water Use Permit</DropdownItem>
-                <DropdownItem> Emissions Permit</DropdownItem>
-              </NavDropdown>
               {props.isAuthenticated && props.isAdmin && (
                 <NavItem>
                   <NavLink onClick={gotoCompliance} className="d-flex align-items-center">

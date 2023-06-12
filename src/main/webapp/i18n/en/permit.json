@@ -1,9 +1,18 @@
 {
   "permit": {
     "title": "Permit",
+    "titles": "Permits",
     "types": {
-      "air": "Air Permit",
-      "drilling": "Drilling Permit"
+      "air": "Air Emission Permit",
+      "drilling": "Drilling Permit",
+      "production": "Production Permit",
+      "transport": "Transportation Permit",
+      "storage": "Storage Permit",
+      "waste": "Waste Management Permit",
+      "pipeline": "Pipeline Permit",
+      "flaring": "Flaring and Venting Permit",
+      "water": "Water Use Permit",
+      "emission": "Emissions Permit"
     }
   }
 }

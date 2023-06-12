@@ -1,6 +1,7 @@
 {
   "licence": {
     "title": "Licence",
+    "titles": "Licences",
     "types": {
       "exploration": "Exploration Licence",
       "production": "Production Licence",
