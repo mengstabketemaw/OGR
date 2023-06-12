@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Card, CardHeader, Col, Row, Spinner, Table } from 'reactstrap';
@@ -6,11 +6,14 @@ import { isArray } from 'lodash';
 import moment from 'moment/moment';
 import CustomPagination from 'app/shared/common/CustomPagination';
 import { DetailModal } from 'app/modules/home/user-home';
-import { Translate } from 'react-jhipster';
+import { translate, Translate } from 'react-jhipster';
 import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import ReactToPrint from 'react-to-print';
+import { faPrint } from '@fortawesome/free-solid-svg-icons';
+import Certificate from 'app/modules/certificates/certificate';
 
 const FormData = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -20,7 +23,13 @@ const FormData = () => {
   const [param] = useSearchParams();
   const nav = useNavigate();
   const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
+  const [printData, setPrintData] = useState(null);
+  const certRef = useRef();
 
+  const handleBeforeGetContent = data => {
+    setPrintData(data);
+    return Promise.resolve();
+  };
   const fetchData = page => {
     // Construct the URL with the page query parameter
     const url = `/api/licence/form/${param.get('pageKey')}?page=${page}&size=${10}&sort=submittedDate,desc`;
@@ -45,6 +54,8 @@ const FormData = () => {
     fetchData(currentPage);
   }, []);
 
+  // @ts-ignore
+  // @ts-ignore
   return (
     <Row className="d-flex justify-content-center">
       <Col md="8">
@@ -177,6 +188,33 @@ const FormData = () => {
                         )}
                       </th>
                       <th>
+                        {data?.status === 'Authorized' ? (
+                          <>
+                            <ReactToPrint
+                              onBeforeGetContent={async () => {
+                                await handleBeforeGetContent({
+                                  title: translate('userDashboard.' + data?.form?.title),
+                                  companyName: data.user.firstName,
+                                  location: 'Cabinda',
+                                  fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
+                                  type: data?.form?.id,
+                                  link: window.location.origin + `/sequence/${data?.form?.id}/${data?.id}`,
+                                });
+                              }}
+                              trigger={() => (
+                                // <button className="border-0 bg-white">button</button>
+                                <Button color="white" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
+                                  <FontAwesomeIcon color="teal" size="2x" icon={faPrint} />
+                                </Button>
+                              )}
+                              content={() => certRef.current}
+                            />
+                            {/*@ts-ignore*/}
+                            {printData && <Certificate data={printData} ref={certRef} />}
+                          </>
+                        ) : (
+                          ''
+                        )}
                         <Button
                           color={data.status === 'Authorized' || data.status === 'Denied' ? 'light' : 'white'}
                           onClick={() => {

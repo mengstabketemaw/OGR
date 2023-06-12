@@ -7,6 +7,7 @@ import { point } from 'app/modules/maps/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { ValidatedField } from 'react-jhipster';
+import './showFieldValue.css';
 function getValue(fieldData, fieldType) {
   switch (fieldType.name) {
     case 'location':
@@ -46,11 +47,11 @@ const ShowFieldValue = ({ data, form }) => {
         {fileName && encodedType ? (
           <>
             <a
-              className="cursor-pointer hover-blue underline-hover d-flex flex-row align-items-center"
+              className="cursor-pointer hover-blue underline-hover d-flex flex-row align-items-center text-wrap"
               download={fileName}
               href={`${encodedType},${fData.file}`}
             >
-              <span className="pt-1 text-blue pb-1">
+              <span className="pt-1 text-blue pb-1 d-inline-block text-break">
                 {fileName} <FontAwesomeIcon icon={faDownload} color="#2DCEC8" size="1x" />
               </span>
             </a>
@@ -73,7 +74,8 @@ const ShowFieldValue = ({ data, form }) => {
         disabled={true}
         type={field.fieldType.name}
         value={value}
-        label={field.required ? field.label + ' *' : field.label}
+        className="custom-mg-form-group"
+        label={field.label + ':'}
       >
         {field.options.map((a, i) => (
           <option key={i} value={a.name}>
@@ -86,9 +88,10 @@ const ShowFieldValue = ({ data, form }) => {
         name={field.label}
         disabled={true}
         key={field.id}
-        label={field.required ? field.label + ' *' : field.label}
+        label={field.label + ':'}
         autoComplete={'off'}
         value={value}
+        className="custom-mg-form-group"
         placeholder={'Click here to add location'}
       />
     ) : field.fieldType.name === 'info' ? (
@@ -101,12 +104,12 @@ const ShowFieldValue = ({ data, form }) => {
     ) : field.fieldType.name === 'checkbox' ? (
       <ValidatedField
         disabled={true}
-        className="mb-0 d-flex flex-column custom-checkbox"
+        className=""
         key={field.id}
         type={field.fieldType.name}
         name={field.label}
         checked={value === 1}
-        label={field.required ? field.label + ' *' : field.label}
+        label={field.label + ':'}
       />
     ) : (
       <ValidatedField
@@ -115,7 +118,8 @@ const ShowFieldValue = ({ data, form }) => {
         type={field.fieldType.name}
         name={field.label}
         value={value}
-        label={field.required ? field.label + ' *' : field.label}
+        className={'custom-mg-form-group'}
+        label={field.label + ':'}
       />
     );
   };
