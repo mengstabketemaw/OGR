@@ -21,6 +21,11 @@ public interface LicenceRepository extends PagingAndSortingRepository<Licence, L
     @Query("update Licence l set l.remark = ?1 where l.id = ?2")
     void updateRemarkById(String remark, Long id);
 
+    @Transactional
+    @Modifying
+    @Query("update Licence l set l.amendment = ?1 where l.id = ?2")
+    void updateAmendmentById(String amendment, Long id);
+
     @Query("select l from Licence l where l.form.title = ?1")
     Page<Licence> findByForm_Title(String title, Pageable pageable);
 

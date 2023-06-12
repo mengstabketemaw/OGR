@@ -11,6 +11,8 @@ import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { faCircleNodes, faInfo, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { ShowAmendmentModal } from 'app/modules/home/showAmendmentModal';
 import ReactToPrint from 'react-to-print';
 import { faPrint } from '@fortawesome/free-solid-svg-icons';
 import Certificate from 'app/modules/certificates/certificate';
@@ -23,9 +25,11 @@ const FormData = () => {
   const [param] = useSearchParams();
   const nav = useNavigate();
   const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
+  const [amendment, setAmen] = useState(false);
+  const [remark, setRemark] = useState('');
   const [printData, setPrintData] = useState(null);
   const certRef = useRef();
-
+  const [id, setId] = useState(0);
   const handleBeforeGetContent = data => {
     setPrintData(data);
     return Promise.resolve();
@@ -43,7 +47,11 @@ const FormData = () => {
       })
       .catch(console.log);
   };
-
+  const showRemarkModal = (value, id) => {
+    setAmen(true);
+    setId(id);
+    setRemark(value);
+  };
   const handlePageChange = pageNumber => {
     setCurrentPage(pageNumber - 1);
     fetchData(pageNumber - 1);
@@ -243,6 +251,11 @@ const FormData = () => {
                             icon={faTrash}
                           />
                         </Button>
+                        {data.amendment && data.amendment !== '' && (data.status === 'Authorized' || data.status === 'Denied') && (
+                          <Button className="ml-0 mt-1 " color="white" onClick={() => showRemarkModal(data.amendment, data.id)} size="sm">
+                            <FontAwesomeIcon color={'blue'} icon={faCircleNodes} />
+                          </Button>
+                        )}
                       </th>
                     </tr>
                   ))}
@@ -254,6 +267,14 @@ const FormData = () => {
           )}
         </Card>
       </Col>
+      <ShowAmendmentModal
+        id={id}
+        showModal={amendment}
+        content={remark}
+        handleClose={() => {
+          setAmen(false);
+        }}
+      />
       <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
       <DeleteLicenceModal
         id={deleteLicence.id}

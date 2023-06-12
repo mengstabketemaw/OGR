@@ -3,10 +3,29 @@ import {Button, Modal} from "reactstrap";
 import {Translate, ValidatedField} from "react-jhipster";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCloud, faWarning} from '@fortawesome/free-solid-svg-icons';
+import { updateAmendment} from "app/modules/administration/workflow/workflow.reducer";
+import {useAppDispatch} from "app/config/store";
+import {toast} from "react-toastify";
 export const Amendment = (props) => {
 
-  const { handleClose, showModal, handleSubmit } = props;
+  const { handleClose, showModal,id } = props;
   const [remark,setRemark] = useState('')
+  const dispatch = useAppDispatch()
+  const handleSubmit = (remark) =>{
+    const param = {
+      id : id,
+      data : {
+        amendment : remark
+      }
+    }
+    dispatch(updateAmendment(param)).then(()=>{
+      toast.success("Amendment saved")
+      handleClose()
+    })
+
+  }
+
+
 
   return(
     <Modal isOpen={showModal} toggle={handleClose}  size={"sm"}   className="modal-dialog-centered modal-white"

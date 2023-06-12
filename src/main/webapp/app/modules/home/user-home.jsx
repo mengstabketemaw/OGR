@@ -28,6 +28,7 @@ const UserHome = () => {
   const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
   const [showRemark, setShowRemark] = useState(false);
   const [remark, setRemark] = useState('');
+  const [id,setId] = useState(0)
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const account = useAppSelector(state => state.authentication.account);
@@ -53,7 +54,7 @@ const UserHome = () => {
     fetchData(currentPage);
   }, []);
 
-  const showRemarkModal = value => {
+  const showRemarkModal = (value) => {
     setShowRemark(true);
     setRemark(value);
   };
@@ -223,7 +224,7 @@ const UserHome = () => {
                             </div>
                             <div className="card-profile-stats d-flex justify-content-between pt-0 pl-0 pr-0">
                               <div className="text-right pl-0 pr-0 ">
-                                {data.stage?.id == 3 && !(data.status === 'Authorized' || data.status === 'Denied') && (
+                                {data.stage?.id == 3 && !data.payment && !(data.status === 'Authorized' || data.status === 'Denied') && (
                                   <Button className="ml-0 mt-1 " onClick={() => nav(`/checkout/${data.form.id}?licenceId=${data.id}`)} size="sm">
                                     <FontAwesomeIcon color={'green'} size="1x" icon={faMoneyBill} />
                                   </Button>
@@ -262,7 +263,8 @@ const UserHome = () => {
                                   // color="secondary"
                                   color={'white'}
                                   // className="bg-translucent-light text-dark"
-                                  onClick={() => setshowAmen(true)}
+                                  onClick={() =>{ setId(data.id)
+                                    setshowAmen(true)}}
 
                                   size="sm"
                                 >
@@ -347,8 +349,8 @@ const UserHome = () => {
       </Row>
 
       <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
-      <ShowRemarkModal showModal={showRemark} content={remark} handleClose={handleClose} />
-      <Amendment showModal={showAmen} handleClose={()=>{setshowAmen(false)}}/>
+      <ShowRemarkModal  showModal={showRemark} content={remark} handleClose={handleClose} />
+      <Amendment  id = {id} showModal={showAmen} handleClose={()=>{setshowAmen(false)}}/>
       <DeleteLicenceModal
         id={deleteLicence.id}
         show={deleteLicence.show}

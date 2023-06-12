@@ -88,6 +88,15 @@ export const updateRemark = createAsyncThunk(
   },
   { serializeError: serializeAxiosError }
 );
+
+export const updateAmendment = createAsyncThunk(
+  'update_amendment_state',
+  async (p, thunkAPI) => {
+    const url = `/api/licence/amendment/${p.id}?amendment=${p.data.amendment}`;
+    return await axios.put(url);
+  },
+  { serializeError: serializeAxiosError }
+);
 export const getStateOfLicence  = createAsyncThunk('fetch_licence', async (id) => axios.get(`api/licence/${id}`), {
   serializeError: serializeAxiosError,
 });

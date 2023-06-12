@@ -220,7 +220,7 @@ const PageSwitcher = () => {
                 <Translate contentKey="workflow.next"></Translate>
               </Button>
 
-              <Button  className={ currentPage !== pages.length - 1 ? 'd-none' : 'col-12 mr-4 mb-2 bg-translucent-success text-success' } onClick={handleProceed}>
+              <Button  className={ currentPage !== pages.length - 1 ? 'd-none' : 'col-12 mr-4 mb-2 bg-translucent-success text-success' } onClick={handleProceed} disabled={(sequenceFromDatabase[currentPage] === 3 && !licencePayment )}>
                 <Translate contentKey="workflow.proceed"></Translate>
               </Button>
 
