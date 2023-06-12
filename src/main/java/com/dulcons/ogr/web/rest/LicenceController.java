@@ -160,6 +160,11 @@ public class LicenceController {
         licenceRepository.updateRemarkById(remark, id);
     }
 
+    @PutMapping("/amendment/{id}")
+    public void updateAmendment(@PathVariable Long id, @RequestParam(value = "amendment") String amendment) {
+        licenceRepository.updateAmendmentById(amendment, id);
+    }
+
     @PutMapping("/payment")
     public void makePayment(@RequestParam Long licenceId) {
         licenceRepository

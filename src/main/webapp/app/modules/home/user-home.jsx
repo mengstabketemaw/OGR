@@ -28,6 +28,7 @@ const UserHome = () => {
   const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
   const [showRemark, setShowRemark] = useState(false);
   const [remark, setRemark] = useState('');
+  const [id,setId] = useState(0)
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
   const account = useAppSelector(state => state.authentication.account);
@@ -53,7 +54,7 @@ const UserHome = () => {
     fetchData(currentPage);
   }, []);
 
-  const showRemarkModal = value => {
+  const showRemarkModal = (value) => {
     setShowRemark(true);
     setRemark(value);
   };
@@ -262,7 +263,8 @@ const UserHome = () => {
                                   // color="secondary"
                                   color={'white'}
                                   // className="bg-translucent-light text-dark"
-                                  onClick={() => setshowAmen(true)}
+                                  onClick={() =>{ setId(data.id)
+                                    setshowAmen(true)}}
 
                                   size="sm"
                                 >
@@ -347,8 +349,8 @@ const UserHome = () => {
       </Row>
 
       <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
-      <ShowRemarkModal showModal={showRemark} content={remark} handleClose={handleClose} />
-      <Amendment showModal={showAmen} handleClose={()=>{setshowAmen(false)}}/>
+      <ShowRemarkModal  showModal={showRemark} content={remark} handleClose={handleClose} />
+      <Amendment  id = {id} showModal={showAmen} handleClose={()=>{setshowAmen(false)}}/>
       <DeleteLicenceModal
         id={deleteLicence.id}
         show={deleteLicence.show}
