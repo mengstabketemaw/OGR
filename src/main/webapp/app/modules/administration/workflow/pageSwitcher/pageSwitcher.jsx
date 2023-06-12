@@ -27,9 +27,9 @@ import './pageS.css'
 import {MoreRequestInfoModal} from '../definedStatePages/more-request-info-modal'
 import {toast} from "react-toastify";
 import moment from 'moment';
-import {trans} from "app/shared/common/translator";
+import {trans as translator, trans} from "app/shared/common/translator";
 import workflow from "../../../../../content/images/workflow.gif";
-import {faRecycle} from "@fortawesome/free-solid-svg-icons";
+import {faCloudSun, faCog, faHourglassStart, faMoneyBillWaveAlt, faRecycle} from "@fortawesome/free-solid-svg-icons";
 import {Denied} from "app/modules/administration/workflow/definedStatePages/denied";
 import {StayOrLeave} from "app/modules/administration/workflow/definedStatePages/stayOrLeave";
 const PageSwitcher = () => {
@@ -42,6 +42,7 @@ const PageSwitcher = () => {
   const [showModal,setShowModal] = useState(false)
   const [showNotify,setShowNotify] = useState(false)
   const licencePayment = useAppSelector(state => state.licence.license.payment) || false;
+
   const handleSwitchPage = (pageNumber) => {
 
     if (pageNumber >= 0 && pageNumber < pages.length) {
@@ -149,7 +150,12 @@ const PageSwitcher = () => {
 
       <Row className=" p-3 h-100">
         <Col xl={"2"}>
-          <Card className="shadow mt-xl-0 mt-4">
+          { sequenceFromDatabase.length > 0 &&
+            sequenceFromDatabase[currentPage] === 0 ?
+              <Card className="shadow mt-xl-0 mt-4">
+
+
+
             <CardHeader>
               <div className="d-flex justify-content-center flex-column">
                 <FontAwesomeIcon icon={faRecycle} size ={'3x'}/>
@@ -161,6 +167,76 @@ const PageSwitcher = () => {
               <span className="text-sm"><Translate contentKey={'workflow.sequenceInfo'}/></span>
             </CardBody>
           </Card>
+              : sequenceFromDatabase[currentPage] === 1 ?
+                <Card className="shadow mt-xl-0 mt-4">
+
+                  <CardHeader>
+                    <div className="d-flex justify-content-center flex-column">
+                      <FontAwesomeIcon icon={faHourglassStart} size ={'3x'}/>
+                      <h2 className="text-uppercase text-success text-center" >{translator("state",'Initial Review')}</h2>
+                    </div>
+                  </CardHeader>
+                  <CardBody>
+
+                    <span className="text-sm">{translator("licence.desc",'Initial Review')}</span>
+                  </CardBody>
+                </Card>
+                :sequenceFromDatabase[currentPage] === 2 ?
+                  <Card className="shadow mt-xl-0 mt-4">
+                    <CardHeader>
+                      <div className="d-flex justify-content-center flex-column">
+                        <FontAwesomeIcon icon={faCog} size ={'3x'}/>
+                        <h2 className="text-uppercase text-success text-center" >{translator("state",'Technical Review')}</h2>
+                      </div>
+                    </CardHeader>
+                    <CardBody>
+                      <span className="text-sm">{translator("licence.desc",'Technical Review')}</span>
+                    </CardBody>
+                  </Card>
+                  :sequenceFromDatabase[currentPage] === 3 ?
+                    <Card className="shadow mt-xl-0 mt-4">
+
+                      <CardHeader>
+                        <div className="d-flex justify-content-center flex-column">
+                          <FontAwesomeIcon icon={faMoneyBillWaveAlt} size ={'3x'}/>
+                          <h2 className="text-uppercase text-success text-center" >{translator("state",'Payment')}</h2>
+                        </div>
+                      </CardHeader>
+                      <CardBody>
+
+                        <span className="text-sm">{translator("licence.desc",'Payment')}</span>
+                      </CardBody>
+                    </Card>
+                  :sequenceFromDatabase[currentPage] === 4 ?
+                      <Card className="shadow mt-xl-0 mt-4">
+
+                        <CardHeader>
+                          <div className="d-flex justify-content-center flex-column">
+                            <FontAwesomeIcon icon={faCloudSun} size ={'3x'}/>
+                            <h2 className="text-uppercase text-success text-center" >{translator("state",'Decision Making')}</h2>
+                          </div>
+                        </CardHeader>
+                        <CardBody>
+
+                          <span className="text-sm">{translator("licence.desc",'Decision Making')}</span>
+                        </CardBody>
+                      </Card>:
+                      <Card className="shadow mt-xl-0 mt-4">
+
+                        <CardHeader>
+                          <div className="d-flex justify-content-center flex-column">
+                            <FontAwesomeIcon icon={faRecycle} size ={'3x'}/>
+                            <h2 className="text-uppercase text-success text-center" ><Translate contentKey={'workflow.sequence'}/></h2>
+                          </div>
+                        </CardHeader>
+                        <CardBody>
+
+                          <span className="text-sm"><Translate contentKey={'workflow.sequenceInfo'}/></span>
+                        </CardBody>
+                      </Card>
+
+          }
+
         </Col>
         <Col xl="9">
         <Card className="shadow">

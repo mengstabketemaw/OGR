@@ -93,11 +93,10 @@ const ReactWorkFlow = (param) =>{
       >
         <Panel position="bottom-left">
 
-          <Button color="primary" type="submit" onClick={onSave}>
+          <Button className="bg-translucent-success text-success mt-3" type="submit" onClick={onSave}>
             <Translate contentKey="entity.action.save">Save</Translate>
           </Button>{' '}
-          <Button color="danger"
-                  className="bg-translucent-danger text-danger"
+          <Button className="bg-translucent-primary text-primary mt-3"
                   onClick={()=>{setShowModal(true)}} >
             <Translate contentKey={'workflow.addnode'} />
           </Button>
