@@ -137,7 +137,7 @@
     </changeSet>
     <changeSet id="5" author="betselot">
         <update tableName="state">
-            <column name="name" value="Payment"/>
+            <column name="name" value="payment"/>
             <where>name = 'specialized review'</where>
         </update>
     </changeSet>

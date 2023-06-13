@@ -8,12 +8,15 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-right: 10px; /* Adjust this value as needed */
+  margin-right: 10px;
+  color: black; /* Adjust this value as needed */
 }
-
-.custom-mg-form-group .form-control,
-.custom-mg-form-group .form-select {
+.custom-mg-form-group .form-label {
+  color: black !important;
+}
+.custom-mg-form-group .form-control {
   flex: 1;
+  padding-bottom: 20px;
   border: none !important;
   background: none;
   box-shadow: none !important;
@@ -21,4 +24,13 @@
 .custom-mg-form-group .form-control:disabled {
   color: rgb(82, 95, 127) !important;
   font-size: 16px;
+}
+
+.custom-mg-form-group .form-select {
+  flex: 1;
+  color: rgb(82, 95, 127) !important;
+  padding-bottom: 16px;
+  border: none !important;
+  background: none;
+  box-shadow: none !important;
 }

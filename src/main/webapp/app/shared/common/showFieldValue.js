@@ -97,7 +97,7 @@ const ShowFieldValue = ({ data, form }) => {
     ) : field.fieldType.name === 'info' ? (
       <i>{field.label}</i>
     ) : field.fieldType.name === 'file' ? (
-      <div className="mb-3 border-info border-bottom p-3 rounded-bottom">
+      <div className="mb-3 p-3">
         {field.label}
         {getFileName(field.label)}
       </div>
