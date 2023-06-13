@@ -9,7 +9,16 @@ import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import UserStats from 'app/modules/dashboard/userStats';
 import { ShowRemarkModal } from 'app/modules/home/showRemarkModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faFileAlt, faFilePdf, faInfo, faMoneyBill, faPencil, faPrint, faUndo} from '@fortawesome/free-solid-svg-icons';
+import {
+  faFileAlt,
+  faFilePdf,
+  faInfo,
+  faInfoCircle,
+  faMoneyBill,
+  faPencil,
+  faPrint,
+  faUndo
+} from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import profilePic from '../../../content/images/avatar.png';
 import { useAppSelector } from 'app/config/store';
@@ -137,7 +146,7 @@ const UserHome = () => {
                                 })
                               }}
                               trigger={() =>
-                                  <img className="w-100 h-100 text-right position-relative left-4" src={medal} />
+                                  <img  className="w-100 h-100 text-right position-relative left-4" src={medal} />
 
                             }
                               content={() => certRef.current}
@@ -221,8 +230,8 @@ const UserHome = () => {
                             <div className="card-profile-stats d-flex justify-content-between pt-0 pl-0 pr-0">
                               <div className="text-right pl-0 pr-0 ">
                                 {data.stage?.id == 3 && !data.payment && !(data.status === 'Authorized' || data.status === 'Denied') && (
-                                  <Button className="ml-0 mt-1 " onClick={() => nav(`/checkout/${data.form.id}?licenceId=${data.id}`)} size="sm">
-                                    <FontAwesomeIcon color={'green'} size="1x" icon={faMoneyBill} />
+                                  <Button color="black" className="ml-0 mt-1 mr-0" onClick={() => nav(`/checkout/${data.form.id}?licenceId=${data.id}`)} size="sm">
+                                    <FontAwesomeIcon color={'teal'}  style={{fontSize:"18px"}} size="1x" icon={faMoneyBill} />
                                   </Button>
                                 )}
 
@@ -242,8 +251,8 @@ const UserHome = () => {
                                       trigger={() =>
 
                                         // <button className="border-0 bg-white">button</button>
-                                        <Button color="white" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
-                                          <FontAwesomeIcon color="teal" size="2x"  icon={faPrint} />
+                                        <Button color="black" size="sm" className="ml-0 mt-1 mr-0">
+                                          <FontAwesomeIcon style={{fontSize:"20px"}} color="teal" size="1x"  icon={faFilePdf} />
                                         </Button>
                                       }
                                       content={() => certRef.current}
@@ -255,9 +264,9 @@ const UserHome = () => {
                                   </>
                                 ): ""}
                                 {data?.status === 'Authorized' || data?.status === 'Denied' ?
-                                <Button className="ml-0 mt-1 "
+                                <Button className="ml-0 mt-1 mr-0 "
                                   // color="secondary"
-                                  color={'white'}
+                                  color="black"
                                   // className="bg-translucent-light text-dark"
                                   onClick={() =>{ setId(data.id)
                                     setshowAmen(true)}}
@@ -268,16 +277,17 @@ const UserHome = () => {
                                   {/*<FontAwesomeIcon icon={faPencil} />*/}
                                   <FontAwesomeIcon
                                     color={'blue'}
+                                    style={{fontSize:"16px"}}
                                     size="1x"
                                     icon={faPencil}
                                   />
                                 </Button> :
-                                <Button className="ml-0 mt-1 "
+                                <Button className="ml-0 mt-1 mr-0 "
                                   // color="secondary"
                                         color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
                                   // className="bg-translucent-light text-dark"
                                         onClick={() => nav('/dataUpdate/' + data.id)}
-                                        disabled={!(data.stage?.id === 0 || data.stage === null)}
+                                        hidden={!(data.stage?.id === 0 || data.stage === null)}
                                         size="sm"
                                 >
                                   {/*<Translate contentKey={'entity.action.edit'} />*/}
@@ -285,15 +295,16 @@ const UserHome = () => {
                                   <FontAwesomeIcon
                                     color={!(data.stage?.id === 0 || data.stage === null) ? 'white' : 'blue'}
                                     size="1x"
+                                    style={{fontSize:"16px"}}
                                     icon={faPencil}
                                   />
                                 </Button>}
-                                <Button className="ml-0 mt-1 "
+                                <Button className="ml-0 mt-1 mr-0"
                                   // color="danger"
                                   // className="bg-translucent-danger text-danger"
-                                  color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
+                                  color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'black'}
                                   onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
-                                  disabled={!(data.stage?.id === 0 || data.stage === null)}
+                                  hidden={!(data.stage?.id === 0 || data.stage === null)}
                                   size="sm"
                                 >
                                   {/*<Translate contentKey={'entity.action.delete'} />*/}
@@ -301,6 +312,7 @@ const UserHome = () => {
                                   <FontAwesomeIcon
                                     color={!(data.stage?.id === 0 || data.stage === null) ? 'white' : 'red'}
                                     size="1x"
+                                    style={{fontSize:"14px"}}
                                     icon={faTrash}
                                   />
                                 </Button>
@@ -308,8 +320,8 @@ const UserHome = () => {
 
 
                                 {data.remark && !(data.status === 'Authorized' || data.status === 'Denied') && (
-                                  <Button  className="ml-0 mt-1 " color="white" onClick={() => showRemarkModal(data.remark)} size="sm">
-                                    <FontAwesomeIcon color={'blue'} icon={faInfo} />
+                                  <Button  className="ml-0 mt-1 " color="black" onClick={() => showRemarkModal(data.remark)} size="sm">
+                                    <FontAwesomeIcon color="teal"  style={{fontSize:"18px"}} icon={faInfoCircle} />
                                   </Button>
                                 )}
 

@@ -11,7 +11,7 @@ import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import ReportForm from 'app/shared/common/reportForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPrint } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faPrint } from '@fortawesome/free-solid-svg-icons';
 import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import Certificate from 'app/modules/certificates/certificate';
@@ -257,8 +257,8 @@ export const AdminDashboardTable = ({ title }) => {
                               }}
                               trigger={() => (
                                 // <button className="border-0 bg-white">button</button>
-                                <Button color="white" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
-                                  <FontAwesomeIcon color="teal" size="2x" icon={faPrint} />
+                                <Button color="black" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
+                                  <FontAwesomeIcon size="2x" icon={faFilePdf} />
                                 </Button>
                               )}
                               content={() => certRef.current}
