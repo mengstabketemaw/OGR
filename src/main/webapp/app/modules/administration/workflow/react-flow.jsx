@@ -79,7 +79,7 @@ const ReactWorkFlow = (param) =>{
 
   }, [setNodes,nodeName]);
   return(
-    <div style={{ height: 500 }}>
+    <div style={{ height: '80vh' }}>
        <ReactFlow
         nodes={nodes}
         edges={edges}

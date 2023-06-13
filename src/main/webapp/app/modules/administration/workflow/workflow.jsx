@@ -21,7 +21,7 @@ import {
   Modal,
   ModalBody,
   ModalFooter,
-  ModalHeader,
+  ModalHeader, Nav, NavItem, NavLink,
   Row,
   Spinner,
   Table
@@ -46,6 +46,7 @@ const Workflow = () => {
   const sequence = useSelector(state => state.licence.currentSequence);
   const [formatedNode,setformatedNode] = useState(null);
   const [open, setOpen] = useState('');
+  const [currentForm,setCurrentForm] = useState(0)
   //const formatedNode = formatReactFlow(states,sequence);
   const fromatedEdge = formatEdge(wf?.workFlowSequences)//[{ id: '1', source: '4', target: '1' }]//formatEdge(workflowForEdit?.workFlowSequences) || []
   useEffect(()=>{
@@ -61,6 +62,7 @@ const Workflow = () => {
   useEffect(() => {
     if(form.length > 0) {
       setEditForm(form[0]);
+      setCurrentForm(form[0]?.id)
     }
   }, [form]);
 
@@ -70,7 +72,9 @@ const Workflow = () => {
     }
   }, [formForEdit]);
   const handleSelectForm = (e) => {
-    setEditForm(form.filter(f=> f.id == e.target.value)[0]);
+
+    setEditForm(form.filter(f=> f.id == e)[0]);
+    setCurrentForm(e)
   }
   const handleSubmit =  (value) =>{
     if(value.length > 0){
@@ -91,16 +95,19 @@ const Workflow = () => {
     <Row className=" p-3 h-100">
       <Col xl="8">
         <Card className="shadow">
-          <Panel position="top-left">
-            <ValidatedField type="select" name="langKey"
-                            onChange={handleSelectForm}
-            > {form.map((f,i) => (
-              <option value={f.id} key={f.id}>
-                {f.title}
-              </option>
-            ))}
+          <Panel position="top-right">
+            <Nav vertical style={{marginBottom: '30px',cursor: 'pointer'}}
+                 className="nav nav-pills  flex-column flex-sm-column justify-content-end ">
+              {form.map((f,i) => (
+                <NavItem  className="w-100 pr-0  pt-0" onClick={()=>{handleSelectForm(f.id)}}>
+                  <NavLink className={currentForm===f.id ? "mb-2 mt-2 mt-lg-3 w-100 mr-2 mr-sm-0 mb-md-0 bg-light text-dark card-hover2 ":"mb-sm-2 mr-2 w-100 mr-sm-0 mt-2 mt-lg-3 mb-md-0 text-dark card-hover2"}  >
+                    <Translate contentKey={"licence."+f.title}></Translate>
+                  </NavLink>
+                </NavItem>
+              ))}
 
-            </ValidatedField >
+            </Nav>
+
           </Panel>
           {formatedNode && formatedNode.length>0 && fromatedEdge &&
           <ReactWorkFlow formatedNode={formatedNode}
