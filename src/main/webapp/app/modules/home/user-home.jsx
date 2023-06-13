@@ -93,7 +93,7 @@ const UserHome = () => {
 
       <UserStats />
       <Row>
-        <Col className="order-xl-2 pl-0 pr-0 d-flex justify-content-evenly " xl="9">
+        <Col className="order-xl-2 pl-0 pr-0" xl="9">
           <Row className=" ml-0 mr-0 pr-0 pl-0">
             {applications.loading ? (
               <Spinner
