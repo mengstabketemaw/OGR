@@ -98,7 +98,11 @@ const Header = (props: IHeaderProps) => {
           <Collapse className={menuOpen ? 'show mt-6 mt-md-0' : 'mt-6 mt-md-0'} navbar>
             <Nav id="header-tabs" className="ms-auto" navbar>
               {props.isAuthenticated && <Home />}
-              <NavDropdown icon="cogs" name={<Translate contentKey="global.services" />} className={'row'}>
+              <NavDropdown
+                // icon="cogs"
+                name={<Translate contentKey="global.services" />}
+                className={'row'}
+              >
                 <Dropdown
                   className={'col-6 col-md-12'}
                   onMouseLeave={() => {
@@ -113,7 +117,7 @@ const Header = (props: IHeaderProps) => {
                     }}
                   >
                     <DropdownToggle
-                      icon="book"
+                      // icon="book"
                       className=" pl-0 pr-0 h3 shadow-none w-100 d-flex justify-content-between bg-transparent border-0 text-dark font-weight-light"
                     >
                       <Translate contentKey="licence.titles" />
@@ -162,7 +166,7 @@ const Header = (props: IHeaderProps) => {
                     }}
                   >
                     <DropdownToggle
-                      icon="book"
+                      // icon="book"
                       className=" pl-0 pr-0 h3 shadow-none w-100 d-flex justify-content-between bg-transparent border-0 text-dark font-weight-light"
                     >
                       <Translate contentKey="permit.titles" />
@@ -205,24 +209,21 @@ const Header = (props: IHeaderProps) => {
                     </DropdownItem>
                   </DropdownMenu>
                 </Dropdown>
+                {props.isAuthenticated && props.isAdmin && (
+                  <DropdownItem onClick={gotoCompliance}>
+                    <Translate contentKey="global.menu.compliance" />
+                  </DropdownItem>
+                )}
+                {props.isAuthenticated && !props.isAdmin && <ComplianceMonitoringUser />}
               </NavDropdown>
-
-              {props.isAuthenticated && props.isAdmin && (
-                <NavItem>
-                  <NavLink onClick={gotoCompliance} className="d-flex align-items-center">
-                    <FontAwesomeIcon icon={faInfoCircle} className={'mr-1'} />
-                    <span>
-                      <Translate contentKey="global.menu.compliance" />
-                    </span>
-                  </NavLink>
-                </NavItem>
-              )}
-              {props.isAuthenticated && !props.isAdmin && <ComplianceMonitoringUser />}
 
               {/* {props.isAuthenticated && <EntitiesMenu />} */}
               {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
               <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />
-              <NavDropdown icon="help" name={<Translate contentKey="support.support" />}>
+              <NavDropdown
+                // icon="help"
+                name={<Translate contentKey="support.support" />}
+              >
                 <DropdownItem tag="a" href={'https://ograngola.tawk.help/'}>
                   {' '}
                   <Translate contentKey="support.knowledgeBased" />

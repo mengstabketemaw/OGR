@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Translate } from 'react-jhipster';
 
-import { DropdownItem, NavbarBrand, NavItem, NavLink, Spinner } from 'reactstrap';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, NavbarBrand, NavItem, NavLink, Spinner } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from 'app/config/store';
 import { NavDropdown } from 'app/shared/layout/menus/menu-components';
 import axios from 'axios';
+import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 const refreshPage = () => {
   window.location.href = '/home';
@@ -39,7 +40,7 @@ export const Brand = () => {
 export const Home = () => (
   <NavItem>
     <NavLink onClick={refreshPage} className="d-flex align-items-center">
-      <FontAwesomeIcon icon="home" className={'mr-1'} />
+      {/*<FontAwesomeIcon icon="home" className={'mr-1'} />*/}
       <span>
         <Translate contentKey="global.menu.home">Home</Translate>
       </span>
@@ -66,34 +67,65 @@ export const ComplianceMonitoringUser = () => {
     fetchData();
   }, []);
 
+  const [inspectionDropdownOpen, setInspectionDropdownOpen] = useState(false);
+
+  const deviceWidth = window.innerWidth;
+
   return (
-    <NavDropdown icon="book" name={<Translate contentKey="compliance.inspectionHistory" />}>
-      {licence.loading ? (
-        <div className={'d-flex justify-content-center'}>
-          <Spinner
-            className="align-self-center"
-            color="primary"
-            style={{
-              height: '3rem',
-              width: '3rem',
-            }}
-            type="grow"
-          >
-            Loading...
-          </Spinner>
-        </div>
-      ) : (
-        <>
-          {licence?.data?.map(data => (
-            <DropdownItem
-              tag={'a'}
-              href={`/complianceUser?licence=${data.form.id}&title=${data.form.title}&submittedDate=${data.submittedDate}`}
+    <Dropdown
+      className={'col-6 col-md-12'}
+      onMouseLeave={() => {
+        setInspectionDropdownOpen(false);
+      }}
+      isOpen={inspectionDropdownOpen}
+      direction={deviceWidth > 768 ? 'end' : 'down'}
+    >
+      <div
+        onMouseEnter={() => {
+          setInspectionDropdownOpen(true);
+        }}
+      >
+        <DropdownToggle
+          icon="book"
+          className=" pl-0 pr-0 h3 shadow-none w-100 d-flex justify-content-between bg-transparent border-0 text-dark font-weight-light"
+        >
+          <Translate contentKey="compliance.inspectionHistory" />
+          {deviceWidth > 768 ? <FontAwesomeIcon icon={faAngleRight} /> : <FontAwesomeIcon icon={faAngleDown} />}
+        </DropdownToggle>
+      </div>
+
+      <DropdownMenu className="border-bottom-dark border-left-dark border-right-dark border-1 shadow ">
+        <DropdownItem className={'text-gray'} header>
+          <Translate contentKey="compliance.inspectionHistory" />
+        </DropdownItem>
+
+        {licence.loading ? (
+          <div className={'d-flex justify-content-center'}>
+            <Spinner
+              className="align-self-center"
+              color="primary"
+              style={{
+                height: '3rem',
+                width: '3rem',
+              }}
+              type="grow"
             >
-              {data.form.title}
-            </DropdownItem>
-          ))}
-        </>
-      )}
-    </NavDropdown>
+              Loading...
+            </Spinner>
+          </div>
+        ) : (
+          <>
+            {licence?.data?.map(data => (
+              <DropdownItem
+                tag={'a'}
+                href={`/complianceUser?licence=${data.form.id}&title=${data.form.title}&submittedDate=${data.submittedDate}`}
+              >
+                {data.form.title}
+              </DropdownItem>
+            ))}
+          </>
+        )}
+      </DropdownMenu>
+    </Dropdown>
   );
 };

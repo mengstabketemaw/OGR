@@ -9,34 +9,39 @@ import { faCalendarTimes, faLocation, faMap, faMoneyBill, faPager } from '@forta
 
 const adminMenuItems = () => (
   <>
-    <MenuItem icon="users" to="/admin/user-management">
+    <DropdownItem icon="users" to="/admin/user-management">
       <Translate contentKey="global.menu.admin.userManagement">User management</Translate>
-    </MenuItem>
-    <MenuItem icon={faMap} to="/admin/location">
+    </DropdownItem>
+    <DropdownItem icon={faMap} to="/admin/location">
       <Translate contentKey="global.menu.admin.locationReport">Location Report</Translate>
-    </MenuItem>
+    </DropdownItem>
 
-    <MenuItem icon={faPager} to="/form/create">
+    <DropdownItem icon={faPager} to="/form/create">
       <Translate contentKey="form.title">Workflow</Translate>
-    </MenuItem>
-    <MenuItem icon={faCalendarTimes} to="/workflow">
+    </DropdownItem>
+    <DropdownItem icon={faCalendarTimes} to="/workflow">
       <Translate contentKey="global.menu.admin.workflow">Workflow</Translate>
-    </MenuItem>
-    <MenuItem icon={faMoneyBill} to="/admin/payment">
+    </DropdownItem>
+    <DropdownItem icon={faMoneyBill} to="/admin/payment">
       <Translate contentKey="payment.menu">Payment</Translate>
-    </MenuItem>
+    </DropdownItem>
     {/* jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here */}
   </>
 );
 
 const openAPIItem = () => (
-  <MenuItem icon="book" to="/admin/docs">
+  <DropdownItem icon="book" to="/admin/docs">
     <Translate contentKey="global.menu.admin.apidocs">API</Translate>
-  </MenuItem>
+  </DropdownItem>
 );
 
 export const AdminMenu = ({ showOpenAPI }) => (
-  <NavDropdown icon="users-cog" name={translate('global.menu.admin.main')} id="admin-menu" data-cy="adminMenu">
+  <NavDropdown
+    // icon="users-cog"
+    name={translate('global.menu.admin.main')}
+    id="admin-menu"
+    data-cy="adminMenu"
+  >
     {adminMenuItems()}
     {showOpenAPI && openAPIItem()}
   </NavDropdown>
