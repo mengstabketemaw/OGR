@@ -390,7 +390,7 @@ export const DetailModal = ({ id, show, handleClose }) => {
   return (
     <Modal isOpen={show} onClosed={handleClose}>
       <ModalHeader toggle={handleClose}>
-        {data.data.form?.title?.slice(0,2).toUpperCase()}{data.data?.id}496
+        <h3>Application Number: {data.data.form?.title?.slice(0,2).toUpperCase()}{data.data?.id}496</h3>
       </ModalHeader>
       <ModalBody>
         <Container className="d-flex flex-column justify-content-center">
@@ -401,8 +401,8 @@ export const DetailModal = ({ id, show, handleClose }) => {
           ) : (
             <>
               <div className="d-flex justify-content-between align-items-end">
-                <span className="text-black fs-4"><Translate contentKey={"userManagement.firstName"}/>: <span style={{ color:"rgb(82, 95, 127)"}}>{data.data.user.firstName}</span></span>
-                <span className="text-black" style={{fontSize:"12px"}}><Translate contentKey={'table.submittedDate'} />: <span>{moment(data.data.submittedDate).format('MMM DD, YYYY')}</span></span>
+                <span className="" style={{color:"rgb(82, 95, 127)"}}><Translate style={{color:"rgb(82, 95, 127)"}} contentKey={"userManagement.firstName"}/>: <span style={{color:"rgb(82, 95, 127)"}}>{data.data.user.firstName}</span></span>
+                <span className="" style={{color:"rgb(82, 95, 127)"}}><Translate style={{color:"rgb(82, 95, 127)"}} contentKey={'table.submittedDate'} />: <span style={{color:"rgb(82, 95, 127)"}}>{moment(data.data.submittedDate).format('MMM DD, YYYY')}</span></span>
               </div>
               <ShowFieldValue data={getDataBasedOnState()} form={data?.data.form} />
             </>
