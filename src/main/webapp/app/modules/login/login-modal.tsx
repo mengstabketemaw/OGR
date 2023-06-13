@@ -15,7 +15,7 @@ import {
   CardHeader,
   CardBody,
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 export interface ILoginModalProps {
@@ -29,7 +29,7 @@ const LoginModal = (props: ILoginModalProps) => {
   const login = ({ username, password, rememberMe }) => {
     props.handleLogin(username, password, rememberMe);
   };
-
+  const nav = useNavigate();
   const {
     handleSubmit,
     register,
@@ -98,20 +98,42 @@ const LoginModal = (props: ILoginModalProps) => {
                   />
                 </Col>
               </Row>
-              <div className="mt-1">&nbsp;</div>
-              <Alert className={'bg-warnin'} color="blue">
-                <Link className={'text-blue font-weight-bold'} to="/account/reset/request" data-cy="forgetYourPasswordSelector">
-                  <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
-                </Link>
-              </Alert>
-              <Alert className={'bg-gradient-succes'} color="blue">
-                <span>
-                  <Translate contentKey="global.messages.info.register.noaccount">You don&apos;t have an account yet?</Translate>
-                </span>{' '}
-                <Link className={'text-blue font-weight-bold'} to="/account/register">
-                  <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
-                </Link>
-              </Alert>
+              <Row className="mt-3">
+                <Col xs="6">
+                  <a
+                    className="text-light-gray"
+                    onClick={e => {
+                      nav('/account/reset/request');
+                    }}
+                  >
+                    <small>Forgot password?</small>
+                  </a>
+                </Col>
+                <Col className="text-right" xs="6">
+                  <a
+                    className="text-light-gray"
+                    onClick={e => {
+                      nav('/account/register');
+                    }}
+                  >
+                    <small>Create new account</small>
+                  </a>
+                </Col>
+              </Row>
+              {/* <div className="mt-1">&nbsp;</div> */}
+              {/* <Alert className={'bg-warnin'} color="blue"> */}
+              {/*   <Link className={'text-blue font-weight-bold'} to="/account/reset/request" data-cy="forgetYourPasswordSelector"> */}
+              {/*     <Translate contentKey="login.password.forgot">Did you forget your password?</Translate> */}
+              {/*   </Link> */}
+              {/* </Alert> */}
+              {/* <Alert className={'bg-gradient-succes'} color="blue"> */}
+              {/*   <span> */}
+              {/*     <Translate contentKey="global.messages.info.register.noaccount">You don&apos;t have an account yet?</Translate> */}
+              {/*   </span>{' '} */}
+              {/*   <Link className={'text-blue font-weight-bold'} to="/account/register"> */}
+              {/*     <Translate contentKey="global.messages.info.register.link">Register a new account</Translate> */}
+              {/*   </Link> */}
+              {/* </Alert> */}
             </CardBody>
             <ModalFooter>
               <Button color="primary" type="submit" data-cy="submit">

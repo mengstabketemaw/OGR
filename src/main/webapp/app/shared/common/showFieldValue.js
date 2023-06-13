@@ -14,17 +14,17 @@ function getValue(fieldData, fieldType) {
     case 'location':
     case 'textarea':
     case 'text':
-      return fieldData.text;
+      return fieldData?.text;
     case 'select':
-      return fieldData.dropDown;
+      return fieldData?.dropDown;
     case 'date':
-      return fieldData.date;
+      return fieldData?.date;
     case 'checkbox':
-      return Number(fieldData.checkBoxId);
+      return Number(fieldData?.checkBoxId);
     case 'datetime-local':
-      return moment(fieldData.dateAndTime).format('YYYY-MM-DDTHH:MM');
+      return moment(fieldData?.dateAndTime).format('YYYY-MM-DDTHH:MM');
     case 'file':
-      return fieldData.file;
+      return fieldData?.file;
   }
   return undefined;
 }
@@ -40,7 +40,7 @@ const ShowFieldValue = ({ data, form }) => {
   const getFileName = name => {
     let fData = data.find(fData => fData.label === name);
     if (fData === undefined) {
-      return 'No file chosen';
+      return <p>No file chosen</p>;
     }
     const fileName = fData.encodingFileType?.split('~')[0];
     const encodedType = fData.encodingFileType?.split('~')[1];
