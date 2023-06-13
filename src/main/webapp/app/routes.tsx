@@ -53,7 +53,14 @@ const AppRoutes = () => {
   return (
     <div className="view-routes">
       <ErrorBoundaryRoutes>
-        <Route path="home" element={<Home />} />
+        <Route
+          path="home"
+          element={
+            <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
+              <Home />
+            </PrivateRoute>
+          }
+        />
         <Route path="login" element={<Login />} />
         <Route path="logouts" element={<Logout />} />
         <Route path="permit" element={<Permit />} />
