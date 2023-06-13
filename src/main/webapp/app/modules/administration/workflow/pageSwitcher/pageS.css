@@ -10,10 +10,10 @@ code {
 
 .box {
   width: 100%;
-  border: 1px solid #ddd;
+  /*border: 1px solid #ddd;*/
 }
 .box .steps {
-  border-bottom: 1px solid #ddd;
+  /*border-bottom: 1px solid #ddd;*/
 }
 .box .steps ul {
   overflow: hidden;

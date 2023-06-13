@@ -20,7 +20,7 @@ import Certificate from 'app/modules/certificates/certificate';
 import medal from './assets/medal.png';
 import {Amendment} from "app/modules/home/amendment";
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 100;
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
   const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
@@ -34,7 +34,6 @@ const UserHome = () => {
   const account = useAppSelector(state => state.authentication.account);
   const [showAmen, setshowAmen] = useState(false);
   const fetchData = page => {
-    // Construct the URL with the page query parameter
     axios
       .get(`/api/licence/formByUser?page=${page}&size=${PAGE_SIZE}&sort=submittedDate,desc`)
       .then(({ data }) => {
@@ -50,7 +49,6 @@ const UserHome = () => {
   };
 
   useEffect(() => {
-    // Fetch the initial data when the component mounts
     fetchData(currentPage);
   }, []);
 
@@ -86,7 +84,7 @@ const UserHome = () => {
 
       <UserStats />
       <Row>
-        <Col className="order-xl-2 pl-0 pr-0  " xl="9">
+        <Col className="order-xl-2 pl-0 pr-0 d-flex justify-content-evenly " xl="9">
           <Row className=" ml-0 mr-0 pr-0 pl-0">
             {applications.loading ? (
               <Spinner
@@ -112,7 +110,7 @@ const UserHome = () => {
             ) : (
               <>
                 {applications.data?.content.map(data => (
-                  <Card border="primary" className={'col-12 col-lg-3 col-md-4 col-sm-6  ml-0 mr-lg-4 mt-2 card-hover pl-4 pr-2 w-50 '}
+                  <Card border="primary" className={'col-12 col-lg-3 col-md-4 col-sm-6  ml-0 mr-lg-2 mt-2 card-hover pl-4 pr-2 w-50 '}
                   >
                     <CardHeader
                       // onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
@@ -139,9 +137,7 @@ const UserHome = () => {
                                 })
                               }}
                               trigger={() =>
-
-                                // <button className="border-0 bg-white">button</button>
-                                <img className="w-100 h-100 text-right position-relative left-4" src={medal} />
+                                  <img className="w-100 h-100 text-right position-relative left-4" src={medal} />
 
                             }
                               content={() => certRef.current}

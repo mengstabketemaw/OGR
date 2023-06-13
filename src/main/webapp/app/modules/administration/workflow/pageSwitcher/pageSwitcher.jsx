@@ -291,7 +291,7 @@ const PageSwitcher = () => {
                 <Translate contentKey="workflow.notify"></Translate>
               </Button>}
 
-              <Button className={"col-12 bg-light"}  onClick={handleNextPage} hidden={(sequenceFromDatabase[currentPage+1] === 3 && !licencePayment) || currentPage === pages.length - 1} disabled={(sequenceFromDatabase[currentPage] === 3 && !licencePayment ) || currentPage === pages.length - 1}>
+              <Button className="col-12 bg-translucent-dark"  onClick={handleNextPage} hidden={(sequenceFromDatabase[currentPage+1] === 3 && !licencePayment) || currentPage === pages.length - 1} disabled={(sequenceFromDatabase[currentPage] === 3 && !licencePayment ) || currentPage === pages.length - 1}>
 
                 <Translate contentKey="workflow.next"></Translate>
               </Button>
