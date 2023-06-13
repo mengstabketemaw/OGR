@@ -219,7 +219,7 @@ export const AdminDashboardTable = ({ title }) => {
                           onClick={() => {
                             nav(`/sequence/${data.form.id}/${data.id}`);
                           }}
-                          disabled={data.status === 'Authorized' || data.status === 'Denied'}
+                          hidden={data.status === 'Authorized' || data.status === 'Denied'}
                           size={'sm'}
                         >
                           <FontAwesomeIcon
@@ -232,7 +232,7 @@ export const AdminDashboardTable = ({ title }) => {
                         <Button
                           color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
                           onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
-                          disabled={!(data.stage?.id === 0 || data.stage === null)}
+                          hidden={!(data.stage?.id === 0 || data.stage === null)}
                           size="sm"
                         >
                           {/*<Translate contentKey={'entity.action.delete'} />*/}

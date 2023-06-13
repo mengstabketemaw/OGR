@@ -11,7 +11,7 @@ import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
-import { faCircleNodes, faInfo, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNodes, faFilePdf, faInfo, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { ShowAmendmentModal } from 'app/modules/home/showAmendmentModal';
 import ReactToPrint from 'react-to-print';
 import { faPrint } from '@fortawesome/free-solid-svg-icons';
@@ -211,8 +211,8 @@ const FormData = () => {
                               }}
                               trigger={() => (
                                 // <button className="border-0 bg-white">button</button>
-                                <Button color="white" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
-                                  <FontAwesomeIcon color="teal" size="2x" icon={faPrint} />
+                                <Button color="black" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
+                                  <FontAwesomeIcon size="2x" icon={faFilePdf} />
                                 </Button>
                               )}
                               content={() => certRef.current}
@@ -228,7 +228,7 @@ const FormData = () => {
                           onClick={() => {
                             nav(`/sequence/${data.form.id}/${data.id}`);
                           }}
-                          disabled={data.status === 'Authorized' || data.status === 'Denied'}
+                          hidden={data.status === 'Authorized' || data.status === 'Denied'}
                           size={'sm'}
                         >
                           <FontAwesomeIcon
@@ -241,7 +241,7 @@ const FormData = () => {
                         <Button
                           color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
                           onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
-                          disabled={!(data.stage?.id === 0 || data.stage === null)}
+                          hidden={!(data.stage?.id === 0 || data.stage === null)}
                           size="sm"
                         >
                           {/*<Translate contentKey={'entity.action.delete'} />*/}
