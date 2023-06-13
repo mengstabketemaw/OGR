@@ -400,9 +400,9 @@ export const DetailModal = ({ id, show, handleClose }) => {
             </Spinner>
           ) : (
             <>
-              <div className="d-flex justify-content-between">
-                <span className="text-black"><Translate contentKey={"userManagement.firstName"}/>: {data.data.user.firstName}<span style={{fontSize:"10px"}}></span></span>
-                <span className="text-black"><Translate contentKey={'table.submittedDate'} />: <span>{moment(data.data.submittedDate).format('MMM DD, YYYY')}</span></span>
+              <div className="d-flex justify-content-between align-items-end">
+                <span className="text-black fs-4"><Translate contentKey={"userManagement.firstName"}/>: <span style={{ color:"rgb(82, 95, 127)"}}>{data.data.user.firstName}</span></span>
+                <span className="text-black" style={{fontSize:"12px"}}><Translate contentKey={'table.submittedDate'} />: <span>{moment(data.data.submittedDate).format('MMM DD, YYYY')}</span></span>
               </div>
               <ShowFieldValue data={getDataBasedOnState()} form={data?.data.form} />
             </>
