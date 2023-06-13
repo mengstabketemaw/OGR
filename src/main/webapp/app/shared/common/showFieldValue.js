@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { ValidatedField } from 'react-jhipster';
 import './showFieldValue.css';
+import { Link } from 'react-router-dom';
 function getValue(fieldData, fieldType) {
   switch (fieldType.name) {
     case 'location':
@@ -30,10 +31,12 @@ function getValue(fieldData, fieldType) {
 const ShowFieldValue = ({ data, form }) => {
   const [locationModal, setLocationModal] = useState({ show: false, value: '' });
 
+  const [visibleItems, setVisibleItems] = useState(8);
+
   const formFields = form.fields.filter(field => field.state.id === 0);
-  const halfLength = Math.ceil(formFields.length / 2);
+  const halfLength = Math.ceil((formFields.length > visibleItems ? visibleItems : formFields.length) / 2);
   const firstHalf = formFields.slice(0, halfLength);
-  const secondHalf = formFields.slice(halfLength);
+  const secondHalf = formFields.slice(halfLength, visibleItems);
   const getFileName = name => {
     let fData = data.find(fData => fData.label === name);
     if (fData === undefined) {
@@ -62,21 +65,17 @@ const ShowFieldValue = ({ data, form }) => {
       </>
     );
   };
+  const handleLoadMore = e => {
+    e.preventDefault();
+    setVisibleItems(prev => prev + 100);
+  };
   const InsideFieldValue = field => {
     let fData = data.find(fData => fData.label === field.label);
 
     const value = getValue(fData, field.fieldType);
 
     return field.fieldType.name === 'select' ? (
-      <ValidatedField
-        key={field.id}
-        name={field.label}
-        disabled={true}
-        type={field.fieldType.name}
-        value={value}
-        className="custom-mg-form-group"
-        label={field.label + ':'}
-      >
+      <ValidatedField key={field.id} name={field.label} disabled={true} type={field.fieldType.name} value={value} label={field.label}>
         {field.options.map((a, i) => (
           <option key={i} value={a.name}>
             {a.name}
@@ -84,16 +83,7 @@ const ShowFieldValue = ({ data, form }) => {
         ))}
       </ValidatedField>
     ) : field.fieldType.name === 'location' ? (
-      <ValidatedField
-        name={field.label}
-        disabled={true}
-        key={field.id}
-        label={field.label + ':'}
-        autoComplete={'off'}
-        value={value}
-        className="custom-mg-form-group"
-        placeholder={'Click here to add location'}
-      />
+      <ValidatedField name={field.label} disabled={true} key={field.id} label={field.label} autoComplete={'off'} value={value} />
     ) : field.fieldType.name === 'info' ? (
       <i>{field.label}</i>
     ) : field.fieldType.name === 'file' ? (
@@ -104,23 +94,15 @@ const ShowFieldValue = ({ data, form }) => {
     ) : field.fieldType.name === 'checkbox' ? (
       <ValidatedField
         disabled={true}
-        className=""
+        className="mb-0 d-flex flex-column custom-checkbox"
         key={field.id}
         type={field.fieldType.name}
         name={field.label}
         checked={value === 1}
-        label={field.label + ':'}
+        label={field.label}
       />
     ) : (
-      <ValidatedField
-        disabled={true}
-        key={field.id}
-        type={field.fieldType.name}
-        name={field.label}
-        value={value}
-        className={'custom-mg-form-group'}
-        label={field.label + ':'}
-      />
+      <ValidatedField disabled={true} key={field.id} type={field.fieldType.name} name={field.label} value={value} label={field.label} />
     );
   };
 
@@ -138,6 +120,11 @@ const ShowFieldValue = ({ data, form }) => {
             return InsideFieldValue(field);
           })}
         </Row>
+        {formFields.length > visibleItems && (
+          <a href="#" onClick={handleLoadMore}>
+            Show all
+          </a>
+        )}
       </Row>
       <ShowLocationModal
         show={locationModal.show}
