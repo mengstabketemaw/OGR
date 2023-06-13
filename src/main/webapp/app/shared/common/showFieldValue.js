@@ -67,7 +67,7 @@ const ShowFieldValue = ({ data, form }) => {
   };
   const handleLoadMore = e => {
     e.preventDefault();
-    setVisibleItems(prev => prev + 4);
+    setVisibleItems(prev => prev + 100);
   };
   const InsideFieldValue = field => {
     let fData = data.find(fData => fData.label === field.label);
@@ -122,7 +122,7 @@ const ShowFieldValue = ({ data, form }) => {
         </Row>
         {formFields.length > visibleItems && (
           <a href="#" onClick={handleLoadMore}>
-            Show more
+            Show all
           </a>
         )}
       </Row>
