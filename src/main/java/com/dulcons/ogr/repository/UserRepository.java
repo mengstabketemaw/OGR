@@ -37,4 +37,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
 
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
+
+    @Query("select distinct u from User u inner join u.authorities authorities where authorities.name = ?1")
+    List<User> findByAuthority(String name);
 }
