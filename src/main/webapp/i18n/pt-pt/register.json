@@ -1,6 +1,9 @@
 {
   "register": {
     "title": "Registo",
+    "signup": "Registro",
+    "already": "Já tem uma conta?\n",
+    "or": "ou",
     "form": {
       "button": "Registar"
     },

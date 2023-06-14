@@ -44,120 +44,15 @@ const LoginModal = (props: ILoginModalProps) => {
 
   return (
     <Row>
-      <Col lg="4" md="4">
-        <Card className="bg-secondary shadow border-0">
-          <Form onSubmit={handleLoginSubmit}>
-            <CardHeader className="bg-transparent pb-5" id="login-title">
-              <div className="text-muted text-center mt-2 mb-3">
-                <Translate contentKey="login.title">Sign in</Translate>
-              </div>
-            </CardHeader>
-            <CardBody className="px-lg-5 py-lg-5">
-              <Row>
-                <Col md="12">
-                  {loginError ? (
-                    <Alert color="danger" data-cy="loginError">
-                      <Translate contentKey="login.messages.error.authentication">
-                        <strong>Failed to sign in!</strong> Please check your credentials and try again.
-                      </Translate>
-                    </Alert>
-                  ) : null}
-                </Col>
-                <Col md="12">
-                  <ValidatedField
-                    name="username"
-                    label={translate('global.form.username.label')}
-                    placeholder={translate('global.form.username.placeholder')}
-                    required
-                    autoFocus
-                    data-cy="username"
-                    validate={{ required: 'Username cannot be empty!' }}
-                    register={register}
-                    error={errors.username}
-                    isTouched={touchedFields.username}
-                  />
-                  <ValidatedField
-                    name="password"
-                    type="password"
-                    label={translate('login.form.password')}
-                    placeholder={translate('login.form.password.placeholder')}
-                    required
-                    data-cy="password"
-                    validate={{ required: 'Password cannot be empty!' }}
-                    register={register}
-                    error={errors.password}
-                    isTouched={touchedFields.password}
-                  />
-                  <ValidatedField
-                    name="rememberMe"
-                    type="checkbox"
-                    check
-                    label={translate('login.form.rememberme')}
-                    value={true}
-                    register={register}
-                  />
-                </Col>
-              </Row>
-              <Row className="mt-3">
-                <Col xs="6">
-                  <a
-                    className="text-light-gray"
-                    onClick={e => {
-                      nav('/account/reset/request');
-                    }}
-                  >
-                    <small>
-                      {' '}
-                      <Translate contentKey="login.password.forgot"></Translate>
-                    </small>
-                  </a>
-                </Col>
-                <Col className="text-right" xs="6">
-                  <a
-                    className="text-light-gray"
-                    onClick={e => {
-                      nav('/account/register');
-                    }}
-                  >
-                    <small>
-                      <Translate contentKey="global.messages.info.register.link"></Translate>
-                    </small>
-                  </a>
-                </Col>
-              </Row>
-              {/* <div className="mt-1">&nbsp;</div> */}
-              {/* <Alert className={'bg-warnin'} color="blue"> */}
-              {/*   <Link className={'text-blue font-weight-bold'} to="/account/reset/request" data-cy="forgetYourPasswordSelector"> */}
-              {/*     <Translate contentKey="login.password.forgot">Did you forget your password?</Translate> */}
-              {/*   </Link> */}
-              {/* </Alert> */}
-              {/* <Alert className={'bg-gradient-succes'} color="blue"> */}
-              {/*   <span> */}
-              {/*     <Translate contentKey="global.messages.info.register.noaccount">You don&apos;t have an account yet?</Translate> */}
-              {/*   </span>{' '} */}
-              {/*   <Link className={'text-blue font-weight-bold'} to="/account/register"> */}
-              {/*     <Translate contentKey="global.messages.info.register.link">Register a new account</Translate> */}
-              {/*   </Link> */}
-              {/* </Alert> */}
-            </CardBody>
-            <ModalFooter>
-              <Button color="primary" type="submit" data-cy="submit">
-                <Translate contentKey="login.form.button">Sign in</Translate>
-              </Button>
-            </ModalFooter>
-          </Form>
-        </Card>
-      </Col>
-      <Col lg="8" md="8" className="justify-content-end">
-        <div className="header-body text-center mb-7">
+      <Col lg="8" className="justify-content-end order-lg-2 col-12">
+        <div className="header-body text-center d-flex justify-content-end align-items-center flex-column">
           <h1 className="text-black align-self-center">
             <Translate contentKey={'userDashboard.welcome'} />
           </h1>
           <svg
+            style={{ width: '70%', height: '50%' }}
             xmlns="http://www.w3.org/2000/svg"
             data-name="Layer 1"
-            width="904.51179"
-            height="587.86116"
             viewBox="0 0 904.51179 587.86116"
           >
             <path
@@ -468,6 +363,96 @@ const LoginModal = (props: ILoginModalProps) => {
             />
           </svg>
         </div>
+      </Col>
+
+      <Col lg="4" className={'order-lg-1 col-lg-4 col-12'}>
+        <Card className="bg-secondary shadow border-0">
+          <Form onSubmit={handleLoginSubmit}>
+            <CardHeader className="bg-transparent pb-0 pt-0" id="login-title">
+              <div className="text-muted text-center mt-2 mb-3 row ">
+                <h1 className={'col-12'}>
+                  <Translate contentKey="login.title">Sign in</Translate>
+                </h1>
+                <p className={'col-12 text-success h2'}>
+                  <span className={'mr-2 p text-dark'}>
+                    {' '}
+                    <Translate contentKey="register.or">Sign up</Translate>{' '}
+                  </span>
+                  <a href={'/account/register'} className="pe-auto text-success text-decoration-none border-0">
+                    {' '}
+                    <Translate contentKey="register.signup">Sign up</Translate>{' '}
+                  </a>
+                </p>
+              </div>
+            </CardHeader>
+            <CardBody className="px-lg-5 py-lg-5">
+              <Row>
+                <Col md="12">
+                  {loginError ? (
+                    <Alert color="danger" data-cy="loginError">
+                      <Translate contentKey="login.messages.error.authentication">
+                        <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                      </Translate>
+                    </Alert>
+                  ) : null}
+                </Col>
+                <Col md="12">
+                  <ValidatedField
+                    name="username"
+                    label={translate('global.form.username.label')}
+                    placeholder={translate('global.form.username.placeholder')}
+                    required
+                    autoFocus
+                    data-cy="username"
+                    validate={{ required: 'Username cannot be empty!' }}
+                    register={register}
+                    error={errors.username}
+                    isTouched={touchedFields.username}
+                  />
+                  <Col className="d-flex justify-content-end mt--3 pr-0">
+                    <a
+                      className="text-blue pe-auto"
+                      onClick={e => {
+                        nav('/account/reset/request');
+                      }}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <small>
+                        {' '}
+                        <Translate contentKey="login.password.forgot"></Translate>
+                      </small>
+                    </a>
+                  </Col>
+                  <ValidatedField
+                    name="password"
+                    type="password"
+                    label={translate('login.form.password')}
+                    placeholder={translate('login.form.password.placeholder')}
+                    required
+                    data-cy="password"
+                    validate={{ required: 'Password cannot be empty!' }}
+                    register={register}
+                    error={errors.password}
+                    isTouched={touchedFields.password}
+                  />
+                  <ValidatedField
+                    name="rememberMe"
+                    type="checkbox"
+                    check
+                    label={translate('login.form.rememberme')}
+                    value={true}
+                    register={register}
+                  />
+                </Col>
+              </Row>
+            </CardBody>
+            <ModalFooter className="d-flex justify-content-center pt-0">
+              <Button color="success" type="submit" data-cy="submit">
+                <Translate contentKey="login.form.button">Sign in</Translate>
+              </Button>
+            </ModalFooter>
+          </Form>
+        </Card>
       </Col>
     </Row>
   );
