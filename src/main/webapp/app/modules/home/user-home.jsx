@@ -119,10 +119,10 @@ const UserHome = () => {
             ) : (
               <>
                 {applications.data?.content.map(data => (
-                  <Card border="primary" className={'col-12 col-lg-3 col-md-4 col-sm-6  ml-0 mr-lg-2 mt-2 card-hover pl-4 pr-2 w-50 '}
+                  <Card border="gray" className={'col-12 col-lg-3 col-md-4 col-sm-6  ml-0 mr-lg-2 mt-2 card-hover pl-4 pr-2 w-50 '}
                   >
                     <CardHeader
-                      // onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
+                      onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
                       className="text-left font-weight-bold border-0 pl-0 pr-0  pt-md-4 pb-0 d-flex pr-0 justify-content-between "
                     >
                       <span className="h3 "
@@ -133,30 +133,7 @@ const UserHome = () => {
                       <div className="text-center position-relative">
                       <div style={{ width: 50, height: 50 }}>
                         {data?.status === 'Authorized' ? (
-                          <>
-                            <ReactToPrint
-                              onBeforeGetContent={async () => {
-                                await handleBeforeGetContent({
-                                  title: translate('userDashboard.' + data?.form?.title),
-                                  companyName: account.firstName,
-                                  location: "Cabinda",
-                                  fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
-                                  type: data?.form?.id,
-                                  link: window.location.origin + `/certificate-validator/${data?.id}`
-                                })
-                              }}
-                              trigger={() =>
-                                  <img  className="w-100 h-100 text-right position-relative left-4" src={medal} />
-
-                            }
-                              content={() => certRef.current}
-                            />
-
-                            {printData && <Certificate
-                              data={printData}
-                              ref={certRef} />}
-                          </>
-
+                       <img  className="w-100 h-100 text-right position-relative left-4" src={medal} />
                         ) : data?.status === 'Denied' ? (
                           <CircularProgressbar className="position-relative left-1" value={0} text={`0%`} />
                         ) : data.status === 'undefined' ? (

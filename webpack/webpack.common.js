@@ -69,13 +69,13 @@ module.exports = async options => {
       module: {
         rules: [
           {
-            test: /\.(tsx|jsx|ts|js)?$/,
+            test: /\.(tsx|jsx|ts|js|pdf)?$/,
             use: getTsLoaderRule(options.env),
             include: [utils.root('./src/main/webapp/app')],
             exclude: [utils.root('node_modules')],
           },
           {
-            test: /\.(png|jpe?g|gif)$/i,
+            test: /\.(png|jpe?g|gif|pdf)$/i,
             use: [
               {
                 loader: 'file-loader',

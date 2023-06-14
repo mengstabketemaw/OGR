@@ -37,14 +37,16 @@ export const AccountMenu = ({ isAuthenticated }) => {
   const authentication = useAppSelector(state => state.authentication);
 
   return (
-    <NavDropdown
-      icon="user"
-      name={isAuthenticated ? account.login : translate('global.menu.account.main')}
-      id="account-menu"
-      data-cy="accountMenu"
-    >
-      {authentication.isAuthenticated ? accountMenuItemsAuthenticated() : accountMenuItems()}
-    </NavDropdown>
+    <>
+      <NavDropdown
+        // icon="user"
+        name={isAuthenticated ? account.login : translate('global.menu.account.main')}
+        id="account-menu"
+        data-cy="accountMenu"
+      >
+        {authentication.isAuthenticated ? accountMenuItemsAuthenticated() : accountMenuItems()}
+      </NavDropdown>
+    </>
   );
 };
 
