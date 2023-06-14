@@ -47,7 +47,7 @@ export const App = () => {
     <BrowserRouter basename={baseHref}>
       {isLandingPage && deviceWidth > 768 ? (
         <ErrorBoundary>
-          <Landing />
+          <Landing isAdmin={isAdmin} />
         </ErrorBoundary>
       ) : (
         <div className="app-container rounded-top " style={{ paddingTop }}>

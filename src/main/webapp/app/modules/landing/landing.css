@@ -2152,7 +2152,7 @@ ul {
   cursor: zoom-in;
 }
 .vision_bar {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
   background-position: top right;
   background-attachment: fixed;
@@ -2207,42 +2207,42 @@ ul {
   color: #2dce89;
 }
 .sec2.s21 {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
   transition: all 0.3s ease-out;
 }
 .sec2.s22 {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
   transition: all 0.3s ease-out;
 }
 .sec2.s23 {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
   transition: all 0.3s ease-out;
 }
 .sec2.s24 {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
   transition: all 0.3s ease-out;
 }
 .sec2.s21:hover {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
   transition: all 0.3s ease-out;
 }
 .sec2.s22:hover {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
   transition: all 0.3s ease-out;
 }
 .sec2.s23:hover {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
   transition: all 0.3s ease-out;
 }
 .sec2.s24:hover {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
   transition: all 0.3s ease-out;
 }
@@ -2282,23 +2282,23 @@ ul {
   height: 465px;
 }
 .vision_bar .sec2.s21 > div {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
 }
 .vision_bar .sec2.s22 > div {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
 }
 .vision_bar .sec2.s23 > div {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
 }
 .vision_bar .sec2.s24 > div {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
 }
 .infograph {
-  background: url(data:) no-repeat;
+  background: no-repeat;
   background-size: cover;
   background-position: top right;
   background-attachment: fixed;
@@ -2559,7 +2559,7 @@ ul {
 }
 .browsinglinks {
   width: 100%;
-  background: url(data:) no-repeat right center;
+  background: no-repeat right center;
   background-size: 100% 100%;
   padding: 36px;
   color: #fff;
