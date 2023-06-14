@@ -106,7 +106,10 @@ const LoginModal = (props: ILoginModalProps) => {
                       nav('/account/reset/request');
                     }}
                   >
-                    <small>Forgot password?</small>
+                    <small>
+                      {' '}
+                      <Translate contentKey="login.password.forgot"></Translate>
+                    </small>
                   </a>
                 </Col>
                 <Col className="text-right" xs="6">
@@ -116,7 +119,9 @@ const LoginModal = (props: ILoginModalProps) => {
                       nav('/account/register');
                     }}
                   >
-                    <small>Create new account</small>
+                    <small>
+                      <Translate contentKey="global.messages.info.register.link"></Translate>
+                    </small>
                   </a>
                 </Col>
               </Row>
@@ -145,7 +150,9 @@ const LoginModal = (props: ILoginModalProps) => {
       </Col>
       <Col lg="8" md="8" className="justify-content-end">
         <div className="header-body text-center mb-7">
-          <h1 className="text-black">Welcome</h1>
+          <h1 className="text-black align-self-center">
+            <Translate contentKey={'userDashboard.welcome'} />
+          </h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             data-name="Layer 1"
