@@ -1813,7 +1813,6 @@ ul {
   position: relative;
 }
 .hblock .title a:after {
-  content: '';
   width: 115px;
   height: 4px;
   background-color: #2dce89;
@@ -2080,7 +2079,6 @@ ul {
   color: #2dce89;
 }
 .tabs li.current:after {
-  content: '';
   width: 115px;
   height: 4px;
   background-color: #2dce89;
@@ -2183,15 +2181,16 @@ ul {
   display: inline-block;
 }
 .visionbtn span {
-  opacity: 0;
+  opacity: 1;
   display: inline-block;
   transition: all 0.3s ease-out;
+  color: #fff;
 }
-.visionbtn:hover span {
-  opacity: 1;
-  padding-left: 15px;
-  transition: all 0.3s ease-out;
-}
+/*.visionbtn:hover span {*/
+/*  opacity: 1;*/
+/*  padding-left: 15px;*/
+/*  transition: all 0.3s ease-out;*/
+/*}*/
 .sec1 {
   float: left;
   width: 40%;
@@ -2323,7 +2322,6 @@ ul {
   position: relative;
 }
 .infograph .title a:after {
-  content: '';
   width: 115px;
   height: 4px;
   background-color: #2dce89;
@@ -2526,7 +2524,7 @@ ul {
   display: block;
 }
 .project .slick-slide .pdes span {
-  color: #42b983;
+  color: #4e4e4e;
 }
 .project .slick-slide .pdate {
   color: #989898;
@@ -2651,7 +2649,6 @@ ul {
   position: relative;
 }
 .topfooter:after {
-  content: '';
   position: absolute;
   top: 121px;
   width: 100%;
@@ -2680,7 +2677,6 @@ ul {
   margin-bottom: 20px;
 }
 .ful li:first-child:after {
-  content: '';
   width: 115px;
   height: 4px;
   background-color: #fff;
@@ -2782,7 +2778,6 @@ footer img {
   position: relative;
 }
 .voting.hblock .title:after {
-  content: '';
   width: 22%;
   height: 5px;
   display: block;
@@ -2792,7 +2787,6 @@ footer img {
 }
 #menu > li > ul li a:before,
 .ful li a:before {
-  content: '';
   font-family: 'Poppins', fontawesome;
   color: #fff;
   display: inline-block;
@@ -2817,7 +2811,6 @@ h1 {
   display: block;
 }
 .hblock .title a span:before {
-  content: '';
   font-family: 'Poppins', fontawesome;
   color: #fff;
   display: inline-block;
@@ -2829,7 +2822,6 @@ h1 {
   padding: 9px 0;
 }
 .browsing.hblock .title:after {
-  content: '';
   width: 29%;
   height: 5px;
   display: block;
@@ -2856,7 +2848,6 @@ h1 {
   transition: all 0.2s ease;
 }
 .more_imgs_vids:before {
-  content: '';
   font-family: 'Poppins', fontawesome;
   color: #41b883;
   display: inline-block;
@@ -2877,7 +2868,6 @@ h1 {
   position: relative;
 }
 .elan .slick-list:before {
-  content: '';
   width: 100%;
   height: 9px;
   display: block;
@@ -3069,7 +3059,6 @@ footer img {
   width: 15%;
 }
 .visionbtn span:before {
-  content: '';
   font-family: 'Poppins', fontawesome;
   color: #fff;
   display: inline-block;
@@ -3136,7 +3125,6 @@ footer > div {
 }
 .vote:after,
 .vote .captchacontainer:after {
-  content: '';
   clear: both;
   display: block;
 }

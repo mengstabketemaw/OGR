@@ -8,7 +8,7 @@ import refineryImage from './assets/refinery2.jpg';
 import individualIcon from './assets/individual.png';
 import businessIcon from './assets/businessIcon.png';
 import {MDBCarousel, MDBCarouselItem} from "mdb-react-ui-kit";
-import {Col} from "reactstrap";
+import {Button, Col} from "reactstrap";
 import news1 from './assets/news1.jpg'
 import news2 from './assets/news2.jpg'
 import news3 from './assets/news3.jpg'
@@ -23,6 +23,7 @@ import ambiente from "./assets/ambiente.png"
 import govServices from "./assets/govServices.png"
 import newService from "./assets/newService.png"
 import {Translate} from "react-jhipster";
+import {toast} from "react-toastify";
 
 
 
@@ -175,7 +176,7 @@ const Landing = (props) => {
                           color: "white",
                         }}
                       >
-                        Empowering Angola's Oil and Gas Industry
+                        <Translate contentKey={'landing.empower'}/>
                       </h1>
                       {!isMobile && (
                         <>
@@ -189,7 +190,7 @@ const Landing = (props) => {
                             }}
                           >
 
-                            Empowering Angola's Oil and Gas Industry
+                            <Translate contentKey={'landing.empower'}/>
                           </h1>
                           <h1
                             style={{
@@ -199,7 +200,7 @@ const Landing = (props) => {
                               color: "white",
                             }}
                           >
-                            Elevating the Energy Sector to New Heights
+                            <Translate contentKey={'landing.elevate'}/>
                           </h1>
                           <h2
                             style={{
@@ -209,14 +210,11 @@ const Landing = (props) => {
                               color: "white",
                             }}
                           >
-                            Regulatory Excellence
+                            <Translate contentKey={'landing.regulatory'}/>
                           </h2>
                         </>
                       )}
                     </div>
-
-
-
 
 
                   </div>
@@ -227,7 +225,7 @@ const Landing = (props) => {
                 <ul className="srv_ul" id="servicesSection" onMouseEnter={()=>{setShowServices(true)}}  onMouseLeave={()=>{setShowServices(false)}}>
                   <li>
                   <span className={"pb-3"}  >
-                    <img src={individualIcon} alt="License Services" /> License Services
+                    <img src={individualIcon} alt="License Services" /> <Translate contentKey={'landing.licences'}/>
                   </span>
                     <div id="services21" className={showServices  ? 'active d-flex justify-content-center  form-group flex-column ' : 'd-none'}>
                       <a href={(props.isAdmin ? '/formData' : '/permit') + '?name=Exploration Licence&pageKey=1'}  className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
@@ -243,13 +241,13 @@ const Landing = (props) => {
                         <Translate contentKey="licence.types.transportation" />
                       </a>
                       <a href="#" title="More ..." className="sf-hiden   form-control bg-transparent text-white border-0 border-none text-left pl-5 ">
-                        More ...
+                        <Translate contentKey={'landing.more'}/>
                       </a>
                     </div>
                   </li>
                   <li>
           <span className={"pb-3"} >
-            <img src={individualIcon} alt="Permit Services" /> Permit Services
+            <img src={individualIcon} alt="Permit Services" />  <Translate contentKey={'landing.permits'}/>
           </span>
                     <div id="services21" className={showServices  ? 'active d-flex justify-content-center  form-group flex-column ' : 'd-none'}>
                       <a href={(props.isAdmin ? '/formData' : '/permit') + '?name=Drilling Permit &pageKey=4'}  className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
@@ -265,35 +263,35 @@ const Landing = (props) => {
                         <Translate contentKey="permit.types.transport" />
                       </a>
                       <a href="#" title="More ..." className="sf-hiden   form-control bg-transparent text-white border-0 border-none text-left pl-5 ">
-                        More ...
+                        <Translate contentKey={'landing.more'}/>
                       </a>
                     </div>
                   </li>
                   <li>
           <span className={"pb-3"} >
-            <img src={govServices} alt="Government Services" /> Government Services
+            <img src={govServices} alt="Government Services" />  <Translate contentKey={'landing.government'}/>
           </span>
                     <div id="services21" className={showServices  ? 'active d-flex justify-content-center  form-group flex-column ' : 'd-none'}>
                       <a href="https://www.cisp.gov.ao:10443/" target="_blank"  className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
-                        Angola Commision
+                        <Translate contentKey={'landing.commision'}/>
                       </a>
                       <a href="https://www.sme.gov.ao/" target="_blank"  className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
-                        Foreign Services
+                        <Translate contentKey={'landing.foreign'}/>
                       </a>
                       <a href="https://mirex.gov.ao/PortalMIREX/#!/rede-diplomatica/mapa-da-rede-diplomatica/embaixadas" target="_blank" className=" form-control bg-transparent text-white border-0 border-none text-left pl-5">
-                        Diplomatic Network
+                        <Translate contentKey={'landing.diplomatic'}/>
                       </a>
                       <a href="#" target="_blank" className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
-                        Follow-up transactions
+                        <Translate contentKey={'landing.followUp'}/>
                       </a>
                       <a href="#" target="_blank" title="More ..." className="sf-hiden   form-control bg-transparent text-white border-0 border-none text-left pl-5 ">
-                        More ...
+                        <Translate contentKey={'landing.more'}/>
                       </a>
                     </div>
                   </li>
                   <li>
           <span className={"pb-3"}>
-            <img src={newService} alt="New Services" /> New Services
+            <img src={newService} alt="New Services" />  <Translate contentKey={'landing.announce'}/>
           </span>
                     <div id="services21" className={showServices  ? 'active d-flex justify-content-center  form-group flex-column ' : 'd-none'}>
                       <a href="#" title="Individuals Portal" className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
@@ -309,7 +307,7 @@ const Landing = (props) => {
                         Follow-up transactions
                       </a>
                       <a href="#" title="More ..." className="sf-hiden   form-control bg-transparent text-white border-0 border-none text-left pl-5 ">
-                        More ...
+                        <Translate contentKey={'landing.more'}/>
                       </a>
                     </div>
                   </li>
@@ -321,13 +319,14 @@ const Landing = (props) => {
               <span className="clr" style={{ marginTop : "50px",marginBottom : "50px" }} />
               <div className="newsbar block animatedParent animateOnce h-200">
                 <div className="news hblock animated fadeInUp go h-100">
-                  <div className="title">
+                  <div className="titl h1 font-weight-light">
                     <a
-                      className="fixedTip"
+                      className="fixedTip text-success"
                       href="#"
                       title="View news archive"
                     >
-                      News
+
+                      <Translate contentKey={'landing.news'}/>
                       <span />
                     </a>
                     <span className="clr" />
@@ -341,8 +340,8 @@ const Landing = (props) => {
                         src={news1}
                         alt='...'
                       >
-                        <h5 className={"text-white h-100 w-100"}>APPO Secretary General to Deliver Keynote Address at MSGBC Oil, Gas & Power 2023</h5>
-                        <p className={"text-responsive h-100 w-100"}>Dr. Omar Farouk Ibrahim, with his extensive experience in African governance...</p>
+                        <h5 className={"text-white h-100 w-100"}> <Translate contentKey={'landing.news1.h5'}/> </h5>
+                        <p className={"text-responsive h-100 w-100"}>  <Translate contentKey={'landing.news1.p'}/> </p>
                       </MDBCarouselItem>
                       <MDBCarouselItem
                         className='w-100 d-block'
@@ -350,8 +349,8 @@ const Landing = (props) => {
                         src={news2}
                         alt='...'
                       >
-                        <h5 className={"text-white h-100 w-100"}>Government Not Looking at Raising Oil and Gas Stakes, Clarifies Angolan Minister</h5>
-                        <p className={"text-responsive h-100 w-100"}>Angola’s Minister of Mines and Energy reiterated that the government is not looking at...</p>
+                        <h5 className={"text-white h-100 w-100"}> <Translate contentKey={'landing.news2.h5'}/> </h5>
+                        <p className={"text-responsive h-100 w-100"}>  <Translate contentKey={'landing.news2.p'}/> </p>
                       </MDBCarouselItem>
                       <MDBCarouselItem
                         className='w-100 d-block'
@@ -359,8 +358,8 @@ const Landing = (props) => {
                         src={news3}
                         alt='...'
                       >
-                        <h5 className={"text-white h-100 w-100"}>Angola, Technip Energies Ink Cooperation Agreement During Invest in African Energy Forum in Paris</h5>
-                        <p className={"text-responsive h-100 w-100"}>Ministry of Hydrocarbons signed a cooperation agreement with Technip Energies...</p>
+                        <h5 className={"text-white h-100 w-100"}> <Translate contentKey={'landing.news3.h5'}/> </h5>
+                        <p className={"text-responsive h-100 w-100"}>  <Translate contentKey={'landing.news3.p'}/> </p>
                       </MDBCarouselItem>
                     </MDBCarousel>
                   </Col>
@@ -368,9 +367,9 @@ const Landing = (props) => {
 
                 <div className="nb_left animated fadeInUp go">
                   <div className="informatic hblock">
-                    <div className="title">
+                    <div className="titl h1 font-weight-light">
                       <a className="fixedTip text-success"  title="View All">
-                        Information Platforms
+                        <Translate contentKey={'landing.info'}/>
                         <span />
                       </a>
                       <span className="clr" />
@@ -428,13 +427,13 @@ const Landing = (props) => {
                   </div>
                   <span className="clr" />
                   <div className="elan hblock">
-                    <div className="title">
+                    <div className="titl h2 font-weight-light">
                       <a
-                        className="fixedTip"
+                        className="fixedTip text-success"
                         href="#"
                         title="Review all announcements and circulars"
                       >
-                        Ministry Circulars
+                        <Translate contentKey={'landing.circulars'}/>
                         <span />
                       </a>
                       <span className="clr" />
@@ -580,13 +579,12 @@ const Landing = (props) => {
                           >
                             <a
                               href="#"
-                              title="View The MOF Announces Offering Lease of Lands in the Eastern Province for Auction "
                               tabIndex={-1}
                             >
                               {" "}
                               <span className="elanTitle">
-                          The MOF Announces Offering Lease of Lands in the
-                          Eastern Province for Auction{" "}
+                         <Translate contentKey={'landing.lease'}/>
+                                {" "}
                         </span>{" "}
                               <span>
                           <img
@@ -606,13 +604,11 @@ const Landing = (props) => {
                           >
                             <a
                               href="#"
-                              title="View The MOF Announces its Desire to Rent Shop for Buffet Activity and Document Photocopying in Taif"
                               tabIndex={-1}
                             >
                               {" "}
                               <span className="elanTitle">
-                          The MOF Announces its Desire to Rent Shop for Buffet
-                          Activity and Document Photocopying in Taif
+                         <Translate contentKey={'landing.request'}/>
                         </span>{" "}
                               <span>
                           <img
@@ -769,7 +765,7 @@ const Landing = (props) => {
                       href="#"
                       title="View all the infographics"
                     >
-                      Budget 2023
+                      <Translate contentKey={'landing.budget'}/>
                       <span className="sf-hidden" />
                     </a>
                     <span className="clr" />
@@ -1079,7 +1075,7 @@ const Landing = (props) => {
                         href="#"
                         title="View all documents"
                       >
-                        Document Library
+                        <Translate contentKey={'landing.document'}/>
                         <span />
                       </a>
                       <span className="clr" />
@@ -1099,7 +1095,7 @@ const Landing = (props) => {
                           src={require('./assets/regulation.png').default}
                           alt="homedoc_hover0"
                         />
-                        <span>Regulations and Instructions</span>
+                        <span><Translate contentKey={'landing.regulations'}/></span>
                       </a>
                       <a
                         title="View Contracts and Projects"
@@ -1114,7 +1110,7 @@ const Landing = (props) => {
                           src={require('./assets/contract.png').default}
                           alt="homedoc_hover1"
                         />
-                        <span>Contracts and Projects</span>
+                        <span><Translate contentKey={'landing.contract'}/></span>
                       </a>
                       <a
                         title="View Ministry Models"
@@ -1129,7 +1125,7 @@ const Landing = (props) => {
                           src={require('./assets/ministry.png').default}
                           alt="homedoc_hover2"
                         />
-                        <span>Ministry Models</span>
+                        <span><Translate contentKey={'landing.ministry'}/></span>
                       </a>
                       <a
                         title="View Statistical Data"
@@ -1144,7 +1140,7 @@ const Landing = (props) => {
                           src={require('./assets/statistical.png').default}
                           alt="homedoc_hover3"
                         />
-                        <span>Statistical Data</span>
+                        <span><Translate contentKey={'landing.statistical'}/></span>
                       </a>
                       <a
                         title="View Budget Data"
@@ -1159,7 +1155,7 @@ const Landing = (props) => {
                           src={require('./assets/budget2.png').default}
                           alt="homedoc_hover4"
                         />
-                        <span>Budget Data</span>
+                        <span><Translate contentKey={'landing.budgetData'}/></span>
                       </a>
                       <a
                         title="View MOF Contracts"
@@ -1174,7 +1170,7 @@ const Landing = (props) => {
                           src={require('./assets/mof.png').default}
                           alt="homedoc_hover5"
                         />
-                        <span>MOF Contracts</span>
+                        <span><Translate contentKey={'landing.mofCons'}/></span>
                       </a>
                       <a
                         title="View Governmental Agreements"
@@ -1189,7 +1185,7 @@ const Landing = (props) => {
                           src={require('./assets/gov.png').default}
                           alt="homedoc_hover6"
                         />
-                        <span>Governmental Agreements</span>
+                        <span><Translate contentKey={'landing.govAgree'}/></span>
                       </a>
                     </div>
                   </div>
@@ -1203,7 +1199,7 @@ const Landing = (props) => {
                         className="more_imgs_vids"
                       />
                       <ul className="tabs">
-                        <li className="current">Photo Gallery</li>
+                        <li className="current"><Translate contentKey={'landing.photo'}/></li>
 
                       </ul>
 
@@ -1298,7 +1294,7 @@ const Landing = (props) => {
                 <div className="animated fadeInUp go">
                   <div className="sec1">
                     <h1>
-                      “The Angola Strategy for 2025” with the goal to assure an inclusive and sustainable growth of the country, aiming to promote human development in Angola.
+                      <Translate contentKey={'landing.infoStrategy'}/>
                     </h1>
                     <span className="clr" />
                     <a
@@ -1306,13 +1302,13 @@ const Landing = (props) => {
                       href="#"
                       title="Ministry of Finance's strategy"
                     >
-                      Learn about the Ministry of Energy and Water's strategy
+                      <Translate contentKey={'landing.learn'}/>
                       <span />
                     </a>
                     <span className="clr" />
                   </div>
                   <div className="sec2 s21 srclose">
-                    <span title="View more">Transparency</span>
+                    <span title="View more"> <Translate contentKey={'landing.transparency'}/> </span>
                     <div>
                       <a className="m_close" title="close">
                         <img
@@ -1340,7 +1336,7 @@ const Landing = (props) => {
                     </div>
                   </div>
                   <div className="sec2 s22 srclose">
-                    <span title="View more">Commitment</span>
+                    <span title="View more"><Translate contentKey={'landing.commitment'}/></span>
                     <div>
                       <a className="m_close" title="close">
                         <img
@@ -1367,7 +1363,7 @@ const Landing = (props) => {
                     </div>
                   </div>
                   <div className="sec2 s23 srclose">
-                    <span title="View more">Partnership</span>
+                    <span title="View more"><Translate contentKey={'landing.partnership'}/></span>
                     <div>
                       <a className="m_close" title="close">
                         <img
@@ -1393,7 +1389,7 @@ const Landing = (props) => {
                     </div>
                   </div>
                   <div className="sec2 s24 srclose">
-                    <span title="View more">Accomplishment</span>
+                    <span title="View more"><Translate contentKey={'landing.accomplishment'}/></span>
                     <div>
                       <a className="m_close" title="close">
                         <img
@@ -1424,13 +1420,13 @@ const Landing = (props) => {
               <span className="clr" />
               <div className="events_bar block animatedParent animateOnce">
                 <div className="events hblock animated fadeInUp go">
-                  <div className="title">
+                  <div className="titl h1 font-weight-light ">
                     <a
-                      className="fixedTip"
+                      className="fixedTip text-success"
                       href="#"
                       title="View all events"
                     >
-                      Ministry Events
+                      <Translate contentKey={'landing.events'}/>
                       <span />
                     </a>
                     <span className="clr" />
@@ -1469,12 +1465,11 @@ const Landing = (props) => {
                           >
                             {" "}
                             <span className="date">
-                        <strong>16</strong>February
+                        <strong>16</strong><Translate contentKey={'landing.february'}/>
                       </span>{" "}
                             <div className="event_info">
                         <span className="eventTitle">
-                          Webinar: Investing in Research to Enable the Knowledge
-                          Economy
+                          <Translate contentKey={'landing.webinar'}/>
                         </span>{" "}
                               <span className="location">
                           {" "}
@@ -1491,7 +1486,7 @@ const Landing = (props) => {
                               className="cls-1"
                             />
                           </svg>{" "}
-                                Virtual{" "}
+                                <Translate contentKey={'landing.virtual'}/>{" "}
                         </span>{" "}
                               <span className="times">
                           {" "}
@@ -1812,18 +1807,16 @@ const Landing = (props) => {
                         >
                           {" "}
                           <a
-                            title="View Webinar: Investing in Research to Enable the Knowledge Economy"
                             href="#"
                             tabIndex={0}
                           >
                             {" "}
                             <span className="date">
-                        <strong>16</strong>February
+                        <strong>16</strong><Translate contentKey={'landing.february'}/>
                       </span>{" "}
                             <div className="event_info">
                         <span className="eventTitle">
-                          Webinar: Investing in Research to Enable the Knowledge
-                          Economy
+                          <Translate contentKey={'landing.webinar'}/>
                         </span>{" "}
                               <span className="location">
                           {" "}
@@ -1840,7 +1833,7 @@ const Landing = (props) => {
                               className="cls-1"
                             />
                           </svg>{" "}
-                                Virtual{" "}
+                                <Translate contentKey={'landing.virtual'}/>{" "}
                         </span>{" "}
                               <span className="times">
                           {" "}
@@ -1874,18 +1867,17 @@ const Landing = (props) => {
                         >
                           {" "}
                           <a
-                            title="View  Future Investment Initiative"
                             href="#"
                             tabIndex={0}
                           >
                             {" "}
                             <span className="date">
-                        <strong>27</strong>January
+                        <strong>27</strong><Translate contentKey={'landing.january'}/>
                       </span>{" "}
                             <div className="event_info">
                         <span className="eventTitle">
                           {" "}
-                          Future Investment Initiative
+                          <Translate contentKey={'landing.future'}/>
                         </span>{" "}
                               <span className="location">
                           {" "}
@@ -1902,7 +1894,7 @@ const Landing = (props) => {
                               className="cls-1"
                             />
                           </svg>{" "}
-                                Virtual{" "}
+                                <Translate contentKey={'landing.virtual'}/>{" "}
                         </span>{" "}
                               <span className="times">
                           {" "}
@@ -2074,13 +2066,12 @@ const Landing = (props) => {
                   </div>
                 </div>
                 <div className="project hblock animated fadeInUp go">
-                  <div className="title">
+                  <div className="titl h1 font-weight-light">
                     <a
-                      className="fixedTip"
+                      className="fixedTip text-success"
                       href="#"
-                      title="View all ministry projects"
                     >
-                      Ministry Projects
+                      <Translate contentKey={'landing.strategy'}/>
                       <span />
                     </a>
                     <span className="clr" />
@@ -2110,7 +2101,6 @@ const Landing = (props) => {
                           {" "}
                           <a
                             href="#"
-                            title="Details of King Salman International Convention Center"
                             tabIndex={-1}
                           >
                             {" "}
@@ -2155,25 +2145,16 @@ const Landing = (props) => {
                           role="option"
                           aria-describedby="slick-slide70"
                         >
-                          {" "}
-                          <a
-                            href="#"
-                            title="Details of Zamzam Well Renovation"
-                            tabIndex={-1}
-                          >
-                            {" "}
-                            <div
-                              className="projects_slider_img"
-                              style={{ backgroundImage: "var(--sf-img-17)" }}
-                            />{" "}
-                            <span className="pdes">
+
+                            <span className="des">
                         <strong>Zamzam Well Renovation</strong>Following the
                         directions of the Custodian of the Two Holy Mosques,
                         King Salman bin Abdulaziz Al Saud, to develop the Two
                         Holy Mosques and serve their visitors and ensure their
                         comfort ... <span>More</span>{" "}
-                      </span>{" "}
-                            <span className="pdate">
+                          {" "}
+                          </span>{" "}
+                          <span className="pdate">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -2187,10 +2168,9 @@ const Landing = (props) => {
                             className="cls-1"
                           />
                         </svg>{" "}
-                              03/10/2018
+                            03/10/2018
                       </span>{" "}
-                            <span className="clr" />{" "}
-                          </a>{" "}
+                          <span className="clr" />{" "}
                         </div>
                         <div
                           className="slick-slide"
@@ -2250,24 +2230,18 @@ const Landing = (props) => {
                           {" "}
                           <a
                             href="#"
-                            title="Details of King Salman International Convention Center"
                             tabIndex={0}
+                            className={"p-3"}
                           >
-                            {" "}
-                            <div
-                              className="projects_slider_img"
-                              style={{ backgroundImage: "var(--sf-img-16)" }}
-                            />{" "}
-                            <span className="pdes">
-                        <strong>
-                          King Salman International Convention Center
-                        </strong>
-                        ​King Salman International Convention Center is in Al
-                        Faisaliah district in the north-west of Madinah. It is
-                        located about six kilometers away from the Prophet's
-                        Mosque ... <span>More</span>{" "}
-                      </span>{" "}
-                            <span className="pdate">
+
+                            <span className="p-3 pdes text-dark">
+                            <strong>
+                              <Translate contentKey={'landing.theStrategy'}/>
+                            </strong>
+                              <Translate contentKey={'landing.theStrategyDetail'}/>
+                             </span>{" "}
+
+                            <span className="pdate p-3">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -2383,84 +2357,69 @@ const Landing = (props) => {
               </div>
               <div className="votingbar block animatedParent animateOnce">
                 <div className="browsing hblock animated fadeInUp go">
-                  <div className="title">Most Popular Content</div>
+                  <div className="title"> <Translate contentKey={'landing.popular'}/></div>
                   <span className="clr" />
-                  <div className="browsinglinks" id="tagged_words">
+                  <div className="browsinglinks text-success" id="tagged_words">
                     <a
-                      title="Search Citizen version"
-                      className="big"
+                      className="big text-success"
                       href="#"
                     >
-                      Citizen version
+                      <Translate contentKey={'landing.citizen'}/>
                     </a>{" "}
                     |{" "}
                     <a
-                      title="Search Budget 2023"
-                      className="big"
+                      className="big text-success"
                       href="#"
                     >
-                      Budget 2023
+                      <Translate contentKey={'landing.budget'}/>
                     </a>{" "}
                     |{" "}
                     <a
-                      title="Search Events"
-                      className="small"
+                      className="small text-success"
                       href="#"
                     >
-                      Events
+                      <Translate contentKey={'landing.events2'}/>
+
                     </a>{" "}
                     |{" "}
                     <a
-                      title="Search E-Services"
-                      className="medium"
+                      className="medium text-success"
                       href="#"
                     >
-                      E-Services
-                    </a>{" "}
-                    |{" "}
-                    <p
-                      className="small"
-                      href="#"
-                    >
-                      News
-                    </p>{" "}
-                    |{" "}
-                    <a
-                      title="Search  Sukuk Issuance Programme"
-                      className="small"
-                      href="#"
-                    >
-                      {" "}
-                      Sukuk Issuance Programme
+                      <Translate contentKey={'landing.eservices'}/>
                     </a>{" "}
                     |{" "}
                     <a
-                      title="Search Project Support fund"
-                      className="small"
+                      className="small text-success"
                       href="#"
                     >
-                      Project Support fund
+                      <Translate contentKey={'landing.news'}/>
                     </a>{" "}
                     |{" "}
                     <a
-                      title="Search Debt management office"
-                      className="medium"
+                      className="small text-success"
                       href="#"
                     >
-                      Debt management office
+                      <Translate contentKey={'landing.fund'}/>
+                    </a>{" "}
+                    |{" "}
+                    <a
+                      className="medium text-success"
+                      href="#"
+                    >
+                      <Translate contentKey={'landing.debt'}/>
                     </a>
                   </div>
                 </div>
                 <div className="voting hblock animated fadeInUp go">
-                  <div className="title">Voting</div>
+                  <div className="title"><Translate contentKey={'landing.voting'}/></div>
                   <div className="t_conts vote">
                     <div className="ques">
                 <span
                   id="ctl00_PlaceHolderMain_ctl00_lblQuestionText"
                   className="ques"
                 >
-                  How satisfied are you with the e-services provided by the
-                  Ministry?
+                 <Translate contentKey={'landing.satisfied'}/>
                 </span>
                     </div>
                     <div className="options">
@@ -2469,259 +2428,98 @@ const Landing = (props) => {
                         type="radio"
                         id="RadioGroup1"
                         defaultValue="3b7454c7-8160-463a-9785-7fd0ea69a260"
+                        className={"mr-1"}
                       />
-                      Very satisfied
+                      <Translate contentKey={'landing.verySat'}/>
                       <div className="clr" />
                       <input
                         name="RadioGroup1"
                         type="radio"
                         id="RadioGroup1"
                         defaultValue="2df7a05a-5a40-4c85-ade6-30c254d01a3a"
+                        className={"mr-1"}
                       />
-                      Satisfied
+                      <Translate contentKey={'landing.sat'}/>
                       <div className="clr" />
                       <input
                         name="RadioGroup1"
                         type="radio"
                         id="RadioGroup1"
                         defaultValue="8386f10a-a7ab-4f73-8d8b-c6af069567e4"
+                        className={"mr-1"}
                       />
-                      Partly satisfied
+                      <Translate contentKey={'landing.partly'}/>
                       <div className="clr" />
                       <input
                         name="RadioGroup1"
                         type="radio"
                         id="RadioGroup1"
                         defaultValue="3a0e0251-7213-4f4c-9d8a-5eb345383acb"
+                        className={"mr-1"}
                       />
-                      Not at all satisfied
+                      <Translate contentKey={'landing.notSat'}/>
                       <div className="clr" />
                     </div>
                     <div className="vote_links" id="vote_links">
-                      <a style={{ cursor: "pointer" }} title="Vote">
-                        Vote
+                      <a style={{ cursor: "pointer" }} onClick={()=>{toast.success("Thank you for your feedback")}} title="Vote">
+                        <Translate contentKey={'landing.vote'}/>
                       </a>{" "}
-                      |{" "}
-                      <a style={{ cursor: "pointer" }} title="Results">
-                        Results
-                      </a>{" "}
-                      |{" "}
-                      <a
-                        title="Recent Polls"
-                        href="#"
-                      >
-                        Recent Polls
-                      </a>
                     </div>
                   </div>
                 </div>
                 <div className="implinks hblock animated fadeInUp go">
-                  <div className="title">
+                  <div className="titl h1 font-weight-light">
                     <a
-                      className="fixedTip"
+                      className="fixedTip text-success"
                       href="#"
                       title="View all links"
                     >
-                      Useful Links
+                      <Translate contentKey={'landing.links'}/>
                       <span />
                     </a>
                     <span className="clr" />
                   </div>
                   <span className="clr" />
                   <div className="ilinks">
-                    <label style={{ display: "none" }} htmlFor="linksCategory">
-                      select
-                    </label>
-                    <select name="linksCategory" id="linksCategory">
-                      <option selected="">Interests and development funds</option>
-                      <option>Ministries</option>
-                      <option>Banks</option>
-                      <option>Finance</option>
-                      <option>Government universities</option>
-                      <option>Contacts and financial institutions</option>
-                      <option>Bodies</option>
-                      <option>Related To The Government Entity</option>
-                    </select>
+
                     <div
                       id="linksContent"
                       className="ilinks_slider slick-initialized slick-slider"
                     >
-                      <img
-                        data-role="none"
-                        className="slick-next slick-arrow"
-                        aria-label="next"
-                        title="Previous"
-                        alt=""
-                        src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="44" height="137"><rect fill-opacity="0"/></svg>'
-                        style={{
-                          backgroundBlendMode: "normal!important",
-                          backgroundClip: "content-box!important",
-                          backgroundPosition: "50% 50%!important",
-                          backgroundColor: "rgba(0,0,0,0)!important",
-                          backgroundImage: "var(--sf-img-25)!important",
-                          backgroundSize: "100% 100%!important",
-                          backgroundOrigin: "content-box!important",
-                          backgroundRepeat: "no-repeat!important"
-                        }}
-                      />
-                      <div aria-live="polite" className="slick-list draggable">
-                        <div
-                          className="slick-track"
-                          style={{
-                            opacity: 1,
-                            width: 1280,
-                            transform: "translate3d(-320px,0px,0px)"
-                          }}
-                          role="listbox"
-                        >
-                          <div
-                            className="slick-slide slick-cloned"
-                            data-slick-index={-1}
-                            aria-hidden="true"
-                            style={{ width: 320 }}
-                            tabIndex={-1}
-                          >
-                            <a
-                              title="View Saudi Vision 2030"
-                              target="_blank"
-                              href="https://vision2030.gov.sa/en/node"
-                              tabIndex={-1}
-                            >
-                              <img
-                                src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="210" height="175"><rect fill-opacity="0"/></svg>'
-                                alt="impLink1"
-                                style={{
-                                  backgroundBlendMode: "normal!important",
-                                  backgroundClip: "content-box!important",
-                                  backgroundPosition: "50% 50%!important",
-                                  backgroundColor: "rgba(0,0,0,0)!important",
-                                  backgroundImage: "var(--sf-img-67)!important",
-                                  backgroundSize: "100% 100%!important",
-                                  backgroundOrigin: "content-box!important",
-                                  backgroundRepeat: "no-repeat!important"
-                                }}
-                              />
-                              <br />
-                              Saudi Vision 2030
-                            </a>
-                          </div>
-                          <div
-                            className="slick-slide slick-current slick-active"
-                            data-slick-index={0}
-                            aria-hidden="false"
-                            style={{ width: 320 }}
-                            tabIndex={-1}
-                            role="option"
-                          >
-                            <a
-                              title="View The Embassy of the Kingdom of Saudia Arabia in Washington"
-                              target="_blank"
-                              href="https://www.saudiembassy.net/"
-                              tabIndex={0}
-                            >
-                              <img
-                                src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="210" height="175"><rect fill-opacity="0"/></svg>'
-                                alt="impLink0"
-                                style={{
-                                  backgroundBlendMode: "normal!important",
-                                  backgroundClip: "content-box!important",
-                                  backgroundPosition: "50% 50%!important",
-                                  backgroundColor: "rgba(0,0,0,0)!important",
-                                  backgroundImage: "var(--sf-img-68)!important",
-                                  backgroundSize: "100% 100%!important",
-                                  backgroundOrigin: "content-box!important",
-                                  backgroundRepeat: "no-repeat!important"
-                                }}
-                              />
-                              <br />
-                              The Embassy of the Kingdom of Saudia Arabia in
-                              Washington
-                            </a>
-                          </div>
-                          <div
-                            className="slick-slide"
-                            data-slick-index={1}
-                            aria-hidden="true"
-                            style={{ width: 320 }}
-                            tabIndex={-1}
-                            role="option"
-                          >
-                            <a
-                              title="View Saudi Vision 2030"
-                              target="_blank"
-                              href="https://vision2030.gov.sa/en/node"
-                              tabIndex={-1}
-                            >
-                              <img
-                                src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="210" height="175"><rect fill-opacity="0"/></svg>'
-                                alt="impLink1"
-                                style={{
-                                  backgroundBlendMode: "normal!important",
-                                  backgroundClip: "content-box!important",
-                                  backgroundPosition: "50% 50%!important",
-                                  backgroundColor: "rgba(0,0,0,0)!important",
-                                  backgroundImage: "var(--sf-img-67)!important",
-                                  backgroundSize: "100% 100%!important",
-                                  backgroundOrigin: "content-box!important",
-                                  backgroundRepeat: "no-repeat!important"
-                                }}
-                              />
-                              <br />
-                              Saudi Vision 2030
-                            </a>
-                          </div>
-                          <div
-                            className="slick-slide slick-cloned"
-                            data-slick-index={2}
-                            aria-hidden="true"
-                            style={{ width: 320 }}
-                            tabIndex={-1}
-                          >
-                            <a
-                              title="View The Embassy of the Kingdom of Saudia Arabia in Washington"
-                              target="_blank"
-                              href="https://www.saudiembassy.net/"
-                              tabIndex={-1}
-                            >
-                              <img
-                                src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="210" height="175"><rect fill-opacity="0"/></svg>'
-                                alt="impLink0"
-                                style={{
-                                  backgroundBlendMode: "normal!important",
-                                  backgroundClip: "content-box!important",
-                                  backgroundPosition: "50% 50%!important",
-                                  backgroundColor: "rgba(0,0,0,0)!important",
-                                  backgroundImage: "var(--sf-img-68)!important",
-                                  backgroundSize: "100% 100%!important",
-                                  backgroundOrigin: "content-box!important",
-                                  backgroundRepeat: "no-repeat!important"
-                                }}
-                              />
-                              <br />
-                              The Embassy of the Kingdom of Saudia Arabia in
-                              Washington
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <img
-                        data-role="none"
-                        className="slick-prev slick-arrow"
-                        aria-label="previous"
-                        title="Next"
-                        alt=""
-                        src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="44" height="137"><rect fill-opacity="0"/></svg>'
-                        style={{
-                          backgroundBlendMode: "normal!important",
-                          backgroundClip: "content-box!important",
-                          backgroundPosition: "50% 50%!important",
-                          backgroundColor: "rgba(0,0,0,0)!important",
-                          backgroundImage: "var(--sf-img-27)!important",
-                          backgroundSize: "100% 100%!important",
-                          backgroundOrigin: "content-box!important",
-                          backgroundRepeat: "no-repeat!important"
-                        }}
-                      />
+                      <ul className="text-decoration-none form-group" >
+                        <li className="form-control border-0">
+                          <a className={"text-decoration-none text-success h4 font-weight-light"} href={"https://www.governo.gov.ao/"}>
+                            <Translate contentKey={'landing.govAngola'}/>
+                          </a>
+                        </li>
+                        <li className="form-control border-0">
+                          <a className={"text-decoration-none text-success h4 font-weight-light"} href={"https://www.minfin.gov.ao/PortalMinfin/#!/"}>
+                            <Translate contentKey={'landing.finance'}/>
+                          </a>
+                        </li>
+                        <li className="form-control border-0">
+                          <a className={"text-decoration-none text-success h4 font-weight-light"} href={"https://www.bna.ao/#/pt"}>
+                            <Translate contentKey={'landing.bank'}/>
+                          </a>
+                        </li>
+                        <li className="form-control border-0">
+                          <a className={"text-decoration-none text-success h4 font-weight-light"} href={"http://amchamangola.org/aipex/"}>
+                            <Translate contentKey={'landing.agency'}/>
+                          </a>
+                        </li>
+                        <li className="form-control border-0">
+                          <a className={"text-decoration-none text-success h4 font-weight-light"} href={"https://www.sonangol.co.ao/English/Pages/Home.aspx/"}>
+                            <Translate contentKey={'landing.sonangol'}/>
+                          </a>
+                        </li>
+                        <li className="form-control border-0">
+                          <a className={"text-decoration-none text-success h4 font-weight-light"} href={"https://parlamento.ao/#http://www.parlamento.ao/glue/AN_Navigation_home.jsp?/"}>
+                            <Translate contentKey={'landing.assembly'}/>
+                          </a>
+                        </li>
+                      </ul>
+
+
                     </div>
                   </div>
                 </div>
@@ -2733,137 +2531,137 @@ const Landing = (props) => {
           <div className="topfooter">
             <div id="footermenu" className="noindex">
               <ul className="ful">
-                <li>General Services</li>
+                <li><Translate contentKey={'landing.genServices'}/></li>
                 <li>
                   <a href="#">
-                    SiteMap
+                    <Translate contentKey={'landing.sitemap'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Subscribe to the mailing list
+                    <Translate contentKey={'landing.mailing'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Open Data
+                    <Translate contentKey={'landing.openData'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Portal Statistics
+                    <Translate contentKey={'landing.portalStats'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Unified National Platform
+                    <Translate contentKey={'landing.natPlatform'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Bureau Of Experts At The Council Of Ministers
+                    <Translate contentKey={'landing.experts'}/>
                   </a>
                 </li>
               </ul>
               <ul className="ful">
-                <li>Communicate with visitors</li>
+                <li><Translate contentKey={'landing.communicate'}/></li>
                 <li>
                   <a href="#">
-                    Social Media
+                    <Translate contentKey={'landing.social'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Sustainable Development
+                    <Translate contentKey={'landing.sustain'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Add your Comments
+                    <Translate contentKey={'landing.comments'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    E-Participation
+                    <Translate contentKey={'landing.epart'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    The Visitor and Resident
+                    <Translate contentKey={'landing.visitor'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
                     {" "}
-                    Supporting Society Groups
+                    <Translate contentKey={'landing.society'}/>
                   </a>
                 </li>
               </ul>
               <ul className="ful">
-                <li>Policy</li>
+                <li><Translate contentKey={'landing.policy'}/></li>
                 <li>
                   <a href="#">
-                    User Charter
+                    <Translate contentKey={'landing.charter'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Data Sharing Interim Regulations
+                    <Translate contentKey={'landing.interim'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Privacy
+                    <Translate contentKey={'landing.privacy'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Terms of use
+                    <Translate contentKey={'landing.terms'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    The Open Data Policy
+                    <Translate contentKey={'landing.openDataPol'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
                     {" "}
-                    Service level Agreement{" "}
+                    <Translate contentKey={'landing.serviceLevel'}/>{" "}
                   </a>
                 </li>
               </ul>
               <ul className="ful">
-                <li>Help Center</li>
+                <li><Translate contentKey={'landing.help'}/></li>
                 <li>
-                  <a href="#">Contact Us</a>
+                  <a href="#"><Translate contentKey={'landing.contact'}/></a>
                 </li>
                 <li>
                   <a href="#">
-                    complaint and Inquiry Service
+                    <Translate contentKey={'landing.compliant'}/>
                   </a>
                 </li>
                 <li>
-                  <a href="#">FAQ</a>
+                  <a href="#"><Translate contentKey={'landing.faq'}/></a>
                 </li>
                 <li>
                   <a href="#">
-                    Secretary Phones
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    Branches Phones Numbers
+                    <Translate contentKey={'landing.secretary'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Portal Search
+                    <Translate contentKey={'landing.branches'}/>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    Personalization
+                    <Translate contentKey={'landing.portalSer'}/>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <Translate contentKey={'landing.personal'}/>
                   </a>
                 </li>
               </ul>
@@ -2880,10 +2678,9 @@ const Landing = (props) => {
           <footer>
             <div>
               <div className="fright">
-                This site can be browsed through a design that matches the dimensions
-                of different screens.
+                <Translate contentKey={'landing.browsed'}/>
                 <br />
-                This site supports browsers :{" "}
+                <Translate contentKey={'landing.browsers'}/>{" "}
                 <img
                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAdCAYAAABWk2cPAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAFUklEQVRIx62WaWxUVRTHf/fNm5lONxiQAmJqKDuyCAJJkSJgSQVaipF9MVAVkQQSCTEmmEiUSICg8EVksUgFsSBrB4Q2IUihrKFCMEFkbRRKWdpSZunMvHf8MAVLmaUS/sn7MPfeOb977jn33KOIoYpJ2QroBgwF0oFXgHZAHOAFbgIXgGPA0dRC1+VYNlUM4DBgJpADtIplDKgE9gI/pBa6jv8vaMWkbCewCHgPaNkMWFPdAb4DlqUWutwxoRWTsrsD64CMZ4A11a/A7NRC198RoTcm5/RRIpuB3s8B+EjHgfGpha6bjwa0xrNOr7enPF8ghJJvY8Wk7MQnPH21eLNq7fFZvtlzIK5NnXub32IZFS7YgkITk+SAV5RIUJTigdWBqNBq8QmIhANbgRXApy/v3W/qAMn1/jF3Eh3j+2z8ZaZ/9LCvKpMShwIJjf9lKkXLevc54FBRx4EXDCy1FjFU7rUTmgbUGg7MXvGmZgWe5tqAWkBjL6bKKMq3A5tNpcaLYlTZmFkHHuRmrq2Oi5ut/nPRk+KrXbojbfC6aauWVQEk7PnH4s7tYDzLeauMovw+wFEFSXcTHGey/rwyeOXu4hcrkxNPBjWtrQJve/f9mbqrbFvrnVdTg5o+L8VbMwJogXCvOi6x+K6RuJ4JKRVyNueNmnrnahQaYIbxtgLI04DhQJIAL7i9A0q6ps3VDh65YTXMr000Ujw1X+iusm0pO64MTw54j7XzVC9UIv2VSCeFDGrtq/usc6CyuN2PFweq/kW/JSh/qQi9Efo2+XogZCG8pgFDGm+npdc3v0/Jlg4P7dYNKZ6aTTs7Dd7Uatf1tISAb4vNCL7UNFwCWJBuFiVb+/18qq1V9yy1IFfCplNIQzSge2MDmpBmN4wFHbcW3ReRD6esWn7LUGqhzQy0j2RIgHjN36nKSJqjBuy9mWipL4lSXwdpQOumBuICwY8GFG/ql+AqrU/desmR4q3NlOhlGgX4RR8NoBE8ryLcHaCz1hDgpnIk+Ou/HLhrt241JFmJJDUzMVuGdhCsDpNIj2TXAH+EySwgE2XcA+qaCa0JHZfupEm1a6SgBlSHmzFF1+Ntt4ddmdYzaIj9cCyaADaCBwFM9N6CihSPGxpwKaIhUZmDdu1soUSWC9rtSOsU4DFt11P0um/lzNh2Dw17ZpTs/UMj9OJHgFr7xduqPrg8vcdlUDNMLLfCAevFcjUg+uTyyYMqA0b8fAPVJUraHdWAQ4AnAlYzTNviYfvWvP3X1F4lFuUfYmJZbYr1vCn6DRG93GPGLfeJdWTVjC4n5czYmW7T9kkUYBVwVGUU5TuAn4BxUUJWp5SxRFPG94fHzLkH0Hf7Ifu5CSPqH2/vTO7ImkCLPYAjip31wFwFkFGUnwNspcnLEkZnNRUoUZgXULg9ptV/Kuf9fXJ6XPKDYPI+A4ZE8bIayHamF5TpDQMuoBDIiwHtb4q1P2BoIlJjOBYB+0zTMSUGEGCDM72gDBruUmlOnhBqxM7TPFm8ov/+Ztztdb4TU9u4RV8QY/0RYMmjH48vcGlOXiXwLtCcvtV317SvWPPWxzV2ZSwIiuoaxctyYJYzveDBU9AG8DlgYsPCSEDumPaSKfHXtntOTulbZ9rmRQEeASY60wuuNh58qlSV5uSVE2quNxDq4J9QAPUwWQUWv26vwo58bqDCJV8dsBoY50wveOrkosY+oyh/LKEOPwuIB6g2bSsv5E5fKKfemVxtJGxSTz4YtcB+YKMzvaAk2mlFVUMP1RMYaaJ1FWHR2lYnPGn6w81+0QYC14CLwGmgFLjoTC+I2jv9C4irISLYGXTZAAAAAElFTkSuQmCC"
                   alt=""
@@ -2911,7 +2708,7 @@ const Landing = (props) => {
                 />
               </div>
               <div className="fleft">
-                All rights reserved - Ministry of Finance - KSA © 20232023
+                <Translate contentKey={'landing.rights'}/>
                 <br />
                 <img
                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAcCAYAAAB75n/uAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAB7klEQVRIx7WWP2sUURTFf/e5JBAtQoibpBAEsRGLgCAWtkK0yQdIxO9hYafgJxAEJWDlJzD4rxAUBItArCVddnfWRCIBE9wci30jb+9OJrPZzIVhZ+5775x7zr53Z0zSLjBNPfErAAc1gQMcBKBTI0G7boJO7QQNoO2SL4AnpwR8BDzwBF7Bnpn9OA26pL0qFjXHsGTePbcbQOaSc0lFl4HngFUkWPQKGkCrRMEkcGcMRZ1QoCAlyEYAK4rMJE0B+0nyLzBhZoo2rQDnK4DNAo9dbooIsq/BuDhqqZIWHMZvgBDHt938kQlINkeMFkAjPnSBK8ngQ0mbFUC/mdmHY4r6mRL4nbRSseqXQE7gz8B2alHXDT4FZuL1qoQgbTNeQbdMwaGZ7QKcYFXaBXwHGFDg9/tCcv8G+Ar0klwP+AK8LSEoVTCb35jZd+CWpBn6p7oHfDSzHbfmxF2UxlVJwcyOEqId4HWRT5ICcKlIQT7huoZjS9IzSffiafegFyQtxzlbBeuvQeySkpoMv3jS+AN8Ataj6iXgNjBRsqZpZllOEIBD4BxnE//7WYj+HjF+50wjy5tlSJKrwBrjfQS0Isb9PDH0pop23aDv813gZol1PeAz/f9mHdjIKz+WoIAw3/9L8VfA+wj4ruA8DMQ/SXLyIdFyu1oAAAAASUVORK5CYII="
