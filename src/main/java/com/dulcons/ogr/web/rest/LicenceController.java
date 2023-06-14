@@ -1,10 +1,11 @@
 package com.dulcons.ogr.web.rest;
 
 import com.dulcons.ogr.domain.*;
+import com.dulcons.ogr.domain.notification.NotificationType;
 import com.dulcons.ogr.repository.*;
+import com.dulcons.ogr.service.NotificationService;
 import com.dulcons.ogr.service.UserService;
 import com.dulcons.ogr.web.rest.vm.LocationFormDto;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ public class LicenceController {
     private final TechnicalReviewRepository technicalReviewRepository;
     private final SpecializedReivewRepository specializedReivewRepository;
     private final DecisionMakingRepository decisionMakingRepository;
+    private final NotificationService notificationService;
 
     public LicenceController(
         LicenceRepository licenceRepository,
@@ -35,7 +37,8 @@ public class LicenceController {
         InitialReviewRepository initialReviewRepository,
         TechnicalReviewRepository technicalReviewRepository,
         SpecializedReivewRepository specializedReivewRepository,
-        DecisionMakingRepository decisionMakingRepository
+        DecisionMakingRepository decisionMakingRepository,
+        NotificationService notificationService
     ) {
         this.licenceRepository = licenceRepository;
         this.userService = userService;
@@ -45,6 +48,7 @@ public class LicenceController {
         this.technicalReviewRepository = technicalReviewRepository;
         this.specializedReivewRepository = specializedReivewRepository;
         this.decisionMakingRepository = decisionMakingRepository;
+        this.notificationService = notificationService;
     }
 
     @GetMapping
@@ -82,6 +86,7 @@ public class LicenceController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createLic(@RequestBody Licence licence) {
         licenceRepository.save(licence);
+        notificationService.createAdminNotification(licence.getForm() + "/" + licence.getId(), NotificationType.NEW_APPLICATION);
     }
 
     @PutMapping("/{id}")
@@ -153,16 +158,51 @@ public class LicenceController {
     ) {
         State state = stateRepository.findById(stateId).orElse(stateRepository.findById(stateId).orElseThrow());
         licenceRepository.updateStatusAndStageById(status, state, id, date);
+        try {
+            licenceRepository
+                .findById(id)
+                .ifPresent(licence -> {
+                    notificationService.createUserNotification(
+                        id.toString(),
+                        NotificationType.APPLICATION_STATUS_CHANGE,
+                        licence.getUser()
+                    );
+                });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @PutMapping("/moreReqRemark/{id}")
     public void updateRemark(@PathVariable Long id, @RequestParam(value = "remark") String remark) {
         licenceRepository.updateRemarkById(remark, id);
+        try {
+            licenceRepository
+                .findById(id)
+                .ifPresent(licence -> {
+                    notificationService.createUserNotification(
+                        id.toString(),
+                        NotificationType.APPLICATION_STATUS_CHANGE,
+                        licence.getUser()
+                    );
+                });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @PutMapping("/amendment/{id}")
     public void updateAmendment(@PathVariable Long id, @RequestParam(value = "amendment") String amendment) {
         licenceRepository.updateAmendmentById(amendment, id);
+        try {
+            licenceRepository
+                .findById(id)
+                .ifPresent(licence -> {
+                    notificationService.createUserNotification(id.toString(), NotificationType.AMENDMENT, licence.getUser());
+                });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @PutMapping("/payment")
@@ -172,6 +212,14 @@ public class LicenceController {
             .ifPresent(licence -> {
                 licence.setPayment(true);
                 licenceRepository.save(licence);
+                try {
+                    notificationService.createAdminNotification(
+                        licence.getForm() + "/" + licence.getId(),
+                        NotificationType.PAYMENT_IS_MADE
+                    );
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             });
     }
 
