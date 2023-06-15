@@ -24,6 +24,7 @@ import govServices from "./assets/govServices.png"
 import newService from "./assets/newService.png"
 import {Translate} from "react-jhipster";
 import {toast} from "react-toastify";
+import axios from 'axios';
 
 
 
@@ -37,6 +38,45 @@ const Landing = (props) => {
   const business = "Business Services";
   const [activeDropdown, setActiveDropdown] = useState('');
   const [showServices,setShowServices]= useState(false);
+
+
+
+  const openPdfInNewTab = (url, filename) => {
+    const tab = window.open();
+    tab.location.href = url;
+    tab.document.title = filename;
+  };
+
+  const fetchPdf = (event, id) => {
+    event.preventDefault();
+    axios({
+      url: `/api/pdf/${id}`,
+      method: 'GET',
+      responseType: 'blob',
+    })
+      .then((response) => {
+        // Extract the file name from the response headers
+        const contentDisposition = response.headers['content-disposition'];
+        const fileNameMatch = contentDisposition.match(/filename="(.+)"/);
+        const fileName = fileNameMatch ? fileNameMatch[1] : 'document.pdf';
+
+        // Create a Blob from the response data
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+
+        // Create a temporary URL for the Blob
+        const blobUrl = URL.createObjectURL(blob);
+
+        // Open the PDF in a new tab with the file name as the tab title
+        openPdfInNewTab(blobUrl, fileName);
+
+        // Clean up the temporary URL
+        URL.revokeObjectURL(blobUrl);
+      })
+      .catch((error) => {
+        console.error('Error fetching PDF:', error);
+      });
+  };
+
 
   const toggleDropdown = (dropdownId) => {
     setActiveDropdown(activeDropdown === dropdownId ? '' : dropdownId);
@@ -1084,7 +1124,8 @@ const Landing = (props) => {
                     <div className="grid-container" id="docsCategories">
                       <a
                         title="View Regulations and Instructions"
-                        href={require('./documents/Regulations and Instructions.pdf').default}
+                        href="#"
+                        onClick={(event) => fetchPdf(event, 1)}
                         target="_blank"
                       >
                         <img
@@ -1099,7 +1140,8 @@ const Landing = (props) => {
                       </a>
                       <a
                         title="View Contracts and Projects"
-                        href={require('./documents/Contracts and Projects.pdf').default}
+                        href="#"
+                        onClick={(event) => fetchPdf(event, 2)}
                         target="_blank"
                       >
                         <img
@@ -1114,7 +1156,8 @@ const Landing = (props) => {
                       </a>
                       <a
                         title="View Ministry Models"
-                        href={require('./documents/Angola\'s Ministry Models.pdf').default}
+                        href="#"
+                        onClick={(event) => fetchPdf(event, 3)}
                         target="_blank"
                       >
                         <img
@@ -1129,7 +1172,8 @@ const Landing = (props) => {
                       </a>
                       <a
                         title="View Statistical Data"
-                        href={require('./documents/2022 Statistical Data - Angola.pdf').default}
+                        href="#"
+                        onClick={(event) => fetchPdf(event, 4)}
                         target="_blank"
                       >
                         <img
@@ -1144,7 +1188,8 @@ const Landing = (props) => {
                       </a>
                       <a
                         title="View Budget Data"
-                        href={require('./documents/Angola Budget Data.pdf').default}
+                        href="#"
+                        onClick={(event) => fetchPdf(event, 5)}
                         target="_blank"
                       >
                         <img
@@ -1159,7 +1204,8 @@ const Landing = (props) => {
                       </a>
                       <a
                         title="View MOF Contracts"
-                        href={require('./documents/MOF Contract.pdf').default}
+                        href="#"
+                        onClick={(event) => fetchPdf(event, 6)}
                         target="_blank"
                       >
                         <img
@@ -1174,7 +1220,8 @@ const Landing = (props) => {
                       </a>
                       <a
                         title="View Governmental Agreements"
-                        href={require('./documents/Laws & Government Agreements Angola.pdf').default}
+                        href="#"
+                        onClick={(event) => fetchPdf(event, 7)}
                         target="_blank"
                       >
                         <img

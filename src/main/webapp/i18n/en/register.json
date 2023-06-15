@@ -4,6 +4,7 @@
     "signup": "Register",
     "already": "Already have an Account?",
     "or": "or",
+    "create": "Create an Account",
     "form": {
       "button": "Register"
     },

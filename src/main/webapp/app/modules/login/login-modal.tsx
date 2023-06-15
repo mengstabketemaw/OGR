@@ -373,16 +373,11 @@ const LoginModal = (props: ILoginModalProps) => {
                 <h1 className={'col-12'}>
                   <Translate contentKey="login.title">Sign in</Translate>
                 </h1>
-                <p className={'col-12 text-success h2'}>
-                  <span className={'mr-2 p text-dark'}>
-                    {' '}
-                    <Translate contentKey="register.or">Sign up</Translate>{' '}
-                  </span>
-                  <a href={'/account/register'} className="pe-auto text-success text-decoration-none border-0">
-                    {' '}
-                    <Translate contentKey="register.signup">Sign up</Translate>{' '}
-                  </a>
-                </p>
+                {/*<p className={'col-12 text-success p'}>*/}
+                {/*  <a href={'/account/register'} className="pe-auto text-success text-decoration-none border-0">*/}
+                {/*    <Translate contentKey="register.create">Sign up</Translate>*/}
+                {/*  </a>*/}
+                {/*</p>*/}
               </div>
             </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
@@ -409,20 +404,6 @@ const LoginModal = (props: ILoginModalProps) => {
                     error={errors.username}
                     isTouched={touchedFields.username}
                   />
-                  <Col className="d-flex justify-content-end mt--3 pr-0">
-                    <a
-                      className="text-blue pe-auto"
-                      onClick={e => {
-                        nav('/account/reset/request');
-                      }}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      <small>
-                        {' '}
-                        <Translate contentKey="login.password.forgot"></Translate>
-                      </small>
-                    </a>
-                  </Col>
                   <ValidatedField
                     name="password"
                     type="password"
@@ -443,6 +424,32 @@ const LoginModal = (props: ILoginModalProps) => {
                     value={true}
                     register={register}
                   />
+                </Col>
+              </Row>
+              <Row className="mt-3">
+                <Col className={''} xs="6">
+                  <a
+                    className="text-light-gray justify-content-end"
+                    onClick={e => {
+                      nav('/account/reset/request');
+                    }}
+                  >
+                    <small>
+                      <Translate contentKey="login.password.forgot"></Translate>
+                    </small>
+                  </a>
+                </Col>
+                <Col className="text-right" xs="6">
+                  <a
+                    className="text-light-gray"
+                    onClick={e => {
+                      nav('/account/register');
+                    }}
+                  >
+                    <small>
+                      <Translate contentKey="register.create"></Translate>
+                    </small>
+                  </a>
                 </Col>
               </Row>
             </CardBody>
