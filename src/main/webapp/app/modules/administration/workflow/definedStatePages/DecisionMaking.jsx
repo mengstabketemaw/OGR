@@ -52,7 +52,7 @@ const DecisionMaking = (params) => {
     dispatch(createDecisionMaking(values)).then( ()=>{
         toast.success("Dec. Making Saved")
       handleSwitchPage(currentPage+1)
-        if (currentPage >= 0 && currentPage < pages.length) {
+        if (currentPage >= 0 && currentPage < pages.length-1) {
           const param = {
             id: id,
             data: {

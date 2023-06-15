@@ -50,7 +50,7 @@ const TechnicalReview = params => {
     dispatch(createTechnicalReview(values)).then(() => {
       toast.success('Tech Review Saved');
       handleSwitchPage(currentPage + 1);
-      if (currentPage >= 0 && currentPage < pages.length) {
+      if (currentPage >= 0 && currentPage < pages.length-1) {
         const param = {
           id: id,
           data: {
