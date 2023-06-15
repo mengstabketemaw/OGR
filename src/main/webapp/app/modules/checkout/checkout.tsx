@@ -59,7 +59,7 @@ export const CheckoutForm = () => {
 
   return (
     <div className="maincontainer" style={loading ? { height: '60vh' } : {}}>
-      <div className="container">
+      <div className="container" style={{ boxShadow: 'none' }}>
         {loading ? (
           <div style={{ height: '60vh' }} className="d-flex justify-content-center align-items-center">
             <Spinner className="align-self-center" color="primary" style={{ height: '3rem', width: '3rem' }} type="grow">

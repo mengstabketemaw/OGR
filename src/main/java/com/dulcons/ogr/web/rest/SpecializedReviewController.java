@@ -24,9 +24,9 @@ public class SpecializedReviewController {
         this.technicalReviewMapper = initialReviewMapper;
     }
 
-    @GetMapping("licence/{id}")
-    public Set<SpecializedReivew> getInitialReviewByLicence(@PathVariable Long id) {
-        return technicalReviewRepository.findByLicence_Id(id);
+    @GetMapping("licence/{id}/{state_id}")
+    public Set<SpecializedReivew> getInitialReviewByLicence(@PathVariable Long id, @PathVariable Long state_id) {
+        return technicalReviewRepository.findByLicence_IdAndCustomField_State_Id(id, state_id);
     }
 
     @PostMapping

@@ -86,7 +86,11 @@ public class LicenceController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createLic(@RequestBody Licence licence) {
         licenceRepository.save(licence);
-        notificationService.createAdminNotification(licence.getForm() + "/" + licence.getId(), NotificationType.NEW_APPLICATION);
+        notificationService.createAdminNotification(
+            licence.getForm().getId() + "/" + licence.getId(),
+            NotificationType.NEW_APPLICATION,
+            ""
+        );
     }
 
     @PutMapping("/{id}")
@@ -94,6 +98,7 @@ public class LicenceController {
     public void updateLic(@RequestBody Licence licence, @PathVariable Long id) {
         licence.setId(id);
         licenceRepository.save(licence);
+        notificationService.createAdminNotification(licence.getForm() + "/" + licence.getId(), NotificationType.APPLICATION_UPDATE, "");
     }
 
     @DeleteMapping("/{id}")
@@ -158,19 +163,7 @@ public class LicenceController {
     ) {
         State state = stateRepository.findById(stateId).orElse(stateRepository.findById(stateId).orElseThrow());
         licenceRepository.updateStatusAndStageById(status, state, id, date);
-        try {
-            licenceRepository
-                .findById(id)
-                .ifPresent(licence -> {
-                    notificationService.createUserNotification(
-                        id.toString(),
-                        NotificationType.APPLICATION_STATUS_CHANGE,
-                        licence.getUser()
-                    );
-                });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        licenceRepository.findById(id).ifPresent(licence -> notificationService.notificationForLicenceUpdate(state, status, licence, ""));
     }
 
     @PutMapping("/moreReqRemark/{id}")
@@ -180,11 +173,7 @@ public class LicenceController {
             licenceRepository
                 .findById(id)
                 .ifPresent(licence -> {
-                    notificationService.createUserNotification(
-                        id.toString(),
-                        NotificationType.APPLICATION_STATUS_CHANGE,
-                        licence.getUser()
-                    );
+                    notificationService.createUserNotification(id.toString(), NotificationType.MORE_INFO, licence.getUser(), remark);
                 });
         } catch (Exception e) {
             e.printStackTrace();
@@ -198,7 +187,11 @@ public class LicenceController {
             licenceRepository
                 .findById(id)
                 .ifPresent(licence -> {
-                    notificationService.createUserNotification(id.toString(), NotificationType.AMENDMENT, licence.getUser());
+                    notificationService.createAdminNotification(
+                        licence.getForm().getId() + "/" + licence.getId(),
+                        NotificationType.AMENDMENT,
+                        amendment
+                    );
                 });
         } catch (Exception e) {
             e.printStackTrace();
@@ -214,8 +207,9 @@ public class LicenceController {
                 licenceRepository.save(licence);
                 try {
                     notificationService.createAdminNotification(
-                        licence.getForm() + "/" + licence.getId(),
-                        NotificationType.PAYMENT_IS_MADE
+                        licence.getForm().getId() + "/" + licence.getId(),
+                        NotificationType.PAYMENT_IS_MADE,
+                        ""
                     );
                 } catch (Exception e) {
                     e.printStackTrace();

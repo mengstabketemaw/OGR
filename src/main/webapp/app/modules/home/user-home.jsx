@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Card, CardBody, CardHeader, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner } from 'reactstrap';
 import axios from 'axios';
 import moment from 'moment';
 import ShowFieldValue from 'app/shared/common/showFieldValue';
@@ -10,26 +10,20 @@ import UserStats from 'app/modules/dashboard/userStats';
 import { ShowRemarkModal } from 'app/modules/home/showRemarkModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faFileAlt,
   faFilePdf,
-  faInfo,
   faInfoCircle,
   faMoneyBill,
-  faPencil,
-  faPrint,
-  faUndo
+  faPencil
 } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
-import profilePic from '../../../content/images/avatar.png';
-import { useAppSelector } from 'app/config/store';
 import Stages from './stages';
 import { CircularProgressbar } from 'react-circular-progressbar';
-import ReactToPrint, { useReactToPrint } from 'react-to-print';
+import ReactToPrint from 'react-to-print';
 import Certificate from 'app/modules/certificates/certificate';
 import medal from './assets/medal.png';
 import {Amendment} from "app/modules/home/amendment";
+import UserNotification from "app/modules/home/UserNotification";
 
-const PAGE_SIZE = 100;
 const UserHome = () => {
   const [applications, setApplications] = useState({ loading: true, data: { content: [] } });
   const [detailModal, setDetailModal] = useState({ show: false, id: -1, formId: -1 });
@@ -38,27 +32,18 @@ const UserHome = () => {
   const [showRemark, setShowRemark] = useState(false);
   const [remark, setRemark] = useState('');
   const [id,setId] = useState(0)
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(1);
-  const account = useAppSelector(state => state.authentication.account);
   const [showAmen, setshowAmen] = useState(false);
-  const fetchData = page => {
+  const fetchData = () => {
     axios
-      .get(`/api/licence/formByUser?page=${page}&size=${PAGE_SIZE}&sort=submittedDate,desc`)
+      .get(`/api/licence/formByUser?page=0&size=100&sort=submittedDate,desc`)
       .then(({ data }) => {
         setApplications({ loading: false, data });
-        setTotalPages(Math.ceil(data.totalElements / PAGE_SIZE));
       })
       .catch(console.log);
   };
 
-  const handlePageChange = pageNumber => {
-    setCurrentPage(pageNumber - 1);
-    fetchData(pageNumber - 1);
-  };
-
   useEffect(() => {
-    fetchData(currentPage);
+    fetchData();
   }, []);
 
   const showRemarkModal = (value) => {
@@ -75,18 +60,6 @@ const UserHome = () => {
     setPrintData(data);
     return Promise.resolve();
   }
-
-  let numberOfCards = 6;
-  let columnClass;
-  if (numberOfCards >= 3) {
-    columnClass = 'col-lg-4';
-  } else if (numberOfCards === 2) {
-    columnClass = 'col-lg-6';
-  } else {
-    columnClass = 'col-lg-12';
-  }
-
-  const percentage = 66;
 
   return (
     <>
@@ -238,7 +211,7 @@ const UserHome = () => {
                                       onBeforeGetContent={async () => {
                                         await handleBeforeGetContent({
                                           title: translate('userDashboard.' + data?.form?.title),
-                                          companyName: account.firstName,
+                                          companyName: data?.user.firstName,
                                           location: "Cabinda",
                                           fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
                                           type: data?.form?.id,
@@ -335,22 +308,7 @@ const UserHome = () => {
           </Row>
         </Col>
 
-        <Col className="order-xl-1 mb-5 mb-xl-0 mt-xl--6  col-sm-6 col-12" xl="3">
-          <Card className="card-profile shadow">
-            <CardHeader className="text-left border-0 pt-8 pt-md-4 pb-0">
-              <h4>
-                <Translate contentKey={'userDashboard.myactivities'} />{' '}
-              </h4>
-            </CardHeader>
-            <CardBody className="pt-0 pt-md-4">
-              <Row>
-                <React.Fragment>
-                  <Stages></Stages>
-                </React.Fragment>
-              </Row>
-            </CardBody>
-          </Card>
-        </Col>
+       <UserNotification showModal={setDetailModal} showRemark={showRemarkModal}/>
       </Row>
 
       <DetailModal id={detailModal.id} show={detailModal.show} handleClose={() => setDetailModal({ ...detailModal, show: false })} />
@@ -398,7 +356,7 @@ export const DetailModal = ({ id, show, handleClose }) => {
         <h3><Translate contentKey={'table.applicationNumber'} />: {data.data.form?.title?.slice(0,2).toUpperCase()}{data.data?.id}496</h3>
       </ModalHeader>
       <ModalBody>
-        <Container className="d-flex flex-column justify-content-center">
+        <div className="d-flex flex-column justify-content-center">
           {data.loading ? (
             <Spinner className="align-self-center" color="primary" style={{ height: '3rem', width: '3rem' }} type="grow">
               Loading...
@@ -412,7 +370,7 @@ export const DetailModal = ({ id, show, handleClose }) => {
               <ShowFieldValue data={getDataBasedOnState()} form={data?.data.form} />
             </>
           )}
-        </Container>
+        </div>
       </ModalBody>
       <ModalFooter>
         <Button onClick={handleClose}>

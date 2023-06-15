@@ -40,7 +40,11 @@ import {trans} from "app/shared/common/translator";
       state_id: key,
     };
     dispatch(getFieldsByState(params));
-    dispatch(getFieldsDataByLicenceSR(parseInt(id)));
+    const params2 = {
+      id: parseInt(id),
+      state_id: key,
+    };
+    dispatch(getFieldsDataByLicenceSR(params2));
   }, []);
   const handleSwitchPage = (pageNumber) => {
 
@@ -53,7 +57,7 @@ import {trans} from "app/shared/common/translator";
     dispatch(createSpecializedReview(values)).then(()=>{
       toast.success("Special Review Saved")
       handleSwitchPage(currentPage+1)
-      if (currentPage >= 0 && currentPage < pages.length) {
+      if (currentPage >= 0 && currentPage < pages.length-1) {
         const param = {
           id: id,
           data: {
@@ -105,7 +109,7 @@ import {trans} from "app/shared/common/translator";
                        licence_id ={parseInt(id)}
                        currentFields = {fields_data}
                        backButtonShow = {true}
-                       saveButtonShow = {false}
+                       saveButtonShow = {true}
                        backButtonName = 'workflow.deny'
                        backButtonIcon = {faCircleMinus}
                        backButtonClass = "bg-translucent-danger text-danger"

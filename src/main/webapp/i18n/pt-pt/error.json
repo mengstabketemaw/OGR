@@ -9,6 +9,8 @@
       "500": "Erro interno do servidor"
     },
     "concurrencyFailure": "Outro utilizador modificou esses dados ao mesmo tempo que você. Suas alterações foram rejeitadas.",
-    "validation": "Erro de validação no servidor."
+    "validation": "Erro de validação no servidor.",
+    "noNotification": "Não há nova Notificação",
+    "notification": "Notificação"
   }
 }

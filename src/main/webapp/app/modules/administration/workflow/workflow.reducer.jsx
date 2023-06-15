@@ -53,7 +53,9 @@ export const createSpecializedReview = createAsyncThunk(
 );
 
 export const getFieldsDataByLicenceSR =
-  createAsyncThunk('fetch_fields_dataSR', async (l_id, thunkAPI) => axios.get(`/api/specializedReview/licence/${l_id}`), {
+  createAsyncThunk('fetch_fields_dataSR',
+    async ({id,state_id}, thunkAPI) =>
+      axios.get(`/api/specializedReview/licence/${id}/${state_id}`), {
     serializeError: serializeAxiosError,
   });
 

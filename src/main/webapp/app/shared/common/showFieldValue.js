@@ -108,20 +108,21 @@ const ShowFieldValue = ({ data, form }) => {
 
   return (
     <>
-      <Row xs="2">
-        <Row xs="1" className="p-3">
+      <Row md="2">
+        <Row xs="1" className="p-3 mr-3">
           {firstHalf.map(field => {
             return InsideFieldValue(field);
           })}
         </Row>
 
-        <Row xs="1" className="p-3 ml-3">
+        <Row xs="1" className="p-3">
           {secondHalf.map(field => {
             return InsideFieldValue(field);
           })}
         </Row>
+        <a></a>
         {formFields.length > visibleItems && (
-          <a href="#" onClick={handleLoadMore}>
+          <a href="#" onClick={handleLoadMore} className="text-right">
             Show all
           </a>
         )}

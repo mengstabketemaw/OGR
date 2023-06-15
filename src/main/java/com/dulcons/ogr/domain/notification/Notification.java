@@ -14,6 +14,7 @@ public class Notification {
     private String source;
     private Instant dateTimeStamp;
     private String message;
+    private String arg;
 
     public Long getId() {
         return id;
@@ -53,5 +54,13 @@ public class Notification {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getArg() {
+        return arg;
+    }
+
+    public void setArg(String arg) {
+        this.arg = arg;
     }
 }

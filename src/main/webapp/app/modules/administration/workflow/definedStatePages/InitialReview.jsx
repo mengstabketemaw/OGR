@@ -53,13 +53,14 @@ const InitialReview = (params) => {
       switchPage(pageNumber);
     }
   };
+
   const handleSumbit = (values) =>{
 
     console.log(values)
     dispatch(createInitialReview(values)).then( () => {
         toast.success("Initial Review Saved")
         handleSwitchPage(currentPage + 1)
-        if (currentPage >= 0 && currentPage < pages.length) {
+        if (currentPage >= 0 && currentPage < pages.length-1) {
           const param = {
             id: id,
             data: {
