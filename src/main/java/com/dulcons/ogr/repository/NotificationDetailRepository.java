@@ -14,7 +14,7 @@ public interface NotificationDetailRepository extends JpaRepository<Notification
     long countByUsername(String username);
 
     @EntityGraph(attributePaths = { "notification" })
-    @Query("select distinct n from NotificationDetail n where n.username = ?1 and n.seen = false")
+    @Query("select n from NotificationDetail n where n.username = ?1 and n.seen = false order by n.notification.dateTimeStamp DESC")
     List<NotificationDetail> findByUsername(String username);
 
     @Transactional

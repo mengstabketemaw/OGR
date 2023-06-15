@@ -28,21 +28,20 @@ function NotificationComponent() {
     axios.get("/api/notification/count")
       .then(({data})=>setUnseenCount(data))
       .catch(console.log)
-  },[])
+  },[isAdmin])
 
   useEffect(()=>{
     axios.get("/api/notification")
       .then(({data})=>setNotifications(data))
       .catch(console.log)
-  },[])
+  },[isAdmin])
 
   const getNotificationIcon = (type) => {
     switch (type){
-      case "NEW_APPLICATION":return <FontAwesomeIcon icon={faNewspaper} color={"green"}/>
-      case "PAYMENT_IS_MADE":return <FontAwesomeIcon icon={faMoneyBill} color={"green"}/>
-      case "AMENDMENT":return <FontAwesomeIcon icon={faPencil} color={"yellow"}/>
-      case "APPLICATION_STATUS_CHANGE":return <FontAwesomeIcon icon={faNewspaper} color={"yellow"}/>
-      default: return  <FontAwesomeIcon icon={faNewspaper} color={"green"}/>;
+      case "NEW_APPLICATION":return <FontAwesomeIcon icon={faNewspaper} color={"#1D65B7"}/>
+      case "PAYMENT_IS_MADE":return <FontAwesomeIcon icon={faMoneyBill} color={"#469C4A"}/>
+      case "AMENDMENT":return <FontAwesomeIcon icon={faPencil} color={"#A63C1B"}/>
+      case "APPLICATION_UPDATE":return <FontAwesomeIcon icon={faNewspaper} color={"#EB6B09"}/>
     }
   }
 

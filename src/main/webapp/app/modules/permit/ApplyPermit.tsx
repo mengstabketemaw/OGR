@@ -29,11 +29,9 @@ const ApplyPermit = () => {
     console.log(valueToSend);
     // @ts-ignore
 
-    dispatch(createLicence(valueToSend)).then(
-      // @ts-ignore
-      toast.success('Saved Successfully')
-    );
-    nav('/home');
+    dispatch(createLicence(valueToSend)).then(() => {
+      nav('/home');
+    });
   };
   return (
     <div className="">
