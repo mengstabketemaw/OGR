@@ -166,7 +166,8 @@
     "detail": "Details",
     "name": "Name",
     "amount": "Amount",
-    "requested": "Requested"
+    "requested": "Requested",
+    "applicationNumber": "Application Number"
   },
   "stats": {
     "totalSubmissions": "Total Submissions",
@@ -206,5 +207,8 @@
     "success": "Operation Successfully",
     "update": "Data is updated Successfully",
     "error": "There is something wrong"
+  },
+  "notification": {
+    "noNotification": "No new notifications"
   }
 }

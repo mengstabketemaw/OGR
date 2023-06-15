@@ -165,7 +165,8 @@
     "detail": "Detalhes",
     "name": "Nome",
     "amount": "Amount",
-    "requested": "Requeridos"
+    "requested": "Requeridos",
+    "applicationNumber": "Número do aplicativo\n"
   },
   "stats": {
     "totalSubmissions": "Total de Envios",
@@ -205,5 +206,8 @@
     "success": "Operação com sucesso",
     "update": "Dados atualizados com sucesso",
     "error": "há erro"
+  },
+  "notification": {
+    "noNotification": "Nenhuma nova notificação\n"
   }
 }

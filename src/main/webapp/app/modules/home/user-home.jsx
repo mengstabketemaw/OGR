@@ -123,79 +123,99 @@ const UserHome = () => {
                   >
                     <CardHeader
                       onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
-                      className="text-left font-weight-bold border-0 pl-0 pr-0  pt-md-4 pb-0 d-flex pr-0 justify-content-between "
+                      className="text-left font-weight-bold border-0 pl-0 pr-0 pt-3 pb-0 d-flex pr-0 justify-content-between "
                     >
                       <span className="h3 "
                       onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
                       >
                       <Translate  contentKey={'userDashboard.' + data?.form?.title} />
                         </span>
-                      <div className="text-center position-relative">
-                      <div style={{ width: 50, height: 50 }}>
+                      <div className="text-right"  >
+                      <div className="badges"  style={{ width: 50, height: 50,position:"absolute",left:"80%",top:"3%" }}>
                         {data?.status === 'Authorized' ? (
-                       <img  className="w-100 h-100 text-right position-relative left-4" src={medal} />
+                       <img  className="w-100 h-100 text-right" src={medal} />
                         ) : data?.status === 'Denied' ? (
-                          <CircularProgressbar className="position-relative left-1" value={0} text={`0%`} />
+                          <CircularProgressbar  value={0} text={`0%`} />
                         ) : data.status === 'undefined' ? (
-                          <CircularProgressbar className="position-relative left-3" value={5} text={`5%`} />
+                          <CircularProgressbar  value={5} text={`5%`} />
                         ) : data.stage?.name == 'Form' ? (
-                          <CircularProgressbar className="position-relative left-3" value={10} text={`10%`} />
+                          <CircularProgressbar  value={10} text={`10%`} />
                         ) : data.stage?.name == 'Initial Review' ? (
-                          <CircularProgressbar className="position-relative left-3" value={30} text={`30%`} />
+                          <CircularProgressbar  value={30} text={`30%`} />
                         ) : data.stage?.name == 'Technical Review' ? (
-                          <CircularProgressbar className="position-relative left-3" value={50} text={`50%`} />
+                          <CircularProgressbar  value={50} text={`50%`} />
                         ) : data.stage?.name == 'Payment' ? (
-                          <CircularProgressbar className="position-relative left-3" value={70} text={`70%`} />
+                          <CircularProgressbar  value={70} text={`70%`} />
                         ) : data.stage?.name == 'Decision Making' ? (
-                          <CircularProgressbar className="position-relative left-3" value={90} text={`90%`} />
+                          <CircularProgressbar  value={90} text={`90%`} />
                         ) : (
-                          <CircularProgressbar className="position-relative left-3" value={60} text={`60%`} />
+                          <CircularProgressbar  value={60} text={`60%`} />
                         )}
 
                       </div>
-                      <span className="heading">
+                      </div>
+
+                    </CardHeader>
+                    <CardBody className="pt-0 pt-md-1 pl-0 pr-0 pb-0">
+                      <Row onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })} className={"pb-0 pt-1"} >
+                        <div className="col pb-0">
+                          <div className="card-profile-stats d-flex justify-content-between mr-0 ml-0 pb-0 mr-2">
+                            <div
+                              className={"mr-0 ml-0  pr-0 smaller-div pl-0 text-left pr-0"}>
+                              <span style={{fontSize:"12px"}} className="heading h5 pb-0 mb-0">
+                               {data?.form?.title?.slice(0,2).toUpperCase()}{data?.id}496
+                              </span>
+                              <span className="description p" style={{fontSize:"11px"}}>
+                                <Translate contentKey={'table.applicationNumber'} />
+                              </span>
+                            </div>
+                            <div className="card-profile-stats d-flex justify-content-between pl-0 pr-0">
+                               <span className="heading">
                                 {data.status === 'Inprogress' ? (
-                                  <p className="btn btn-sm pt-0 shadow-none border-0 d-flex flex-column text-center">
+                                  <p className="btn btn-sm pt-0 shadow-none border-0 d-flex flex-column text-right mb-0 pr-0">
                                     <span className="font-weight-bold  text-warning"> {data.status}</span>
-                                    <span className="h6 description mt-1" style={{fontSize:"11px"}}>
+                                    <span className="h6 description mt-1 text-right" style={{fontSize:"11px"}}>
                                     <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
                                   </span>
                                   </p>
                                 ) : data.status === 'Authorized' ? (
-                                  <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-center ">
-                                    <span className={'font-weight-bold text-success'}>{data.status}</span>
-                                    <span className="h6 description mt-1 invisible" style={{fontSize:"11px"}}>
+                                  <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-0 ">
+                                    <span className={'font-weight-bold text-success text-right'}>{data.status}</span>
+                                    <span className="h6 description mt-1 invisible text-right" style={{fontSize:"11px"}}>
                                     <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
                                   </span>
                                   </p>
                                 ) : data.status === 'Denied' ? (
-                                  <p className="btn btn-sm shadow-none border-0 ">
-                                    <span className={' font-weight-bold text-danger'}>{data.status}</span>
+                                  <p className="btn btn-sm shadow-none border-0 text-right mb-0 pr-0 ">
+                                    <span className={' font-weight-bold text-danger text-right'}>{data.status}</span>
+                                    <span className="h6 description mt-1 invisible text-right" style={{fontSize:"11px"}}>
+                                    <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
+                                  </span>
                                   </p>
                                 ) : data.status === 'undefined' ? (
-                                  <p className="btn btn-sm shadow-none border-0 d-flex flex-column">
-                                    <span className={'font-weight-bold  text-gray'}>Inprogress</span>
-                                    <div className="h6 description" style={{fontSize:"11px"}}>
+                                  <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-0">
+                                    <span className={'font-weight-bold  text-gray text-right'}>Inprogress</span>
+                                    <div className="h6 description text-right" style={{fontSize:"11px"}}>
                                       <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
                                     </div>
                                   </p>
                                 ) : (
-                                  <p className="btn btn-sm shadow-none border-0 d-flex flex-column">
-                                    <span className={' font-weight-bold text-info'}>{data.status}</span>
-                                    <div className="h6 description" style={{fontSize:"11px"}}>
+                                  <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-1">
+                                    <span className={' font-weight-bold text-warning text-right'}>{data.status}</span>
+                                    <div className="h6 description text-right" style={{fontSize:"11px"}}>
                                       <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
                                     </div>
 
                                   </p>
                                 )}
                               </span>
-                      </div>
-
-                    </CardHeader>
-                    <CardBody className="pt-0 pt-md-1 pl-0 pr-0 pb-0">
-                      <Row className={"pb-0"} >
+                            </div>
+                          </div>
+                        </div>
+                      </Row>
+                      <Row className={"pb-0 pt-0"} >
                         <div className="col pb-0">
-                          <div className="card-profile-stats d-flex justify-content-between mr-0 ml-0 pb-0 mr-2">
+                          <div className="card-profile-stats d-flex justify-content-between mr-0 ml-0 pb-0 pt-0 mr-2">
                             <div
                               onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
                               className={"mr-0 ml-0  pr-0 smaller-div pl-0 text-left pr-0"}>
@@ -261,7 +281,7 @@ const UserHome = () => {
                                 </Button> :
                                 <Button className="ml-0 mt-1 mr-0 "
                                   // color="secondary"
-                                        color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
+                                        color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'black'}
                                   // className="bg-translucent-light text-dark"
                                         onClick={() => nav('/dataUpdate/' + data.id)}
                                         hidden={!(data.stage?.id === 0 || data.stage === null)}
@@ -375,7 +395,7 @@ export const DetailModal = ({ id, show, handleClose }) => {
   return (
     <Modal isOpen={show} onClosed={handleClose}>
       <ModalHeader toggle={handleClose}>
-        <h3>Application Number: {data.data.form?.title?.slice(0,2).toUpperCase()}{data.data?.id}496</h3>
+        <h3><Translate contentKey={'table.applicationNumber'} />: {data.data.form?.title?.slice(0,2).toUpperCase()}{data.data?.id}496</h3>
       </ModalHeader>
       <ModalBody>
         <Container className="d-flex flex-column justify-content-center">
