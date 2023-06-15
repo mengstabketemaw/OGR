@@ -355,7 +355,7 @@ const Landing = (props) => {
                 <span className="clr" />
               </div>
               <span className="clr" style={{backgroundColor: "#007467"}} />
-              <div style={{ display: "none" }} className="container"></div>
+              <div style={{ display: "none" }} className="container2"></div>
               <span className="clr" style={{ marginTop : "50px",marginBottom : "50px" }} />
               <div className="newsbar block animatedParent animateOnce h-200">
                 <div className="news hblock animated fadeInUp go h-100">
