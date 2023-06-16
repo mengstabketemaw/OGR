@@ -4,11 +4,13 @@ import { Row, Container } from 'reactstrap';
 
 import Header from '../../argon/components/Headers/Header.js';
 import AdminDashboardTable from 'app/modules/dashboard/adminDashboardTable';
+import StickyCardDropdown from 'app/modules/home/StickyCardDropdown';
 
 export const AdminHome = () => {
   return (
     <>
       <Header />
+      {/*<StickyCardDropdown  />*/}
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row className="mt-5">
