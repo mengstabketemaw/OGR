@@ -18,28 +18,28 @@ public enum NotificationType {
     NotificationType(int id) {
         switch (id) {
             case 1:
-                this.message = "New application is registered";
+                this.message = "New application submitted";
                 break;
             case 2:
-                this.message = "Payment is made";
+                this.message = "Payment made";
                 break;
             case 3:
-                this.message = "Amendment Request";
+                this.message = "Amendment Requested";
                 break;
             case 4:
-                this.message = "Application status is changed to {0}";
+                this.message = "Application status changed to {0}";
                 break;
             case 5:
-                this.message = "Licence is Approved";
+                this.message = "Licence Approved";
                 break;
             case 6:
-                this.message = "Licence is Declined";
+                this.message = "Licence Declined";
                 break;
             case 7:
-                this.message = "More information is required";
+                this.message = "More information required";
                 break;
             case 8:
-                this.message = "Application is updated";
+                this.message = "Application updated";
                 break;
         }
     }
