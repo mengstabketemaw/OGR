@@ -14,7 +14,8 @@ import {useAppSelector} from "app/config/store";
 import {hasAnyAuthority} from "app/shared/auth/private-route";
 import {AUTHORITIES} from "app/config/constants";
 import {useNavigate} from "react-router-dom";
-function NotificationComponentHeader() {
+import { Translate } from "react-jhipster";
+function NotificationComponent() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [unseenCount, setUnseenCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
@@ -62,7 +63,6 @@ function NotificationComponentHeader() {
   if(!isAdmin)
     return <></>
   return (
-
     <div className="">
       <Dropdown isOpen={dropdownOpen} toggle={toggle} direction="start">
         <DropdownToggle tag="div" >
@@ -78,7 +78,7 @@ function NotificationComponentHeader() {
           <div style={{padding:"1rem"}} >
             {notifications.length === 0 ? <>
               <div className="d-flex justify-content-center align-items-center w-100 h-100">
-                <p className="h4 text-muted">No new notification</p>
+                <p className="h4 text-muted"><Translate contentKey={"error.noNotification"}>There is no new Notification</Translate></p>
               </div>
             </> : <>
               <div className="navi navi-hover" style={{height: "300px", overflowY: unseenCount > 4 ? "scroll" : "hidden"}}>
@@ -104,4 +104,4 @@ function NotificationComponentHeader() {
   );
 }
 
-export default NotificationComponentHeader;
+export default NotificationComponent;
