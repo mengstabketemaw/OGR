@@ -98,7 +98,11 @@ public class LicenceController {
     public void updateLic(@RequestBody Licence licence, @PathVariable Long id) {
         licence.setId(id);
         licenceRepository.save(licence);
-        notificationService.createAdminNotification(licence.getForm() + "/" + licence.getId(), NotificationType.APPLICATION_UPDATE, "");
+        notificationService.createAdminNotification(
+            licence.getForm().getId() + "/" + licence.getId(),
+            NotificationType.APPLICATION_UPDATE,
+            ""
+        );
     }
 
     @DeleteMapping("/{id}")
