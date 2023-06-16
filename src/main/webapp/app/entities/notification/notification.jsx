@@ -69,7 +69,7 @@ function NotificationComponent() {
           <div className="d-flex pulse ">
             <FontAwesomeIcon color={"white"} icon={faBell} style={{marginTop:"15px"}}/>
             {unseenCount ? <>
-              <span className="badge">{unseenCount}</span>
+              <span className="badge text-red">{unseenCount}</span>
               <span className="pulse-ring"></span>
             </>:""}
           </div>
