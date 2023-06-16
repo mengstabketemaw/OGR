@@ -2,6 +2,8 @@ import React from 'react';
 import { DropdownItem } from 'reactstrap';
 import { NavDropdown } from './menu-components';
 import { locales, languages } from 'app/config/translation';
+import britain from '../../../../content/images/britain.png';
+import portugal from '../../../../content/images/portugal.png';
 
 export const LocaleMenu = ({ currentLocale, onClick }: { currentLocale: string; onClick: (event: any) => void }) =>
   Object.keys(languages).length > 1 ? (
@@ -10,9 +12,9 @@ export const LocaleMenu = ({ currentLocale, onClick }: { currentLocale: string; 
       name={
         currentLocale ? (
           currentLocale == 'en' ? (
-            <img width="25" height="25" src="https://img.icons8.com/color/48/great-britain.png" alt="great-britain" />
+            <img width="25" height="25" src={britain} alt="great-britain" />
           ) : (
-            <img width="25" height="25" src="https://img.icons8.com/color/48/portugal.png" alt="portugal" />
+            <img width="25" height="25" src={portugal} alt="portugal" />
           )
         ) : undefined
       }
@@ -23,12 +25,12 @@ export const LocaleMenu = ({ currentLocale, onClick }: { currentLocale: string; 
         <DropdownItem key={locale} value={locale} onClick={onClick}>
           {locale == 'en' ? (
             <>
-              <img width="28" height="28" className={'mr-1'} src="https://img.icons8.com/color/48/great-britain.png" alt="great-britain" />
+              <img width="28" height="28" className={'mr-1'} src={britain} alt="great-britain" />
               {languages['en'].name}
             </>
           ) : (
             <>
-              <img width="28" height="28" className={'mr-1'} src="https://img.icons8.com/color/48/portugal.png" alt="portugal" />
+              <img width="28" height="28" className={'mr-1'} src={portugal} alt="portugal" />
               {languages['pt-pt'].name}
             </>
           )}
