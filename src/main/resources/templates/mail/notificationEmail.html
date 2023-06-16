@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OGR-Notification</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      /* Add your custom CSS styles here */
+
+      /* Body styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+
+      /* Container styles */
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Heading styles */
+      h1 {
+        color: #333333;
+        margin-top: 0;
+      }
+
+      /* Paragraph styles */
+      p {
+        color: #666666;
+        line-height: 1.5;
+        margin-bottom: 20px;
+      }
+
+      /* Button styles */
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #225b9a;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      .button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Signature styles */
+      .signature {
+        color: #999999;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>Dear <span th:text="${user.lastName}"></span></p>
+      <p>We are delighted to inform you about an important notification. Please read the details below:</p>
+      <p th:text="${message}"></p>
+      <p>
+        <a class="button" th:with="url=(@{|${baseUrl}|})" th:href="${url}">View Notification</a>
+      </p>
+      <p>
+        <span class="signature">Regards,</span>
+        <br />
+        <em>OGR Team</em>
+      </p>
+    </div>
+  </body>
+</html>

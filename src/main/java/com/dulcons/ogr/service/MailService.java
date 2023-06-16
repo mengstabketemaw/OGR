@@ -2,6 +2,7 @@ package com.dulcons.ogr.service;
 
 import com.dulcons.ogr.domain.User;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Locale;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -108,5 +109,26 @@ public class MailService {
     public void sendPasswordResetMail(User user) {
         log.debug("Sending password reset email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title");
+    }
+
+    @Async
+    public void sendEmailFromTemplateForNotification(User user, String templateName, String title, String message) {
+        if (user.getEmail() == null) {
+            log.debug("Email doesn't exist for user '{}'", user.getLogin());
+            return;
+        }
+        Context context = new Context();
+        context.setVariable(USER, user);
+        context.setVariable("message", message);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process(templateName, context);
+
+        sendEmail(user.getEmail(), title, content, false, true);
+    }
+
+    @Async
+    public void sendEmailNotification(User user, String title, String message) {
+        log.debug("Sending password reset email to user");
+        sendEmailFromTemplateForNotification(user, "mail/notificationEmail", title, message);
     }
 }

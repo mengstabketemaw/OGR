@@ -10,7 +10,6 @@ import com.dulcons.ogr.repository.NotificationDetailRepository;
 import com.dulcons.ogr.repository.NotificationRepository;
 import com.dulcons.ogr.repository.UserRepository;
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +19,22 @@ public class NotificationService {
     private final UserRepository userRepository;
     private final NotificationDetailRepository notificationDetailRepository;
     private final NotificationRepository notificationRepository;
+    private final MailService mailService;
 
     public NotificationService(
         UserRepository userRepository,
         NotificationDetailRepository notificationDetailRepository,
-        NotificationRepository notificationRepository
+        NotificationRepository notificationRepository,
+        MailService mailService
     ) {
         this.userRepository = userRepository;
         this.notificationDetailRepository = notificationDetailRepository;
         this.notificationRepository = notificationRepository;
+        this.mailService = mailService;
     }
 
     public void createAdminNotification(String source, NotificationType type, String arg) {
         List<User> users = userRepository.findByAuthority("ROLE_ADMIN");
-
         saveNotification(source, type, arg, users);
     }
 
@@ -85,6 +86,7 @@ public class NotificationService {
             detail.setUsername(user.getLogin());
             detail.setNotification(notification);
             notificationDetailRepository.save(detail);
+            mailService.sendEmailNotification(user, "", notification.getMessage());
         }
     }
 }
