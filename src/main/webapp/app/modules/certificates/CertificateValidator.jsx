@@ -9,10 +9,14 @@ import moment from "moment/moment";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPrint} from "@fortawesome/free-solid-svg-icons";
 import Certificate from "app/modules/certificates/certificate";
+import {useAppSelector} from "app/config/store";
+import {hasAnyAuthority} from "app/shared/auth/private-route";
+import {AUTHORITIES} from "app/config/constants";
 
 const CertificateValidator = () => {
   const {id} = useParams();
   const [data, setDate] = useState({ loading: true, data: {} });
+  const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
 
   useEffect(() => {
     axios
@@ -23,6 +27,19 @@ const CertificateValidator = () => {
   useEffect(()=>{
 
   },[])
+
+
+  const isMobile = window.innerWidth <= 768;
+  const isTablet = window.innerWidth <= 850;
+  const divStyle = {
+    transform: 'scale(0.8)',
+    transformOrigin: 'top left',
+    ...(isMobile && isTablet && {
+      transform: 'scale(0.3)',
+    } || isTablet && {transform: 'scale(0.5)'}
+    ),
+  };
+
   return (
     <div className="d-flex flex-column justify-content-center p-3">
 
@@ -35,10 +52,16 @@ const CertificateValidator = () => {
 
           {data.data?.status === 'Authorized' ? (
             <div className="d-flex flex-column" >
+              {isAdmin ?
               <div className="alert alert-success" role="alert">
                 <Translate contentKey="cert.validCert"/> <Link to={""}>Show more info</Link>
               </div>
-              <div style={{transform: 'scale(0.8)', transformOrigin: 'top left'}}>
+                :
+                <div className="alert alert-success" role="alert">
+                  {data.data.user.firstName + '\'s  ' + data.data?.form?.title}
+                </div>
+              }
+              <div style={divStyle}>
                 <Certificate
                   data={{
                     title: translate('userDashboard.' + data.data?.form?.title),
@@ -52,6 +75,7 @@ const CertificateValidator = () => {
 
                 />
               </div>
+
             </div>
           ):
             <div className="alert alert-warning" role="alert">

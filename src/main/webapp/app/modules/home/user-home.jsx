@@ -60,6 +60,8 @@ const UserHome = () => {
     setPrintData(data);
     return Promise.resolve();
   }
+  const isMobile = window.innerWidth <= 850;
+
 
   return (
     <>
@@ -207,6 +209,11 @@ const UserHome = () => {
 
                                 {data?.status === 'Authorized' ? (
                                   <>
+                                    {isMobile ?
+                                    <Button color="black" tag={"a"} size="sm" href={window.location.origin + `/certificate-validator/${data?.id}`} className="ml-0 mt-1 mr-0">
+                                      <FontAwesomeIcon style={{fontSize:"20px"}} color="teal" size="1x"  icon={faFilePdf} />
+                                    </Button>
+                                      :
                                     <ReactToPrint
                                       onBeforeGetContent={async () => {
                                         await handleBeforeGetContent({
@@ -227,6 +234,7 @@ const UserHome = () => {
                                       }
                                       content={() => certRef.current}
                                     />
+                                    }
 
                                     {printData && <Certificate
                                       data={printData}
