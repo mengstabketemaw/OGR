@@ -26,7 +26,7 @@ import { NavDropdown } from 'app/shared/layout/menus/menu-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleRight, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import NotificationComponent from 'app/entities/notification/notification';
+// import NotificationComponent from 'app/entities/notification/notification';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -98,7 +98,7 @@ const Header = (props: IHeaderProps) => {
           <Brand />
           <Collapse className={menuOpen ? 'show mt-6 mt-md-0' : 'mt-6 mt-md-0'} navbar>
             <Nav id="header-tabs" className="ms-auto" navbar>
-              <NotificationComponent />
+              {/*<NotificationComponent />*/}
               {props.isAuthenticated && <Home />}
               <NavDropdown
                 // icon="cogs"

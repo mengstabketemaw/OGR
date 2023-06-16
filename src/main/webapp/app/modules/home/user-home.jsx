@@ -159,7 +159,7 @@ const UserHome = () => {
                                   </span>
                                   </p>
                                 ) : data.status === 'Denied' ? (
-                                  <p className="btn btn-sm shadow-none border-0 text-right mb-0 pr-0 ">
+                                  <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-0 ">
                                     <span className={' font-weight-bold text-danger text-right'}>{data.status}</span>
                                     <span className="h6 description mt-1 invisible text-right" style={{fontSize:"11px"}}>
                                     <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
