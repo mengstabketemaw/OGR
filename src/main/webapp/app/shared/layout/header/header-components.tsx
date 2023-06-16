@@ -50,6 +50,7 @@ export const Home = () => (
 
 export const ComplianceMonitoringUser = () => {
   const [licence, setLicence] = useState({ loading: true, data: [] });
+  const [inspectionDropdownOpen, setInspectionDropdownOpen] = useState(false);
 
   const fetchData = () => {
     // Construct the URL with the page query parameter
@@ -65,9 +66,7 @@ export const ComplianceMonitoringUser = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
-
-  const [inspectionDropdownOpen, setInspectionDropdownOpen] = useState(false);
+  }, [, inspectionDropdownOpen]);
 
   const deviceWidth = window.innerWidth;
 

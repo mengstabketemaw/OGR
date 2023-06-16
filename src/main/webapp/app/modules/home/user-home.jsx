@@ -101,7 +101,7 @@ const UserHome = () => {
                       <span className="h3 "
                       onClick={() => setDetailModal({ show: true, id: data.id, formId: data.form.id })}
                       >
-                      <Translate  contentKey={'userDashboard.' + data?.form?.title} />
+                      <Translate  contentKey={'userDashboard.' + data?.form?.title || "Form"} />
                         </span>
                       <div className="text-right"  >
                       <div className="badges"  style={{ width: 50, height: 50,position:"absolute",left:"80%",top:"3%" }}>
@@ -148,35 +148,35 @@ const UserHome = () => {
                                   <p className="btn btn-sm pt-0 shadow-none border-0 d-flex flex-column text-right mb-0 pr-0">
                                     <span className="font-weight-bold  text-warning"> {data.status}</span>
                                     <span className="h6 description mt-1 text-right" style={{fontSize:"11px"}}>
-                                    <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
+                                    {data.stage?.name || 'Form'}
                                   </span>
                                   </p>
                                 ) : data.status === 'Authorized' ? (
                                   <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-0 ">
                                     <span className={'font-weight-bold text-success text-right'}>{data.status}</span>
                                     <span className="h6 description mt-1 invisible text-right" style={{fontSize:"11px"}}>
-                                    <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
+                                    {data.stage?.name || 'Form'}
                                   </span>
                                   </p>
                                 ) : data.status === 'Denied' ? (
                                   <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-0 ">
                                     <span className={' font-weight-bold text-danger text-right'}>{data.status}</span>
                                     <span className="h6 description mt-1 invisible text-right" style={{fontSize:"11px"}}>
-                                    <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
+                                    {data.stage?.name || 'Form'}
                                   </span>
                                   </p>
                                 ) : data.status === 'undefined' ? (
                                   <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-0">
                                     <span className={'font-weight-bold  text-gray text-right'}>Inprogress</span>
                                     <div className="h6 description text-right" style={{fontSize:"11px"}}>
-                                      <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
+                                      {data.stage?.name || 'Form'}
                                     </div>
                                   </p>
                                 ) : (
                                   <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-1">
                                     <span className={' font-weight-bold text-warning text-right'}>{data.status}</span>
                                     <div className="h6 description text-right" style={{fontSize:"11px"}}>
-                                      <Translate contentKey={'userDashboard.' + data.stage?.name || 'Form'} />
+                                      {data.stage?.name || 'Form'}
                                     </div>
 
                                   </p>
@@ -210,7 +210,7 @@ const UserHome = () => {
                                     <ReactToPrint
                                       onBeforeGetContent={async () => {
                                         await handleBeforeGetContent({
-                                          title: translate('userDashboard.' + data?.form?.title),
+                                          title: translate('userDashboard.' + data?.form?.title || "Form"),
                                           companyName: data?.user.firstName,
                                           location: "Cabinda",
                                           fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),

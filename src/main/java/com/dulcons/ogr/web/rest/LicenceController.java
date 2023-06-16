@@ -28,6 +28,8 @@ public class LicenceController {
     private final SpecializedReivewRepository specializedReivewRepository;
     private final DecisionMakingRepository decisionMakingRepository;
     private final NotificationService notificationService;
+    private final UserRepository userRepository;
+    private final CustomFormRepository customFormRepository;
 
     public LicenceController(
         LicenceRepository licenceRepository,
@@ -38,7 +40,9 @@ public class LicenceController {
         TechnicalReviewRepository technicalReviewRepository,
         SpecializedReivewRepository specializedReivewRepository,
         DecisionMakingRepository decisionMakingRepository,
-        NotificationService notificationService
+        NotificationService notificationService,
+        UserRepository userRepository,
+        CustomFormRepository customFormRepository
     ) {
         this.licenceRepository = licenceRepository;
         this.userService = userService;
@@ -49,6 +53,8 @@ public class LicenceController {
         this.specializedReivewRepository = specializedReivewRepository;
         this.decisionMakingRepository = decisionMakingRepository;
         this.notificationService = notificationService;
+        this.userRepository = userRepository;
+        this.customFormRepository = customFormRepository;
     }
 
     @GetMapping
@@ -153,8 +159,34 @@ public class LicenceController {
     @GetMapping("/user")
     public Iterable<Licence> getAllByUser() {
         User user = userService.getUserWithAuthorities().orElseThrow();
-        List<Long> licenceId = complianceRepository.findLicenceIdByCompany_Id(2L);
-        Iterable<Licence> licences = licenceRepository.findByUser_IdAndForm_IdIn(2L, licenceId);
+        Iterable<Licence> licences = licenceRepository.findByUser_IdAndStatus(user.getId(), "Authorized");
+        for (Licence licence : licences) {
+            Compliance compliance = new Compliance();
+            if (complianceRepository.existsBySubmittedDate(licence.getSubmittedDate())) continue;
+            try {
+                compliance.setCompany(userRepository.findByIdd(licence.getUser().getId()));
+                compliance.setCustomForm(customFormRepository.findByIdd(licence.getForm().getId()));
+                compliance.setSubmittedDate(licence.getSubmittedDate());
+
+                //setting location on compliance
+                Optional<Licence> licenceWithData = licenceRepository.findById(licence.getId());
+                licenceWithData.ifPresent(licenceData -> {
+                    String location = licenceData
+                        .getData()
+                        .stream()
+                        .filter(licenceFieldData -> licenceFieldData.getFieldType().getName().equals("location"))
+                        .limit(1)
+                        .map(LicenceFieldData::getText)
+                        .findFirst()
+                        .orElse(null);
+                    compliance.setLocation(location);
+                });
+
+                complianceRepository.save(compliance);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
         return licences;
     }
 

@@ -16,6 +16,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface LicenceRepository extends PagingAndSortingRepository<Licence, Long> {
+    @Query("select l from Licence l where l.user.id = ?1 and l.status = ?2")
+    Iterable<Licence> findByUser_IdAndStatus(Long id, String status);
+
     @Transactional
     @Modifying
     @Query("update Licence l set l.remark = ?1 where l.id = ?2")

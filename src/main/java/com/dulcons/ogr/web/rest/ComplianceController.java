@@ -159,6 +159,6 @@ public class ComplianceController {
     public Compliance findOneByUserId(@PathVariable Long id, @PathVariable Instant submittedDate) {
         User user = userService.getUserWithAuthorities().orElseThrow();
         Iterable<Licence> licence = licenceRepository.findAllByUserId(id);
-        return complianceRepository.findByCompany_IdAndCustomForm_IdAndsubmittedDate(2L, id, submittedDate);
+        return complianceRepository.findByCompany_IdAndCustomForm_IdAndsubmittedDate(user.getId(), id, submittedDate);
     }
 }
