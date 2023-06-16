@@ -15,7 +15,7 @@ const initialState = {
 export type LocaleState = Readonly<typeof initialState>;
 
 const loadLocaleAndRegisterLocaleFile = async (locale: string, prefix: string) => {
-  if (prefix || !Object.keys(TranslatorContext.context.translations).includes(locale)) {
+  if ((prefix || !Object.keys(TranslatorContext.context.translations).includes(locale)) && locale) {
     const response = await axios.get(`${prefix}i18n/${locale}.json?_=${I18N_HASH}`, { baseURL: '' });
     TranslatorContext.registerTranslations(locale, response.data);
   }
