@@ -17,7 +17,7 @@ import {hasAnyAuthority} from "app/shared/auth/private-route";
 import {AUTHORITIES} from "app/config/constants";
 import axios from "axios";
 
-const NotificationComponent = () => {
+const StickyCardDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -130,4 +130,4 @@ const NotificationComponent = () => {
   );
 };
 
-export default NotificationComponent;
+export default StickyCardDropdown;
