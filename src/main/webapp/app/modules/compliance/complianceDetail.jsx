@@ -58,10 +58,10 @@ export function ComplianceDetail() {
                 <h1><Translate contentKey={"compliance.complianceDetail"}/></h1>
               </div>
 
-              <div className="d-flex flex-column col-6 mt-3 form-group">
+              <div className="d-flex flex-column col-12 col-lg-6 mt-3 form-group">
                 <div className="company d-flex flex-row justify-content-between">
                   <h3 className={""}><Translate contentKey={"compliance.companyName"}/> </h3>
-                  <p className={"col-6"} >{compliance.data.company.login}</p>
+                  <p className={"col-6"} >{compliance.data.company.firstName}</p>
                 </div>
               <div className="licence d-flex flex-row justify-content-between">
                 <h3 className={""}><Translate contentKey={"compliance.table.licenceType"}/> </h3>

@@ -85,8 +85,8 @@ const ComplianceHistoryUser = ({complianceId, compliance}) => {
                   <thead className="thead-light">
                   <tr>
                     <th scope="col"><Translate contentKey={"compliance.table.date"}/></th>
-                    <th scope="col"><Translate contentKey={"compliance.inspector"}/></th>
-                    <th scope="col"><Translate contentKey={"compliance.table.findings"}/></th>
+                    <th className={"d-none d-sm-table-cell"} scope="col"><Translate contentKey={"compliance.inspector"}/></th>
+                    <th className={"d-none d-sm-table-cell"} scope="col"><Translate contentKey={"compliance.table.findings"}/></th>
                     <th scope="col"><Translate contentKey={"compliance.table.status"}/></th>
                   </tr>
                   </thead>
@@ -99,8 +99,8 @@ const ComplianceHistoryUser = ({complianceId, compliance}) => {
                   <thead className="thead-light">
                   <tr>
                     <th scope="col"><Translate contentKey={"compliance.table.date"}/></th>
-                    <th scope="col"><Translate contentKey={"compliance.inspector"}/></th>
-                    <th scope="col"><Translate contentKey={"compliance.table.findings"}/></th>
+                    <th className={"d-none d-sm-table-cell"} scope="col"><Translate contentKey={"compliance.inspector"}/></th>
+                    <th className={"d-none d-sm-table-cell"} scope="col"><Translate contentKey={"compliance.table.findings"}/></th>
                     <th scope="col"><Translate contentKey={"compliance.table.status"}/></th>
                   </tr>
                   </thead>
@@ -109,8 +109,8 @@ const ComplianceHistoryUser = ({complianceId, compliance}) => {
                   {inspectionHistory.data?.content.map(data => (
                     <tr key={data.id}>
                       <th>{data.date}</th>
-                      <th>{data.inspector.login}</th>
-                      <th>{
+                      <th className={"d-none d-sm-table-cell"} >{data.inspector.login}</th>
+                      <th className={"d-none d-sm-table-cell"}>{
                         data.finding ?
                           data.finding :
                           "---"

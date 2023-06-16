@@ -211,7 +211,7 @@ const ComplianceMonitoring = () => {
                             nav(`/complianceHistory?compliance=${data.id}`);
                           }}
                         >
-                          {data.company.login}
+                          {data.company.firstName}
                         </th>
                         <th
                           onClick={() => {
