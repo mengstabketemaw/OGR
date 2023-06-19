@@ -25,6 +25,7 @@ import { InspectionReport } from 'app/modules/compliance/inspectionReport';
 import { ComplianceUser } from 'app/modules/complianceUser/complianceUser';
 import Workflow from 'app/modules/administration/workflow/workflow';
 import CertificateValidator from 'app/modules/certificates/CertificateValidator';
+import News from 'app/modules/news/news';
 const loading = <div>loading ...</div>;
 
 const Account = Loadable({
@@ -67,6 +68,7 @@ const AppRoutes = () => {
         <Route path="licence" element={<Licence />} />
         <Route path="compliance" element={<ComplianceMonitoring />} />
         <Route path="certificate-validator/:id" element={<CertificateValidator />} />
+        <Route path="news/:id" element={<News />} />
         <Route
           path="sequence/:formId/:id"
           element={
