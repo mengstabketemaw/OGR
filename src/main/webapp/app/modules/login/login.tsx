@@ -19,7 +19,7 @@ export const Login = () => {
   }, []);
 
   const handleLogin = (username, password, rememberMe = false) => dispatch(login(username, password, rememberMe));
-
+  const deviceWidth = window.innerWidth;
   const handleClose = () => {
     setShowModal(false);
     navigate('/home');
@@ -27,7 +27,12 @@ export const Login = () => {
 
   const { from } = (location.state as any) || { from: { pathname: '/home', search: location.search } };
   if (isAuthenticated) {
-    return <Navigate to={from} replace />;
+    if (deviceWidth < 850) {
+      navigate('/home');
+      // window.location.reload();
+    } else {
+      return <Navigate to={from} replace />;
+    }
   }
   return <LoginModal showModal={showModal} handleLogin={handleLogin} handleClose={handleClose} loginError={loginError} />;
 };
