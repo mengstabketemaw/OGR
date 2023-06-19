@@ -215,7 +215,7 @@ export const AdminDashboardTable = ({ title }) => {
                       </th>
                       <th>
                         <Button
-                          color={data.status === 'Authorized' || data.status === 'Denied' ? 'light' : 'white'}
+                          color={data.status === 'Authorized' || data.status === 'Denied' ? 'light' : 'black'}
                           onClick={() => {
                             nav(`/sequence/${data.form.id}/${data.id}`);
                           }}
@@ -224,13 +224,14 @@ export const AdminDashboardTable = ({ title }) => {
                         >
                           <FontAwesomeIcon
                             color={data.status === 'Authorized' || data.status === 'Denied' ? 'white' : 'blue'}
-                            size="1x"
+                            // size="1x"
+                            style={{ fontSize: '16px' }}
                             icon={faCogs}
                           />
                           {/*<Translate contentKey={'workflow.moreaction'} />*/}
                         </Button>
                         <Button
-                          color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'white'}
+                          color={!(data.stage?.id === 0 || data.stage === null) ? 'light' : 'black'}
                           onClick={() => setDeleteLicence({ id: data.id, show: true, name: data.form.title })}
                           hidden={!(data.stage?.id === 0 || data.stage === null)}
                           size="sm"
@@ -238,7 +239,8 @@ export const AdminDashboardTable = ({ title }) => {
                           {/*<Translate contentKey={'entity.action.delete'} />*/}
                           <FontAwesomeIcon
                             color={!(data.stage?.id === 0 || data.stage === null) ? 'white' : 'red'}
-                            size="1x"
+                            // size="1x"
+                            style={{ fontSize: '15px' }}
                             icon={faTrash}
                           />
                         </Button>
@@ -258,7 +260,11 @@ export const AdminDashboardTable = ({ title }) => {
                               trigger={() => (
                                 // <button className="border-0 bg-white">button</button>
                                 <Button color="black" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
-                                  <FontAwesomeIcon size="2x" icon={faFilePdf} />
+                                  <FontAwesomeIcon
+                                    size="2x"
+                                    // style={{fontSize:"25px"}}
+                                    icon={faFilePdf}
+                                  />
                                 </Button>
                               )}
                               content={() => certRef.current}
