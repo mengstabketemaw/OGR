@@ -86,7 +86,7 @@ public class NotificationService {
             detail.setUsername(user.getLogin());
             detail.setNotification(notification);
             notificationDetailRepository.save(detail);
-            mailService.sendEmailNotification(user, "", notification.getMessage());
+            mailService.sendEmailNotification(user, "Action Required", notification.getMessage());
         }
     }
 }

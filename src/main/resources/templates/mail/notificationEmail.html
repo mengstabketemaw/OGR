@@ -59,11 +59,11 @@
   </head>
   <body>
     <div class="container">
-      <p>Dear <span th:text="${user.lastName}"></span></p>
+      <p>Dear <span th:text="${user.lastName}"></span>,</p>
       <p>We are delighted to inform you about an important notification. Please read the details below:</p>
       <p th:text="${message}"></p>
       <p>
-        <a class="button" th:with="url=(@{|${baseUrl}|})" th:href="${url}">View Notification</a>
+        <a th:with="url=(@{|${baseUrl}/home|})" th:href="${url}">View Notification</a>
       </p>
       <p>
         <span class="signature">Regards,</span>
