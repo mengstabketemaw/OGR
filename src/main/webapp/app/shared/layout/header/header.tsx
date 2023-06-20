@@ -221,7 +221,7 @@ const Header = (props: IHeaderProps) => {
 
               {/* {props.isAuthenticated && <EntitiesMenu />} */}
               {props.isAuthenticated && props.isAdmin && <AdminMenu showOpenAPI={props.isOpenAPIEnabled} />}
-              <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />
+
               <NavDropdown
                 // icon="help"
                 name={<Translate contentKey="support.support" />}
@@ -240,6 +240,7 @@ const Header = (props: IHeaderProps) => {
                 </DropdownItem>
               </NavDropdown>
               <AccountMenu isAuthenticated={props.isAuthenticated} />
+              <LocaleMenu currentLocale={props.currentLocale} onClick={handleLocaleChange} />
             </Nav>
           </Collapse>
         </Navbar>

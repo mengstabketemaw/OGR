@@ -331,20 +331,17 @@ const Landing = (props) => {
                   </li>
                   <li>
           <span className={"pb-3"}>
-            <img src={newService} alt="New Services" />  <Translate contentKey={'landing.announce'}/>
+            <img src={newService} alt="New Services" /> <Translate contentKey={'landing.announce'}/>
           </span>
                     <div id="services21" className={showServices  ? 'active d-flex justify-content-center  form-group flex-column ' : 'd-none'}>
-                      <a href="#" title="Individuals Portal" className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
-                        Individuals Portal
+                      <a href="/news/1"  className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
+                        <Translate contentKey={'news.news1'}/>
                       </a>
-                      <a href="#" title="Payment Orders Inquiry" className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
-                        Payment Orders Inquiry
+                      <a href="/news/2"  className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
+                        <Translate contentKey={'news.news2'}/>
                       </a>
-                      <a href="#" title="Recruitment" className=" form-control bg-transparent text-white border-0 border-none text-left pl-5">
-                        Recruitment
-                      </a>
-                      <a href="#" title="Follow-up transactions" className="sf-hiden  form-control bg-transparent text-white border-0 border-none text-left pl-5">
-                        Follow-up transactions
+                      <a href="/news/3"  className=" form-control bg-transparent text-white border-0 border-none text-left pl-5">
+                        <Translate contentKey={'news.news3'}/>
                       </a>
                       <a href="#" title="More ..." className="sf-hiden   form-control bg-transparent text-white border-0 border-none text-left pl-5 ">
                         <Translate contentKey={'landing.more'}/>
@@ -374,6 +371,7 @@ const Landing = (props) => {
                   <span className="clr" />
                   <Col md={"12"} className={"w-200 h-200 mb-2"}>
                     <MDBCarousel showControls showIndicators className={"h-100 w-100"}>
+                      <a href='/news/1'>
                       <MDBCarouselItem
                         className='w-100 h-100 d-block'
                         itemId={1}
@@ -383,6 +381,8 @@ const Landing = (props) => {
                         <h5 className={"text-white h-100 w-100"}> <Translate contentKey={'landing.news1.h5'}/> </h5>
                         <p className={"text-responsive h-100 w-100"}>  <Translate contentKey={'landing.news1.p'}/> </p>
                       </MDBCarouselItem>
+                      </a>
+                      <a href='/news/2'>
                       <MDBCarouselItem
                         className='w-100 d-block'
                         itemId={2}
@@ -392,15 +392,21 @@ const Landing = (props) => {
                         <h5 className={"text-white h-100 w-100"}> <Translate contentKey={'landing.news2.h5'}/> </h5>
                         <p className={"text-responsive h-100 w-100"}>  <Translate contentKey={'landing.news2.p'}/> </p>
                       </MDBCarouselItem>
+                      </a>
+                      <a href='/news/3'>
                       <MDBCarouselItem
                         className='w-100 d-block'
                         itemId={3}
                         src={news3}
                         alt='...'
+                        onClick={e => {
+                          nav('/news/3');
+                        }}
                       >
                         <h5 className={"text-white h-100 w-100"}> <Translate contentKey={'landing.news3.h5'}/> </h5>
                         <p className={"text-responsive h-100 w-100"}>  <Translate contentKey={'landing.news3.p'}/> </p>
                       </MDBCarouselItem>
+                      </a>
                     </MDBCarousel>
                   </Col>
                 </div>
@@ -1109,11 +1115,12 @@ const Landing = (props) => {
               <div className="doc_bar block">
                 <div className="animatedParent animateOnce">
                   <div className="doc hblock animated fadeInUp go">
-                    <div className="title">
+                    <div className="titl">
                       <a
-                        className="fixedTip"
+                        className="fixedTip text-success h2 font-weight-light"
                         href="#"
                         title="View all documents"
+
                       >
                         <Translate contentKey={'landing.document'}/>
                         <span />

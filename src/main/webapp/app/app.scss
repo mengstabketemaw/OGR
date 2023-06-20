@@ -111,6 +111,15 @@
   cursor: pointer;
 }
 
+.card-hover3 {
+  //border: 1px solid #bdb8b8 !important;
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.card-hover3:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
 .equal-height-cards > [class^='col'] {
   display: flex;
   flex-direction: column;
