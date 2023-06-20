@@ -2,8 +2,8 @@ package com.dulcons.ogr.service;
 
 import com.dulcons.ogr.domain.User;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import org.slf4j.Logger;
@@ -127,8 +127,27 @@ public class MailService {
     }
 
     @Async
-    public void sendEmailNotification(User user, String title, String message) {
+    public void genericNotificationSender(User user, String templateName, String title, Map<String, Object> body) {
+        if (user.getEmail() == null) {
+            log.debug("Email doesn't exist for user '{}'", user.getLogin());
+            return;
+        }
+        Context context = new Context();
+        context.setVariable(USER, user);
+
+        for (Map.Entry<String, Object> data : body.entrySet()) {
+            context.setVariable(data.getKey(), data.getValue());
+        }
+
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process(templateName, context);
+
+        sendEmail(user.getEmail(), title, content, false, true);
+    }
+
+    @Async
+    public void sendEmailNotification(User user, String title, String message, String template) {
         log.debug("Sending password reset email to user");
-        sendEmailFromTemplateForNotification(user, "mail/notificationEmail", title, message);
+        sendEmailFromTemplateForNotification(user, template, title, message);
     }
 }

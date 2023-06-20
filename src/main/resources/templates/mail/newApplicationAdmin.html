@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New License/Permit Application Submitted</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 0;
+      }
+      p {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>Dear <span th:text="${user.lastName}"></span>,</p>
+      <p>A new application has been submitted for <span th:text="${application}"></span>.</p>
+      <p>The following information is provided:</p>
+      <ul>
+        <li>Applicant Name: <span th:text="${applicant.lastName}"></span></li>
+        <li>Applicant Contact Information: <span th:text="${applicant.email}"></span></li>
+        <li>Type of License/Permit: <span th:text="${type}"></span></li>
+        <li>Company name: <span th:text="${applicant.firstName}"></span></li>
+        <li>Submitted Date: <span th:text="${date}"></span></li>
+      </ul>
+      <p>
+        <a th:with="url=(@{|${baseUrl}/home|})" th:href="${url}">View Notification</a>
+      </p>
+      <p>Please review the application and take the necessary action.</p>
+      <p>Thank you,</p>
+      <em>Team OGR</em>
+    </div>
+  </body>
+</html>

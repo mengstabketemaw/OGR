@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Update</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 0;
+      }
+      p {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p>Dear <span th:text="${user.lastName}"></span>,</p>
+      <p>Thank you for submitting your application for <span th:text="${application}"></span>.</p>
+      <p>
+        We have received your application, and it is currently being reviewed by our team. We will notify you of the status of your
+        application within 72 working hours.
+      </p>
+      <p>If you have any questions or concerns in the meantime, please don’t hesitate to contact us.</p>
+      <p>Thank you for your interest in our company.</p>
+      <p>
+        <span class="signature">Best regards,</span>
+        <br />
+        <em>Team OGR</em>
+      </p>
+    </div>
+  </body>
+</html>
