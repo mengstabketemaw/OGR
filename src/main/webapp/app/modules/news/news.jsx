@@ -3,16 +3,13 @@ import { Container, Row, Col, Card, CardImg, CardBody, CardTitle, CardText } fro
 import {useParams} from "react-router-dom";
 import {useAppSelector} from "app/config/store";
 import newsData from './newsData';
+import {Translate} from "react-jhipster";
 const News = () => {
   const {id} = useParams();
   const currentLocale = useAppSelector(state => state.locale.currentLocale);
 
 
-  const leftContentHeading = "OGR - Oil and Gas Regulation and Licensing";
-  const leftContentParagraph = `
-    OGR (Oil and Gas Regulation and Licensing) is an innovative system implemented by the Angolan government to streamline the process of applying for licenses and permits in the oil and gas industry.
-    This cutting-edge platform facilitates the efficient management and oversight of regulatory activities, bringing numerous benefits to both operators and the nation as a whole.
-  `;
+
   const leftContentBenefits ={
     en:[
       "Simplified Application Process: OGR simplifies and digitizes applications, reducing paperwork and hurdles.",
@@ -38,10 +35,10 @@ const News = () => {
         <Col md={3} sm={12}>
           <Card className="mb-4">
             <CardBody>
-              <CardTitle tag="h3">{leftContentHeading}</CardTitle>
-              <CardText>{leftContentParagraph}</CardText>
+              <CardTitle tag="h3"><Translate  contentKey={"news.heading"} /></CardTitle>
+              <CardText><Translate  contentKey={"news.desc1"} /></CardText>
               <CardText>
-                The OGR system ensures streamlined processes, promotes compliance, and contributes to the sustainable development of the oil and gas industry in Angola.
+                <Translate  contentKey={"news.desc2"} />
               </CardText>
               <ul>
                 {currentLocale == 'pt-pt' ?
@@ -59,7 +56,6 @@ const News = () => {
                 }
 
               </ul>
-              <a href="https://example.com/ogr-system" className="btn btn-primary">Learn More</a>
             </CardBody>
           </Card>
         </Col>
@@ -91,14 +87,14 @@ const News = () => {
           </Card>
         </Col>
         <Col md={3} sm={6}>
-          <h3 className="mb-4">Recent News</h3>
+          <h3 className="mb-4"><Translate  contentKey={"news.recent"} /></h3>
 
           {currentLocale == "pt-pt"
             ?
             <>
               {newsData.pt?.map((news,index)=>(
 
-                  <Card className={String(index+1) == id ? "d-none":"mb-3"}>
+                  <Card tag={"a"} href={`/news/${index+1}`} className={String(index+1) == id ? "d-none":"mb-3 card-hover3"}>
                     <CardImg top  src={news.image} alt="Recent News Image" />
                     <CardBody>
                       <CardTitle tag="h5">{news.title}</CardTitle>
@@ -112,7 +108,7 @@ const News = () => {
             <>
           {newsData.en?.map((news,index)=>(
 
-            <Card className={String(index+1) == id ? "d-none":"mb-3"}>
+            <Card tag={"a"} href={`/news/${index+1}`} className={String(index+1) == id ? "d-none":"mb-3 card-hover3"}>
             <CardImg top  src={news.image} alt="Recent News Image" />
             <CardBody>
             <CardTitle tag="h5">{news.title}</CardTitle>
