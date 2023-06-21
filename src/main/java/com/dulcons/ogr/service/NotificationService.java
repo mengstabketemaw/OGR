@@ -119,7 +119,7 @@ public class NotificationService {
                 !type.equals(NotificationType.LICENCE_APPROVED) &&
                 !type.equals(NotificationType.LICENCE_DECLINED)
             ) {
-                mailService.sendEmailNotification(user, "Action Required", emailMessage, "mail/notificationEmail");
+                mailService.sendEmailNotification(user, "Status change", emailMessage, "mail/notificationEmail");
             }
         }
     }
