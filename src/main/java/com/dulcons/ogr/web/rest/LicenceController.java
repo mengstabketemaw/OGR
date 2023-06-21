@@ -95,8 +95,10 @@ public class LicenceController {
         notificationService.createAdminNotification(
             licence.getForm().getId() + "/" + licence.getId(),
             NotificationType.NEW_APPLICATION,
-            ""
+            "",
+            licence.getForm().getTitle() + "~" + licence.getUser().getFirstName()
         );
+        notificationService.createEmailToBothAdminAndUser(licence);
     }
 
     @PutMapping("/{id}")
@@ -107,7 +109,8 @@ public class LicenceController {
         notificationService.createAdminNotification(
             licence.getForm().getId() + "/" + licence.getId(),
             NotificationType.APPLICATION_UPDATE,
-            ""
+            "",
+            licence.getForm().getTitle() + "~" + licence.getUser().getFirstName()
         );
     }
 
@@ -199,7 +202,10 @@ public class LicenceController {
     ) {
         State state = stateRepository.findById(stateId).orElse(stateRepository.findById(stateId).orElseThrow());
         licenceRepository.updateStatusAndStageById(status, state, id, date);
-        licenceRepository.findById(id).ifPresent(licence -> notificationService.notificationForLicenceUpdate(state, status, licence, ""));
+        licenceRepository
+            .findById(id)
+            .ifPresent(licence -> notificationService.notificationForLicenceUpdate(state, status, licence, "", licence.getForm().getTitle())
+            );
     }
 
     @PutMapping("/moreReqRemark/{id}")
@@ -209,7 +215,13 @@ public class LicenceController {
             licenceRepository
                 .findById(id)
                 .ifPresent(licence -> {
-                    notificationService.createUserNotification(id.toString(), NotificationType.MORE_INFO, licence.getUser(), remark);
+                    notificationService.createUserNotification(
+                        id.toString(),
+                        NotificationType.MORE_INFO,
+                        licence.getUser(),
+                        remark,
+                        licence.getForm().getTitle() + "~" + remark
+                    );
                 });
         } catch (Exception e) {
             e.printStackTrace();
@@ -226,7 +238,8 @@ public class LicenceController {
                     notificationService.createAdminNotification(
                         licence.getForm().getId() + "/" + licence.getId(),
                         NotificationType.AMENDMENT,
-                        amendment
+                        amendment,
+                        licence.getForm().getTitle() + "~" + licence.getUser().getFirstName() + "~" + amendment
                     );
                 });
         } catch (Exception e) {
@@ -245,7 +258,8 @@ public class LicenceController {
                     notificationService.createAdminNotification(
                         licence.getForm().getId() + "/" + licence.getId(),
                         NotificationType.PAYMENT_IS_MADE,
-                        ""
+                        "",
+                        licence.getForm().getTitle() + "~" + licence.getUser().getFirstName()
                     );
                 } catch (Exception e) {
                     e.printStackTrace();
