@@ -2,12 +2,8 @@ import React, {useEffect, useState} from 'react'
 import {translate, Translate} from "react-jhipster";
 import {Link, useParams} from "react-router-dom";
 import axios from "axios";
-import {Button, Spinner} from "reactstrap";
-import {UpdateDynamicFields} from "app/shared/form/form-data-update";
-import ReactToPrint from "react-to-print";
+import {Spinner} from "reactstrap";
 import moment from "moment/moment";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPrint} from "@fortawesome/free-solid-svg-icons";
 import Certificate from "app/modules/certificates/certificate";
 import {useAppSelector} from "app/config/store";
 import {hasAnyAuthority} from "app/shared/auth/private-route";
@@ -22,7 +18,7 @@ const CertificateValidator = () => {
     axios
       .get('/api/licence/' + id)
       .then(({ data }) => setDate({ loading: false, data }))
-      .catch(console.log);
+      .catch(()=>setDate({ loading: false, data:{}}));
   }, [id])
   useEffect(()=>{
 
