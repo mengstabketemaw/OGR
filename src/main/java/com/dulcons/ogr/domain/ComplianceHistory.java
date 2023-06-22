@@ -20,6 +20,9 @@ public class ComplianceHistory {
 
     String finding;
     String status;
+
+    @Lob
+    @Column(name = "report", columnDefinition = "LONGTEXT")
     String report;
 
     public Long getId() {
