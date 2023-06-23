@@ -226,7 +226,7 @@ const Header = (props: IHeaderProps) => {
                 // icon="help"
                 name={<Translate contentKey="support.support" />}
               >
-                <DropdownItem tag="a" href={'https://ograngola.tawk.help/'}>
+                <DropdownItem tag="a" target={'_blank'} href={'https://ograngola.tawk.help/'}>
                   {' '}
                   <Translate contentKey="support.knowledgeBased" />
                 </DropdownItem>
