@@ -108,7 +108,7 @@ export const CheckoutForm = () => {
                       name={'address'}
                       type={'text'}
                       required={true}
-                      label={translate('checkout.address')}
+                      label={translate('checkout.address') + ' *'}
                       placeholder={'1234 Main St'}
                     />
                   </div>
@@ -127,16 +127,22 @@ export const CheckoutForm = () => {
                         name={'country'}
                         type={'text'}
                         required={true}
-                        label={translate('checkout.country')}
+                        label={translate('checkout.country') + ' *'}
                         placeholder={''}
                       />
                     </div>
                     <div className="col-md-4 mb-3">
-                      <ValidatedField name={'state'} type={'text'} required={true} label={translate('checkout.state')} placeholder={''} />
+                      <ValidatedField
+                        name={'state'}
+                        type={'text'}
+                        required={true}
+                        label={translate('checkout.state') + ' *'}
+                        placeholder={''}
+                      />
                     </div>
                     <div className="col-md-3 mb-3">
                       <label htmlFor="zip">
-                        <Translate contentKey={'checkout.zip'} />
+                        <Translate contentKey={'checkout.zip'} /> *
                       </label>
                       <input type="text" className="form-control" id="zip" placeholder="" required />
                       <div className="invalid-feedback">Zip code required.</div>
@@ -162,7 +168,7 @@ export const CheckoutForm = () => {
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <label htmlFor="cc-name">
-                        <Translate contentKey={'checkout.nameOnCard'} />
+                        <Translate contentKey={'checkout.nameOnCard'} /> *
                       </label>
                       <input type="text" className="form-control" id="cc-name" placeholder="" required />
                       <small className="text-muted">
@@ -172,7 +178,7 @@ export const CheckoutForm = () => {
                     </div>
                     <div className="col-md-6 mb-3">
                       <label htmlFor="cc-number">
-                        <Translate contentKey={'checkout.creditCardNumber'} />
+                        <Translate contentKey={'checkout.creditCardNumber'} /> *
                       </label>
                       <input
                         type="text"
@@ -191,7 +197,7 @@ export const CheckoutForm = () => {
                   <div className="row">
                     <div className="col-md-3 mb-3">
                       <label htmlFor="cc-expiration">
-                        <Translate contentKey={'checkout.expiration'} />
+                        <Translate contentKey={'checkout.expiration'} /> *
                       </label>
                       <input
                         type="text"
@@ -208,7 +214,7 @@ export const CheckoutForm = () => {
                     </div>
                     <div className="col-md-3 mb-3">
                       <label htmlFor="cc-expiration">
-                        <Translate contentKey={'checkout.cvv'} />
+                        <Translate contentKey={'checkout.cvv'} /> *
                       </label>
                       <input type="number" className="form-control" id="cc-cvv" placeholder="123" required maxLength={4} minLength={3} />
                       <div className="invalid-feedback">Security code required</div>
