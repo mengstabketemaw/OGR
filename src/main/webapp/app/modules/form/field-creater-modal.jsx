@@ -16,6 +16,10 @@ const FieldCreaterModal=(props)=>{
     handleFields(valueToSend);
     handleClose();
   };
+  const trans = (v) =>{
+    const returnValue =  translate("state."+v);
+    return returnValue.startsWith('translation-not-found[') ? v : returnValue;
+  }
 
   const defaultValue = () => {
     return {...field, fieldType: JSON.stringify(field.fieldType),
@@ -81,7 +85,7 @@ const FieldCreaterModal=(props)=>{
               </option>
               { states.map((f,i) => (
                 <option value={JSON.stringify(f)} key={f.id}>
-                  <Translate contentKey={"state."+f.name}></Translate>
+                  {trans(f.name)}
                 </option>
               ))}
             </ValidatedField >}

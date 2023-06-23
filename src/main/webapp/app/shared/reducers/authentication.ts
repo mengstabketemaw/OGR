@@ -66,6 +66,7 @@ export const login: (username: string, password: string, rememberMe?: boolean) =
       } else {
         Storage.session.set(AUTH_TOKEN_KEY, jwt);
       }
+      Storage.local.set('admin_name', username.toString());
     }
     dispatch(getSession());
   };
@@ -76,6 +77,12 @@ export const clearAuthToken = () => {
   }
   if (Storage.session.get(AUTH_TOKEN_KEY)) {
     Storage.session.remove(AUTH_TOKEN_KEY);
+  }
+  if (Storage.local.get('admin_name')) {
+    Storage.local.remove('admin_name');
+  }
+  if (Storage.session.get('admin_name')) {
+    Storage.session.remove('admin_name');
   }
 };
 
