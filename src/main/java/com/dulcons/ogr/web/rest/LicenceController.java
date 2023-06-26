@@ -269,14 +269,14 @@ public class LicenceController {
 
     void changeUserName(Licence original) {
         Licence licenceWithData = licenceRepository.findById(original.getId()).orElseThrow();
-        String applicantName = licenceWithData
+        /*        String applicantName = licenceWithData
             .getData()
             .stream()
             .filter(licenceFieldData -> licenceFieldData.getLabel().equalsIgnoreCase("Applicant Name"))
             .findFirst()
             .map(LicenceFieldData::getText)
-            .orElse(original.getUser().getLastName());
+            .orElse(original.getUser().getLastName());*/
 
-        original.setApplicantUsername(applicantName);
+        original.setApplicantUsername(licenceWithData.getUser().getFirstName());
     }
 }
