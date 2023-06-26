@@ -209,7 +209,7 @@ const LicencesHeader = () => {
 
 
       <Modal isOpen={modalOpen} toggle={closeModal} backdrop={true}>
-        <ModalHeader toggle={closeModal}>Full Text</ModalHeader>
+        <ModalHeader toggle={closeModal}><Translate contentKey={'licence.fullText'}/> </ModalHeader>
         <ModalBody>
           <p className="text-black text-justify">
             {

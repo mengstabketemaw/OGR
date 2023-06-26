@@ -22,6 +22,7 @@
       "Payment": "Esta etapa envolve o processo de pagamento para o fluxo de trabalho."
     },
     "delete": "Tem certeza de que deseja excluir isso {{name}}?",
-    "deleted": "{{name}} esta deletado"
+    "deleted": "{{name}} esta deletado",
+    "fullText": "Detalhe Completo\n"
   }
 }

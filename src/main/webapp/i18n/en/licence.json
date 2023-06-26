@@ -22,6 +22,7 @@
       "Payment": "This stage involves the payment process for the workflow."
     },
     "delete": "Are you sure you want to delete this {{name}}?",
-    "deleted": "{{name}} is deleted"
+    "deleted": "{{name}} is deleted",
+    "fullText": "Full Detail"
   }
 }
