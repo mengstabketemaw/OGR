@@ -90,7 +90,7 @@ const UserNotification = ({showModal = a=>a, showRemark = a=>a }) => {
                 <p className="text-muted"> <Translate contentKey={"error.noNotification"}>There is no new Notification</Translate></p>
               </div>
             </> : <>
-              <div className="navi navi-hover pl-0 pr-0" style={{height: "600px", overflowY: unseenCount > 4 ? "hidden" : "hidden"}}>
+              <div className="navi navi-hover pl-0 pr-0" style={{height: "600px", overflowY: unseenCount > 7 ? "scroll" : "hidden"}}>
                 {notifications.map(detail =>(
                   <a href="#" className="navi-item" onClick={getNotificationHandler(detail)}>
                     <div className="navi-link">
