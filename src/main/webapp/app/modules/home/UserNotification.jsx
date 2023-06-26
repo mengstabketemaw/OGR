@@ -86,11 +86,11 @@ const UserNotification = ({showModal = a=>a, showRemark = a=>a }) => {
           {tab === 'activities' ? <Stages/> :
           <>
             {notifications.length === 0 ? <>
-              <div className="d-flex justify-content-center h-100 align-items-center" style={{overflowY: "scroll", height:"600px"}}>
+              <div className="d-flex justify-content-center align-items-center" style={{overflowY: "hidden", height:"600px"}}>
                 <p className="text-muted"> <Translate contentKey={"error.noNotification"}>There is no new Notification</Translate></p>
               </div>
             </> : <>
-              <div className="navi navi-hover" style={{height: "600px", overflowY: unseenCount > 4 ? "scroll" : "hidden"}}>
+              <div className="navi navi-hover pl-0 pr-0" style={{height: "600px", overflowY: unseenCount > 4 ? "hidden" : "hidden"}}>
                 {notifications.map(detail =>(
                   <a href="#" className="navi-item" onClick={getNotificationHandler(detail)}>
                     <div className="navi-link">
