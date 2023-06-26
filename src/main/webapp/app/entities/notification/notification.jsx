@@ -15,7 +15,7 @@ import {hasAnyAuthority} from "app/shared/auth/private-route";
 import {AUTHORITIES} from "app/config/constants";
 import {useNavigate} from "react-router-dom";
 import { Translate } from "react-jhipster";
-function NotificationComponent() {
+function NotificationComponent({menuOpen}) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [unseenCount, setUnseenCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
@@ -67,7 +67,7 @@ function NotificationComponent() {
       <Dropdown isOpen={dropdownOpen} toggle={toggle} direction="start">
         <DropdownToggle tag="div" >
           <div className="d-flex pulse ">
-            <FontAwesomeIcon color={"white"} icon={faBell} style={{marginTop:"15px"}}/>
+            <FontAwesomeIcon color={menuOpen ? 'black' : 'white'} icon={faBell} style={{marginTop: '15px'}} />
             {unseenCount ? <>
               <span className="badge text-red">{unseenCount}</span>
               <span className="pulse-ring"></span>

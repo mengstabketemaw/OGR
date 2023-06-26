@@ -122,7 +122,7 @@ const ComplianceHistory = ({complianceId,compliance}) => {
               </>
             ) : (
               <>
-                <Table className="align-items-center table-flush" responsive>
+                <Table className="align-items-center table-flush table-hover" responsive>
                   <thead className="thead-light">
                   <tr>
                     <th scope="col"><Translate contentKey={"compliance.table.date"}/></th>
@@ -136,15 +136,15 @@ const ComplianceHistory = ({complianceId,compliance}) => {
 
                   <tbody>
                   {inspectionHistory.data?.content.map(data => (
-                    <tr key={data.id}>
-                      <th>{data.date}</th>
-                      <th>{data.inspector.login}</th>
-                      <th>{
+                    <tr key={data.id} >
+                      <th onClick={ () => {nav(`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`)}}>{data.date}</th>
+                      <th onClick={ () => {nav(`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`)}}>{data.inspector.login}</th>
+                      <th onClick={ () => {nav(`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`)}}>{
                         data.finding?
                           data.finding:
                           "---"
                       }</th>
-                      <th>
+                      <th onClick={ () => {nav(`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`)}}>
                       {
                         `${data.status}` == 'Non-Compliant'
                           ?
