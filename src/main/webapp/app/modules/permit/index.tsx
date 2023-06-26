@@ -82,7 +82,7 @@ const Permit = () => {
   return (
     <>
       <div className="p-1 p-md-5">
-        <h1 className={'text-uppercase'}>{params.get('name')}</h1>
+        <h1 className={'text-uppercase pl-3'}>{params.get('name')}</h1>
 
         <div className="header pb-8 pt-1 pt-md-">
           <Container fluid>
