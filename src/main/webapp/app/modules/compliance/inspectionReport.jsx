@@ -61,7 +61,7 @@ export function InspectionReport() {
             <div className="d-flex flex-column col-12 form-group border-top-bottom mt-3">
               <div className="company d-flex flex-row justify-content-between">
                 <h3 className={""}><Translate contentKey={"compliance.companyName"}/> </h3>
-                <p className={"col-8"}>{compliance.data.compliance.company.login}</p>
+                <p className={"col-8"}>{compliance.data.compliance.company.firstName}</p>
               </div>
               <div className="licence d-flex flex-row justify-content-between">
                 <h3 className={""}><Translate contentKey={"compliance.table.licenceType"}/> </h3>
@@ -73,7 +73,7 @@ export function InspectionReport() {
               </div>
               <div className="licence d-flex flex-row justify-content-between">
                 <h3 className={""}><Translate contentKey={"compliance.inspector"}/> </h3>
-                <p className="col-8">{compliance.data.inspector.login}</p>
+                <p className="col-8">{compliance.data.inspector.lastName}</p>
               </div>
               <div className="licence d-flex flex-row justify-content-between">
                 <h3 className={""}><Translate contentKey={"compliance.table.findings"}/> </h3>

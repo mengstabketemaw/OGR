@@ -50,7 +50,10 @@ const UserStats = () => {
             <h1 className="text-white align-self-center"><Translate contentKey={'userDashboard.welcome'}/></h1>
 
             <div className="text-white">
-              <span>{account.firstName} {account.lastName}</span>
+              <span>{account.firstName} </span>
+            </div>
+            <div className="text-white" style={{fontSize:"14px"}}>
+              <span>{account.lastName}</span>
             </div>
 
 

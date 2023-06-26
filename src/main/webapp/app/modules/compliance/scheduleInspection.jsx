@@ -53,7 +53,7 @@ export const ScheduleInspection = ({show,refreshTable, handleClose, users,schedu
             {users.map((f, i) => (
               f.authorities.includes('ROLE_ADMIN') && (
                 <option value={f.id} key={f.id}>
-                  {f.login}
+                  {f.lastName}
                 </option>
               )
             ))}

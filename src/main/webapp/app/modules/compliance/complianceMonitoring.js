@@ -78,7 +78,7 @@ const ComplianceMonitoring = () => {
   useEffect(() => {
     const results = inspections.data.content.filter(
       d =>
-        d.company.login.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        d.company.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         d.customForm.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         d.id == searchTerm.toLowerCase()
     );
@@ -272,7 +272,7 @@ const ComplianceMonitoring = () => {
                               setScheduleParams({
                                 complianceId: data.id,
                                 companyId: data.company.id,
-                                companyName: data.company.login,
+                                companyName: data.company.firstName,
                                 licenceId: data.customForm.id,
                                 licenceName: data.customForm.title,
                               });
