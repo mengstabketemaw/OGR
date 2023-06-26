@@ -23,6 +23,10 @@
     },
     "delete": "Are you sure you want to delete this {{name}}?",
     "deleted": "{{name}} is deleted",
-    "fullText": "Full Detail"
+    "fullText": "Full Detail",
+    "description": "Description",
+    "timeEstimate": "Time Estimate",
+    "onAverage": "On average, it may take around 2-4 weeks",
+    "fee": "Fee"
   }
 }

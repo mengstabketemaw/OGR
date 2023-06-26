@@ -79,39 +79,56 @@ const Permit = () => {
     );
   };
 
+  const [startProcess, setStartProcess] = useState(false);
+
   return (
     <>
       <div className="p-1 p-md-5">
-        <h1 className={'text-uppercase pl-3'}>{params.get('name')}</h1>
+        <div className="row p-0">
+          <div className="col-xl-8 col-12 d-flex justify-content-between">
+            <h1 className={'text-uppercase pl-3 mr-4 '}>{params.get('name')}</h1>
+            {!startProcess && (
+              <>
+                {isAuthenticated ? (
+                  <Button
+                    onClick={() => {
+                      setStartProcess(true);
+                    }}
+                    className="mb-1 mr-1 btn btn-success text-uppercase ml--2 ml-md-0"
+                  >
+                    <Translate contentKey={'form.loginFirst'} />
+                  </Button>
+                ) : (
+                  <Button
+                    className="mb-1 mr-1 btn btn-success text-uppercase ml--2 ml-md-0"
+                    onClick={() => {
+                      nav('/apply-permit?name=' + params.get('name') + '&pageKey=' + params.get('pageKey'));
+                      setStartProcess(true);
+                    }}
+                  >
+                    <Translate contentKey={'form.loginFirst'} />
+                  </Button>
+                )}
+              </>
+            )}
+          </div>
+        </div>
 
         <div className="header pb-8 pt-1 pt-md-">
           <Container fluid>
-            <div className="header-body mb-5">
-              {/* Card stats */}
-              <LicencesHeader />
-            </div>
+            {startProcess && (
+              <div className="header-body mb-5">
+                {/* Card stats */}
+                <LicencesHeader />
+              </div>
+            )}
 
             <Row>
-              <Col lg={8}>
+              <Col xl={8}>
                 <Card>
                   {' '}
                   <CardBody>
-                    {isAuthenticated ? (
-                      <ApplyPermit />
-                    ) : (
-                      <>
-                        <Row className="justify-content-center ">
-                          <Col md="6">
-                            <h1 className="">
-                              <Translate contentKey={'form.for'} /> {params.get('name')}
-                            </h1>
-                          </Col>
-                        </Row>
-                        <Button onClick={() => nav('/apply-permit?name=' + params.get('name') + '&pageKey=' + params.get('pageKey'))}>
-                          <Translate contentKey={'form.loginFirst'} />
-                        </Button>
-                      </>
-                    )}
+                    <ApplyPermit startProcess={startProcess} />
                   </CardBody>{' '}
                 </Card>
               </Col>
