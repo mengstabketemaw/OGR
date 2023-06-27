@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import {useNavigate, useParams} from "react-router-dom";
-import {Translate, ValidatedBlobField, ValidatedField, ValidatedForm, F} from "react-jhipster";
+import { Translate, ValidatedBlobField, ValidatedField, ValidatedForm, F, translate } from "react-jhipster";
 import {
   Button,
   Card,
@@ -215,6 +215,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
   return(<>
 
     <ValidatedForm>
+      <ValidatedField name={"companyName"} label={translate('table.user') + ' *'} value={data.user.firstName}/>
         {
           data.form.fields.filter(field => field.state?.id === 0)
             .map(
