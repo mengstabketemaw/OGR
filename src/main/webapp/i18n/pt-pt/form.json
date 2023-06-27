@@ -6,7 +6,7 @@
     "fields": {
       "title": "Título",
       "label": "Rótulo",
-      "placeholder": "Placeholder",
+      "placeholder": "Espaço reservado\n",
       "required": "Obrigatória",
       "type": "Tipo"
     },
@@ -28,7 +28,7 @@
     "displayOn": "Exibir em"
   },
   "licence": {
-    "Exploration licence": "licença de exploração",
+    "Exploration licence": "Licença de exploração",
     "Pipeline Licence": "Licença de Oleoduto",
     "Air Permit": "Permissão Aérea",
     "Drilling Permit": "Permissão de Perfuração"

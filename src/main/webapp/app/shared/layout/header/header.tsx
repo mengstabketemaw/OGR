@@ -27,6 +27,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleRight, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import NotificationComponent from 'app/entities/notification/notification';
+import axios from 'axios';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -60,7 +61,20 @@ const Header = (props: IHeaderProps) => {
   const handleLocaleChange = event => {
     const langKey = event.target.value;
     Storage.session.set('locale', langKey);
+    setBackendLocale(langKey.split('-')[0]);
     dispatch(setLocale(langKey));
+    window.location.reload();
+  };
+
+  const setBackendLocale = language => {
+    axios
+      .post('/api/locale', null, { params: { language } })
+      .then(response => {
+        console.log('Locale set successfully');
+      })
+      .catch(error => {
+        console.error('Error setting locale:', error);
+      });
   };
 
   const renderDevRibbon = () =>

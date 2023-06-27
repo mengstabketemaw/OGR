@@ -2,8 +2,10 @@ package com.dulcons.ogr.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import javax.persistence.*;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 @Entity
 public class CustomField {
@@ -16,6 +18,7 @@ public class CustomField {
     private FieldTypes fieldType;
 
     private String label;
+    private String portugueseLabel;
     private Boolean required;
     private String placeholder;
 
@@ -74,7 +77,12 @@ public class CustomField {
     }
 
     public String getLabel() {
-        return label;
+        Locale locale = LocaleContextHolder.getLocale();
+        if (locale.getLanguage().equals("en")) {
+            return label;
+        } else {
+            return getPortugueseLabel();
+        }
     }
 
     public void setLabel(String label) {
@@ -111,6 +119,14 @@ public class CustomField {
         if (o == null || getClass() != o.getClass()) return false;
         CustomField that = (CustomField) o;
         return id.equals(that.id) && label.equals(that.label) && required.equals(that.required) && placeholder.equals(that.placeholder);
+    }
+
+    public String getPortugueseLabel() {
+        return portugueseLabel;
+    }
+
+    public void setPortugueseLabel(String portugueseLabel) {
+        this.portugueseLabel = portugueseLabel;
     }
 
     @Override

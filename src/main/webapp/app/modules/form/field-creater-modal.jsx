@@ -44,6 +44,14 @@ const FieldCreaterModal=(props)=>{
                 required
 
               />
+            <ValidatedField
+              type="text"
+              name="portugueseLabel"
+              label={translate('form.fields.portugueseLabel')}
+              //placeholder="add label"//{translate('global.form.username.placeholder')}
+              required
+
+            />
               <ValidatedField
                 type="text"
                 name="placeholder"

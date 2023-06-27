@@ -6,6 +6,7 @@
     "fields": {
       "title": "Title",
       "label": "Label",
+      "portugueseLabel": "Portuguese Label",
       "placeholder": "Placeholder",
       "required": "Required",
       "type": "Type"

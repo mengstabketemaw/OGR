@@ -16,6 +16,7 @@ const FieldCreater = (param) =>{
   const initalField = {
     "id":0,
     "label":"",
+    "portugueseLabel":"",
     "required":true,
     "placeholder":"",
     "fieldType":{},
