@@ -1,57 +1,59 @@
 {
   "form": {
-    "for": "Formulário de inscrição para",
-    "title": "Forma",
+    "for": "Formulário de Solicitação para",
+    "title": "Formulário",
     "edit": "Editar um formulário",
     "fields": {
       "title": "Título",
       "label": "Rótulo",
-      "placeholder": "Espaço reservado\n",
-      "required": "Obrigatória",
+      "portugueseLabel": "Rótulo em Português",
+      "placeholder": "Marcador de Posição",
+      "required": "Obrigatório",
       "type": "Tipo"
     },
     "add": "Adicionar",
-    "addField": "Adicionar Estada",
-    "back": "Back",
-    "save": "Save",
-    "state": "Estada",
+    "addField": "Adicionar Novo Campo",
+    "back": "Voltar",
+    "save": "Salvar",
+    "state": "Estado",
     "delete": "Excluir",
     "submit": "Enviar",
-    "loginFirst": "Aplique agora\n"
+    "loginFirst": "Aplicar Agora"
   },
   "formModal": {
-    "fieldCreater": "Criador de campo",
+    "fieldCreater": "Criador de Campo",
     "order": "Ordem",
-    "fieldType": "Tipo de campo",
-    "option": "opções",
-    "optionPlaceHolder": "As opções devem ser separadas por nova linha",
-    "displayOn": "Exibir em"
+    "fieldType": "Tipo de Campo",
+    "option": "Opções",
+    "optionPlaceHolder": "As opções devem ser separadas por uma nova linha",
+    "displayOn": "Revisado em"
   },
+
   "licence": {
-    "Exploration licence": "Licença de exploração",
+    "Exploration licence": "Licença de Exploração",
     "Pipeline Licence": "Licença de Oleoduto",
-    "Air Permit": "Permissão Aérea",
+    "Air Permit": "Permissão de Ar",
     "Drilling Permit": "Permissão de Perfuração"
   },
   "state": {
-    "title": "Estada",
-    "Form": "Editar formulário",
-    "Initial Review": "Revisão inicial",
-    "Technical Review": "Revisao Tecnica",
+    "title": "Estado",
+    "Form": "Formulário de Solicitação",
+    "Initial Review": "Revisão Inicial",
+    "Technical Review": "Revisão Técnica",
     "Specialized Review": "Revisão Especializada",
-    "Decision Making": "Tomando uma decisão",
+    "Decision Making": "Tomada de Decisão",
     "Payment": "Pagamento"
   },
   "fieldstype": {
     "Text": "Texto",
     "Button": "Botão",
-    "Dropdown": "Suspensa",
+    "Dropdown": "Caixa de Seleção",
     "Date": "Data",
-    "Check-box": "caixa de seleção",
-    "Date and Time": "Data e hora",
+    "Check-box": "Caixa de Seleção",
+    "Date and Time": "Data e Hora",
     "File": "Arquivo",
     "Location": "Localização",
-    "Text Area": "Área de texto",
+    "Text Area": "Área de Texto",
     "Information": "Informação"
   },
   "questions": {
