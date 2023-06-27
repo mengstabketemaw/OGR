@@ -54,7 +54,7 @@ export const MakeInspection = ({show,refreshTable, handleClose, users,schedulePa
             {users.map((f, i) => (
               f.authorities.includes('ROLE_ADMIN') && (
                 <option value={f.id} key={f.id}>
-                  {f.login}
+                  {f.lastName}
                 </option>
               )
             ))}

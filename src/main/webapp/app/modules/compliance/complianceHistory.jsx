@@ -83,7 +83,7 @@ const ComplianceHistory = ({complianceId,compliance}) => {
                             setScheduleParams({
                               complianceId: complianceId,
                               companyId:  compliance.data.company.id,
-                              companyName:  compliance.data.company.login,
+                              companyName:  compliance.data.company.firstName,
                               licenceId:  compliance.data.customForm.id,
                               licenceName:  compliance.data.customForm.title,
                             });
@@ -138,7 +138,7 @@ const ComplianceHistory = ({complianceId,compliance}) => {
                   {inspectionHistory.data?.content.map(data => (
                     <tr key={data.id} >
                       <th onClick={ () => {nav(`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`)}}>{data.date}</th>
-                      <th onClick={ () => {nav(`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`)}}>{data.inspector.login}</th>
+                      <th onClick={ () => {nav(`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`)}}>{data.inspector.lastName}</th>
                       <th onClick={ () => {nav(`/inspectionReport?compliance=${complianceId}&inspection=${data.id}`)}}>{
                         data.finding?
                           data.finding:
@@ -191,11 +191,11 @@ const ComplianceHistory = ({complianceId,compliance}) => {
                               inspectionDate: inspectionHistory.data?.content[0]?.date,
                               complianceId: inspectionHistory.data?.content[0]?.compliance.id,
                               companyId:  inspectionHistory.data?.content[0]?.compliance.company.id,
-                              companyName:  inspectionHistory.data?.content[0]?.compliance.company.login,
+                              companyName:  inspectionHistory.data?.content[0]?.compliance.company.firstName,
                               licenceId:  inspectionHistory.data?.content[0]?.compliance.customForm.id,
                               licenceName:  inspectionHistory.data?.content[0]?.compliance.customForm.title,
                               inspectorId: inspectionHistory.data?.content[0]?.inspector.id,
-                              inspectorName: inspectionHistory.data?.content[0]?.inspector.login,
+                              inspectorName: inspectionHistory.data?.content[0]?.inspector.lastName,
                               finding: inspectionHistory.data?.content[0]?.finding,
                               report: inspectionHistory.data?.content[0]?.report,
                               status: inspectionHistory.data?.content[0]?.status,

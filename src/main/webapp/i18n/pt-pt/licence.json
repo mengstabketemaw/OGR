@@ -22,6 +22,11 @@
       "Payment": "Esta etapa envolve o processo de pagamento para o fluxo de trabalho."
     },
     "delete": "Tem certeza de que deseja excluir isso {{name}}?",
-    "deleted": "{{name}} esta deletado"
+    "deleted": "{{name}} esta deletado",
+    "fullText": "Detalhe Completo\n",
+    "description": "Descrição",
+    "timeEstimate": "Estimativa de tempo\n",
+    "onAverage": "Em média, pode demorar cerca de 2-4 semanas\n",
+    "fee": "Taxa"
   }
 }

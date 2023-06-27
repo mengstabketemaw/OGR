@@ -69,7 +69,7 @@ const LicencesHeader = () => {
               </Row>
 
             </CardBody>
-            <CardFooter className="border-top-0 pt-0" style={{backgroundColor:"#2dce89"}}>
+            <CardFooter className="border-top-0 pt-0 pl-3" style={{backgroundColor:"#2dce89"}}>
               <p className="mb-0 text-muted text-sm">
                       <span className="text-white mr-2">
                       </span>{" "}
@@ -108,7 +108,7 @@ const LicencesHeader = () => {
                 </Col>
               </Row>
             </CardBody>
-            <CardFooter className="border-top-0 pt-0" style={{backgroundColor:"#2dcecc"}}>
+            <CardFooter className="border-top-0 pt-0 pl-3" style={{backgroundColor:"#2dcecc"}}>
               <p className=" mb-0 text-muted  text-sm">
                       <span className="text-white mr-2">
                       </span>{" "}
@@ -147,7 +147,7 @@ const LicencesHeader = () => {
               </Row>
 
             </CardBody>
-            <CardFooter className="border-top-0 pt-0" style={{backgroundColor:"#2dce89"}}>
+            <CardFooter className="border-top-0 pt-0 pl-3" style={{backgroundColor:"#2dce89"}}>
               <p className=" mb-0 text-muted text-sm">
                       <span className="text-white mr-2">
                       </span>{" "}
@@ -187,7 +187,7 @@ const LicencesHeader = () => {
               </Row>
 
             </CardBody>
-            <CardFooter className="border-top-0 pt-0" style={{backgroundColor:"#2dcecc"}}>
+            <CardFooter className="border-top-0 pt-0 pl-3" style={{backgroundColor:"#2dcecc"}}>
               <p className=" mb-0 text-muted text-sm">
                       <span className="text-white mr-2">
                       </span>{" "}
@@ -209,7 +209,7 @@ const LicencesHeader = () => {
 
 
       <Modal isOpen={modalOpen} toggle={closeModal} backdrop={true}>
-        <ModalHeader toggle={closeModal}>Full Text</ModalHeader>
+        <ModalHeader toggle={closeModal}><Translate contentKey={'licence.fullText'}/> </ModalHeader>
         <ModalBody>
           <p className="text-black text-justify">
             {

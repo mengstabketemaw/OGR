@@ -109,7 +109,7 @@ const ComplianceHistoryUser = ({complianceId, compliance}) => {
                   {inspectionHistory.data?.content.map(data => (
                     <tr key={data.id}>
                       <th>{data.date}</th>
-                      <th className={"d-none d-sm-table-cell"} >{data.inspector.login}</th>
+                      <th className={"d-none d-sm-table-cell"} >{data.inspector.lastName}</th>
                       <th className={"d-none d-sm-table-cell"}>{
                         data.finding ?
                           data.finding :
