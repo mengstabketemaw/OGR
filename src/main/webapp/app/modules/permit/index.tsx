@@ -29,6 +29,8 @@ import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { getForm } from 'app/modules/form/form.reducer';
 import { Translate } from 'react-jhipster';
 import ApplyPermit from 'app/modules/permit/ApplyPermit';
+import AskQuestion from 'app/modules/informationPages/askQuestion';
+import LicenceLanding from 'app/modules/licence/licenceLanding';
 
 const Permit = () => {
   const [params] = useSearchParams();
@@ -87,30 +89,16 @@ const Permit = () => {
         <div className="row p-0">
           <div className="col-xl-8 col-12 d-flex justify-content-between">
             <h1 className={'text-uppercase pl-3 mr-4 '}>{params.get('name')}</h1>
-            {!startProcess && (
-              <>
-                {isAuthenticated ? (
-                  <Button
-                    onClick={() => {
-                      setStartProcess(true);
-                    }}
-                    className="mb-1 mr-1 btn btn-success text-uppercase ml--2 ml-md-0"
-                  >
-                    <Translate contentKey={'form.loginFirst'} />
-                  </Button>
-                ) : (
-                  <Button
-                    className="mb-1 mr-1 btn btn-success text-uppercase ml--2 ml-md-0"
-                    onClick={() => {
-                      nav('/apply-permit?name=' + params.get('name') + '&pageKey=' + params.get('pageKey'));
-                      setStartProcess(true);
-                    }}
-                  >
-                    <Translate contentKey={'form.loginFirst'} />
-                  </Button>
-                )}
-              </>
-            )}
+            <>
+              <Button
+                className="mb-1 mr-1 btn btn-success text-uppercase ml--2 ml-md-0"
+                onClick={() => {
+                  nav('/apply-permit?name=' + params.get('name') + '&pageKey=' + params.get('pageKey'));
+                }}
+              >
+                <Translate contentKey={'form.loginFirst'} />
+              </Button>
+            </>
           </div>
         </div>
 
@@ -128,7 +116,7 @@ const Permit = () => {
                 <Card>
                   {' '}
                   <CardBody>
-                    <ApplyPermit startProcess={startProcess} />
+                    <LicenceLanding />
                   </CardBody>{' '}
                 </Card>
               </Col>
@@ -139,35 +127,7 @@ const Permit = () => {
                 <Card>
                   {' '}
                   <CardBody>
-                    <div className="feedback-form">
-                      <h3>
-                        {' '}
-                        <Translate contentKey={'questions.title'} />{' '}
-                      </h3>
-                      <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                          <label htmlFor="name">
-                            <Translate contentKey={'questions.name'} />:
-                          </label>
-                          <input type="text" id="name" className="form-control" />
-                        </div>
-                        <div className="form-group">
-                          <label htmlFor="email">
-                            <Translate contentKey={'questions.email'} />:
-                          </label>
-                          <input type="email" id="email" className="form-control" />
-                        </div>
-                        <div className="form-group">
-                          <label htmlFor="message">
-                            <Translate contentKey={'questions.message'} />:
-                          </label>
-                          <textarea id="message" className="form-control" rows={4}></textarea>
-                        </div>
-                        <button type="submit" className="btn btn-primary">
-                          <Translate contentKey={'compliance.submit'} />
-                        </button>
-                      </form>
-                    </div>
+                    <AskQuestion />
                   </CardBody>{' '}
                 </Card>
               </Col>

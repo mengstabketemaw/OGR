@@ -19,7 +19,7 @@ export default () => {
           path="apply-permit"
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
-              <Permit />
+              <ApplyPermit />
             </PrivateRoute>
           }
         />
