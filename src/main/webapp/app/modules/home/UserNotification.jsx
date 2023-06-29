@@ -33,10 +33,10 @@ const UserNotification = ({showModal = a=>a, showRemark = a=>a }) => {
   },[])
   const getNotificationIcon = (type) => {
     switch (type) {
-      case "LICENCE_APPROVED":return <FontAwesomeIcon icon={faCircleCheck} size={"2x"} color={"#23c91b"}/>
-      case "LICENCE_DECLINED":return <FontAwesomeIcon icon={faCircleXmark} size={"2x"} color={"#c92323"}/>
-      case "APPLICATION_STATUS_CHANGE":return <FontAwesomeIcon icon={faExchangeAlt} size={"2x"} color={"#ff9900"}/>
-      case "MORE_INFO":return <FontAwesomeIcon icon={faCircleInfo} size={"2x"} color={"#32567F"}/>
+      case "LICENCE_APPROVED":return <FontAwesomeIcon icon={faCircleCheck} size={"1x"} color={"#23c91b"}/>
+      case "LICENCE_DECLINED":return <FontAwesomeIcon icon={faCircleXmark} size={"1x"} color={"#c92323"}/>
+      case "APPLICATION_STATUS_CHANGE":return <FontAwesomeIcon icon={faExchangeAlt} size={"1x"} color={"#ff9900"}/>
+      case "MORE_INFO":return <FontAwesomeIcon icon={faCircleInfo} size={"1x"} color={"#32567F"}/>
     }
   }
 
@@ -87,19 +87,19 @@ const UserNotification = ({showModal = a=>a, showRemark = a=>a }) => {
           <>
             {notifications.length === 0 ? <>
               <div className="d-flex justify-content-center align-items-center" style={{overflowY: "hidden", height:"600px"}}>
-                <p className="text-muted"> <Translate contentKey={"error.noNotification"}>There is no new Notification</Translate></p>
+                <p className="text-muted" style={{fontSize: "14px"}}> <Translate contentKey={"error.noNotification"}>There is no new Notification</Translate></p>
               </div>
             </> : <>
-              <div className="navi navi-hover pl-0 pr-0" style={{height: "600px", overflowY: unseenCount > 7 ? "scroll" : "hidden"}}>
+              <div className="navi navi-hover pl-0 pr-0" style={{height: "600px", overflowY: unseenCount > 8 ? "scroll" : "hidden"}}>
                 {notifications.map(detail =>(
                   <a href="#" className="navi-item" onClick={getNotificationHandler(detail)}>
-                    <div className="navi-link">
+                    <div className="navi-link pl-3" style={{fontSize: "14px"}}>
                       <div className="mr-3">
                         {getNotificationIcon(detail?.notification.type)}
                       </div>
-                      <div className="navi-text" style={{fontSize: "15px"}}>
-                        <div className="font-weight-bold">{getNotificationMessage(detail?.notification)}</div>
-                        <div className="text-muted">{moment(detail?.notification.dateTimeStamp).fromNow()}</div>
+                      <div className="navi-text">
+                        <div className="" style={{fontSize: "14px"}}>{getNotificationMessage(detail?.notification)}</div>
+                        <div className="text-muted" style={{fontSize: "12px"}}  >{moment(detail?.notification.dateTimeStamp).fromNow()}</div>
                       </div>
                     </div>
                   </a>

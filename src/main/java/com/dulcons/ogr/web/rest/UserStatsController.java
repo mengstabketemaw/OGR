@@ -42,13 +42,13 @@ public class UserStatsController {
     @GetMapping
     public HashMap<String, Long> getAdminStat() {
         User user = userService.getUserWithAuthorities().orElseThrow();
-        long approvedCount = licenceRepository.countByStatus("Authorized", user.getId());
+        long approvedCount = licenceRepository.countByStatus("Approved", user.getId());
         long pendingCount = licenceRepository.countByStatus("Inprogress", user.getId());
         long rejectedCount = licenceRepository.countByStatus("Denied", user.getId());
         long upcomingInspectionsCount = complianceHistoryRepository.countByStatusAndCompliance_Company_Id("Not Inspected", user.getId());
 
-        long approvedCountLicence = licenceRepository.countByStatusAndForm_IdLessThanEqual("Authorized", 2L, user.getId());
-        long approvedCountPermit = licenceRepository.countByStatusAndForm_IdGreaterThanEqual("Authorized", 3L, user.getId());
+        long approvedCountLicence = licenceRepository.countByStatusAndForm_IdLessThanEqual("Approved", 2L, user.getId());
+        long approvedCountPermit = licenceRepository.countByStatusAndForm_IdGreaterThanEqual("Approved", 3L, user.getId());
         long pendingCountLicence = licenceRepository.countByStatusAndForm_IdLessThanEqual("Inprogress", 2L, user.getId());
         long pendingCountPermit = licenceRepository.countByStatusAndForm_IdGreaterThanEqual("Inprogress", 3L, user.getId());
         long rejectedCountLicence = licenceRepository.countByStatusAndForm_IdLessThanEqual("Denied", 2L, user.getId());

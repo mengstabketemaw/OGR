@@ -46,7 +46,7 @@ const CertificateValidator = () => {
       ) : (
         <div>
 
-          {data.data?.status === 'Authorized' ? (
+          {data.data?.status === 'Approved' ? (
             <div className="d-flex flex-column" >
               {isAdmin ?
               <div className="alert alert-success" role="alert">

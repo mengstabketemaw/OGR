@@ -162,12 +162,12 @@ export const AdminDashboardTable = ({ title }) => {
                     <tr
                       key={data.id}
                       // onClick={() => {
-                      //   if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                      //   if (!(data.status === 'Approved' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
                       // }}
                     >
                       <th
                         onClick={() => {
-                          if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (!(data.status === 'Approved' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={'pr-0'}
                       >
@@ -176,7 +176,7 @@ export const AdminDashboardTable = ({ title }) => {
 
                       <th
                         onClick={() => {
-                          if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (!(data.status === 'Approved' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={'pl-0'}
                       >
@@ -185,7 +185,7 @@ export const AdminDashboardTable = ({ title }) => {
 
                       <th
                         onClick={() => {
-                          if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (!(data.status === 'Approved' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={'pl-0 pr-1'}
                       >
@@ -193,7 +193,7 @@ export const AdminDashboardTable = ({ title }) => {
                       </th>
                       <th
                         onClick={() => {
-                          if (!(data.status === 'Authorized' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (!(data.status === 'Approved' || data.status === 'Denied')) nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={'pl-0 pr-0'}
                       >
@@ -201,7 +201,7 @@ export const AdminDashboardTable = ({ title }) => {
                           <p className="btn btn-sm shadow-none border-0 ">
                             <span className="font-weight-bold  text-warning">{data.status}</span>
                           </p>
-                        ) : data.status === 'Authorized' ? (
+                        ) : data.status === 'Approved' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
                             <span className={'font-weight-bold text-success'}>{data.status}</span>
                           </p>
@@ -221,15 +221,15 @@ export const AdminDashboardTable = ({ title }) => {
                       </th>
                       <th>
                         <Button
-                          color={data.status === 'Authorized' || data.status === 'Denied' ? 'light' : 'black'}
+                          color={data.status === 'Approved' || data.status === 'Denied' ? 'light' : 'black'}
                           onClick={() => {
                             nav(`/sequence/${data.form.id}/${data.id}`);
                           }}
-                          hidden={data.status === 'Authorized' || data.status === 'Denied'}
+                          hidden={data.status === 'Approved' || data.status === 'Denied'}
                           size={'sm'}
                         >
                           <FontAwesomeIcon
-                            color={data.status === 'Authorized' || data.status === 'Denied' ? 'white' : 'blue'}
+                            color={data.status === 'Approved' || data.status === 'Denied' ? 'white' : 'blue'}
                             // size="1x"
                             style={{ fontSize: '16px' }}
                             icon={faCogs}
@@ -250,7 +250,7 @@ export const AdminDashboardTable = ({ title }) => {
                             icon={faTrash}
                           />
                         </Button>
-                        {data?.status === 'Authorized' ? (
+                        {data?.status === 'Approved' ? (
                           <>
                             <ReactToPrint
                               onBeforeGetContent={async () => {

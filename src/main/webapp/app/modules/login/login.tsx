@@ -29,7 +29,7 @@ export const Login = () => {
   if (isAuthenticated) {
     if (deviceWidth < 850) {
       navigate('/home');
-      // window.location.reload();
+      window.location.reload();
     } else {
       return <Navigate to={from} replace />;
     }

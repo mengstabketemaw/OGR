@@ -22,6 +22,7 @@ export const Brand = () => {
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
   return (
     <NavbarBrand
+      role="button"
       onClick={() => {
         if (isAuthenticated) {
           window.location.href = '/home';
@@ -38,7 +39,7 @@ export const Brand = () => {
 };
 
 export const Home = () => (
-  <NavItem>
+  <NavItem role="button">
     <NavLink onClick={refreshPage} className="d-flex align-items-center">
       {/*<FontAwesomeIcon icon="home" className={'mr-1'} />*/}
       <span style={{ cursor: 'pointer' }}>

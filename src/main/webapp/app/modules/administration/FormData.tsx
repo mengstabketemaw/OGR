@@ -144,7 +144,7 @@ const FormData = () => {
                     <tr key={data.id}>
                       <th
                         onClick={() => {
-                          if (data.status !== 'Authorized' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (data.status !== 'Approved' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={' pr-0'}
                       >
@@ -152,7 +152,7 @@ const FormData = () => {
                       </th>
                       <th
                         onClick={() => {
-                          if (data.status !== 'Authorized' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (data.status !== 'Approved' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={'pl-0'}
                       >
@@ -161,7 +161,7 @@ const FormData = () => {
 
                       <th
                         onClick={() => {
-                          if (data.status !== 'Authorized' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (data.status !== 'Approved' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={'pl-0 pr-1'}
                       >
@@ -169,7 +169,7 @@ const FormData = () => {
                       </th>
                       <th
                         onClick={() => {
-                          if (data.status !== 'Authorized' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
+                          if (data.status !== 'Approved' && data.status !== 'Denied') nav(`/sequence/${data.form.id}/${data.id}`);
                         }}
                         className={'pl-0 pr-0'}
                       >
@@ -177,7 +177,7 @@ const FormData = () => {
                           <p className="btn btn-sm shadow-none border-0 ">
                             <span className="font-weight-bold  text-warning">{data.status}</span>
                           </p>
-                        ) : data.status === 'Authorized' ? (
+                        ) : data.status === 'Approved' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
                             <span className={'font-weight-bold text-success'}>{data.status}</span>
                           </p>
@@ -196,7 +196,7 @@ const FormData = () => {
                         )}
                       </th>
                       <th>
-                        {data?.status === 'Authorized' ? (
+                        {data?.status === 'Approved' ? (
                           <>
                             <ReactToPrint
                               onBeforeGetContent={async () => {
@@ -224,15 +224,15 @@ const FormData = () => {
                           ''
                         )}
                         <Button
-                          color={data.status === 'Authorized' || data.status === 'Denied' ? 'light' : 'white'}
+                          color={data.status === 'Approved' || data.status === 'Denied' ? 'light' : 'white'}
                           onClick={() => {
                             nav(`/sequence/${data.form.id}/${data.id}`);
                           }}
-                          hidden={data.status === 'Authorized' || data.status === 'Denied'}
+                          hidden={data.status === 'Approved' || data.status === 'Denied'}
                           size={'sm'}
                         >
                           <FontAwesomeIcon
-                            color={data.status === 'Authorized' || data.status === 'Denied' ? 'white' : 'blue'}
+                            color={data.status === 'Approved' || data.status === 'Denied' ? 'white' : 'blue'}
                             size="1x"
                             icon={faCogs}
                           />
@@ -251,7 +251,7 @@ const FormData = () => {
                             icon={faTrash}
                           />
                         </Button>
-                        {data.amendment && data.amendment !== '' && (data.status === 'Authorized' || data.status === 'Denied') && (
+                        {data.amendment && data.amendment !== '' && (data.status === 'Approved' || data.status === 'Denied') && (
                           <Button className="ml-0 mt-1 " color="white" onClick={() => showRemarkModal(data.amendment, data.id)} size="sm">
                             <FontAwesomeIcon color={'blue'} icon={faCircleNodes} />
                           </Button>

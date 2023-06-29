@@ -74,7 +74,7 @@ const NewPage = (params) => {
       id : id,
       data : {
         stateId : sequenceFromDatabase[currentPage],
-        status:issue?'Authorized':'Denied'
+        status:issue?'Approved':'Denied'
       }
     }
     dispatch(updateStatusAndState(param)).then(()=>{

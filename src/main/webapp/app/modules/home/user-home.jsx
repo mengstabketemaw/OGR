@@ -107,7 +107,7 @@ const UserHome = () => {
                         </span>
                       <div className="text-right"  >
                       <div className="badges"  style={{ width: 50, height: 50,position:"absolute",left:"80%",top:"3%" }}>
-                        {data?.status === 'Authorized' ? (
+                        {data?.status === 'Approved' ? (
                        <img  className="w-100 h-100 text-right" src={medal} />
                         ) : data?.status === 'Denied' ? (
                           <CircularProgressbar  value={0} text={`0%`} />
@@ -153,7 +153,7 @@ const UserHome = () => {
                                     {data.stage?.name || 'Form'}
                                   </span>
                                   </p>
-                                ) : data.status === 'Authorized' ? (
+                                ) : data.status === 'Approved' ? (
                                   <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-0 ">
                                     <span className={'font-weight-bold text-success text-right'}>{data.status}</span>
                                     <span className="h6 description mt-1 invisible text-right" style={{fontSize:"11px"}}>
@@ -201,13 +201,13 @@ const UserHome = () => {
                             </div>
                             <div className="card-profile-stats d-flex justify-content-between pt-0 pl-0 pr-0">
                               <div className="text-right pl-0 pr-0 ">
-                                {data.stage?.id == 3 && !data.payment && !(data.status === 'Authorized' || data.status === 'Denied') && (
+                                {data.stage?.id == 3 && !data.payment && !(data.status === 'Approved' || data.status === 'Denied') && (
                                   <Button color="black" className="ml-0 mt-1 mr-0" onClick={() => nav(`/checkout/${data.form.id}?licenceId=${data.id}`)} size="sm">
                                     <FontAwesomeIcon color={'teal'}  style={{fontSize:"18px"}} size="1x" icon={faMoneyBill} />
                                   </Button>
                                 )}
 
-                                {data?.status === 'Authorized' ? (
+                                {data?.status === 'Approved' ? (
                                   <>
                                     {isMobile ?
                                     <Button color="black" tag={"a"} size="sm" href={window.location.origin + `/certificate-validator/${data?.id}`} className="ml-0 mt-1 mr-0">
@@ -241,7 +241,7 @@ const UserHome = () => {
                                       ref={certRef} />}
                                   </>
                                 ): ""}
-                                {data?.status === 'Authorized' || data?.status === 'Denied' ?
+                                {data?.status === 'Approved' || data?.status === 'Denied' ?
                                 <Button className="ml-0 mt-1 mr-0 "
                                   // color="secondary"
                                   color="black"
@@ -297,7 +297,7 @@ const UserHome = () => {
 
 
 
-                                {data.remark && !(data.status === 'Authorized' || data.status === 'Denied') && (
+                                {data.remark && !(data.status === 'Approved' || data.status === 'Denied') && (
                                   <Button  className="ml-0 mt-1 " color="black" onClick={() => showRemarkModal(data.remark)} size="sm">
                                     <FontAwesomeIcon color="teal"  style={{fontSize:"18px"}} icon={faInfoCircle} />
                                   </Button>

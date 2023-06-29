@@ -75,7 +75,7 @@ import {trans} from "app/shared/common/translator";
       id : id,
       data : {
         stateId : sequenceFromDatabase[currentPage],
-        status:issue?'Authorized':'Denied'
+        status:issue?'Approved':'Denied'
       }
     }
     dispatch(updateStatusAndState(param)).then(()=>{

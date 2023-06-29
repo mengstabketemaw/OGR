@@ -430,6 +430,7 @@ const LoginModal = (props: ILoginModalProps) => {
                 <Col className={''} xs="6">
                   <a
                     className="text-light-gray justify-content-end"
+                    role="button"
                     onClick={e => {
                       nav('/account/reset/request');
                     }}
@@ -442,6 +443,7 @@ const LoginModal = (props: ILoginModalProps) => {
                 <Col className="text-right" xs="6">
                   <a
                     className="text-light-gray"
+                    role="button"
                     onClick={e => {
                       nav('/account/register');
                     }}

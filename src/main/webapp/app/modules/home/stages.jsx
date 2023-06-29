@@ -28,7 +28,7 @@ export default function Stage() {
       }}
     >
 
-      <TimelineItem>
+      <TimelineItem className={"pb-0"} >
         <TimelineOppositeContent  color="textSecondary"  className="flex-none">
           {moment().format('h:mm A')}
         </TimelineOppositeContent>
@@ -36,7 +36,7 @@ export default function Stage() {
           <TimelineDot variant="outlined" color={'secondary'} />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent style={{fontSize: "14px"}}><Translate contentKey={'userDashboard.logged'}/></TimelineContent>
+        <TimelineContent className={"pb-0"} style={{fontSize: "14px"}}><Translate contentKey={'userDashboard.logged'}/></TimelineContent>
       </TimelineItem>
 
       <TimelineItem>
