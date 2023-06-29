@@ -108,7 +108,7 @@ const ComplianceMonitoring = () => {
   return (
     <>
       <div className="d-flex justify-content-center">
-        <Col className="mb-5 mb-xl-0" md="8">
+        <Col className="mb-5 mb-xl-0" md="12" xl="10">
           <Card className="shadow">
             <CardHeader className="border-0">
               <Row className="align-items-center">
