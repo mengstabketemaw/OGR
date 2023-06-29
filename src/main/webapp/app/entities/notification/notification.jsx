@@ -65,8 +65,8 @@ function NotificationComponent({menuOpen}) {
   return (
     <div className="">
       <Dropdown isOpen={dropdownOpen} toggle={toggle} direction="start">
-        <DropdownToggle tag="div" style={{marginRight: "20px"}} >
-          <div className="position-relative pulse" style={{top:"10px"}}>
+        <DropdownToggle tag="div" >
+          <div role={"button"} className="position-relative">
             <span className="pulse">
               {unseenCount ? <>
                 <span className="pulse-ring" style={{right:"-8px"}}></span>
@@ -74,16 +74,9 @@ function NotificationComponent({menuOpen}) {
               <FontAwesomeIcon color={menuOpen ? 'black' : 'white'} className="pulse" icon={faBell} style={{marginTop:"5px", marginRight:"5px"}}/>
             </span>
             {unseenCount ? <>
-              <span className="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-circle" style={{fontSize:"40%", fontWeight:"lighter", lineHeight:"0.5"}}>{unseenCount}</span>
+              <span className="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-circle" style={{fontSize:"50%", fontWeight:"lighter", lineHeight:"0.5"}}>{unseenCount}</span>
             </>:""}
           </div>
-          {/*<div className="d-flex position-relative">
-            <FontAwesomeIcon color={menuOpen ? 'black' : 'white'} icon={faBell} style={{marginTop: '15px'}} />
-            {unseenCount ? <>
-              <span className="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">{unseenCount}</span>
-              <span className="pulse-ring"></span>
-            </>:""}
-          </div>*/}
         </DropdownToggle>
         <DropdownMenu style={{width:"300px", marginTop:"50px"}}>
           <div style={{padding:"1rem"}} >
