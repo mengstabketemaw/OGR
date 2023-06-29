@@ -69,7 +69,7 @@ const ChooseLocation = ({ setLocation }) => {
         <Translate contentKey={'map.chooseLocation'} />
       </Label>
 
-      <MapContainer style={{ height: '100%' }} center={[-11.2027, 17.8739]} zoom={7} scrollWheelZoom={true}>
+      <MapContainer style={{ height: '100%' }} center={[-11.2027, 17.8739]} zoom={6} scrollWheelZoom={true}>
         <MapTiles />
         <UserMarkerExp ref={child} />
       </MapContainer>

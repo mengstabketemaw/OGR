@@ -46,7 +46,7 @@ const LicenceLocation = () => {
         </>
       ) : (
         <>
-          <MapContainer style={{ height: '100%', width: '100%' }} center={me} zoom={8}>
+          <MapContainer style={{ height: '100%', width: '100%' }} center={me} zoom={6}>
             <MapTiles />
             <Marker position={me} icon={point}>
               <Popup>Your are here!</Popup>

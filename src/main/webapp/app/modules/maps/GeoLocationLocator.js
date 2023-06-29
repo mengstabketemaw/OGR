@@ -55,7 +55,7 @@ const GeoLocationLocator = () => {
                 <Translate contentKey={'map.report'} />
               </h3>
               <div>
-                <MapContainer style={{ height: '75vh' }} center={me} zoom={9}>
+                <MapContainer style={{ height: '75vh' }} center={me} zoom={6}>
                   <MapTiles />
                   {data.data.map(e => {
                     return (

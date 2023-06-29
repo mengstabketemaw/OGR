@@ -145,7 +145,7 @@ export const ShowLocationModal = ({ show, value, handleClose }) => {
     <Modal isOpen={show}>
       <ModalHeader>Geo-Locator</ModalHeader>
       <div style={{ height: '500px', width: '100%' }}>
-        <MapContainer style={{ height: '100%', width: '100%' }} center={location} zoom={20} scrollWheelZoom={true}>
+        <MapContainer style={{ height: '100%', width: '100%' }} center={location} zoom={6} scrollWheelZoom={true}>
           <MapTiles />
           <Marker position={location} icon={point}>
             <Popup>"Here!"</Popup>
