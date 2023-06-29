@@ -135,7 +135,7 @@ public class LicenceController {
     public List<LocationFormDto> getAllLicenceWithLocation() {
         return licenceRepository
             .findAllForLocation()
-            .filter(licence -> licence.getStatus().equalsIgnoreCase("authorized"))
+            .filter(licence -> licence.getStatus().equalsIgnoreCase("approved"))
             .filter(licence -> licence.getData().stream().anyMatch(customField -> customField.getFieldType().getName().equals("location")))
             .map(licence -> {
                 LocationFormDto locationFormDto = new LocationFormDto();
@@ -162,7 +162,7 @@ public class LicenceController {
     @GetMapping("/user")
     public Iterable<Licence> getAllByUser() {
         User user = userService.getUserWithAuthorities().orElseThrow();
-        Iterable<Licence> licences = licenceRepository.findByUser_IdAndStatus(user.getId(), "Authorized");
+        Iterable<Licence> licences = licenceRepository.findByUser_IdAndStatus(user.getId(), "Approved");
         for (Licence licence : licences) {
             Compliance compliance = new Compliance();
             if (complianceRepository.existsBySubmittedDate(licence.getSubmittedDate())) continue;

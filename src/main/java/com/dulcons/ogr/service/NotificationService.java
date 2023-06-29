@@ -60,7 +60,7 @@ public class NotificationService {
                     name.getName(),
                     emailArg + "~" + name.getName()
                 );
-            } else if (status.equalsIgnoreCase("Authorized")) {
+            } else if (status.equalsIgnoreCase("Approved")) {
                 createUserNotification(licence.getId().toString(), NotificationType.LICENCE_APPROVED, licence.getUser(), arg, emailArg);
                 mailService.genericNotificationSender(
                     licence.getUser(),

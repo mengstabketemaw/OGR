@@ -97,7 +97,7 @@
                             <p className="btn btn-sm shadow-none border-0 ">
                               <span className="font-weight-bold  text-warning">{data.status}</span>
                             </p>
-                          ) : data.status === 'Authorized' ? (
+                          ) : data.status === 'Approved' ? (
                             <p className="btn btn-sm shadow-none border-0 ">
                               <span className={'font-weight-bold text-success'}>{data.status}</span>
                             </p>
@@ -159,7 +159,7 @@
                               icon={faTrash}
                             />
                           </Button>
-                          {data.remark && !(data.status === 'Authorized' || data.status === 'Denied') && (
+                          {data.remark && !(data.status === 'Approved' || data.status === 'Denied') && (
                             <Button color="warning" onClick={() => showRemarkModal(data.remark)} size="sm">
                               <Translate contentKey={'workflow.requestInfo'}/>
                             </Button>

@@ -112,7 +112,7 @@ const PageSwitcher = () => {
       id : id,
       data : {
         stateId : sequenceFromDatabase[currentPage],
-        status:issue?'Authorized':'Denied',
+        status:issue?'Approved':'Denied',
         approvedDate:moment().format('YYYY-MM-DD')
       }
     }
