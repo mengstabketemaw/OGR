@@ -64,13 +64,17 @@ function NotificationComponent({menuOpen}) {
     return <></>
   return (
     <div className="">
-      <Dropdown role="button" isOpen={dropdownOpen} toggle={toggle} direction="start">
+      <Dropdown isOpen={dropdownOpen} toggle={toggle} direction="start">
         <DropdownToggle tag="div" >
-          <div className="d-flex pulse ">
-            <FontAwesomeIcon color={menuOpen ? 'black' : 'white'} icon={faBell} style={{marginTop: '3px'}} />
+          <div role={"button"} className="position-relative">
+            <span className="pulse">
+              {unseenCount ? <>
+                <span className="pulse-ring" style={{right:"-8px"}}></span>
+              </>:""}
+              <FontAwesomeIcon color={menuOpen ? 'black' : 'white'} className="pulse" icon={faBell} style={{marginTop:"5px", marginRight:"5px"}}/>
+            </span>
             {unseenCount ? <>
-              <span className="badge text-red">{unseenCount}</span>
-              <span className="pulse-ring"></span>
+              <span className="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-circle" style={{fontSize:"50%", fontWeight:"lighter", lineHeight:"0.5"}}>{unseenCount}</span>
             </>:""}
           </div>
         </DropdownToggle>

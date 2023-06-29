@@ -42,7 +42,7 @@ export const Home = () => (
   <NavItem role="button">
     <NavLink onClick={refreshPage} className="d-flex align-items-center">
       {/*<FontAwesomeIcon icon="home" className={'mr-1'} />*/}
-      <span>
+      <span style={{ cursor: 'pointer' }}>
         <Translate contentKey="global.menu.home">Home</Translate>
       </span>
     </NavLink>

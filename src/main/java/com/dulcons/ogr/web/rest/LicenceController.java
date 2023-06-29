@@ -105,6 +105,9 @@ public class LicenceController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateLic(@RequestBody Licence licence, @PathVariable Long id) {
         licence.setId(id);
+        if (licence.getStatus().equalsIgnoreCase("Request More Info")) {
+            licence.setStatus("Amendment Submitted");
+        }
         licenceRepository.save(licence);
         notificationService.createAdminNotification(
             licence.getForm().getId() + "/" + licence.getId(),

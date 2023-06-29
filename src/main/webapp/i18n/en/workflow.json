@@ -17,7 +17,7 @@
     "proceed": "Approve",
     "deny": "Deny",
     "authorize": "Approve",
-    "infoPermit": "Do you want to accept or deny this request?",
+    "infoPermit": "Are you sure you want to approve this application?",
     "infoDeny": "Do you want to deny this request?",
     "issueordeny": "Approve",
     "moreReq": "Request Amendment",
