@@ -67,7 +67,7 @@ function NotificationComponent({menuOpen}) {
       <Dropdown isOpen={dropdownOpen} toggle={toggle} direction="start">
         <DropdownToggle tag="div" >
           <div className="d-flex pulse ">
-            <FontAwesomeIcon color={menuOpen ? 'black' : 'white'} icon={faBell} style={{marginTop: '15px'}} />
+            <FontAwesomeIcon color={menuOpen ? 'black' : 'white'} icon={faBell} style={{marginTop: '3px'}} />
             {unseenCount ? <>
               <span className="badge text-red">{unseenCount}</span>
               <span className="pulse-ring"></span>

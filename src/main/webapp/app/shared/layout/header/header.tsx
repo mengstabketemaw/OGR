@@ -112,7 +112,11 @@ const Header = (props: IHeaderProps) => {
           <Brand />
           <Collapse className={menuOpen ? 'show mt-6 mt-md-0' : 'mt-6 mt-md-0'} navbar>
             <Nav id="header-tabs" className="ms-auto" navbar>
-              <NotificationComponent menuOpen={menuOpen} />
+              <NavItem>
+                <NavLink>
+                  <NotificationComponent menuOpen={menuOpen} />
+                </NavLink>
+              </NavItem>
               {props.isAuthenticated && <Home />}
               <NavDropdown
                 // icon="cogs"
