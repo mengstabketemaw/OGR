@@ -281,7 +281,7 @@ export const AdminDashboardTable = ({ title }) => {
                         ) : (
                           ''
                         )}
-                        {data.amendment && data.amendment !== '' && (data.status === 'Authorized' || data.status === 'Denied') && (
+                        {data.amendment && data.amendment !== '' && (data.status === 'Approved' || data.status === 'Denied') && (
                           <Button className="ml-0 mt-1 " color="white" onClick={() => showRemarkModal(data.amendment, data.id)} size="sm">
                             <FontAwesomeIcon color={'blue'} icon={faCircleNodes} />
                           </Button>
