@@ -11,10 +11,11 @@ import DeleteLicenceModal from 'app/modules/permit/DeleteLicenceModal';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
 import ReportForm from 'app/shared/common/reportForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faPrint } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNodes, faFilePdf, faPrint } from '@fortawesome/free-solid-svg-icons';
 import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import Certificate from 'app/modules/certificates/certificate';
+import { ShowAmendmentModal } from 'app/modules/home/showAmendmentModal';
 
 const PAGE_SIZE = 7;
 export const AdminDashboardTable = ({ title }) => {
@@ -25,6 +26,7 @@ export const AdminDashboardTable = ({ title }) => {
   const [deleteLicence, setDeleteLicence] = useState({ id: -1, show: false, name: '' });
   const [printData, setPrintData] = useState(null);
   const certRef = useRef();
+  const [amendmentModal, setAmendmentModal] = useState({ id: -1, show: false, remark: '' });
 
   const handleBeforeGetContent = data => {
     setPrintData(data);
@@ -60,6 +62,10 @@ export const AdminDashboardTable = ({ title }) => {
   const handlePrint = useReactToPrint({
     content: () => tableRef.current,
   });
+
+  const showRemarkModal = (value, id) => {
+    setAmendmentModal({ show: true, id, remark: value });
+  };
 
   return (
     <>
@@ -275,6 +281,11 @@ export const AdminDashboardTable = ({ title }) => {
                         ) : (
                           ''
                         )}
+                        {data.amendment && data.amendment !== '' && (data.status === 'Authorized' || data.status === 'Denied') && (
+                          <Button className="ml-0 mt-1 " color="white" onClick={() => showRemarkModal(data.amendment, data.id)} size="sm">
+                            <FontAwesomeIcon color={'blue'} icon={faCircleNodes} />
+                          </Button>
+                        )}
                       </th>
                     </tr>
                   ))}
@@ -297,6 +308,14 @@ export const AdminDashboardTable = ({ title }) => {
             data: { content: licences.data.content.filter(license => license.id !== deleteLicence.id) },
           })
         }
+      />
+      <ShowAmendmentModal
+        id={amendmentModal.id}
+        showModal={amendmentModal.show}
+        content={amendmentModal.remark}
+        handleClose={() => {
+          setAmendmentModal({ id: -1, remark: '', show: false });
+        }}
       />
     </>
   );
