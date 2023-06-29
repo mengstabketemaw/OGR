@@ -5,6 +5,10 @@
     "already": "Já tem uma conta?\n",
     "or": "ou",
     "create": "Crie a sua conta aqui\n",
+    "backToLogin": "Faça login em sua conta\n",
+    "emailSent": "E-mail de ativação enviado!\n",
+    "registered": "Registrado com sucesso!\n",
+    "checkEmail": "Você se registrou com sucesso. Verifique seu e-mail para confirmação.",
     "form": {
       "button": "Registar"
     },
