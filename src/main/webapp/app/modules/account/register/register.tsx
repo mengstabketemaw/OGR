@@ -6,10 +6,14 @@ import { toast } from 'react-toastify';
 import PasswordStrengthBar from 'app/shared/layout/password/password-strength-bar';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 import { handleRegister, reset } from './register.reducer';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 export const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch();
+  const nav = useNavigate();
 
   useEffect(
     () => () => {
@@ -30,7 +34,7 @@ export const RegisterPage = () => {
 
   useEffect(() => {
     if (successMessage) {
-      toast.success(translate(successMessage));
+      toast.success(translate('register.emailSent'));
     }
   }, [successMessage]);
 
@@ -359,80 +363,104 @@ export const RegisterPage = () => {
 
       <Col lg="4" className={'order-lg-1 col-lg-4 col-12'}>
         <Card className="bg-secondary shadow border-0 align-items-center">
-          <ValidatedForm id="register-form" onSubmit={handleValidSubmit} className={'col-10'}>
-            <CardHeader className="bg-transparent pb-0 pt-0" id="login-title">
-              <div className="text-muted text-center mt-2 mb-3 row ">
-                <h1 className={'col-12'}>
-                  <Translate contentKey="register.signup">Sign up</Translate>
-                </h1>
-                <p className={'col-12 text-success p'}>
-                  <a href={'/login'} className="pe-auto text-success text-decoration-none border-0">
-                    <Translate contentKey="register.already">Sign up</Translate>
-                  </a>
-                </p>
-              </div>
-            </CardHeader>
-            <ValidatedField
-              name="username"
-              label={translate('global.form.username.label')}
-              placeholder={translate('global.form.username.placeholder')}
-              validate={{
-                required: { value: true, message: translate('register.messages.validate.login.required') },
-                pattern: {
-                  value: /^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$/,
-                  message: translate('register.messages.validate.login.pattern'),
-                },
-                minLength: { value: 1, message: translate('register.messages.validate.login.minlength') },
-                maxLength: { value: 50, message: translate('register.messages.validate.login.maxlength') },
-              }}
-              data-cy="username"
-            />
-            <ValidatedField
-              name="email"
-              label={translate('global.form.email.label')}
-              placeholder={translate('global.form.email.placeholder')}
-              type="email"
-              validate={{
-                required: { value: true, message: translate('global.messages.validate.email.required') },
-                minLength: { value: 5, message: translate('global.messages.validate.email.minlength') },
-                maxLength: { value: 254, message: translate('global.messages.validate.email.maxlength') },
-                validate: v => isEmail(v) || translate('global.messages.validate.email.invalid'),
-              }}
-              data-cy="email"
-            />
-            <ValidatedField
-              name="firstPassword"
-              label={translate('global.form.newpassword.label')}
-              placeholder={translate('global.form.newpassword.placeholder')}
-              type="password"
-              onChange={updatePassword}
-              validate={{
-                required: { value: true, message: translate('global.messages.validate.newpassword.required') },
-                minLength: { value: 4, message: translate('global.messages.validate.newpassword.minlength') },
-                maxLength: { value: 50, message: translate('global.messages.validate.newpassword.maxlength') },
-              }}
-              data-cy="firstPassword"
-            />
-            <PasswordStrengthBar password={password} />
-            <ValidatedField
-              name="secondPassword"
-              label={translate('global.form.confirmpassword.label')}
-              placeholder={translate('global.form.confirmpassword.placeholder')}
-              type="password"
-              validate={{
-                required: { value: true, message: translate('global.messages.validate.confirmpassword.required') },
-                minLength: { value: 4, message: translate('global.messages.validate.confirmpassword.minlength') },
-                maxLength: { value: 50, message: translate('global.messages.validate.confirmpassword.maxlength') },
-                validate: v => v === password || translate('global.messages.error.dontmatch'),
-              }}
-              data-cy="secondPassword"
-            />
-            <div className="d-flex justify-content-center">
-              <Button id="register-submit" color="success" type="submit" data-cy="submit">
-                <Translate contentKey="register.form.button">Register</Translate>
-              </Button>
+          {successMessage ? (
+            <div>
+              <Row className="justify-content-center">
+                <Col md="12">
+                  <CardHeader className="bg-transparent pb-0 pt-0" id="login-title">
+                    <div className="text-muted text-center mt-2 mb-3 row">
+                      <h1 className={'col-12'}>Registered Successfully!</h1>
+                      <p className="bg-success text-white p-2 rounded-3">{translate('register.checkEmail')}</p>
+                      <p
+                        className="text-blue"
+                        role="button"
+                        onClick={() => {
+                          nav('/login');
+                        }}
+                      >
+                        <Translate contentKey={'register.backToLogin'} />
+                      </p>
+                    </div>
+                  </CardHeader>
+                </Col>
+              </Row>
             </div>
-          </ValidatedForm>
+          ) : (
+            <ValidatedForm id="register-form" onSubmit={handleValidSubmit} className={'col-10'}>
+              <CardHeader className="bg-transparent pb-0 pt-0" id="login-title">
+                <div className="text-muted text-center mt-2 mb-3 row ">
+                  <h1 className={'col-12'}>
+                    <Translate contentKey="register.signup">Sign up</Translate>
+                  </h1>
+                  <p className={'col-12 text-success p'}>
+                    <a href={'/login'} className="pe-auto text-success text-decoration-none border-0">
+                      <Translate contentKey="register.already">Sign up</Translate>
+                    </a>
+                  </p>
+                </div>
+              </CardHeader>
+              <ValidatedField
+                name="username"
+                label={translate('global.form.username.label')}
+                placeholder={translate('global.form.username.placeholder')}
+                validate={{
+                  required: { value: true, message: translate('register.messages.validate.login.required') },
+                  pattern: {
+                    value: /^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$/,
+                    message: translate('register.messages.validate.login.pattern'),
+                  },
+                  minLength: { value: 1, message: translate('register.messages.validate.login.minlength') },
+                  maxLength: { value: 50, message: translate('register.messages.validate.login.maxlength') },
+                }}
+                data-cy="username"
+              />
+              <ValidatedField
+                name="email"
+                label={translate('global.form.email.label')}
+                placeholder={translate('global.form.email.placeholder')}
+                type="email"
+                validate={{
+                  required: { value: true, message: translate('global.messages.validate.email.required') },
+                  minLength: { value: 5, message: translate('global.messages.validate.email.minlength') },
+                  maxLength: { value: 254, message: translate('global.messages.validate.email.maxlength') },
+                  validate: v => isEmail(v) || translate('global.messages.validate.email.invalid'),
+                }}
+                data-cy="email"
+              />
+              <ValidatedField
+                name="firstPassword"
+                label={translate('global.form.newpassword.label')}
+                placeholder={translate('global.form.newpassword.placeholder')}
+                type="password"
+                onChange={updatePassword}
+                validate={{
+                  required: { value: true, message: translate('global.messages.validate.newpassword.required') },
+                  minLength: { value: 4, message: translate('global.messages.validate.newpassword.minlength') },
+                  maxLength: { value: 50, message: translate('global.messages.validate.newpassword.maxlength') },
+                }}
+                data-cy="firstPassword"
+              />
+              <PasswordStrengthBar password={password} />
+              <ValidatedField
+                name="secondPassword"
+                label={translate('global.form.confirmpassword.label')}
+                placeholder={translate('global.form.confirmpassword.placeholder')}
+                type="password"
+                validate={{
+                  required: { value: true, message: translate('global.messages.validate.confirmpassword.required') },
+                  minLength: { value: 4, message: translate('global.messages.validate.confirmpassword.minlength') },
+                  maxLength: { value: 50, message: translate('global.messages.validate.confirmpassword.maxlength') },
+                  validate: v => v === password || translate('global.messages.error.dontmatch'),
+                }}
+                data-cy="secondPassword"
+              />
+              <div className="d-flex justify-content-center">
+                <Button id="register-submit" color="success" type="submit" data-cy="submit">
+                  <Translate contentKey="register.form.button">Register</Translate>
+                </Button>
+              </div>
+            </ValidatedForm>
+          )}
         </Card>
       </Col>
     </Row>

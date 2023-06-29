@@ -55,7 +55,7 @@ export const App = () => {
             position={toast.POSITION.TOP_RIGHT}
             className="toastify-container"
             toastClassName="toastify-toast"
-            autoClose={500}
+            autoClose={4000}
           />
           <ErrorBoundary>
             <Header
