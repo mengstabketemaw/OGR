@@ -200,23 +200,23 @@ export const AdminDashboardTable = ({ title }) => {
                       >
                         {data.status === 'Inprogress' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className="font-weight-bold  text-warning">{trans('status', data.status)}</span>
+                            <span className="font-weight-bold  text-warning">{data.status}</span>
                           </p>
                         ) : data.status === 'Approved' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={'font-weight-bold text-success'}>{trans('status', data.status)}</span>
+                            <span className={'font-weight-bold text-success'}>{data.status}</span>
                           </p>
                         ) : data.status === 'Denied' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={' font-weight-bold text-danger'}>{trans('status', data.status)}</span>
+                            <span className={' font-weight-bold text-danger'}>{data.status}</span>
                           </p>
                         ) : data.status === 'undefined' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={'font-weight-bold  text-gray'}>{trans('status', 'Inprogress')}</span>
+                            <span className={'font-weight-bold  text-gray'}>Inprogress</span>
                           </p>
                         ) : (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={' font-weight-bold text-warning'}>{trans('status', data.status)}</span>
+                            <span className={' font-weight-bold text-warning'}>{data.status}</span>
                           </p>
                         )}
                       </th>

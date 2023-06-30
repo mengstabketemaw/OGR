@@ -15,15 +15,20 @@ import {hasAnyAuthority} from "app/shared/auth/private-route";
 import {AUTHORITIES} from "app/config/constants";
 import {useNavigate} from "react-router-dom";
 import { Translate } from "react-jhipster";
+import { ShowAmendmentModal } from "app/modules/home/showAmendmentModal";
 function NotificationComponent({menuOpen}) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [unseenCount, setUnseenCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const nav = useNavigate();
   const isAdmin = useAppSelector(state => hasAnyAuthority(state.authentication.account.authorities, [AUTHORITIES.ADMIN]));
+  const [amendmentModal, setAmendmentModal] = useState({ id: -1, show: false, remark: '' });
+
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
-
+  const showRemarkModal = (value, id) => {
+    setAmendmentModal({ show: true, id, remark: value });
+  };
 
   useEffect(()=>{
     axios.get("/api/notification/count")
@@ -49,7 +54,12 @@ function NotificationComponent({menuOpen}) {
   const getNotificationHandler = ({id, notification}) => {
     return e => {
       e.preventDefault();
-      nav("sequence/"+notification.source)
+      if(notification.type === "AMENDMENT"){
+        showRemarkModal(notification.arg,notification.source)
+      }
+      else{
+        nav("sequence/"+notification.source)
+      }
       toggle();
       axios.put(`/api/notification/seen/${id}`)
         .then(()=>{
@@ -104,6 +114,14 @@ function NotificationComponent({menuOpen}) {
           </div>
         </DropdownMenu>
       </Dropdown>
+      <ShowAmendmentModal
+        id={amendmentModal.id}
+        showModal={amendmentModal.show}
+        content={amendmentModal.remark}
+        handleClose={() => {
+          setAmendmentModal({ id: -1, remark: '', show: false });
+        }}
+      />
     </div>
   );
 }
