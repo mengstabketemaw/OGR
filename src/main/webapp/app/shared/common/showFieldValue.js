@@ -9,6 +9,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { ValidatedField } from 'react-jhipster';
 import './showFieldValue.css';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from 'app/config/store';
 function getValue(fieldData, fieldType) {
   switch (fieldType.name) {
     case 'location':
@@ -30,7 +31,7 @@ function getValue(fieldData, fieldType) {
 }
 const ShowFieldValue = ({ data, form }) => {
   const [locationModal, setLocationModal] = useState({ show: false, value: '' });
-
+  const currentLocale = useAppSelector(state => state.locale.currentLocale);
   const [visibleItems, setVisibleItems] = useState(8);
 
   const formFields = form.fields.filter(field => field.state.id === 0);
@@ -75,7 +76,14 @@ const ShowFieldValue = ({ data, form }) => {
     const value = getValue(fData, field.fieldType);
 
     return field.fieldType.name === 'select' ? (
-      <ValidatedField key={field.id} name={field.label} disabled={true} type={field.fieldType.name} value={value} label={field.label}>
+      <ValidatedField
+        key={field.id}
+        name={field.label}
+        disabled={true}
+        type={field.fieldType.name}
+        value={value}
+        label={currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
+      >
         {field.options.map((a, i) => (
           <option key={i} value={a.name}>
             {a.name}
@@ -83,12 +91,19 @@ const ShowFieldValue = ({ data, form }) => {
         ))}
       </ValidatedField>
     ) : field.fieldType.name === 'location' ? (
-      <ValidatedField name={field.label} disabled={true} key={field.id} label={field.label} autoComplete={'off'} value={value} />
+      <ValidatedField
+        name={field.label}
+        disabled={true}
+        key={field.id}
+        label={currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
+        autoComplete={'off'}
+        value={value}
+      />
     ) : field.fieldType.name === 'info' ? (
-      <i>{field.label}</i>
+      <i>label={currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}</i>
     ) : field.fieldType.name === 'file' ? (
       <div className="mb-3 p-3">
-        {field.label}
+        {currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
         {getFileName(field.label)}
       </div>
     ) : field.fieldType.name === 'checkbox' ? (
@@ -99,10 +114,17 @@ const ShowFieldValue = ({ data, form }) => {
         type={field.fieldType.name}
         name={field.label}
         checked={value === 1}
-        label={field.label}
+        label={currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
       />
     ) : (
-      <ValidatedField disabled={true} key={field.id} type={field.fieldType.name} name={field.label} value={value} label={field.label} />
+      <ValidatedField
+        disabled={true}
+        key={field.id}
+        type={field.fieldType.name}
+        name={field.label}
+        value={value}
+        label={currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
+      />
     );
   };
 

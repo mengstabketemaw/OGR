@@ -8,15 +8,16 @@ export const formatValue = async (values, fields, c, f) => {
       const current = fields.filter(f => f.label === key)[0];
       const fieldType = current.fieldType;
       const label = key;
+      const portugueseLabel = current.portugueseLabel;
       const value = values[key];
-      const fieldValue = await fieldFill(value, fieldType.name, fieldType, label);
+      const fieldValue = await fieldFill(value, fieldType.name, fieldType, label, portugueseLabel);
       valueToSend.push(fieldValue);
     })
   );
   return valueToSend;
 };
 
-const fieldFill = async (val, field, fieldType, label) => {
+const fieldFill = async (val, field, fieldType, label, portugueseLabel) => {
   switch (field) {
     case 'textarea':
     case 'location':
@@ -24,6 +25,7 @@ const fieldFill = async (val, field, fieldType, label) => {
       return {
         fieldType: fieldType,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: val,
         dropDown: null,
         date: null,
@@ -36,6 +38,7 @@ const fieldFill = async (val, field, fieldType, label) => {
       return {
         fieldType: fieldType,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: null,
         dropDown: val,
         date: null,
@@ -48,6 +51,7 @@ const fieldFill = async (val, field, fieldType, label) => {
       return {
         fieldType: fieldType,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: null,
         dropDown: null,
         date: val,
@@ -60,6 +64,7 @@ const fieldFill = async (val, field, fieldType, label) => {
       return {
         fieldType: fieldType,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: null,
         dropDown: null,
         date: null,
@@ -72,6 +77,7 @@ const fieldFill = async (val, field, fieldType, label) => {
       return {
         fieldType: fieldType,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: null,
         dropDown: null,
         date: null,
@@ -86,6 +92,7 @@ const fieldFill = async (val, field, fieldType, label) => {
       return {
         fieldType: fieldType,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: null,
         dropDown: null,
         date: null,

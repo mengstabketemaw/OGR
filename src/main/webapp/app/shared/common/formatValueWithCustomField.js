@@ -12,8 +12,9 @@ export const formatValue = async (values, fields, currentFields, licence_id) => 
       const fieldType = field.fieldType;
       const custom_field_id = field.id;
       const label = key;
+      const portugueseLabel = field.portugueseLabel;
       const value = values[key];
-      const fieldValue = await fieldFill(value, fieldType.name, custom_field_id, label, dataId, licence_id);
+      const fieldValue = await fieldFill(value, fieldType.name, custom_field_id, label, dataId, licence_id, portugueseLabel);
       valueToSend.push(fieldValue);
     })
   );
@@ -41,7 +42,7 @@ export const formatDisplayOn = (values, fields, stateKey) => {
   return valueToSend;
 };
 
-const fieldFill = async (val, field, custom_field_id, label, dataId, licence_id) => {
+const fieldFill = async (val, field, custom_field_id, label, dataId, licence_id, portugueseLabel) => {
   switch (field) {
     case 'textarea':
     case 'location':
@@ -51,6 +52,7 @@ const fieldFill = async (val, field, custom_field_id, label, dataId, licence_id)
         customFieldId: custom_field_id,
         licenceId: licence_id,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: val,
         dropDown: null,
         date: null,
@@ -65,6 +67,7 @@ const fieldFill = async (val, field, custom_field_id, label, dataId, licence_id)
         customFieldId: custom_field_id,
         licenceId: licence_id,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: null,
         dropDown: val,
         date: null,
@@ -79,6 +82,7 @@ const fieldFill = async (val, field, custom_field_id, label, dataId, licence_id)
         customFieldId: custom_field_id,
         licenceId: licence_id,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: null,
         dropDown: null,
         date: val,
@@ -93,6 +97,7 @@ const fieldFill = async (val, field, custom_field_id, label, dataId, licence_id)
         customFieldId: custom_field_id,
         licenceId: licence_id,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: null,
         dropDown: null,
         date: null,
@@ -107,6 +112,7 @@ const fieldFill = async (val, field, custom_field_id, label, dataId, licence_id)
         customFieldId: custom_field_id,
         licenceId: licence_id,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: null,
         dropDown: null,
         date: null,
@@ -123,6 +129,7 @@ const fieldFill = async (val, field, custom_field_id, label, dataId, licence_id)
         customFieldId: custom_field_id,
         licenceId: licence_id,
         label: label,
+        portugueseLabel: portugueseLabel,
         text: null,
         dropDown: null,
         date: null,

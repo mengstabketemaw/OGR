@@ -7,11 +7,13 @@ import {MapContainer, Marker, Popup, TileLayer, useMap} from 'react-leaflet'
 import ChooseLocation from "app/modules/maps/MapUtils";
 import {isArray} from "lodash";
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
+import {useAppSelector} from "app/config/store";
 // import 'leaflet/dist/leaflet.css'
 
 const DynamicFields = props =>{
   const nav = useNavigate();
   const [locationModal,setLocationModal] = useState({show: false, value:""});
+  const currentLocale = useAppSelector(state => state.locale.currentLocale);
   const {fields,
           defaultValue,
           handleSubmit,
@@ -39,6 +41,7 @@ const DynamicFields = props =>{
     const formattedValue = await formatValue(value, fields,currentFields,licence_id);
     handleSubmit(formattedValue);
   }
+
 
   const getFileName = name => {
 
@@ -74,7 +77,8 @@ const DynamicFields = props =>{
           key = {f.label}
           type={f.fieldType.name}
           name={f.label}
-          label={f.required ? f.label+' *':f.label}//{translate('global.form.username.label')}
+          label={f.required ? currentLocale == 'pt-pt' ? f.portugueseLabel : f.label+' *':currentLocale == 'pt-pt' ? f.portugueseLabel : f.label}
+          //{translate('global.form.username.label')}
           //placeholder="add label"//{translate('global.form.username.placeholder')}
           required={f.required}
         >
@@ -85,7 +89,7 @@ const DynamicFields = props =>{
             <ValidatedField
               key = {f.label}
               name={f.label}
-              label={f.required ? f.label+' *':f.label}
+              label={f.required ? currentLocale == 'pt-pt' ? f.portugueseLabel : f.label+' *':currentLocale == 'pt-pt' ? f.portugueseLabel : f.label}
               autoComplete={"off"}
               value={locationModal.value}
               placeholder={translate('map.addLocation')}
@@ -99,7 +103,7 @@ const DynamicFields = props =>{
                 key = {f.label}
                 type={f.fieldType.name}
                 name={f.label}
-                label={f.required ? f.label+' *':f.label}
+                label={f.required ? currentLocale == 'pt-pt' ? f.portugueseLabel : f.label+' *':currentLocale == 'pt-pt' ? f.portugueseLabel : f.label}
                 required={f.required}
                 placeholder={f.placeholder}
               />
@@ -107,7 +111,8 @@ const DynamicFields = props =>{
 
             </>
           :f.fieldType.name === "info" ?
-            <i>{f.label}</i>
+            <i>{f.required ? currentLocale == 'pt-pt' ? f.portugueseLabel : f.label+' *':currentLocale == 'pt-pt' ? f.portugueseLabel : f.label}
+            </i>
 
           :f.fieldType.name === "checkbox" ?
             <ValidatedField
@@ -115,7 +120,7 @@ const DynamicFields = props =>{
               className="mb-0 d-flex flex-column custom-checkbox"
               type={f.fieldType.name}
               name={f.required ? f.label+' *':f.label}
-              label={f.label}
+              label={f.required ? currentLocale == 'pt-pt' ? f.portugueseLabel : f.label+' *':currentLocale == 'pt-pt' ? f.portugueseLabel : f.label}
               required={f.required}
             />
 
@@ -123,7 +128,7 @@ const DynamicFields = props =>{
               key = {f.label}
               type={f.fieldType.name}
               name={f.label}
-              label={f.required ? f.label+' *':f.label}
+              label={f.required ? currentLocale == 'pt-pt' ? f.portugueseLabel : f.label+' *':currentLocale == 'pt-pt' ? f.portugueseLabel : f.label}
               required={f.required}
               placeholder={f.placeholder}
             />
