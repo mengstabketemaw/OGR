@@ -16,6 +16,7 @@ import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import Certificate from 'app/modules/certificates/certificate';
 import { ShowAmendmentModal } from 'app/modules/home/showAmendmentModal';
+import { trans } from 'app/shared/common/translator';
 
 const PAGE_SIZE = 7;
 export const AdminDashboardTable = ({ title }) => {
@@ -199,23 +200,23 @@ export const AdminDashboardTable = ({ title }) => {
                       >
                         {data.status === 'Inprogress' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className="font-weight-bold  text-warning">{data.status}</span>
+                            <span className="font-weight-bold  text-warning">{trans('status', data.status)}</span>
                           </p>
                         ) : data.status === 'Approved' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={'font-weight-bold text-success'}>{data.status}</span>
+                            <span className={'font-weight-bold text-success'}>{trans('status', data.status)}</span>
                           </p>
                         ) : data.status === 'Denied' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={' font-weight-bold text-danger'}>{data.status}</span>
+                            <span className={' font-weight-bold text-danger'}>{trans('status', data.status)}</span>
                           </p>
                         ) : data.status === 'undefined' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={'font-weight-bold  text-gray'}>Inprogress</span>
+                            <span className={'font-weight-bold  text-gray'}>{trans('status', 'Inprogress')}</span>
                           </p>
                         ) : (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={' font-weight-bold text-warning'}>{data.status}</span>
+                            <span className={' font-weight-bold text-warning'}>{trans('status', data.status)}</span>
                           </p>
                         )}
                       </th>
@@ -281,9 +282,9 @@ export const AdminDashboardTable = ({ title }) => {
                         ) : (
                           ''
                         )}
-                        {data.amendment && data.amendment !== '' && (data.status === 'Authorized' || data.status === 'Denied') && (
-                          <Button className="ml-0 mt-1 " color="white" onClick={() => showRemarkModal(data.amendment, data.id)} size="sm">
-                            <FontAwesomeIcon color={'blue'} icon={faCircleNodes} />
+                        {data.amendment && data.amendment !== '' && (data.status === 'Approved' || data.status === 'Denied') && (
+                          <Button className="ml-0 mt-1 " color="black" onClick={() => showRemarkModal(data.amendment, data.id)} size="sm">
+                            <FontAwesomeIcon style={{ fontSize: '15px' }} color={'blue'} icon={faCircleNodes} />
                           </Button>
                         )}
                       </th>

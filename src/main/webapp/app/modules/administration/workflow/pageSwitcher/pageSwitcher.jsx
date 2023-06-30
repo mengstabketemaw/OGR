@@ -94,7 +94,7 @@ const PageSwitcher = () => {
         id : id,
         data : {
           stateId : 0,
-          status:'Request More Info'
+          status:'Amendment Requested'
         }
       }
       dispatch(updateStatusAndState(param)).then(()=>{
