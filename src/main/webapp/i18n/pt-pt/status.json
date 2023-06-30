@@ -1,0 +1,11 @@
+{
+  "status": {
+    "Form": "Formulário",
+    "Approved": "Aprovado",
+    "Denied": "Negado",
+    "Amendment Requested": "Emenda solicitada\n",
+    "Amendment Submitted": "Emenda enviada\n",
+    "Inprogress": "Em Progresso",
+    "Request More Info": "Solicitar Mais Informações"
+  }
+}
