@@ -9,6 +9,7 @@ import ApplyLicence from 'app/modules/licence/ApplyLicence';
 import Workflow from 'app/modules/administration/workflow/workflow';
 import CheckoutForm from 'app/modules/checkout/checkout';
 import Permit from 'app/modules/permit';
+import PageNotFound from 'app/shared/error/page-not-found';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 export default () => {
@@ -39,6 +40,7 @@ export default () => {
             </PrivateRoute>
           }
         />
+        <Route path="*" element={<PageNotFound />} />
       </ErrorBoundaryRoutes>
     </div>
   );
