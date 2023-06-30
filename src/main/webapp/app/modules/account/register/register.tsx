@@ -369,7 +369,9 @@ export const RegisterPage = () => {
                 <Col md="12">
                   <CardHeader className="bg-transparent pb-0 pt-0" id="login-title">
                     <div className="text-muted text-center mt-2 mb-3 row">
-                      <h1 className={'col-12'}>Registered Successfully!</h1>
+                      <h1 className={'col-12'}>
+                        <Translate contentKey={'register.registered'} />
+                      </h1>
                       <p className="bg-success text-white p-2 rounded-3">{translate('register.checkEmail')}</p>
                       <p
                         className="text-blue"
