@@ -17,6 +17,7 @@ public class LicenceFieldData {
     private FieldTypes fieldType;
 
     private String label;
+    private String portugueseLabel;
     private String text;
     private String dropDown;
     private Date date;
@@ -130,5 +131,13 @@ public class LicenceFieldData {
         } else {
             this.encodingFileType = null;
         }
+    }
+
+    public String getPortugueseLabel() {
+        return portugueseLabel;
+    }
+
+    public void setPortugueseLabel(String portugueseLabel) {
+        this.portugueseLabel = portugueseLabel;
     }
 }

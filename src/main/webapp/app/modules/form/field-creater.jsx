@@ -12,6 +12,7 @@ const FieldCreater = (param) =>{
   const [show,setShow] = useState(false);
   const dispatch = useAppDispatch();
   const {formForEdit, state, fields, handleFields, handleDelete, states} = param;
+  const currentLocale = useAppSelector(state => state.locale.currentLocale);
   //const fields = useAppSelector(state => state.form.fieldsForEdit);
   const initalField = {
     "id":0,
@@ -76,7 +77,7 @@ const FieldCreater = (param) =>{
       <tbody >
       {fields?.map( (field) =>(
           <tr id={field.id} key={field.id} onClick={()=>editField(field.id)}>
-            <td>{field.label}</td>
+            <td>{currentLocale == 'pt-pt' ? field.portugueseLabel :  field.label}</td>
             <td>{field.placeholder}</td>
             <td>{field.required ? (<p
               // color="success"

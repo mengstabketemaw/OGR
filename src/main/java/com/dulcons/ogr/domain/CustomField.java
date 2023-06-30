@@ -77,12 +77,13 @@ public class CustomField {
     }
 
     public String getLabel() {
-        Locale locale = LocaleContextHolder.getLocale();
-        if (locale.getLanguage().equals("en")) {
-            return label;
-        } else {
-            return getPortugueseLabel();
-        }
+        //        Locale locale = LocaleContextHolder.getLocale();
+        //        if (locale.getLanguage().equals("en")) {
+        //            return label;
+        //        } else {
+        //            return portugueseLabel;
+        //        }
+        return label;
     }
 
     public void setLabel(String label) {

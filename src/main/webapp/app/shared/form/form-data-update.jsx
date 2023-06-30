@@ -21,6 +21,7 @@ import {convertFileToBase64} from "app/shared/common/formatValue";
 import moment from "moment";
 import {toast} from "react-toastify";
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
+import {useAppSelector} from "app/config/store";
 
 function getFieldValueName(type){
   switch (type) {
@@ -44,6 +45,8 @@ const FormDataUpdate = (param) => {
   const { id } = useParams();
   const [data, setDate] = useState({ loading: true, data: {} });
   const {seq} = param;
+  const currentLocale = useAppSelector(state => state.locale.currentLocale);
+
   useEffect(() => {
     axios
       .get('/api/licence/' + id)
@@ -91,6 +94,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
   const [fieldData, setFieldData] = useState(data.data)
   const nav = useNavigate();
   const [locationModal,setLocationModal] = useState({show: false, label:undefined, fieldType:undefined});
+  const currentLocale = useAppSelector(state => state.locale.currentLocale);
 
   const getFieldDataTemplate = (name) => {
     let field = data.form.fields.find(formFields => formFields.label === name)
@@ -98,6 +102,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
       id:null,
       fieldType: field.fieldType,
       label: name,
+      portugueseLabel: field.portugueseLabel,
       text: undefined,
       dropDown: undefined,
       date: undefined,
@@ -224,7 +229,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
                 key={field.id}
                 type={field.fieldType.name}
                 value={getFieldValue(field.label)}
-                label={field.required ? field.label+' *':field.label}
+                label={field.required ? currentLocale == 'pt-pt' ? field.portugueseLabel : field.label+' *':currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
                 required={field.required}
                 onChange={getOnChangeHandler(field.label, field.fieldType)}
               >
@@ -234,7 +239,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
             :field.fieldType.name === "location" ?
                 <ValidatedField
                   key={field.id}
-                  label={field.required ? field.label+' *':field.label}
+                  label={field.required ? currentLocale == 'pt-pt' ? field.portugueseLabel : field.label+' *':currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
                   autoComplete={"off"}
                   value={getFieldValue(field.label)}
                   placeholder={"Click here to add location"}
@@ -243,7 +248,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
                 />
 
             :field.fieldType.name === "info" ?
-                  <i>{field.label}</i>
+                  <i>{currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}</i>
 
             :field.fieldType.name === "file" ?
                   <>
@@ -251,7 +256,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
                       className="mb-0"
                       key={field.id}
                       type={field.fieldType.name}
-                      label={field.required ? field.label+' *':field.label}
+                      label={field.required ? currentLocale == 'pt-pt' ? field.portugueseLabel : field.label+' *':currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
                       required={false}
                       onChange={getOnChangeHandlerForFile(field.label, field.fieldType)}
                     />
@@ -265,7 +270,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
                 type={field.fieldType.name}
                 name={field.label}
                 checked={getFieldValue(field.label) === 1}
-                label={field.required ? field.label+' *':field.label}
+                label={field.required ? currentLocale == 'pt-pt' ? field.portugueseLabel : field.label+' *':currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
                 required={field.required}
                 onChange={getOnChangeHandlerForCheckbox(field.label, field.fieldType)}
               />
@@ -275,7 +280,7 @@ export const UpdateDynamicFields = ({data,seq = false}) =>{
               type={field.fieldType.name}
               name={field.label}
               value={getFieldValue(field.label)}
-              label={field.required ? field.label+' *':field.label}
+              label={field.required ? currentLocale == 'pt-pt' ? field.portugueseLabel : field.label+' *':currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
               required={field.required}
               onChange={getOnChangeHandler(field.label, field.fieldType)}
             />
