@@ -206,7 +206,7 @@ const FormData = () => {
                                   location: 'Cabinda',
                                   fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
                                   type: data?.form?.id,
-                                  link: window.location.origin + `/sequence/${data?.form?.id}/${data?.id}`,
+                                  link: window.location.origin + `/certificate-validator/${data?.id}`,
                                 });
                               }}
                               trigger={() => (
