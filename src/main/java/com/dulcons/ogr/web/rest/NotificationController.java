@@ -4,10 +4,10 @@ import com.dulcons.ogr.domain.User;
 import com.dulcons.ogr.domain.notification.NotificationDetail;
 import com.dulcons.ogr.repository.NotificationDetailRepository;
 import com.dulcons.ogr.service.UserService;
+import java.util.HashMap;
 import java.util.List;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.security.crypto.codec.Hex;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,8 +41,8 @@ public class NotificationController {
     }
 
     @GetMapping(value = "/tawk")
-    public String getTawkChat() {
-        JSONObject object = new JSONObject();
+    public HashMap<String, String> getTawkChat() {
+        HashMap<String, String> object = new HashMap<>();
         userService
             .getUserWithAuthorities()
             .ifPresent(user -> {
@@ -54,7 +54,7 @@ public class NotificationController {
                     e.printStackTrace();
                 }
             });
-        return object.toString();
+        return object;
     }
 
     public static String generateHmacSha256(String data, String key) throws Exception {
