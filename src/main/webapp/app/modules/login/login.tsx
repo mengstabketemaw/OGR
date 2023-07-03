@@ -17,9 +17,13 @@ export const Login = () => {
   useEffect(() => {
     setShowModal(true);
   }, []);
-
-  const handleLogin = (username, password, rememberMe = false) => dispatch(login(username, password, rememberMe));
   const deviceWidth = window.innerWidth;
+  let remember = false;
+  if (deviceWidth < 850) {
+    remember = true;
+  }
+  const handleLogin = (username, password, rememberMe = remember) => dispatch(login(username, password, remember));
+
   const handleClose = () => {
     setShowModal(false);
     navigate('/home');
