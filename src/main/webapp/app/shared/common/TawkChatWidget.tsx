@@ -31,6 +31,7 @@ const TawkChatWidget = () => {
   };
 
   const removeBrand = () => {
+    if (isAuthenticated) sendMetadata();
     setTimeout(() => {
       let iframes = document.getElementsByTagName('iframe');
       if (iframes.length > 2) {
@@ -43,8 +44,6 @@ const TawkChatWidget = () => {
         styleElement.appendChild(iframeDocument.createTextNode(cssCode));
 
         iframeDocument.head.appendChild(styleElement);
-        /*while(iframes[1].contentDocument.getElementsByClassName("tawk-branding").length > 0)
-          iframes[1].contentDocument.getElementsByClassName("tawk-branding")[0].remove();*/
       }
     }, 500);
   };
