@@ -100,7 +100,7 @@ const ShowFieldValue = ({ data, form }) => {
         value={value}
       />
     ) : field.fieldType.name === 'info' ? (
-      <i>label={currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}</i>
+      <i>{currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}</i>
     ) : field.fieldType.name === 'file' ? (
       <div className="mb-3 p-3">
         {currentLocale == 'pt-pt' ? field.portugueseLabel : field.label}
