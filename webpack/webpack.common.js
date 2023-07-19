@@ -133,6 +133,10 @@ module.exports = async options => {
               from: require.resolve('axios/dist/axios.min.js'),
               to: 'swagger-ui/',
             },
+            {
+              from: './src/main/webapp/swagger-ui/dist/swagger-init.js', // Adjust the path based on your project structure
+              to: 'swagger-ui/',
+            },
             { from: './src/main/webapp/swagger-ui/', to: 'swagger-ui/' },
             { from: './src/main/webapp/content/', to: 'content/' },
             { from: './src/main/webapp/favicon.ico', to: 'favicon.ico' },

@@ -9,6 +9,7 @@ import com.dulcons.ogr.web.rest.vm.LocationFormDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/licence")
+@Tag(name = "Licence", description = "Operations related to licences")
 public class LicenceController {
 
     private final LicenceRepository licenceRepository;
