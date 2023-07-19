@@ -229,7 +229,7 @@ const LicencesHeader = () => {
             }
           </p>
         </ModalBody>
-        <ModalFooter><Button color="primary" onClick={closeModal}><Translate contentKey={`compliance.close`}/></Button></ModalFooter>
+        <ModalFooter><Button color="secondary" onClick={closeModal}><Translate contentKey={`compliance.close`}/></Button></ModalFooter>
       </Modal>
     </>
   );

@@ -69,7 +69,7 @@ export const ScheduleInspection = ({show,refreshTable, handleClose, users,schedu
             &nbsp;
             <Translate contentKey="entity.action.save"/>
           </Button>
-          <Button className={"bg-translucent-danger text-danger"} onClick={handleClose}><Translate
+          <Button className={"bg-translucent-light text-dark"} onClick={handleClose}><Translate
             contentKey={"compliance.close"}/></Button>
 
           </div>

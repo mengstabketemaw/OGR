@@ -6,6 +6,9 @@ import com.dulcons.ogr.repository.*;
 import com.dulcons.ogr.service.NotificationService;
 import com.dulcons.ogr.service.UserService;
 import com.dulcons.ogr.web.rest.vm.LocationFormDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,16 +60,28 @@ public class LicenceController {
         this.customFormRepository = customFormRepository;
     }
 
+    @Operation(summary = "Retrieve all licences", description = "Get a list of all licences and permits in the system.")
     @GetMapping
     public Iterable<Licence> getAll() {
         return licenceRepository.findAll();
     }
 
+    @Operation(summary = "Get a specific licence by ID", description = "Get the licence or permit with the specified ID.")
+    @ApiResponses(
+        value = {
+            @ApiResponse(responseCode = "200", description = "Licence found"),
+            @ApiResponse(responseCode = "404", description = "Licence not found"),
+        }
+    )
     @GetMapping("/{id}")
     public Licence get(@PathVariable Long id) {
         return licenceRepository.findById(id).orElseThrow();
     }
 
+    @Operation(
+        summary = "Get licences by form type",
+        description = "Get a paginated list of licences and permits based on the specified form type."
+    )
     @GetMapping("/formByType")
     public Page<Licence> get(@RequestParam String type, Pageable pageable) {
         Page<Licence> licences = licenceRepository.findDistinctByForm_Type(type, pageable);
@@ -74,6 +89,10 @@ public class LicenceController {
         return licences;
     }
 
+    @Operation(
+        summary = "Get licences by form title",
+        description = "Get a paginated list of licences and permits based on the specified form title."
+    )
     @GetMapping("/formByTitle")
     public Page<Licence> getByTitle(@RequestParam String title, Pageable pageable) {
         Page<Licence> licences = licenceRepository.findByForm_Title(title, pageable);
@@ -81,6 +100,10 @@ public class LicenceController {
         return licences;
     }
 
+    @Operation(
+        summary = "Get licences by form ID",
+        description = "Get a paginated list of licences and permits associated with a specific form."
+    )
     @GetMapping("/form/{id}")
     public Page<Licence> getbyForm(@PathVariable Long id, Pageable page) {
         Page<Licence> licences = licenceRepository.findDistinctByForm_Id(id, page);
@@ -88,6 +111,7 @@ public class LicenceController {
         return licences;
     }
 
+    @Operation(summary = "Create a new licence", description = "Create a new licence or permit.")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createLic(@RequestBody Licence licence) {
@@ -101,6 +125,13 @@ public class LicenceController {
         notificationService.createEmailToBothAdminAndUser(licence);
     }
 
+    @Operation(summary = "Update an existing licence", description = "Update an existing licence or permit.")
+    @ApiResponses(
+        value = {
+            @ApiResponse(responseCode = "202", description = "Licence updated successfully"),
+            @ApiResponse(responseCode = "404", description = "Licence not found"),
+        }
+    )
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateLic(@RequestBody Licence licence, @PathVariable Long id) {
@@ -117,6 +148,7 @@ public class LicenceController {
         );
     }
 
+    @Operation(summary = "Delete a licence", description = "Delete a licence or permit with the specified ID.")
     @DeleteMapping("/{id}")
     public void deleteLic(@PathVariable Long id) {
         Optional<Licence> licence = licenceRepository.findById(id);
@@ -127,12 +159,17 @@ public class LicenceController {
         licenceRepository.deleteById(id);
     }
 
-    @GetMapping("/formByUser") //Find all application the use applied to
+    @Operation(
+        summary = "Get licences by user",
+        description = "Get a paginated list of licences and permits associated with the authenticated user."
+    )
+    @GetMapping("/formByUser")
     public Page<Licence> getDataByUserId(Pageable page) {
         User user = userService.getUserWithAuthorities().orElseThrow();
         return licenceRepository.findByUser_Id(user.getId(), page);
     }
 
+    @Operation(summary = "Get licences with location data", description = "Get a list of licences and permits with location data.")
     @GetMapping("/location")
     @Transactional
     public List<LocationFormDto> getAllLicenceWithLocation() {
@@ -162,6 +199,7 @@ public class LicenceController {
             .collect(Collectors.toList());
     }
 
+    @Operation(summary = "Get licences by user", description = "Get a list of licences and permits associated with the authenticated user.")
     @GetMapping("/user")
     public Iterable<Licence> getAllByUser() {
         User user = userService.getUserWithAuthorities().orElseThrow();
@@ -196,6 +234,7 @@ public class LicenceController {
         return licences;
     }
 
+    @Operation(summary = "Update licence stage", description = "Update the stage and status of a licence or permit.")
     @PutMapping("/updateLicenceStage/{id}")
     public void updateLiSAS(
         @PathVariable Long id,
@@ -211,6 +250,7 @@ public class LicenceController {
             );
     }
 
+    @Operation(summary = "Update licence with additional remark", description = "Update a licence or permit with an additional remark.")
     @PutMapping("/moreReqRemark/{id}")
     public void updateRemark(@PathVariable Long id, @RequestParam(value = "remark") String remark) {
         licenceRepository.updateRemarkById(remark, id);
@@ -231,6 +271,7 @@ public class LicenceController {
         }
     }
 
+    @Operation(summary = "Update licence with an amendment", description = "Update a licence or permit with an amendment.")
     @PutMapping("/amendment/{id}")
     public void updateAmendment(@PathVariable Long id, @RequestParam(value = "amendment") String amendment) {
         licenceRepository.updateAmendmentById(amendment, id);
@@ -250,6 +291,7 @@ public class LicenceController {
         }
     }
 
+    @Operation(summary = "Make payment for a licence", description = "Mark a licence or permit as paid.")
     @PutMapping("/payment")
     public void makePayment(@RequestParam Long licenceId) {
         licenceRepository
