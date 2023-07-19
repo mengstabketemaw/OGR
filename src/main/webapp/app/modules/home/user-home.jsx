@@ -108,21 +108,21 @@ const UserHome = () => {
                         </span>
                       <div className="text-right"  >
                       <div className="badges"  style={{ width: 50, height: 50,position:"absolute",left:"80%",top:"3%" }}>
-                        {data?.status === 'Approved' ? (
+                        {data?.status === 'Approved' || data?.status === 'Expired' ? (
                        <img  className="w-100 h-100 text-right" src={medal} />
                         ) : data?.status === 'Denied' ? (
                           <CircularProgressbar  value={0} text={`0%`} />
                         ) : data.status === 'undefined' ? (
                           <CircularProgressbar  value={5} text={`5%`} />
-                        ) : data.stage?.name == 'Form' ? (
+                        ) : data.stage?.name === 'Form' ? (
                           <CircularProgressbar  value={10} text={`10%`} />
-                        ) : data.stage?.name == 'Initial Review' ? (
+                        ) : data.stage?.name === 'Initial Review' ? (
                           <CircularProgressbar  value={30} text={`30%`} />
-                        ) : data.stage?.name == 'Technical Review' ? (
+                        ) : data.stage?.name === 'Technical Review' ? (
                           <CircularProgressbar  value={50} text={`50%`} />
-                        ) : data.stage?.name == 'Payment' ? (
+                        ) : data.stage?.name === 'Payment' ? (
                           <CircularProgressbar  value={70} text={`70%`} />
-                        ) : data.stage?.name == 'Decision Making' ? (
+                        ) : data.stage?.name === 'Decision Making' ? (
                           <CircularProgressbar  value={90} text={`90%`} />
                         ) : (
                           <CircularProgressbar  value={60} text={`60%`} />
@@ -161,7 +161,15 @@ const UserHome = () => {
                                     {data.stage?.name || 'Form'}
                                   </span>
                                   </p>
-                                ) : data.status === 'Denied' ? (
+                                ) : data.status === 'Expired' ? (
+                                  <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-0 ">
+                                    <span className={'font-weight-bold text-danger text-right'}>{trans('status',data.status)}</span>
+                                    <span className="h6 description mt-1 invisible text-right" style={{fontSize:"11px"}}>
+                                    {data.stage?.name || 'Form'}
+                                  </span>
+                                  </p>
+                                )
+                                  : data.status === 'Denied' ? (
                                   <p className="btn btn-sm shadow-none border-0 d-flex flex-column text-right mb-0 pr-0 ">
                                     <span className={' font-weight-bold text-danger text-right'}>{trans('status',data.status)}</span>
                                     <span className="h6 description mt-1 invisible text-right" style={{fontSize:"11px"}}>
@@ -207,7 +215,7 @@ const UserHome = () => {
                                   </Button>
                                 )}
 
-                                {data?.status === 'Approved' ? (
+                                {data?.status === 'Approved' || data?.status === 'Expired' ? (
                                   <>
                                     {isMobile ?
                                     <Button color="black" tag={"a"} size="sm" href={window.location.origin + `/certificate-validator/${data?.id}`} className="ml-0 mt-1 mr-0">
@@ -241,7 +249,7 @@ const UserHome = () => {
                                       ref={certRef} />}
                                   </>
                                 ): ""}
-                                {data?.status === 'Approved' || data?.status === 'Denied' ?
+                                {data?.status === 'Approved' || data?.status === 'Denied' || data?.status === 'Expired' ?
                                 <Button className="ml-0 mt-1 mr-0 "
                                   // color="secondary"
                                   color="black"
