@@ -200,15 +200,15 @@ export const AdminDashboardTable = ({ title }) => {
                       >
                         {data.status === 'Inprogress' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className="font-weight-bold  text-warning">{data.status}</span>
+                            <span className="font-weight-bold  text-warning">{trans('status', data.status)}</span>
                           </p>
                         ) : data.status === 'Approved' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={'font-weight-bold text-success'}>{data.status}</span>
+                            <span className={'font-weight-bold text-success'}>{trans('status', data.status)}</span>
                           </p>
-                        ) : data.status === 'Denied' ? (
+                        ) : data.status === 'Denied' || data.status === 'Expired' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={' font-weight-bold text-danger'}>{data.status}</span>
+                            <span className={' font-weight-bold text-danger'}>{trans('status', data.status)}</span>
                           </p>
                         ) : data.status === 'undefined' ? (
                           <p className="btn btn-sm shadow-none border-0 ">
@@ -216,7 +216,7 @@ export const AdminDashboardTable = ({ title }) => {
                           </p>
                         ) : (
                           <p className="btn btn-sm shadow-none border-0 ">
-                            <span className={' font-weight-bold text-warning'}>{data.status}</span>
+                            <span className={' font-weight-bold text-warning'}>{trans('status', data.status)}</span>
                           </p>
                         )}
                       </th>
@@ -251,7 +251,7 @@ export const AdminDashboardTable = ({ title }) => {
                             icon={faTrash}
                           />
                         </Button>
-                        {data?.status === 'Approved' ? (
+                        {data?.status === 'Approved' || data?.status === 'Expired' ? (
                           <>
                             <ReactToPrint
                               onBeforeGetContent={async () => {
