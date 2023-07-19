@@ -4,6 +4,9 @@ import com.dulcons.ogr.domain.User;
 import com.dulcons.ogr.domain.notification.NotificationDetail;
 import com.dulcons.ogr.repository.NotificationDetailRepository;
 import com.dulcons.ogr.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.HashMap;
 import java.util.List;
 import javax.crypto.Mac;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/notification")
+@Tag(name = "Notification", description = "Operations related to notifications")
 public class NotificationController {
 
     private final NotificationDetailRepository notificationDetailRepository;
@@ -24,23 +28,29 @@ public class NotificationController {
     }
 
     @GetMapping
+    @Operation(summary = "Get notifications by username", description = "Retrieves notifications for the authenticated user.")
     public List<NotificationDetail> getByUsername() {
         User user = userService.getUserWithAuthorities().orElseThrow();
         return notificationDetailRepository.findByUsername(user.getLogin());
     }
 
     @GetMapping("/count")
+    @Operation(summary = "Get notification count", description = "Retrieves the count of notifications for the authenticated user.")
     public long count() {
         User user = userService.getUserWithAuthorities().orElseThrow();
         return notificationDetailRepository.countByUsername(user.getLogin());
     }
 
     @PutMapping("/seen/{id}")
+    @Operation(summary = "Mark notification as seen", description = "Marks a notification as seen by providing its ID.")
+    @ApiResponse(responseCode = "204", description = "Notification marked as seen successfully")
     public void putSeen(@PathVariable Long id) {
         notificationDetailRepository.updateSeenById(true, id);
     }
 
     @GetMapping(value = "/tawk")
+    @Operation(summary = "Get Tawk.to chat details", description = "Retrieves Tawk.to chat details for the authenticated user.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved Tawk.to chat details")
     public HashMap<String, String> getTawkChat() {
         HashMap<String, String> object = new HashMap<>();
         userService
