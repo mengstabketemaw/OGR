@@ -24,11 +24,7 @@ export const Brand = () => {
     <NavbarBrand
       role="button"
       onClick={() => {
-        if (isAuthenticated) {
-          window.location.href = '/home';
-        } else {
-          window.location.href = '/';
-        }
+        window.location.href = '/';
       }}
       className="brand-logo"
     >
