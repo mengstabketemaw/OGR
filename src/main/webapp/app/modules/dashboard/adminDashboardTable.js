@@ -68,6 +68,7 @@ export const AdminDashboardTable = ({ title }) => {
     setAmendmentModal({ show: true, id, remark: value });
   };
 
+  const isMobile = window.innerWidth <= 850;
   return (
     <>
       <Col className="mb-5 mb-xl-0" xl="6">
@@ -253,31 +254,42 @@ export const AdminDashboardTable = ({ title }) => {
                         </Button>
                         {data?.status === 'Approved' || data?.status === 'Expired' ? (
                           <>
-                            <ReactToPrint
-                              onBeforeGetContent={async () => {
-                                await handleBeforeGetContent({
-                                  title: translate('userDashboard.' + data?.form?.title),
-                                  companyName: data.user.firstName,
-                                  location: 'Cabinda',
-                                  fromDate: moment(data.approvedDate).format('YYYY-MM-DD'),
-                                  type: data?.form?.id,
-                                  link: window.location.origin + `/certificate-validator/${data?.id}`,
-                                  licenceId: `${data.form?.title?.slice(0, 2).toUpperCase()}` + `${data?.id}` + `496`,
-                                });
-                              }}
-                              trigger={() => (
-                                // <button className="border-0 bg-white">button</button>
-                                <Button color="black" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
-                                  <FontAwesomeIcon
-                                    size="2x"
-                                    // style={{fontSize:"25px"}}
-                                    icon={faFilePdf}
-                                  />
-                                </Button>
-                              )}
-                              content={() => certRef.current}
-                            />
-
+                            {isMobile ? (
+                              <Button
+                                color="black"
+                                tag={'a'}
+                                size="sm"
+                                href={window.location.origin + `/certificate-validator/${data?.id}`}
+                                className="ml-0 mt-1 mr-0"
+                              >
+                                <FontAwesomeIcon style={{ fontSize: '20px' }} color="teal" size="1x" icon={faFilePdf} />
+                              </Button>
+                            ) : (
+                              <ReactToPrint
+                                onBeforeGetContent={async () => {
+                                  await handleBeforeGetContent({
+                                    title: translate('userDashboard.' + data?.form?.title),
+                                    companyName: data.user.firstName,
+                                    location: 'Cabinda',
+                                    fromDate: moment(data.approvedDate).format('YYYY-MM-DD'),
+                                    type: data?.form?.id,
+                                    link: window.location.origin + `/certificate-validator/${data?.id}`,
+                                    licenceId: `${data.form?.title?.slice(0, 2).toUpperCase()}` + `${data?.id}` + `496`,
+                                  });
+                                }}
+                                trigger={() => (
+                                  // <button className="border-0 bg-white">button</button>
+                                  <Button color="black" size="sm" className="ml-0 mt-1 pt-0 pb-0 pl-1 pr-1">
+                                    <FontAwesomeIcon
+                                      size="2x"
+                                      // style={{fontSize:"25px"}}
+                                      icon={faFilePdf}
+                                    />
+                                  </Button>
+                                )}
+                                content={() => certRef.current}
+                              />
+                            )}
                             {printData && <Certificate data={printData} ref={certRef} />}
                           </>
                         ) : (
