@@ -20,6 +20,8 @@ export const BrandIcon = props => (
 
 export const Brand = () => {
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
+  const isMobile = window.innerWidth >= 750 && window.innerWidth <= 850;
+  if (isMobile) return <></>;
   return (
     <NavbarBrand
       role="button"
