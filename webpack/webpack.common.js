@@ -135,7 +135,7 @@ module.exports = async options => {
             },
             {
               from: './src/main/webapp/swagger-ui/dist/swagger-init.js', // Adjust the path based on your project structure
-              to: 'swagger-ui/',
+              to: 'swagger-ui/swagger-init.js',
             },
             { from: './src/main/webapp/swagger-ui/', to: 'swagger-ui/' },
             { from: './src/main/webapp/content/', to: 'content/' },
