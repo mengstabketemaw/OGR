@@ -105,20 +105,20 @@ const CertificateValidator = () => {
                </tr>
                <tr>
                  <td><Translate contentKey={'cert.issuedOn'} /></td>
-                 <td>{moment(data.data?.approvedDate || currentDate).format('YYYY-MM-DD')}</td>
+                 <td>{moment(data.data?.approvedDate || data.data?.submittedDate).format('YYYY-MM-DD')}</td>
                </tr>
                <tr>
                  <td><Translate contentKey={'cert.location'} /></td>
                  <td>Cabinda</td>
                </tr>
-               { data.data?.status != 'Approved' || moment(currentDate).isAfter(moment(data.data?.approvedDate || currentDate).add(3, 'years').format('YYYY-MM-DD'))  ?
+               { data.data?.status != 'Approved' || moment(currentDate).isAfter(moment(data.data?.approvedDate || data.data?.submittedDate).add(3, 'years').format('YYYY-MM-DD'))  ?
 
                   <></>
                    :
                    <>
                      <tr>
                    <td><Translate contentKey={'cert.validUntil'} /></td>
-                   <td>{moment(data.data?.approvedDate|| currentDate).add(3, 'years').format('YYYY-MM-DD')}</td>
+                   <td>{moment(data.data?.approvedDate|| data.data?.submittedDate).add(3, 'years').format('YYYY-MM-DD')}</td>
                       </tr>
                    </>
                  }
@@ -134,7 +134,7 @@ const CertificateValidator = () => {
                     title: translate('userDashboard.' + data.data?.form?.title),
                     companyName: data.data.user.firstName,
                     location: "Cabinda",
-                    fromDate:  moment(data.data?.approvedDate || currentDate).format('YYYY-MM-DD'),
+                    fromDate:  moment(data.data?.approvedDate || data.data?.submittedDate).format('YYYY-MM-DD'),
                     type: data.data?.form?.id,
                     display: "display",
                     link: window.location.href,

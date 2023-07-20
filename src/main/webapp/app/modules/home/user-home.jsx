@@ -228,7 +228,7 @@ const UserHome = () => {
                                           title: translate('userDashboard.' + data?.form?.title || "Form"),
                                           companyName: data?.user.firstName,
                                           location: "Cabinda",
-                                          fromDate: moment(data.approvedDate).format('YYYY-MM-DD'),
+                                          fromDate: moment(data.approvedDate || data.submittedDate).format('YYYY-MM-DD'),
                                           type: data?.form?.id,
                                           link: window.location.origin + `/certificate-validator/${data?.id}`,
                                           licenceId: `${data.form?.title?.slice(0,2).toUpperCase()}`+`${data?.id}`+`496`,
