@@ -230,7 +230,8 @@ const UserHome = () => {
                                           location: "Cabinda",
                                           fromDate: moment(data.approvedDate).format('YYYY-MM-DD'),
                                           type: data?.form?.id,
-                                          link: window.location.origin + `/certificate-validator/${data?.id}`
+                                          link: window.location.origin + `/certificate-validator/${data?.id}`,
+                                          licenceId: `${data.form?.title?.slice(0,2).toUpperCase()}`+`${data?.id}`+`496`,
                                         })
                                       }}
                                       trigger={() =>

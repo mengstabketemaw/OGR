@@ -7,7 +7,7 @@ import {Translate} from "react-jhipster";
 import moment from "moment";
 const Certificate = React.forwardRef((props, ref) => {
 
-  const {title, companyName, location, fromDate, link, type,display="none"} = props?.data
+  const {title, companyName, location, fromDate, link, type,display="none",licenceId} = props?.data
   return(
     <div style={{display}} >
     <div className=" pm-certificate-container" ref={ref} style={{ backgroundImage: `url(${BackGround})`, backgroundSize: "cover" }}>
@@ -114,6 +114,7 @@ const Certificate = React.forwardRef((props, ref) => {
                 viewBox={`0 0 256 256`}
 
               />
+             <div className="ml--2 mt-1 text-nowrap" style={{fontSize: "15px"}}>{licenceId}</div>
             </div>}
 
           </div>

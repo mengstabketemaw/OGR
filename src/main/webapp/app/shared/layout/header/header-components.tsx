@@ -12,16 +12,24 @@ const refreshPage = () => {
   window.location.href = '/home';
 };
 
-export const BrandIcon = props => (
-  <div {...props} className="brand-icon">
-    <img src="content/images/img_1.png" className="img-fluid text-xl" style={{ borderRadius: '12px' }} alt="Logo" />
-  </div>
-);
+export const BrandIcon = props => {
+  const isMobile = window.innerWidth >= 750 && window.innerWidth <= 850;
+  if (isMobile) {
+    return (
+      <div {...props} className="brand-icon">
+        <img src="content/images/img_3.png" className="img-fluid" style={{ borderRadius: '6px' }} alt="Logo" />
+      </div>
+    );
+  }
+  return (
+    <div {...props} className="brand-icon">
+      <img src="content/images/img_1.png" className="img-fluid text-xl" style={{ borderRadius: '12px' }} alt="Logo" />
+    </div>
+  );
+};
 
 export const Brand = () => {
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
-  const isMobile = window.innerWidth >= 750 && window.innerWidth <= 850;
-  if (isMobile) return <></>;
   return (
     <NavbarBrand
       role="button"

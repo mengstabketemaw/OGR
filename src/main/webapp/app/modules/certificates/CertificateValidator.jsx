@@ -62,10 +62,10 @@ const CertificateValidator = () => {
       ) : (
         <div>
 
-          {data.data?.status === 'Approved' ? (
+          {data.data?.status === 'Approved' || data.data?.status === 'Expired' ? (
             <>
               {
-                moment(currentDate).isAfter(moment(data.data.approvedDate).add(3, 'years').format('YYYY-MM-DD')) ?
+                data.data?.status === 'Expired' ?
                   (
                   <span style={{fontSize:"23px"}} className="text-danger text-uppercase form-group font-weight-bold d-flex justify-content-center">
                   <Translate  contentKey="cert.expiredCert"/>
@@ -127,7 +127,7 @@ const CertificateValidator = () => {
              <span onClick={()=>{setDetailModal(true)}} className="text-blue d-flex justify-content-end" role="button"><Translate contentKey={'cert.seeMore'} /></span>
            </Card>
 
-          {data.data?.status === 'Approved' && moment(currentDate).isBefore(moment(data.data?.approvedDate || currentDate).add(3, 'years').format('YYYY-MM-DD')) ? (
+          {data.data?.status === 'Approved' || data.data?.status === 'Expired'  ? (
               <div style={divStyle}>
                 <Certificate
                   data={{
@@ -137,7 +137,8 @@ const CertificateValidator = () => {
                     fromDate:  moment(data.data?.approvedDate || currentDate).format('YYYY-MM-DD'),
                     type: data.data?.form?.id,
                     display: "display",
-                    link: window.location.href
+                    link: window.location.href,
+                    licenceId: `${data?.data.form?.title?.slice(0,2).toUpperCase()}`+`${data?.data?.id}`+`496`,
                   }}
                 />
               </div>
