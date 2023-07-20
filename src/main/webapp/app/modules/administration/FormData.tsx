@@ -204,7 +204,7 @@ const FormData = () => {
                                   title: translate('userDashboard.' + data?.form?.title),
                                   companyName: data.user.firstName,
                                   location: 'Cabinda',
-                                  fromDate: moment(data.apporvedDate).format('YYYY-MM-DD'),
+                                  fromDate: moment(data.approvedDate).format('YYYY-MM-DD'),
                                   type: data?.form?.id,
                                   link: window.location.origin + `/certificate-validator/${data?.id}`,
                                 });
