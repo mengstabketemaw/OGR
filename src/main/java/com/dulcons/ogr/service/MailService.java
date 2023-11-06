@@ -2,6 +2,7 @@ package com.dulcons.ogr.service;
 
 import com.dulcons.ogr.domain.User;
 import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import javax.mail.MessagingException;
@@ -62,7 +63,6 @@ public class MailService {
             subject,
             content
         );
-
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
